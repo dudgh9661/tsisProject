@@ -6,6 +6,15 @@ public class academyDTO {
     private String academyLogoUrl;
     private int count;
     private String academyLoc;
+    private String academyUrl;
+
+    public String getAcademyUrl() {
+        return academyUrl;
+    }
+
+    public void setAcademyUrl(String academyUrl) {
+        this.academyUrl = academyUrl;
+    }
 
     public String getAcademyId() {
         return academyId;
