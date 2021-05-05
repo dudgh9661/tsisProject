@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.tsis.education.admin.adminRepository">
+    <select id="getAdmin" resultType="kr.co.tsis.education.admin.DTOS.lectureDTO">
+
+    </select>
+    <select id="getUser" parameterType="String" resultType="kr.co.tsis.education.admin.DTOS.lectureDTO">
+
+    </select>
+    <update id="setAdmin" parameterType="String">
+
+    </update>
+    <update id="delAdmin" parameterType="String">
+
+    </update>
+</mapper>
