@@ -7,6 +7,15 @@ public class academyDTO {
     private int count;
     private String academyLoc;
     private String academyUrl;
+    private  String academyDetails;
+
+    public String getAcademyDetails() {
+        return academyDetails;
+    }
+
+    public void setAcademyDetails(String academyDetails) {
+        this.academyDetails = academyDetails;
+    }
 
     public String getAcademyUrl() {
         return academyUrl;
