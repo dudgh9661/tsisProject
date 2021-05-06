@@ -1,6 +1,5 @@
 package kr.co.tsis.education.guide;
 
-import kr.co.tsis.education.academyModify.AcademyModifyController;
 import kr.co.tsis.education.guide.DTOS.guideDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,16 +16,19 @@ public class guideController {
 
     @GetMapping("/main")
     public String main(){
+        LOGGER.debug("void");
         return "guide/main";
     }
     @ResponseBody
     @GetMapping("/getGuide")
     public guideDTO getGuide(){
+        LOGGER.debug("void");
         return service.getGuide();
     }
     @ResponseBody
     @PostMapping("setGuide")
     public int setGuide(@RequestBody guideDTO request){
+        LOGGER.debug("request",request);
         return service.setGuide(request);
     }
 }
