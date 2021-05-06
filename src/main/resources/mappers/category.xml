@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.tsis.education.category.categoryRepository">
+    <select id="getDepth1" resultType="String">
+
+    </select>
+    <select id="getDepth2" parameterType="String" resultType="String">
+
+    </select>
+    <select id="getDepth3" parameterType="String" resultType="String">
+
+    </select>
+    <select id="getList" parameterType="String" resultType="kr.co.tsis.education.category.DTOS.categoryDTO">
+
+    </select>
+    <delete id="delDepth1" parameterType="String">
+
+    </delete>
+    <delete id="delDepth2" parameterType="String">
+
+    </delete>
+    <delete id="delDepth3" parameterType="String">
+
+    </delete>
+    <select id="getTile" parameterType="int" resultType="kr.co.tsis.education.category.DTOS.categoryDTO">
+
+    </select>
+
+    <update id="setDepth" parameterType="kr.co.tsis.education.category.DTOS.categoryForm">
+
+    </update>
+
+    <insert id="addDepth" parameterType="kr.co.tsis.education.category.DTOS.categoryForm">
+
+    </insert>
+
+    <update id="setDepth1" parameterType="kr.co.tsis.education.category.DTOS.categoryForm">
+
+    </update>
+
+    <update id="setDepth2" parameterType="kr.co.tsis.education.category.DTOS.categoryForm">
+
+    </update>
+
+    <update id="setDepth3" parameterType="kr.co.tsis.education.category.DTOS.categoryForm">
+
+    </update>
+</mapper>
