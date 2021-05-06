@@ -31,6 +31,8 @@ function btn_click() {
         }
         localStorage.setItem("id",document.loginForm.userid.value)
         localStorage.setItem("check",true)
+        document.getElementById("loginForm").action = "login";
+        document.getElementById("loginForm").submit();
         // setCookie("id", document.loginForm.userid.value, 7); //쿠키이름을 id로 아이디입력필드값을 7일동안 저장
     } else { // 아이디 저장을 체크 하지 않았을때
         // setCookie("id", document.loginForm.userid.value, 0); //날짜를 0으로 저장하여 쿠키삭제
@@ -46,8 +48,9 @@ function btn_click() {
         }
         localStorage.setItem("check",false)
         localStorage.removeItem("id")
+        document.getElementById("loginForm").action = "login";
+        document.getElementById("loginForm").submit();
     }
 
-    // document.loginForm.submit(); //유효성 검사가 통과되면 서버로 전송.
 }
 
