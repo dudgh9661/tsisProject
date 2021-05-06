@@ -14,12 +14,18 @@ public class academyService {
 
     public academyPageDTO getList(int page){
         int totalcount = dao.getCount();
-        int totpage = totalcount%12 ==0 ? totalcount/12 : (totalcount/12)+1;
-        List<academyDTO> list = dao.getList(page);
         academyPageDTO result = new academyPageDTO();
+        List<academyDTO> list;
+        if(page == 0){
+            list = dao.getAllList();
+        }
+        else {
+            list = dao.getList(page);
+            int totpage = totalcount%12 ==0 ? totalcount/12 : (totalcount/12)+1;
+            result.setTotalpage(totpage);
+        }
         result.setTotalCount(totalcount);
         result.setOrgani(list);
-        result.setTotalpage(totpage);
         return result;
 
     }

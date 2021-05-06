@@ -8,6 +8,9 @@
     <select id="getList" parameterType="int" resultType="kr.co.tsis.education.academy.DTOS.academyDTO">
 
     </select>
+    <select id="getAllList" resultType="kr.co.tsis.education.academy.DTOS.academyDTO">
+
+    </select>
 
     <delete id="delList" parameterType="String">
 

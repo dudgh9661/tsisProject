@@ -10,4 +10,5 @@ public interface academyRepository {
     int getCount();
     List<academyDTO> getList(int page);
     int delList(String id);
+    List<academyDTO> getAllList();
 }
