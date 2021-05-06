@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CategoryByLectureMapper">
+
+    <!-- 카테고리 -->
+    <resultMap type="LectureCategory" id="lectureCategoryResultMap">
+        <result property="categoryId" column="category_id"></result>
+        <result property="depth1Field" column="depth1_field"></result>
+        <result property="depth2Skill" column="depth2_skill"></result>
+        <result property="depth3Course" column="depth3_course"></result>
+    </resultMap>
+
+    <!-- 수준별 -->
+    <resultMap id="EduInfoLevel" type="eduInfoLevelResultMap">
+        <result property="eduLevelId" column="edu_level_id"></result>
+        <result property="eduLevel" column="edu_level"></result>
+        <result property="eduDetails" column="edu_details"></result>
+        <result property="lectureNum" column="lecture_num"></result>
+    </resultMap>
+
+    <!-- 대분류 리스트 -->
+    <select id="mainCategoryList" resultMap="lectureCategoryResultMap">
+
+    </select>
+
+    <!-- 중분류 리스트 -->
+    <select id="middleCategoryList" resultMap="lectureCategoryResultMap">
+
+    </select>
+
+    <!-- 소분류 리스트 -->
+    <select id="subClassList" resultMap="lectureCategoryResultMap">
+
+    </select>
+
+    <!-- 과정 수준 리스트 -->
+    <select id="courseLevelList" resultMap="eduInfoLevelResultMap">
+
+    </select>
+
+    <!-- 과정 수준 클릭 -->
+
+
+    <!-- 관심강좌 등록 -->
+    <insert id="wishListPush">
+
+    </insert>
+
+    <!-- 관심강좌 취소 -->
+    <delete id="wishListPop">
+
+    </delete>
+
+</mapper>

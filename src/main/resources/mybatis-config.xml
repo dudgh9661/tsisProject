@@ -9,4 +9,33 @@
         <setting name="callSettersOnNulls" value="true"/>
         <setting name="jdbcTypeForNull" value="NULL"/>
     </settings>
+    <typeAliases>
+        <!-- 사용자 공통사용 -->
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.Academy" alias="Academy"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.AcademySubject" alias="AcademySubject"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.EducationLevel" alias="EducationLevel"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.Employee" alias="Employee"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.Guide" alias="Guide"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.Lecture" alias="Lecture"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.LectureCategory" alias="LectureCategory"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.RequiredLecture" alias="RequiredLecture"></typeAlias>
+        <typeAlias type="kr.co.tsis.education.userCommon.dto.ThemeLecture" alias="ThemeLecture"></typeAlias>
+
+        <!-- 메인페이지 -->
+        <typeAlias type="kr.co.tsis.education.mainPage.dto.MainPageLecture" alias="MainPageLecture"></typeAlias>
+
+        <!-- 나의 강좌(마이페이지) -->
+        <typeAlias type="kr.co.tsis.education.myLecture.dto.MyLecture" alias="MyLecture"></typeAlias>
+
+        <!-- 주제별 강좌보기 -->
+        <typeAlias type="kr.co.tsis.education.subjectByLecture.dto.SubjectByLectureAll" alias="SubjectByLectureAll"></typeAlias>
+    </typeAliases>
+    <mappers>
+        <mapper resource="mappers/majorEducational-mapper.xml"></mapper>
+        <mapper resource="mappers/mainPage-mapper.xml"></mapper>
+        <mapper resource="mappers/myLecture-mapper.xml"></mapper>
+        <mapper resource="mappers/subjectByLecture-mapper.xml"></mapper>
+        <mapper resource="categoryByLecture-mapper.xml"></mapper>
+        <mapper resource="mappers/trainingByInstitution-mapper.xml"></mapper>
+    </mappers>
 </configuration>

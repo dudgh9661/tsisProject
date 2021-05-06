@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MainPageMapper">
+
+    <!-- 추천강좌 -->
+    <resultMap type="MainPageLecture" id="mainPageLectureResultMap">
+        <result property="lectureId" column="lecture_id"></result>
+        <result property="lectureTitle" column="lecture_title"></result>
+        <result property="lectureUrl" column="lecture_url"></result>
+        <result property="validYn" column="valid_yn"></result>
+        <result property="onlineYn" column="online_yn"></result>
+        <result property="lectureBestYn" column="lecture_best_yn"></result>
+        <result property="categoryId" column="category_id"></result>
+        <result property="academyId" column="academy_id"></result>
+        <result property="eduLevelId" column="edu_level_id"></result>
+        <result property="themeLectureId" column="theme_lecture_id"></result>
+        <result property="requiredLectureId" column="required_lecture_id"></result>
+        <result property="academySubjectId" column="academy_subject_id"></result>
+        <result property="academyName" column="academy_name"></result>
+        <result property="academyLoc" column="academy_loc"></result>
+        <result property="academyUrl" column="academy_url"></result>
+        <result property="academyDetails" column="academy_details"></result>
+        <result property="academyLogoUrl" column="academy_logo_url"></result>
+    </resultMap>
+
+    <!-- 공지사항 -->
+    <resultMap type="Guide" id="guideResultMap">
+        <result property="guideId" column="guide_id"></result>
+        <result property="contents" column="contents"></result>
+    </resultMap>
+
+    <!-- 공지사항 -->
+    <select id="selectGuide" resultMap="guideResultMap">
+
+    </select>
+
+    <!-- 필수강좌 -->
+    <select id="myRequiredLectureList" resultMap="myRequiredLectureResultMap">
+
+    </select>
+    <!-- 추천강좌 -->
+    <select id="bestLectureList" resultMap="bestLectureResultMap">
+
+    </select>
+</mapper>
