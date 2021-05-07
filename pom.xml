@@ -9,8 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.tsis</groupId>
-	<artifactId>education</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>tsis</artifactId>
+	<version>0.0.1</version>
+	<packaging>war</packaging>
 	<name>education</name>
 	<description>Tsis Commissioned education</description>
 	<properties>
@@ -67,6 +68,13 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
+		</dependency>
+
+		<!--tomcat server-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
