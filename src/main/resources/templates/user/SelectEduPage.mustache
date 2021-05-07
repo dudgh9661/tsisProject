@@ -245,34 +245,36 @@
     <!-- 여기에 코드 넣으세요 -->
     <section>
         <div id="contentWrapper">
-            {{#academies}}
+            {{#academyList}}
                 <div class="contentInside">
                     <div class="card-body">
                         <div class="card-body_thumb">
-                            <a href="https://www.multicampus.com" target="_blank">
+                            <a href="
+                                {{academyUrl}}" target="_blank">
                                 <div class="institution-logo">
-                                    <img class="logoImg" src="../static/img/institutionLogo.PNG">
+                                    <img class="logoImg" src="{{academyLogoUrl}}">
                                 </div>
                             </a>
                         </div>
                         <div class="card-body_cont">
                             <div class="card-body_cont_name">
-                                <strong></strong>
+                                <strong>
+                                    {{academyName}}</strong>
                             </div>
                             <div class="card-body_cont_info">
-                                {{academy_name}}
+                                {{academyDetails}}
                             </div>
                             <div class="card-body_cont_location">
-                                역삼역
+                                {{academyLoc}}
                             </div>
                         </div>
                     </div>
                 </div>
-            {{/academies}}
+            {{/academyList}}
 
-            {{^academies}}
+            {{^academyList}}
                 데이터 없음!
-            {{/academies}}
+            {{/academyList}}
         </div>
     </section>
     <!--/section-->

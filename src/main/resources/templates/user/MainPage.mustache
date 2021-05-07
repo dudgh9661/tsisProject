@@ -50,7 +50,7 @@
         <!--header-->
         <header>
             <div class="login-info">
-                <span>{{mployee.empName}} {{employee.empPosition}}님 환영합니다!</span>
+                <span>{{employee.empName}} {{employee.empPosition}}님 환영합니다!</span>
                 <button type="button" class="logout">
                     <a href="src/main/resources/templates/user/LoginPage.mustache">
                         로그아웃
@@ -165,46 +165,6 @@
                 </div>
                 <!--연차별 추천 강좌-->
 
-
-                <!--고객 맞춤 강좌-->
-                <div class="info-detail">
-                    <div class="info-imoji">
-                        <p>고객 맞춤 강좌<br></p>
-                    </div>
-                    <button type="button" class="more">
-                        <a href="01_Index.html">
-                            더보기
-                        </a>
-                    </button>
-                    <div class="info-content"> 
-                        {{#파이썬추천}}
-                        <div class="contentInside">
-                            <div class="card-body">
-                                <div class="card-body_thumb">
-                                    <a href="{{lectureUrl}}" target="_blank">
-                                        <div class="institution-logo">
-                                            <img class="logoImg" src="{{academyLogoUrl}}">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body_cont">
-                                    <div class="card-body_cont_name">
-                                        <strong>{{lectureTitle}}</strong>
-                                    </div>
-                                    <div class="card-body_cont_info">
-                                        {{멀티캠퍼스에서는 계정 등록 후 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. }}
-                                    </div>
-                                    <div class="card-body_cont_location">
-                                        <span class="loc-acdm">{{academyName}}</span>
-                                        <span class="loc-name">{{onlineYn}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{/파이썬추천}}
-                    </div>
-                </div>
-                <!--고객 맞춤 강좌-->
             </div>
             <!--/안내문구-->
         </section>

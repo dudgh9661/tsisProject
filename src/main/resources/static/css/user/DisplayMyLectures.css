@@ -57,6 +57,14 @@ li{
 }
 
 .DML_anchorButton_necessary a{
+    width:  130px;
+    height: 70px;
+}
+.DML_anchorButton_interest a{
+    width:  130px;
+    height: 70px;
+}
+.DML_anchorButton_necessary a{
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;

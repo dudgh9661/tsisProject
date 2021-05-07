@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/user/common.css">
+    <link rel="stylesheet" href="/css/common.css">
     
     <title>주제별 강의</title>
 </head>
@@ -55,9 +55,9 @@
             <div class="DLBS_selSubjectShowIcons">
                 <div class="DLBS_selSubject">
                     <select class="DLBS_selSubject_selectBox" id="DLBS_selSubject_selectBox" onchange=DLBS_display_theme()>
-                        {{#themeLecture}}
+                        {{#themeLecturesList}}
                             <option value="{{themeLectureId}}">{{theme}}</option>
-                        {{/themeLecture}}
+                        {{/themeLecturesList}}
                     </select>
                 </div>
                 <div class="DLBS_showIcons">
