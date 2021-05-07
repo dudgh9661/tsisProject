@@ -32,10 +32,7 @@ public class MainPageController {
         // 필수강좌정보
         //String empId = loginUser.getEmpId();
         ArrayList<MainPageLecture> myRequiredLectureList = mpService.myRequiredLectureList(loginUser);
-        // 추천강좌정보(베스트)
-        ArrayList<MainPageLecture> bestLecturesList = mpService.bestLectureList();
         model.addAttribute("requiredLectureList",myRequiredLectureList);
-        model.addAttribute("bestLectureList",bestLecturesList);
         model.addAttribute("guide",guideList);
         model.addAttribute("employee",loginUser);
         return "";

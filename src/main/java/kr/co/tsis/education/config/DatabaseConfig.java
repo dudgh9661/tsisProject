@@ -12,7 +12,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "kr.co.tsis.education.repository")
+@MapperScan(basePackages = "kr.co.tsis.education")
 @PropertySource("classpath:database.properties")
 public class DatabaseConfig {
 

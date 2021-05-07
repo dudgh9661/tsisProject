@@ -29,8 +29,4 @@ public class MainPageRepository {
         return (ArrayList)sqlSession.selectList("MainPageMapper.myRequiredLectureList", loginUser);
     }
 
-    //추천강좌
-    public ArrayList<MainPageLecture> bestLectureList(){
-        return (ArrayList)sqlSession.selectList("MainPageMapper.bestLectureList");
-    }
 }

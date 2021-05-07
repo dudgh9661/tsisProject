@@ -31,7 +31,7 @@ public class CategoryByLectureController {
     @GetMapping("/mainCategoryKinds")
     public String CategoryLectureView(Model model){
         ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
-        model.addAttribute("",mainCategoryList);
+        model.addAttribute("mainCategoryList",mainCategoryList);
         return "";
     }
 
@@ -68,25 +68,54 @@ public class CategoryByLectureController {
 
     //과정 수준 클릭
     //질문하기
-    /*@ResponseBody
+    @ResponseBody
     @GetMapping("/DuplicateCourseSelection")
-    public ArrayList<CategoryByLectureAll> duplicateCourseList(){
+    public ArrayList<CategoryByLectureAll> duplicateCourseList(HttpServletRequest request){
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        String[] levelList = request.getParameterValues("levelList"); // 프론트에서 boolean으로 넘어오는데 확인해보기
+        String columnName = request.getParameter("columnName");
+        //강좌 갯수
+        int lectureNum = 0;
+        String eduLevelId = "";
+        for (int i = 0; i < levelList.length; i++){
+            String levelId = levelList[i];
+            if(levelId.equals("True")){
+                if(i == 0){
+                    eduLevelId = "ET001";
+                }
+                else if(i == 1){
+                    eduLevelId = "ET002";
+                }
+                else{
+                    eduLevelId = "ET003";
+                }
+                //lectureNum += cblService.selectLectureNum(); // 강좌갯수 구하기
+            }
 
-    }*/
+        }
+
+
+    }
 
     //관심강좌 선택
     @ResponseBody
     @GetMapping("/wishListSelection")
-    public int wishListSelection(int lectureId, String wishYn, HttpServletRequest request, HttpSession session){ // true, false는 어떤 변수명으로 넘겨줄건지
+    public int wishListSelection(HttpServletRequest request, HttpSession session){ // true, false는 어떤 변수명으로 넘겨줄건지
+        int lectureId = Integer.parseInt(request.getParameter("lectureId"));
+        String wishYn = request.getParameter("wishYn");
         // 사원정보
         session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        CategoryByLectureAll lectureAll = new CategoryByLectureAll();
+        lectureAll.setLectureId(lectureId);
+        lectureAll.setEmpId(loginUser.getEmpId());
         int wishPush = 0;
         if(wishYn.equals("true")){ // true일 경우 insert문
-            wishPush = cblService.wishListPush(lectureId);
+            wishPush = cblService.wishListPush(lectureAll);
         }
         else{// false일 경우 delete문
-            wishPush = cblService.wishListPop(lectureId);
+            wishPush = cblService.wishListPop(lectureAll);
         }
         return wishPush;
     }

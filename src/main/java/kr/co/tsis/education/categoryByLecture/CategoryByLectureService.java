@@ -1,5 +1,6 @@
 package kr.co.tsis.education.categoryByLecture;
 
+import kr.co.tsis.education.categoryByLecture.dto.CategoryByLectureAll;
 import kr.co.tsis.education.categoryByLecture.dto.EduInfoLevel;
 import kr.co.tsis.education.userCommon.dto.LectureCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +39,12 @@ public class CategoryByLectureService {
     }
 
     // 관심강좌 등록
-    public int wishListPush(int lectureId){
-        return cblRepository.wishListPush(lectureId);
+    public int wishListPush(CategoryByLectureAll lectureAll){
+        return cblRepository.wishListPush(lectureAll);
     }
 
     // 관심강좌 취소
-    public int wishListPop(int lectureId){
-        return cblRepository.wishListPop(lectureId);
+    public int wishListPop(CategoryByLectureAll lectureAll){
+        return cblRepository.wishListPop(lectureAll);
     }
 }

@@ -28,8 +28,4 @@ public class MainPageService {
         return mpRepository.myRequiredLectureList(loginUser);
     }
 
-    //추천강좌
-    public ArrayList<MainPageLecture> bestLectureList(){
-        return mpRepository.bestLectureList();
-    }
 }

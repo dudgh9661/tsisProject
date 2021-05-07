@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class TrainingByInstitutionService {
@@ -29,8 +30,23 @@ public class TrainingByInstitutionService {
         return tbiRepository.academySubjectList(academyId);
     }
 
+    //검색 강좌 갯수
+    public int selectLectureNum(HashMap<String, Integer> selectInfo){
+        return tbiRepository.selectLectureNum(selectInfo);
+    }
+
     //검색결과 리스트
     public ArrayList<TrainingInstitutionLectureAll> lectureList(TrainingPageHandlingInfo handlingInfo){
         return tbiRepository.lectureList(handlingInfo);
+    }
+
+    // 관심강좌 등록
+    public int wishListPush(TrainingInstitutionLectureAll empInfo){
+        return tbiRepository.wishListPush(empInfo);
+    }
+
+    // 관심강좌 취소
+    public int wishListPop(TrainingInstitutionLectureAll empInfo){
+        return tbiRepository.wishListPop(empInfo);
     }
 }
