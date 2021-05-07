@@ -30,7 +30,7 @@ public class TrainingByInstitutionController {
     }
 
     //기관별 교육 검색
-    @GetMapping("/trainingByInstitution")
+    @GetMapping("/trainingByInstitutionList")
     public String trainingInstitutionView(Model model){
         //기관 종류 리스트
         ArrayList<Academy> academyList = tbiService.academyList();
@@ -42,7 +42,9 @@ public class TrainingByInstitutionController {
     @ResponseBody
     @GetMapping("/topicList")
     public ArrayList<AcademySubject> topicList(HttpServletRequest request){
-        int academyId = Integer.parseInt(request.getParameter("academyId"));
+        //test
+        //String academyId = "1234";
+        String academyId = request.getParameter("academyId");
         ArrayList<AcademySubject> academySubjectList = tbiService.academySubjectList(academyId);
         return academySubjectList;
     }
@@ -51,20 +53,28 @@ public class TrainingByInstitutionController {
     @ResponseBody
     @GetMapping("/trainingSearchResult")
     public TraningLecturePath trainingSearchResult(HttpServletRequest request){
-        int academyId = Integer.parseInt(request.getParameter("academyId"));
+        String academyId = request.getParameter("academyId");
+        //test
+        //int academySubjectId = 0;
         int academySubjectId = Integer.parseInt(request.getParameter("academySubjectId"));
         //총 강좌 갯수
-        HashMap<String, Integer> selectInfo = new HashMap<String, Integer>();
-        selectInfo.put("academyId", academyId);
-        selectInfo.put("academySubjectId", academySubjectId);
+        TrainingInstitutionLectureAll selectInfo = new TrainingInstitutionLectureAll();
+        selectInfo.setAcademyId(academyId);
+        selectInfo.setAcademySubjectId(academySubjectId);
+        //selectInfo.put("academyId", academyId);
+        //selectInfo.put("academySubjectId", academySubjectId);
         int lectureNum = tbiService.selectLectureNum(selectInfo);
 
         // 사원정보
         HttpSession session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
         //현재 페이지 번호
+        //test
+        //int pageNum = 0;
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         //컬럼명
+        //test
+        //String columnName = "ctgr.category_id";
         String columnName = request.getParameter("columnName");
 
         //페이징 처리 시 한번에 20개씩 페이지 버튼은 5개
@@ -75,6 +85,8 @@ public class TrainingByInstitutionController {
         TrainingPageHandlingInfo handlingInfo = new TrainingPageHandlingInfo();
         handlingInfo.setAcademyId(academyId);
         handlingInfo.setAcademySubjectId(academySubjectId);
+        //test
+        //handlingInfo.setEmpId("2613562");
         handlingInfo.setEmpId(loginUser.getEmpId());
         handlingInfo.setColumnName(columnName);
         handlingInfo.setFirstNum(firstNum);

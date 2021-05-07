@@ -30,8 +30,8 @@ public class SubjectByLectureRepository {
     }
 
     //검색결과 리스트(비동기처리)
-    public ArrayList<SubjectByLectureAll> lectureList(PushEmplInfo emplInfo){
-        return (ArrayList)sqlSession.selectList("SubjectByLectureMapper.lectureList");
+    public ArrayList<SubjectByLectureAll> lectureList(PushEmplInfo empInfo){
+        return (ArrayList)sqlSession.selectList("SubjectByLectureMapper.lectureList",empInfo);
     }
 
     // 관심강좌 등록

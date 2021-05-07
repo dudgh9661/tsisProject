@@ -52,9 +52,6 @@
         GROUP BY lec.edu_level_id
     </select>
 
-    <!-- 과정 수준 클릭 -->
-
-
     <!-- 관심강좌 등록 -->
     <insert id="categoryWishListPush">
         INSERT INTO wishlist VALUES(#{empId},#{lectureId})
@@ -64,5 +61,73 @@
     <delete id="categoryWishListPop">
         DELETE FROM wishlist WHERE emp_id = #{empId} AND lecture_id = #{lectureId}
     </delete>
+
+    <!-- 강좌갯수 구하기 -->
+    <select id="selectLectureNum" resultType="int">
+        SELECT count(lec.lecture_id)
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        <if test="dataPush == 0">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = '0'
+        </if>
+        <if test="dataPush == 1">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET003'
+        </if>
+        <if test="dataPush == 2">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002'
+        </if>
+        <if test="dataPush == 3">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        </if>
+        <if test="dataPush == 4">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001'
+        </if>
+        <if test="dataPush == 5">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET003'
+        </if>
+        <if test="dataPush == 6">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002'
+        </if>
+        <if test="dataPush == 7">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        </if>
+    </select>
+
+    <!-- 과정 수준 클릭 -->
+    <select id="selectLectureList" resultType="kr.co.tsis.education.categoryByLecture.dto.CategoryByLectureAll">
+        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id),
+        lec.lecture_best_yn 'lectureBestYn', lec.lecture_title 'lectureTitle', lec.lecture_url 'lectureUrl', lec.online_yn 'onlineYn',
+        acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc'
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        <if test="dataPush == 0">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = '0'
+        </if>
+        <if test="dataPush == 1">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET003'
+        </if>
+        <if test="dataPush == 2">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002'
+        </if>
+        <if test="dataPush == 3">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        </if>
+        <if test="dataPush == 4">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001'
+        </if>
+        <if test="dataPush == 5">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET003'
+        </if>
+        <if test="dataPush == 6">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002'
+        </if>
+        <if test="dataPush == 7">
+            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        </if>
+        ORDER BY ${columnName}
+        limit #{totalListNum} offset #{firstNum}
+    </select>
 
 </mapper>

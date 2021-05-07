@@ -1,6 +1,7 @@
 package kr.co.tsis.education.categoryByLecture;
 
 import kr.co.tsis.education.categoryByLecture.dto.CategoryByLectureAll;
+import kr.co.tsis.education.categoryByLecture.dto.CategoryByLecturePush;
 import kr.co.tsis.education.categoryByLecture.dto.EduInfoLevel;
 import kr.co.tsis.education.userCommon.dto.LectureCategory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -47,5 +48,15 @@ public class CategoryByLectureRepository {
     // 관심강좌 취소
     public int wishListPop(CategoryByLectureAll lectureAll){
         return sqlSession.delete("CategoryByLectureMapper.categoryWishListPop",lectureAll);
+    }
+
+    //강좌갯수 구하기
+    public int selectLectureNum(CategoryByLecturePush pushDate){
+        return sqlSession.selectOne("CategoryByLectureMapper.selectLectureNum",pushDate);
+    }
+
+    //과정 수준 강좌 리스트
+    public ArrayList<CategoryByLectureAll> selectLectureList(CategoryByLecturePush pushData){
+        return (ArrayList)sqlSession.selectList("CategoryByLectureMapper.selectLectureList", pushData);
     }
 }

@@ -48,14 +48,14 @@
 
     <!-- 검색결과 리스트(비동기처리) -->
     <select id="lectureList" resultMap="subjectByLectureAllResultMap">
-        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id) '관심여부',
+        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id),
         lec.lecture_title, lec.lecture_url, lec.online_yn, lec.lecture_best_yn,
         ctgr.depth2_skill, ctgr.depth3_course
         FROM lecture lec
         INNER JOIN lecture_category ctgr
         ON ctgr.category_id = lec.category_id
         WHERE lec.theme_lecture_id=#{themeLectureId}
-        ORDER BY ${columnName}
+        ORDER BY ${columnName} ASC
         limit #{totalListNum} offset #{firstNum}
     </select>
 

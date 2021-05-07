@@ -1,7 +1,9 @@
 package kr.co.tsis.education.categoryByLecture;
 
 import kr.co.tsis.education.categoryByLecture.dto.CategoryByLectureAll;
+import kr.co.tsis.education.categoryByLecture.dto.CategoryByLecturePush;
 import kr.co.tsis.education.categoryByLecture.dto.EduInfoLevel;
+import kr.co.tsis.education.categoryByLecture.dto.LecturePush;
 import kr.co.tsis.education.userCommon.dto.Employee;
 import kr.co.tsis.education.userCommon.dto.LectureCategory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/categoryByLecture")
@@ -61,6 +64,8 @@ public class CategoryByLectureController {
     @ResponseBody
     @GetMapping("/courseLevelKinds")
     public ArrayList<EduInfoLevel> courseLevelKinds(HttpServletRequest request){
+        //test
+        //int categoryId = 1;
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         ArrayList<EduInfoLevel> courseLevelList = cblService.courseLevelList(categoryId);
         return courseLevelList;
@@ -70,31 +75,46 @@ public class CategoryByLectureController {
     //질문하기
     @ResponseBody
     @GetMapping("/DuplicateCourseSelection")
-    public ArrayList<CategoryByLectureAll> duplicateCourseList(HttpServletRequest request){
+    public LecturePush duplicateCourseList(HttpServletRequest request){
+        //test
+        //int categoryId =1;
+        //int pageNum = 1;
+        //String[] levelList = {"0", "0", "1"};
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         String[] levelList = request.getParameterValues("levelList"); // 프론트에서 boolean으로 넘어오는데 확인해보기
         String columnName = request.getParameter("columnName");
+
+        // 사원정보
+        HttpSession session = request.getSession();
+        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+
+        // 배열을 String으로
+        String dataPushNum = Arrays.toString(levelList).replaceAll("[^0-9]","");
+        // String을 int로
+        int pushNum = Integer.parseInt(dataPushNum);
+        // 2진법을 10진법으로
+        String dataPush = Integer.toBinaryString(pushNum);
+
+        CategoryByLecturePush pushData = new CategoryByLecturePush();
+        pushData.setDataPush(dataPush);
+        pushData.setCategoryId(categoryId);
+        pushData.setEmpId(loginUser.getEmpId());
         //강좌 갯수
-        int lectureNum = 0;
-        String eduLevelId = "";
-        for (int i = 0; i < levelList.length; i++){
-            String levelId = levelList[i];
-            if(levelId.equals("True")){
-                if(i == 0){
-                    eduLevelId = "ET001";
-                }
-                else if(i == 1){
-                    eduLevelId = "ET002";
-                }
-                else{
-                    eduLevelId = "ET003";
-                }
-                //lectureNum += cblService.selectLectureNum(); // 강좌갯수 구하기
-            }
+        int lectureNum = cblService.selectLectureNum(pushData);
 
-        }
+        int totalListNum = 20; // 출력되는 리스트 갯수
+        int firstNum = pageNum * totalListNum; // 가장 먼저 출력되는 리스트 번호
+        pushData.setColumnName(columnName);
+        pushData.setFirstNum(firstNum);
+        pushData.setTotalListNum(totalListNum);
 
+        ArrayList<CategoryByLectureAll> lectureList = cblService.selectLectureList(pushData);
+        int totalPageNationNum = (int)(lectureNum / totalListNum);//전체 페이지 갯수
+
+        LecturePush lecturePush = new LecturePush(lectureList, totalPageNationNum, lectureNum);
+
+        return lecturePush;
 
     }
 

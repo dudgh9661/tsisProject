@@ -23,7 +23,7 @@ public class MyLectureController {
 
     }
 
-    @GetMapping("/mylectureInfo")
+    @GetMapping("/myLectureInfo")
     public String myLectureView(HttpServletRequest request, Model model){
         // 사원정보
         HttpSession session = request.getSession();

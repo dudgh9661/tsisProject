@@ -26,12 +26,12 @@ public class TrainingByInstitutionService {
     }
 
     //주제리스트
-    public ArrayList<AcademySubject> academySubjectList(int academyId){
+    public ArrayList<AcademySubject> academySubjectList(String academyId){
         return tbiRepository.academySubjectList(academyId);
     }
 
     //검색 강좌 갯수
-    public int selectLectureNum(HashMap<String, Integer> selectInfo){
+    public int selectLectureNum(TrainingInstitutionLectureAll selectInfo){
         return tbiRepository.selectLectureNum(selectInfo);
     }
 

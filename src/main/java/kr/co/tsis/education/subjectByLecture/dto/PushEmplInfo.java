@@ -78,4 +78,17 @@ public class PushEmplInfo {
     public void setLectureId(int lectureId) {
         this.lectureId = lectureId;
     }
+
+    @Override
+    public String toString() {
+        return "PushEmplInfo{" +
+                "empId='" + empId + '\'' +
+                ", themeLectureId=" + themeLectureId +
+                ", columnName='" + columnName + '\'' +
+                ", totalPageNationNum=" + totalPageNationNum +
+                ", firstNum=" + firstNum +
+                ", totalListNum=" + totalListNum +
+                ", lectureId=" + lectureId +
+                '}';
+    }
 }
