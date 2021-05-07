@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.tsis.education.academyModify.academyModifyRepository">
+    <select id="getAcademy" parameterType="String" resultType="kr.co.tsis.education.academy.DTOS.academyDTO">
+        SELECT academy_id,
+                academy_name,
+                academy_loc,
+                academy_url,
+                academy_details,
+                academy_logo_url,
+                (SELECT count(*)
+                 FROM academy acdm INNER JOIN lecture lec
+                                              ON acdm.academy_id = lec.academy_id
+                 WHERE acdm.academy_id = academy.academy_id)
+        FROM academy
+        WHERE academy.academy_id = #{0}
+    </select>
+
+    <update id="setAcademy" parameterType="kr.co.tsis.education.academy.DTOS.academyDTO">
+        UPDATE academy
+        SET
+            academy_name = #{academyName},
+            academy_loc = #{academyLoc},
+            academy_url = #{academyUrl},
+            academy_details = #{academyDetails},
+            academy_logo_url = #{academyLogoUrl}
+        WHERE academy_id = #{academyId}
+    </update>
+
+    <insert id="addAcademy" parameterType="kr.co.tsis.education.academy.DTOS.academyDTO">
+        INSERT INTO academy (academy_id, academy_name, academy_loc, academy_url, academy_details, academy_logo_url)
+        VALUES (#{academyId}, #{academyName}, #{academyLoc}, #{academyUrl}, #{academyDetails}, #{academyLogoUrl})
+    </insert>
+    <select id="getLast" resultType="String">
+        SELECT academy_id FROM academy
+        ORDER BY academy_id DESC LIMIT 1;
+    </select>
+</mapper>
