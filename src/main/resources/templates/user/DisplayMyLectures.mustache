@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/user/common.css">
+    <link rel="stylesheet" href="/css/common.css">
     <title>나의 강좌</title>
 </head>
 <body>
@@ -53,7 +53,7 @@
             <section>
                 <div class="DML_contents">
                     <div class="DML_greetings" id="DML_greetings">
-                        {{name}} {{title}}님 환영합니다.
+                        {{employee.empName}} {{employee.empPosition}}님 환영합니다.
                     </div>
                     <div class="DML_anchors">
                         <button class="DML_anchorButton_necessary"><a href="#DML_display_lectures_necessary_title">필수 강좌</a></button>
@@ -65,7 +65,6 @@
                             <!--강좌명, 교육기관명, 주제명, 해당기관 이미지url, 해당기관사이트url  -->
                             {{#requiredLectureList}}
                                 <li class="DML_li"> 
-                                    <div>{{theme}}</div>
                                     <a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>
                                     <!--밑 태그로 변경할것.-->
                                     <!--<a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>-->
@@ -84,7 +83,6 @@
                             <!--강좌명, 교육기관명, 주제명, 해당기관 이미지url, 해당기관사이트url  -->
                             {{#wishLectureList}}
                                 <li class="DML_li">
-                                    <div>{{theme}}</div>
                                     <a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>
                                     <!--밑 태그로 변경할것.-->
                                     <!--<a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>-->
@@ -119,5 +117,6 @@
         </div>
         <!--content-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/js/DisplayMyLectures.js"></script>
 </body>
 </html>

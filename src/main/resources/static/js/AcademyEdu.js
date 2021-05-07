@@ -17,7 +17,7 @@ let maxPageNum = 0;
 function requestCategoryAPI(url, done, academyId) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?academyId=" + academyId + "&subjectId=" + subjectId,
+        url: "js/" + url + "?academyId=" + academyId,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -26,23 +26,23 @@ function requestCategoryAPI(url, done, academyId) {
 }
 
 // academy 요청
-requestCategoryAPI("test11.json", (response) => {
+requestCategoryAPI("/trainingByInstitution/trainingByInstitutionList", (response) => {
     for (const option of response['academy']) {
-        $(academyCategory).append("<option>" + option['academy_name'] + "</option>");
-        academyId.push(option['academy_id']);
+        $(academyCategory).append("<option>" + option['academyName'] + "</option>");
+        academyId.push(option['academyId']);
     }
-    $(".academy-bottom-note").children("div")[0].innerHTML = response['academy'][0]['academy_loc'];
+    $(".academy-bottom-note").children("div")[0].innerHTML = response['academy'][0]['academyLoc'];
     requestSubjectCategory(academyId[0]);
 })
 
 // subject 요청 Method
 function requestSubjectCategory(academyId) {
-    requestCategoryAPI("test12.json", (response) => {
+    requestCategoryAPI("/trainingByInstitution/topicList", (response) => {
         $(subjectCategory).children().remove().end();
         subjectId.length = 0;
         for (const option of response['subject']) {
-            $(subjectCategory).append("<option>" + option['academy_skill'] + "</option>");
-            subjectId.push(option['subject_id']);
+            $(subjectCategory).append("<option>" + option['academySkill'] + "</option>");
+            subjectId.push(option['academySubjectId']);
         }
         if (isInit) {
             requestCourseList(academyId[0], subjectId[0]);
@@ -62,38 +62,38 @@ function requestListAPI(url, done, academyId, subjectId, pageNum, columnName) {
 }
 
 function setTotalCourseNumber(response) {
-    totalCourseNumber = response['total_course'];
+    totalCourseNumber = response['lectureNum'];
     $(".academy-result__title")[0].innerHTML = "총 " + totalCourseNumber + "개 검색";
 }
 
 function setCourseList(response) {
     $(courseList).children().slice(2).remove().end();
     lectureId.length = 0;
-    for (const lecture of response['lecture_list']) {
-        lectureId.push(lecture['lecture_id']);
+    for (const lecture of response['lectureList']) {
+        lectureId.push(lecture['lectureId']);
 
         let list = [];
 
         let best = "";
         let wish = "<img class='academy-icon-sm' src='../../../static/img/empty-heart.png'>";
-        let index = response['lecture_list'].indexOf(lecture) + 1;
+        let index = response['lectureList'].indexOf(lecture) + 1;
         let online = "온라인";
         let urlImage = "<img class='academy-icon-sm' src='../../../static/img/link.png'>";
-        let url = "<a href='" + lecture['lecture_url'] + "' target='_blank'>" + urlImage;
-        if (lecture['lecture_best_yn'] === true) {
+        let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
+        if (lecture['lectureBestYn'] === true) {
             best = "<img class='academy-icon-sm' src='../../../static/img/star.svg'>"
         }
-        if (lecture['wish_yn'] === true) {
+        if (lecture['wishBool'] === true) {
             wish = "<img class='academy-icon-sm' src='../../../static/img/full-heart.png'>";
         }
-        if (lecture['online_yn'] === false) {
+        if (lecture['onlineYn'] === false) {
             online = "오프라인";
         }
         list.push("<div>" + best + "</div>");
         list.push("<div>" + wish + "</div>");
         list.push("<span>" + index + "</span>");
-        list.push("<span>" + lecture['lecture_category'] + "</span>");
-        list.push("<span>" + lecture['lecture_title'] + "</span>");
+        list.push("<span>" + lecture['depth2Skill'] + " > " + lecture['depth3Course'] + "</span>");
+        list.push("<span>" + lecture['lectureTitle'] + "</span>");
         list.push("<span>" + online + "</span>");
         list.push(url + "</a>");
 
@@ -125,10 +125,10 @@ function setPagination(start) {
 }
 
 function requestCourseList(academyId, subjectId, pageNum, columnName = "") {
-    requestListAPI("test13.json", (response) => {
+    requestListAPI("/trainingByInstitution/trainingSearchResult", (response) => {
         setTotalCourseNumber(response);
         setCourseList(response);
-        maxPageNum = response['max_page'];
+        maxPageNum = response['totalPageNationNum'];
         setPagination(1);
     }, academyId, subjectId, pageNum, columnName);
     isInit = false;
@@ -146,8 +146,8 @@ subjectCategory.addEventListener("change", (event) => {
 
 function requestWishAPI(url, done, lectureId, wishTo) {
     $.ajax({
-        type: "PUT",
-        url: "js/" + url + "?lecturedId=" + lectureId + "&wishTo=" + wishTo,
+        type: "GET",
+        url: "js/" + url + "?lectureId=" + lectureId + "&wishYn=" + wishTo,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
