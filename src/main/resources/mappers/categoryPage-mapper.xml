@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.tsis.education.categoryPage.CategoryPageRepository">
+    <!-- 카테고리 (대) -->
+    <select id="getLectureCategoryDepth1" resultType="kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth1">
+        SELECT depth1_field 'depth1Field' FROM lecture_category GROUP BY depth1_field;
+    </select>
+
+    <!-- 카테고리 (중) -->
+    <select id="getLectureCategoryDepth2" resultType="kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth2">
+        SELECT
+            category_id 'categoryId',
+                depth2_skill 'depth2Skill',
+                depth3_course 'depth3Course',
+                (SELECT COUNT(*) FROM lecture WHERE category_id = ctgr.category_id) AS 'categoryNum'
+        FROM lecture_category ctgr
+        WHERE depth1_field=#{depth1Field}
+    </select>
+</mapper>

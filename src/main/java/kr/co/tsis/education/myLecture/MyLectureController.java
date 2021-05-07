@@ -37,6 +37,6 @@ public class MyLectureController {
         model.addAttribute("employee",loginUser);
         model.addAttribute("requiredLectureList",myPageRequiredLecturesList);
         model.addAttribute("wishLectureList",myWishLecturesList);
-        return "";
+        return "user/DisplayMyLectures";
     }
 }

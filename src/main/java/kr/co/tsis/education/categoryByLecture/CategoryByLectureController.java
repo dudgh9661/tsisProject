@@ -35,7 +35,7 @@ public class CategoryByLectureController {
     public String CategoryLectureView(Model model){
         ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
         model.addAttribute("mainCategoryList",mainCategoryList);
-        return "";
+        return "user/SubjectEduPage";
     }
 
     //중분류 리스트

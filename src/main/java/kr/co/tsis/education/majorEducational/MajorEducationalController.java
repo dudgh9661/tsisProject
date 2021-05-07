@@ -26,6 +26,6 @@ public class MajorEducationalController {
     public String academyListView(Model model){
         ArrayList<Academy> academyList = meService.academyListSelect();
         model.addAttribute("academyList",academyList);
-        return "";
+        return "user/SelectEduPage";
     }
 }
