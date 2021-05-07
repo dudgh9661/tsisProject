@@ -8,16 +8,27 @@ let isInit = true;
 let courseList = document.querySelector(".academy-result");
 let lectureId = [];
 let totalCourseNumber = 0;
-let columnName = "";
+let columnName = "lec.lecture_title";
 
 let pageNum = 1;
 let maxPageNum = 0;
 
 // 서버 요청
-function requestCategoryAPI(url, done, academyId) {
+// function requestAcademyCategoryAPI(url, done) {
+//     $.ajax({
+//         type: "GET",
+//         url: url,
+//         dataType: "json",
+//         contentType:"application/json; charset=utf-8",
+//     }).done(done).fail((error) => {
+//         alert(JSON.stringify(error));
+//     });
+// }
+
+function requestSubjectCategoryAPI(url, done, academyId) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?academyId=" + academyId,
+        url: url + "?academyId=" + academyId,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -25,19 +36,40 @@ function requestCategoryAPI(url, done, academyId) {
     });
 }
 
+// const requestAcademyCategoryAPI = () => {
+    /*$.ajax({
+        type: 'GET',
+        url: '/trainingByInstitution/trainingByInstitutionList',
+        // dataType: 'json',
+        // contentType:'application/json; charset=utf-8',
+        success : function (data) {
+            console.log(data);
+        }
+    })*/
+    //     .fail((error) => {
+    //     console.log(error)
+    //     // alert(JSON.stringify(error));
+    // });
+/*.done((response) => {
+
+    })*/
+// }
+// requestAcademyCategoryAPI()
+// requestAcademyCategoryAPI();
 // academy 요청
-requestCategoryAPI("/trainingByInstitution/trainingByInstitutionList", (response) => {
-    for (const option of response['academy']) {
-        $(academyCategory).append("<option>" + option['academyName'] + "</option>");
-        academyId.push(option['academyId']);
-    }
-    $(".academy-bottom-note").children("div")[0].innerHTML = response['academy'][0]['academyLoc'];
-    requestSubjectCategory(academyId[0]);
-})
+// requestAcademyCategoryAPI("/trainingByInstitution/trainingByInstitutionList", (response) => {
+//     console.log(response);
+//     // for (const option of response['academyList']) {
+//     //     $(academyCategory).append("<option>" + option['academyName'] + "</option>");
+//     //     academyId.push(option['academyId']);
+//     // }
+//     // $(".academy-bottom-note").children("div")[0].innerHTML = response['academyList'][0]['academyLoc'];
+//     // requestSubjectCategory(academyId[0]);
+// })
 
 // subject 요청 Method
 function requestSubjectCategory(academyId) {
-    requestCategoryAPI("/trainingByInstitution/topicList", (response) => {
+    requestSubjectCategoryAPI("/trainingByInstitution/topicList", (response) => {
         $(subjectCategory).children().remove().end();
         subjectId.length = 0;
         for (const option of response['subject']) {
@@ -53,7 +85,7 @@ function requestSubjectCategory(academyId) {
 function requestListAPI(url, done, academyId, subjectId, pageNum, columnName) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?academyId=" + academyId + "&subjectId=" + subjectId + "&pageNum=" + pageNum + "&columnName=" + columnName,
+        url: url + "?academyId=" + academyId + "&subjectId=" + subjectId + "&pageNum=" + pageNum + "&columnName=" + columnName,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -75,16 +107,16 @@ function setCourseList(response) {
         let list = [];
 
         let best = "";
-        let wish = "<img class='academy-icon-sm' src='../../../static/img/empty-heart.png'>";
+        let wish = "<img class='academy-icon-sm' src='img/empty-heart.png'>";
         let index = response['lectureList'].indexOf(lecture) + 1;
         let online = "온라인";
-        let urlImage = "<img class='academy-icon-sm' src='../../../static/img/link.png'>";
+        let urlImage = "<img class='academy-icon-sm' src='img/link.png'>";
         let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
         if (lecture['lectureBestYn'] === true) {
-            best = "<img class='academy-icon-sm' src='../../../static/img/star.svg'>"
+            best = "<img class='academy-icon-sm' src='img/star.svg'>"
         }
         if (lecture['wishBool'] === true) {
-            wish = "<img class='academy-icon-sm' src='../../../static/img/full-heart.png'>";
+            wish = "<img class='academy-icon-sm' src='img/full-heart.png'>";
         }
         if (lecture['onlineYn'] === false) {
             online = "오프라인";
@@ -147,7 +179,7 @@ subjectCategory.addEventListener("change", (event) => {
 function requestWishAPI(url, done, lectureId, wishTo) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?lectureId=" + lectureId + "&wishYn=" + wishTo,
+        url: url + "?lectureId=" + lectureId + "&wishYn=" + wishTo,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -158,11 +190,11 @@ function requestWishAPI(url, done, lectureId, wishTo) {
 $(document).click(function(event) {
     if (event.target.className === "academy-icon-sm") {
         if (event.target.src.includes("empty-heart.png") === true) {
-            event.target.src = "../../../static/img/full-heart.png";
+            event.target.src = "img/full-heart.png";
             requestWishAPI("test6.json", () => {}, lectureId[event.target.parentElement.parentElement.children[2].innerHTML - 1], true);
         }
         else if (event.target.src.includes("full-heart.png") === true) {
-            event.target.src = "../../../static/img/empty-heart.png";
+            event.target.src = "img/empty-heart.png";
             requestWishAPI("test6.json", () => {}, lectureId[event.target.parentElement.parentElement.children[2].innerHTML - 1], false);
         }
     }

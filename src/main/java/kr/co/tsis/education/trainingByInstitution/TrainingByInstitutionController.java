@@ -34,6 +34,10 @@ public class TrainingByInstitutionController {
     public String trainingInstitutionView(Model model){
         //기관 종류 리스트
         ArrayList<Academy> academyList = tbiService.academyList();
+        System.out.println(academyList.size());
+        for (int i = 0; i < academyList.size(); i++){
+            System.out.println("기관별" + academyList.get(i).getAcademyName());
+        }
         model.addAttribute("academyList", academyList);
         return "user/AcademyEduPage";
     }
@@ -45,7 +49,11 @@ public class TrainingByInstitutionController {
         //test
         //String academyId = "1234";
         String academyId = request.getParameter("academyId");
+        System.out.println("academyId"+academyId);
         ArrayList<AcademySubject> academySubjectList = tbiService.academySubjectList(academyId);
+        for (int i = 0;  i < academySubjectList.size(); i++){
+            System.out.println("주제리스트"+academySubjectList.get(i).getAcademySubjectId());
+        }
         return academySubjectList;
     }
 

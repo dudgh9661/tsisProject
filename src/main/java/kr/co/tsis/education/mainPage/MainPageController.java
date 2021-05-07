@@ -28,6 +28,7 @@ public class MainPageController {
         // 사원정보
         HttpSession session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        //System.out.println(loginUser.getEmpId());
 
         // 필수강좌정보
         //String empId = loginUser.getEmpId();
@@ -35,7 +36,7 @@ public class MainPageController {
         model.addAttribute("requiredLectureList",myRequiredLectureList);
         model.addAttribute("guide",guideList);
         model.addAttribute("employee",loginUser);
-        return "";
+        return "user/MainPage";
     }
 
 }

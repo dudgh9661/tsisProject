@@ -34,7 +34,11 @@ public class CategoryByLectureController {
     @GetMapping("/mainCategoryKinds")
     public String CategoryLectureView(Model model){
         ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
-        model.addAttribute("mainCategoryList",mainCategoryList);
+        /*for (int i = 0; i < mainCategoryList.size(); i++){
+            System.out.println(mainCategoryList.get(i).getDepth1Field());
+        }
+        model.addAttribute("mainCategoryList",mainCategoryList);*/
+
         return "user/SubjectEduPage";
     }
 
@@ -105,13 +109,14 @@ public class CategoryByLectureController {
 
         int totalListNum = 20; // 출력되는 리스트 갯수
         int firstNum = pageNum * totalListNum; // 가장 먼저 출력되는 리스트 번호
+        //System.out.println("먼저 출력 : " + firstNum);
         pushData.setColumnName(columnName);
         pushData.setFirstNum(firstNum);
         pushData.setTotalListNum(totalListNum);
 
         ArrayList<CategoryByLectureAll> lectureList = cblService.selectLectureList(pushData);
         int totalPageNationNum = (int)(lectureNum / totalListNum);//전체 페이지 갯수
-
+        //System.out.println("전체 페이지 갯수: " + totalPageNationNum);
         LecturePush lecturePush = new LecturePush(lectureList, totalPageNationNum, lectureNum);
 
         return lecturePush;

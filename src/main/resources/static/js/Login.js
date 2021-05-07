@@ -16,40 +16,33 @@ function btn_click() {
     var frm = document.loginForm;
     
 
-    if (document.loginForm.idsave.checked == true) { // 아이디 저장을 체크 하였을때
-        // console.log("aaaaaaaaaaaaaaaaaaa")
-        // console.log(document.loginForm.userid.value)
-        if (!frm.userid.value) { //아이디를 입력하지 않으면.
-            alert("아이디를 입력 해주세요!");
-            frm.userid.focus();
-            
+    if (document.loginForm.idsave.checked === true) { // 아이디 저장을 체크 하였을때
+        if (!frm.userid.value || !frm.pwd.value) { //아이디를 입력하지 않으면.
+            alert("아이디와 비밀번호를 확인해주세요!");
+            //frm.userid.focus();
+            location.href="redirect:/";
+            //return false;
         }
-        if (!frm.pwd.value) { //패스워드를 입력하지 않으면.
-            alert("패스워드를 입력 해주세요!");
-            frm.pwd.focus();
-            
+        else{
+            localStorage.setItem("id",document.loginForm.userid.value);
+            localStorage.setItem("check",true);
         }
-        localStorage.setItem("id",document.loginForm.userid.value)
-        localStorage.setItem("check",true)
-        document.getElementById("loginForm").action = "/employee/login";
-        document.getElementById("loginForm").submit();
-        // setCookie("id", document.loginForm.userid.value, 7); //쿠키이름을 id로 아이디입력필드값을 7일동안 저장
+
+
     } else { // 아이디 저장을 체크 하지 않았을때
-        // setCookie("id", document.loginForm.userid.value, 0); //날짜를 0으로 저장하여 쿠키삭제
-        if (!frm.userid.value) { //아이디를 입력하지 않으면.
-            alert("아이디를 입력 해주세요!");
-            frm.userid.focus();
+
+        if (!frm.userid.value || !frm.pwd.value) { //아이디를 입력하지 않으면.
+            alert("아이디와 비밀번호를 확인해주세요!");
+            //frm.userid.focus();
+            location.href="redirect:/";
             
         }
-        if (!frm.pwd.value) { //패스워드를 입력하지 않으면.
-            alert("패스워드를 입력 해주세요!");
-            frm.pwd.focus();
-            
+        else{
+            localStorage.setItem("check",false);
+            localStorage.removeItem("id");
         }
-        localStorage.setItem("check",false)
-        localStorage.removeItem("id")
-        document.getElementById("loginForm").action = "/employee/login";
-        document.getElementById("loginForm").submit();
+
+
     }
 
 }

@@ -21,7 +21,7 @@ let maxPageNum = 0;
 function requestCategoryAPI(url, done) {
     $.ajax({
         type: "GET",
-        url: "js/" + url,
+        url: url,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -32,7 +32,7 @@ function requestCategoryAPI(url, done) {
 function requestLargeCategoryAPI(url, done, largeCategoryName) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?depth1Field=" + largeCategoryName,
+        url: url + "?depth1Field=" + largeCategoryName,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -43,7 +43,7 @@ function requestLargeCategoryAPI(url, done, largeCategoryName) {
 function requestMediumCategoryAPI(url, done, largeCategoryName, mediumCategoryName) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?depth1Field=" + largeCategoryName + "&depth2Skill" + mediumCategoryName,
+        url: url + "?depth1Field=" + largeCategoryName + "&depth2Skill" + mediumCategoryName,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -108,7 +108,7 @@ function levelToList() {
 function requestInitListAPI(url, done, categoryId) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?categoryId=" + categoryId,
+        url: url + "?categoryId=" + categoryId,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -119,7 +119,7 @@ function requestInitListAPI(url, done, categoryId) {
 function requestListAPI(url, done, categoryId, pageNum, columnName) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?categoryId=" + categoryId + "&pageNum=" + pageNum + "&levelList=" + levelToList() + "&columnName=" + columnName,
+        url: url + "?categoryId=" + categoryId + "&pageNum=" + pageNum + "&levelList=" + levelToList() + "&columnName=" + columnName,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -153,16 +153,16 @@ function setCourseList(response) {
         let list = [];
 
         let best = "";
-        let wish = "<img class='subject-icon-sm' src='../../../static/img/empty-heart.png'>";
+        let wish = "<img class='subject-icon-sm' src='img/empty-heart.png'>";
         let index = response['lectureList'].indexOf(lecture) + 1;
         let online = "온라인";
-        let urlImage = "<img class='subject-icon-sm' src='../../../static/img/link.png'>";
+        let urlImage = "<img class='subject-icon-sm' src='img/link.png'>";
         let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
         if (lecture['lectureBestYn'] === true) {
-            best = "<img class='subject-icon-sm' src='../../../static/img/star.svg'>"
+            best = "<img class='subject-icon-sm' src='img/star.svg'>"
         }
         if (lecture['wishBool'] === true) {
-            wish = "<img class='subject-icon-sm' src='../../../static/img/full-heart.png'>";
+            wish = "<img class='subject-icon-sm' src='img/full-heart.png'>";
         }
         if (lecture['onlineYn'] === false) {
             online = "오프라인";
@@ -263,7 +263,7 @@ selectedElective.addEventListener("click", () => {
 function requestWishAPI(url, done, lectureId, wishTo) {
     $.ajax({
         type: "GET",
-        url: "js/" + url + "?lectureId=" + lectureId + "&wishYn=" + wishTo,
+        url: url + "?lectureId=" + lectureId + "&wishYn=" + wishTo,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -274,11 +274,11 @@ function requestWishAPI(url, done, lectureId, wishTo) {
 $(document).click(function(event) {
     if (event.target.className === "subject-icon-sm") {
         if (event.target.src.includes("empty-heart.png") === true) {
-            event.target.src = "../../../static/img/full-heart.png";
+            event.target.src = "img/full-heart.png";
             requestWishAPI("/categoryByLecture/wishListSelection", () => {}, lectureId[event.target.parentElement.parentElement.children[2].innerHTML - 1], true);
         }
         else if (event.target.src.includes("full-heart.png") === true) {
-            event.target.src = "../../../static/img/empty-heart.png";
+            event.target.src = "img/empty-heart.png";
             requestWishAPI("/categoryByLecture/wishListSelection", () => {}, lectureId[event.target.parentElement.parentElement.children[2].innerHTML - 1], false);
         }
     }

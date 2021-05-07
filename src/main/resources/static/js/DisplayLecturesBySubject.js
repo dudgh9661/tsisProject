@@ -4,7 +4,7 @@ let DLBS_display_searchCount = document.getElementById("DLBS_display_searchCount
 let DLBS_display_list_pagingButtons = document.getElementById("DLBS_display_list_pagingButtons");
 
 let DLBS_ext_themeId = DLBS_selSubject_selectBox.options[DLBS_selSubject_selectBox.selectedIndex].value;
-let DLBS_ext_columnName = "";
+let DLBS_ext_columnName = "lec.lecture_title";
 let DLBS_ext_pageNum = 1;
 const DLBS_pages = 5;
 const DLBS_listSize = 20;
@@ -14,12 +14,15 @@ const DLBS_listSize = 20;
 
 //초기 화면 보여줄 때 나타낼 강좌목록 받아온 후 화면에 표시
 let  DLBS_doAjax =  (themeLectureId, columnName, pageNum) => {
+    //tet
+    //columnName = "lec.lecture_title";
     $.ajax({
         type: 'GET',
-        url: '/getLectures?themeLectureId=' + themeLectureId +'&columnName=' + columnName + '&pageNum=' + pageNum,
+        url: '/subjectByLecture/recommendationResultList?themeLectureId=' + themeLectureId +'&columnName=' + columnName + '&pageNum=' + pageNum,
         contentType:'application/json; charset=utf-8',
         dataType: 'json',
     }).done((ajaxData)=>{
+        console.log(ajaxData);
         DLBS_setDisplay(ajaxData);
     }).fail(function (error) {
         alert(JSON.stringify(error));

@@ -10,19 +10,22 @@ import kr.co.tsis.education.util.HttpConnection;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/employee")
 public class EmployeeController
 {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/login")
+    @GetMapping("/")
+    public String loginView(){
+        return "user/LoginPage";
+    }
+
+    @RequestMapping(value = "/employee/login", method = RequestMethod.POST)
     public String login( HttpSession session, HttpServletRequest request) throws IOException {
 
         String userId = request.getParameter("userId");
@@ -71,7 +74,7 @@ public class EmployeeController
         }
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/employee/logout")
     public String logout(HttpSession session) throws IOException {
         session.invalidate();
         return "redirect:/login";

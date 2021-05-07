@@ -6,6 +6,8 @@
 /* 각페이지 */
 @import "DisplayLecturesBySubject.css";
 @import "DisplayMyLectures.css";
+@import "AcademyEduPage.css";
+@import "SubjectEduPage.css";
 
 
 :root {

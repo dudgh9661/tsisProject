@@ -9,14 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
           integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../../static/css/common.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/user/common.css">
+    <title>기관별 강좌</title>
 </head>
 
 <body>
 <!--sidebar-->
 <div class="sidebar">
-    <a href="MainPage.mustache"><img src="../../../static/img/tsis.png" class="logo"/></a>
+    <a href="MainPage.mustache"><img src="/img/tsis.png" class="logo"/></a>
     <ul class="sidebar_ul">
         <li>
             <a href="RecommendationEduPage.mustache">주제별 강좌 보기</a>
@@ -59,10 +59,13 @@
                     <div class="academy-top-note">원하시는 기관을 선택해 주세요.</div>
                     <div class="academy-option">
                         <select class="academy-option__academy">
+                        {{#academyList}}
+                            <option value="{{academyId}}">{{academyName}}</option>
+                        {{/academyList}}
                         </select>
                     </div>
                     <div class="academy-bottom-note">
-                        <img class="academy-icon-sm" src="../../../static/img/location.svg">
+                        <img class="academy-icon-sm" src="/img/location.svg">
                         <div></div>
                     </div>
                 </div>
@@ -78,11 +81,11 @@
 
         <section class="academy-notice-bar">
             <div class="academy-notice-bar-icon">
-                <img class="academy-icon-sm" src="../../../static/img/star.svg"> : 베스트강좌
-                <img class="academy-icon-sm" src="../../../static/img/full-heart.png"> : 관심강좌
+                <img class="academy-icon-sm" src="/img/star.svg"> : 베스트강좌
+                <img class="academy-icon-sm" src="/img/full-heart.png"> : 관심강좌
             </div>
             <div>
-                <img class="academy-icon-sm" src="../../../static/img/help.svg">
+                <img class="academy-icon-sm" src="/img/help.svg">
                 <a href="07_SelectEdu.html">어떤 기관을 선택해야 할지 모르겠다면? 기관소개를 참고해보세요(클릭)</a>
             </div>
         </section>
@@ -102,12 +105,12 @@
     </section>
     <div class="academy-pagination">
         <div>
-            <img class="academy-icon-sm" src="../../../static/img/left-arrow.png">
+            <img class="academy-icon-sm" src="/img/left-arrow.png">
         </div>
         <ul class="academy-pagination__number">
         </ul>
         <div>
-            <img class="academy-icon-sm" src="../../../static/img/right-arrow.png">
+            <img class="academy-icon-sm" src="/img/right-arrow.png">
         </div>
     </div>
     <!--/section-->
@@ -127,7 +130,7 @@
 </div>
 <!--content-->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="../../../static/js/AcademyEdu.js"></script>
+<script src="/js/AcademyEdu.js"></script>
 
 </body>
 
