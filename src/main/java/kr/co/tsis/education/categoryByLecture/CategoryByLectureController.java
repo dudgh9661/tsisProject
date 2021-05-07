@@ -68,35 +68,35 @@ public class CategoryByLectureController {
 
     //과정 수준 클릭
     //질문하기
-    @ResponseBody
-    @GetMapping("/DuplicateCourseSelection")
-    public ArrayList<CategoryByLectureAll> duplicateCourseList(HttpServletRequest request){
-        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-        String[] levelList = request.getParameterValues("levelList"); // 프론트에서 boolean으로 넘어오는데 확인해보기
-        String columnName = request.getParameter("columnName");
-        //강좌 갯수
-        int lectureNum = 0;
-        String eduLevelId = "";
-        for (int i = 0; i < levelList.length; i++){
-            String levelId = levelList[i];
-            if(levelId.equals("True")){
-                if(i == 0){
-                    eduLevelId = "ET001";
-                }
-                else if(i == 1){
-                    eduLevelId = "ET002";
-                }
-                else{
-                    eduLevelId = "ET003";
-                }
-                //lectureNum += cblService.selectLectureNum(); // 강좌갯수 구하기
-            }
-
-        }
-
-
-    }
+//    @ResponseBody
+//    @GetMapping("/DuplicateCourseSelection")
+//    public ArrayList<CategoryByLectureAll> duplicateCourseList(HttpServletRequest request){
+//        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+//        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+//        String[] levelList = request.getParameterValues("levelList"); // 프론트에서 boolean으로 넘어오는데 확인해보기
+//        String columnName = request.getParameter("columnName");
+//        //강좌 갯수
+//        int lectureNum = 0;
+//        String eduLevelId = "";
+//        for (int i = 0; i < levelList.length; i++){
+//            String levelId = levelList[i];
+//            if(levelId.equals("True")){
+//                if(i == 0){
+//                    eduLevelId = "ET001";
+//                }
+//                else if(i == 1){
+//                    eduLevelId = "ET002";
+//                }
+//                else{
+//                    eduLevelId = "ET003";
+//                }
+//                //lectureNum += cblService.selectLectureNum(); // 강좌갯수 구하기
+//            }
+//
+//        }
+//
+//
+//    }
 
     //관심강좌 선택
     @ResponseBody

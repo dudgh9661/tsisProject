@@ -27,7 +27,7 @@
 
     <!-- 중분류 리스트 -->
     <select id="middleCategoryList" resultType="kr.co.tsis.education.userCommon.dto.LectureCategory">
-        SELECT distinct depth2_skill 'depth2Skill'
+        SELECT depth2_skill 'depth2Skill'
         FROM lecture_category
         WHERE depth1_field = #{depth1Field}
         GROUP BY depth2_skill

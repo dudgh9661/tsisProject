@@ -44,7 +44,7 @@
         <typeAlias type="kr.co.tsis.education.subjectByLecture.SubjectByLectureRepository" alias="SubjectByLectureMapper"></typeAlias>
         <typeAlias type="kr.co.tsis.education.trainingByInstitution.TrainingByInstitutionRepository" alias="TraningByInstitutionMapper"></typeAlias>
 
-
+<!--        <typeAlias type="kr.co.tsis.education.employee.EmployeeRepository" alias="EmployeeMapper"></typeAlias>-->
 
     </typeAliases>
     <!--<mappers>
