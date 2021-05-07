@@ -1,0 +1,122 @@
+.DLBS_img{
+    width:16px;
+    height:16px;
+}
+
+.DLBS_section{
+    display: flex;
+    flex-direction: column;
+}
+
+.DLBS_display{
+    display: flex;
+    flex-direction: column;
+}
+
+.DLBS_pagingButton{
+    width:32px;
+    height:32px;
+}
+
+.DLBS_display_list_container{
+    display: flex;
+    flex-direction: column;
+    width:1000px;
+    margin: auto;
+}
+
+.DLBS_display_list_dynamic{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.DLBS_display_list_title .DLBS_display_list_element{
+    width:100%;
+}
+
+
+.DLBS_display_list_best{
+    width:4%;
+    display: inline-block;
+}
+.DLBS_display_list_interest{
+    width:4%;
+    display: inline-block;
+}
+.DLBS_display_list_no{
+    width:10%;
+    display: inline-block;
+}
+.DLBS_display_list_category{
+    width:20%;
+    display: inline-block;
+}
+.DLBS_display_list_lectureName{
+    width:34%;
+    display: inline-block;
+}
+.DLBS_display_list_onOff{
+    width:16%;
+    display: inline-block;
+}
+.DLBS_display_list_detail{
+    width:12%;
+    display: inline-block;
+}
+
+.DLBS_display_list_pagingButtons{
+    margin: 50px auto;
+}
+/* .DLBS_display_list_element{
+    display: flex;
+    flex-direction: row;
+} */
+.DLBS_display_list_icons{
+    text-decoration: underline;
+    
+}
+.DLBS_display_list_notIcons{
+    text-decoration: underline;
+}
+li{
+    margin-bottom: 25px;
+}
+
+.DLBS_selSubjectShowIcons{
+    width:1000px;
+    margin: auto;
+    
+}
+.DLBS_selSubject{
+    height:120px;
+    text-align: center;
+    background-color: steelblue;
+    margin-top: 20px;
+}
+.DLBS_selSubject_selectBox{
+    margin-top: 40px;
+    width: 35%;
+}
+.DLBS_showIcons{
+    background-color: silver;
+    padding: 5px;
+    margin-bottom:20px;
+}
+
+.DLBS_display_searchCount{
+    width:1000px;
+    margin: auto;
+    color: violet;
+    font-size: large;
+}
+
+.DLBS_display_list_icons{
+    border-bottom: 1px solid #fff;
+}
+
+.DLBS_display_list_notIcons{
+    border-bottom: 1px solid #666;
+    padding-bottom: 5px;
+}
