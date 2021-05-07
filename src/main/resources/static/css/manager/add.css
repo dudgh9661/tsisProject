@@ -1,0 +1,137 @@
+
+html {width:100%; height:100%;}
+body {width:100%; height:100%; margin: 0;}
+#app {width:100%; height:100%;}
+.select {
+    outline: none;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    height: 56px;
+    padding: 0 36px 0 12px;
+    border: 1px solid #d9d9d9;
+    background: #fff url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABHNCSVQICAgIfAhkiAAAAb5JREFUaEPtkz9LA0EQxWfuDBxht0pnmdY6dqJgJQhiKfgBtBI7v4FolU4/gJBaCFgJ/ulMbWtpl2p3jyvCjiyckCIJuZu9SHCu3nnz3vvNIaz5h2vuHyTAXxMUAkKA2YCcELNA9rgQYFfIFBACzALZ40KAXSFTQAgwC2SP/zsCmdb6DQB67OpKASKaeO+P8zwf1tGsTEBr3SGiV0TcqrNweoaIPBGdOucGdbUqBwiL2u32Zpqm7wDQrbs4zHnvL51zfY5GrQBhYZZl3Var9QEAnToGvPc3zrmrOrPTM7UDlCR6aZo+A4CuYoSI7q2151Vm5r1lBQiiSqk9AHhCxGxJQ0NjzFG4oCXfL3zGDlCSOEyS5BERk0XbiOjFWnsAAEUM80EjSoCSxBki3i0wNjLG7AOAiWU+aoAgprUOP+X1DINfALBtjBnHNB89QEmij4gXv0aJ6HsymewURRFCRP+indCUs0Qp9YCIJwAwJqJda+1ndOelYBMBgvSGUmrgvb/N83zUlPlGTqhJs7O0myKwshwSYGVVz1kkBIQAswE5IWaB7HEhwK6QKSAEmAWyx4UAu0KmgBBgFsgeX3sCPxxqazEoU2UGAAAAAElFTkSuQmCC) no-repeat;
+    background-size: 24px;
+    background-position: center right 12px;
+    -webkit-appearance: listbox;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+.select.type2 {
+  width: 90%;
+  font-size: 15px;
+  margin-top: 10px;
+}
+.select.type2:first-child {
+  width: 100%;
+  font-size: 15px;
+}
+.add .tblBody .md {
+  font-size: 26px;
+  font-weight: bold;
+  color: #243887;
+  margin: 0 5px;
+}
+.add .head {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.add .tblBody {
+  text-align:center;
+}
+.add table {
+  margin: auto;
+  width: 70%;
+  border-spacing: 11px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 7px 15px 0 #e8e8e8;
+}
+.add .tblBody tr td {
+  text-align: left;
+}
+.add .tblBody tr td:first-child {
+  text-align: center;
+  margin: auto;
+}
+.add .tblBody .label {
+  display: inline-block;
+  position: relative;
+}
+.add .tblBody .label.type2 {
+  margin-left: 9px;
+}
+.rdo.type2 {
+    color: #0d0d0d;
+    background: #
+}
+input[type=checkbox] {
+    outline: none;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 2;
+    width: 1px;
+    height: 1px;
+    -webkit-appearance: none;
+}
+.rdo.type2+.lTxt {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 90px;
+    padding: 12px 13px;
+    text-align: center;
+    vertical-align: top;
+    border-radius: 11px;
+    background: rgba(13,13,13,.08);
+    cursor: pointer;
+}
+.rdo.type2:checked+.lTxt, .rdo.type2:disabled+.lTxt {
+    color: #fff;
+    font-weight: 700;
+    background: #243887;
+}
+.input {
+    outline: none;
+    font-size: 20px;
+    height: 56px;
+    padding-left: 12px;
+    border: 1px solid #d9d9d9;
+    vertical-align: top;
+    width: 98%;
+}
+.add .tblBody .key {
+  font-weight: bold;
+}
+.add .btn.con {
+  text-align: center;
+  margin-top: 15px;
+}
+.add .btn.con .btn{
+  border: 0px;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 12px 13px;
+  border-radius: 11px;
+  font-size: 18px;
+  line-height: 24px;
+  width: 10%;
+  color: #ffffff;
+  text-decoration: none;
+}
+.add .btn.con .btn.gl{
+  background: #6D6E70;
+}
+.add .btn.con .btn.gr{
+  background: #4193D0;
+}
+.add a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.add button {
+  outline: none;
+}

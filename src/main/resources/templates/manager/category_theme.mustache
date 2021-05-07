@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- <link rel="stylesheet" href="main.css"/> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <!--icon-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+          integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <!--css-->
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/category_theme_1.css">
+    <link rel="stylesheet" href="/css/category_theme_2.css">
+    <!--js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script defer src="/js/category_theme.js"></script>
+    <!--alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--sidebar-->
+    <div class="sidebar">
+        <a href="03_Main.html"><img src="/img/tsis.png" class="logo" /></a>
+        <ul class="sidebar_ul">
+            <li>
+                <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
+            </li>
+            <li>
+                <a href="05_SubjectEdu.html">주제별 교육 검색</a>
+            </li>
+            <li>
+                <a href="06_AcademyEdu.html">기관별 교육 검색</a>
+            </li>
+            <li>
+                <a href="07_SelectEdu.html">주요 교육기관</a>
+            </li>
+            <li>
+                <a href="08_LegendEdu.html">교육 주제 범례</a>
+            </li>
+            <li>
+                <a href="09_AdminMain.html">관리자</a>
+            </li>
+        </ul>
+    </div>
+    <!--/sidebar-->
+
+    <!--content-->
+    <div class="content">
+        <!--header-->
+        <header>
+            <div class="login-info">
+                <span>죠르디님 환영합니다!</span>
+                <button type="button" class="logout">
+                    <a href="01_Index.html">
+                        로그아웃
+                    </a>
+                </button>
+            </div>
+        </header>
+        <!--header-->
+
+        <!--section-->
+        <!-- 여기에 코드 넣으세요 -->
+        <section>
+            <div class="container">
+                <input id="category_tab" type="radio" name="tab_item" checked>
+                <label class="tab_item" for="category_tab">카테고리 관리</label>
+
+                <input id="subject_tab" type="radio" name="tab_item">
+                <label class="tab_item" for="subject_tab">주제 관리</label>
+
+                <div class="tab_content" id="category_tab_content">
+                    <div class="sorted_categories">
+                        <form>
+                            <input type="button" value="새로고침" class="reload" onClick="window.location.reload()">
+                        </form>
+                        <div class="sorted_categories_div">
+                            <div class="sorted_category bg_sorted_category">
+                                <p>대분류</p>
+                                <div class="category_list">
+                                    <div class="category_list_div">
+                                        <div class="category_list_one category_list_one_bg">
+                                            <!--여기에 비동기 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arrow arrow1"> >> </div>
+                            <div class="sorted_category m_sorted_category">
+                                <p>중분류</p>
+                                <div class="category_list">
+                                    <div class="category_list_div">
+                                        <div class="category_list_one category_list_one_m">
+                                            <!--여기에 비동기 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arrow arrow2"> >> </div>
+                            <div class="sorted_category s_sorted_category">
+                                <p>소분류</p>
+                                <div class="category_list">
+                                    <div class="category_list_div">
+                                        <div class="category_list_one category_list_one_s">
+                                            <!--여기에 비동기 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sorted_icon">🔻</div>
+                    <div class="sorted_lectures">
+                        <p>강의목록</p>
+                        <div class="sorted_lecture_list">
+                            <!--여기에 비동기 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="tab_content" id="theme_tab_content">
+                    <form>
+                        <input type="button" value="새로고침" class="reload" onClick="window.location.reload()">
+                    </form>
+                    <div class="theme_div">
+                        <table class="class_manage">
+                            <thead>
+                            <tr>
+                                <th class="subject_manage">주제명</th>
+                                <th class="subject_manage"></th>
+                                <th class="subject_manage"><button type="button" class="btn_add" onclick = "add_sub()" >추가</button></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--
+                                {{#subjectList}}
+                                    <tr>
+                                        <td class="subject_manage">{{theme}}</td>
+                                        <td class="subject_manage"><button type="button" class="btn_modify" data-id = "{{themeLectureId}}">수정</td>
+                                        <td class="subject_manage"><button type="button" class="btn_delete" data-id = "{{themeLectureId}}">ㅡ</td>
+                                    </tr>
+
+                                {{/subjectList}}
+-->
+
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            <tr>
+                                <td class="subject_manage">개발자 스킬업을 위한 전문교육</td>
+                                <td class="subject_manage"><button type="button" class="btn_modify" data-id="1">수정</td>
+                                <td class="subject_manage"><button type="button" class="btn_delete" data-id="1">ㅡ</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="table table-hover">
+                        <thead class="tab1_header">
+                        <tr>
+                            <th>추천</th>
+                            <th>찜</th>
+                            <th>No</th>
+                            <th>카테고리</th>
+                            <th>강좌명</th>
+                            <th>교육기관</th>
+                            <th>온라인여부</th>
+                            <th>위치</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>★</td>
+                            <td>♥</td>
+                            <td>1</td>
+                            <td>직무>전략</td>
+                            <td>Perfect!! 발주자를 위한 정보전략계획(JSP)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>온라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>♡</td>
+                            <td>2</td>
+                            <td>직무>전략</td>
+                            <td>정보화 투자 성과평가(IT-ROI)</td>
+                            <td>멀티캠퍼스</td>
+                            <td>오프라인</td>
+                            <td>역삼역</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!--/section-->
+
+        <!--footer-->
+        <footer>
+            <div class="footer-info">
+                <div>
+                    <p>문의처</p>
+                </div>
+                <div>
+                    <p>교육담당자 | 인사팀 정병석 과장</p>
+                </div>
+            </div>
+        </footer>
+        <!--/footer-->
+    </div>
+    <!--content-->
+</body>
+
+</html>

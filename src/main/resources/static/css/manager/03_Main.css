@@ -1,0 +1,101 @@
+
+/* 이용 안내 */
+
+.use-info {
+  padding: 0 20px 20px 20px;
+  /* 배경색 수정 필요 */
+  /*background-color: #DFDFDF;*/
+  background: linear-gradient(20deg, var(--color-light-sky-blue), var(--color-sky-blue));
+  white-space: normal;
+}
+
+.use-info-content {
+  padding: 0.5% 5%;
+}
+
+.use-info-content > .p-info {
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.use-info-content > .p-info-text {
+  font-size: 20px;
+}
+
+/* 신규 강좌 공지 */
+.notice-lecture {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 50px;
+}
+
+.notice-lecture > img {
+  display: inline;
+  width: 40px;
+  margin-right: 2%;
+}
+
+.notice-lecture > p {
+  display: inline;
+  font-size: 30px;
+}
+
+.notice-lecture > marquee {
+  margin-left: 20px;
+  width: 30%;
+  border: 0.5px solid #e5e5e5;
+  border-radius: 10px;
+
+  animation: neon 2s ease infinite;
+}
+
+@keyframes neon {
+  10% {
+    color: #fed128;
+  }
+
+  30% {
+    color: red;
+  }
+
+  50% {
+    color: blue;
+  }
+}
+
+/* 이모지 + 설명  */
+
+.info-contents {
+  display: grid;
+  white-space: normal;
+}
+
+.info-detail {
+  float: left;
+  margin-top: 100px;
+  height: 100px;
+}
+
+.info-imoji {
+  float: left;
+
+  width: 5%;
+  margin-left: 5%;
+  margin-right: 3%;
+}
+
+.info-content {
+  width: 82%;
+  margin-right: 5%;
+  float: left;
+  font-size: 18px;
+}
+
+.info-detail > div {
+  display: inline;
+}
+
+.info-imoji > img {
+  margin-top: 20%;
+  width: 70px;
+}

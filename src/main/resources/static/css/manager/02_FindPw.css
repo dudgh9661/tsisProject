@@ -1,0 +1,21 @@
+.pw-box {
+    background-color: #4193D0;
+    height:50px;
+    width: 300px;
+    border: none;
+    border-radius: 3%;
+}
+
+.input-info-box {
+    height: 30px;
+    width: 300px;
+}
+
+.div-info {
+    padding-right: 250px;
+    padding-bottom: 5px;
+}
+
+.input-pw-font {
+    color: white;
+}

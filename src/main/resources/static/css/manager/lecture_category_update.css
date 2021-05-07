@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.pw-box {
+    background-color: #3a4b99;
+    height:50px;
+    width: 300px;
+    border: none;
+    border-radius: 3%;
+    margin: 10px 0;
+}
+
+.input-info-box,
+.bg_cate,
+.m_cate,
+.s_cate {
+    height: 30px;
+    width: 300px;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.div-info {
+    text-align: left;
+    margin-left: 130px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.input-pw-font {
+    color: white;
+}
+
+.cate_update_title {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 30px;
+    font-family: "Noto Sans KR", sans-serif;
+    color: #242e5f;
+}
+
+.input-info-box {
+    border: none;
+    border-radius: 5px;
+}
+
+center {
+    background-color: rgb(199, 218, 231); 
+    width: 60%; 
+    margin: 0 auto; 
+    border-radius: 20px; 
+    padding: 30px 20px
+}
