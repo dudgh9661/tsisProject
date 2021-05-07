@@ -35,7 +35,7 @@ public class TrainingByInstitutionController {
         //기관 종류 리스트
         ArrayList<Academy> academyList = tbiService.academyList();
         model.addAttribute("academyList", academyList);
-        return "";
+        return "user/AcademyEduPage";
     }
 
     //주제리스트

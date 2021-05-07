@@ -24,7 +24,7 @@
 
     <!-- 나의 강좌(필수강좌) -->
     <select id="myPageRequiredLecturesList" resultMap="myLectureResultMap">
-        SELECT lec.lecture_id, lec.lecture_title, lec.lecture_url, aca.academy_logo_url
+        SELECT lec.lecture_id, lec.lecture_title, lec.lecture_url, aca.academy_logo_url, aca.academy_name
         FROM employee emp
         INNER JOIN required_lecture req
         ON emp.emp_position = req.emp_position
@@ -39,7 +39,7 @@
 
     <!-- 관심강좌 -->
     <select id="myWishLecturesList" resultMap="myLectureResultMap">
-        SELECT lec.lecture_id, lec.lecture_title, lec.lecture_url, aca.academy_logo_url
+        SELECT lec.lecture_id, lec.lecture_title, lec.lecture_url, aca.academy_logo_url, aca.academy_name
         FROM wishlist wish
         INNER JOIN lecture lec
         ON wish.lecture_id = lec.lecture_id

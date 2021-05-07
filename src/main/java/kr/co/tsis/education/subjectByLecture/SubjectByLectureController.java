@@ -34,7 +34,7 @@ public class SubjectByLectureController {
         ArrayList<ThemeLecture> themeLecturesList = sblService.themeLecturesList();
 
         model.addAttribute("themeLecturesList", themeLecturesList);
-        return "";
+        return "user/DisplayLecturesBySubject";
     }
 
     //검색결과 리스트(비동기처리)

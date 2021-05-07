@@ -1,12 +1,15 @@
 package kr.co.tsis.education.categoryPage;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth1;
+import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth2;
+import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth3;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
-public class CategoryPageRepository {
+import java.util.List;
 
-    @Autowired
-    private SqlSessionTemplate sqlSession;
+@Mapper
+public interface CategoryPageRepository {
+    public List<LectureCategoryDepth1> getLectureCategoryDepth1();
+    public List<LectureCategoryDepth2> getLectureCategoryDepth2(String depth1Field);
 }
+
