@@ -5,6 +5,7 @@ import kr.co.tsis.education.required.DTOS.requiredLectureDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,6 +29,11 @@ public class requiredService {
     }
 
     public List<requiredLectureDTO> getDpList(String d1,String d2,String d3){
+
+        if(d1==null || d2 == null || d3 == null){
+            List<requiredLectureDTO> result = new ArrayList<requiredLectureDTO>();
+            return result;
+        }
         return dao.getDpList(d1,d2,d3);
     }
 

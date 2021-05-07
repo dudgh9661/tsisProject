@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class academyService {
+    final static int limit = 12;
     @Autowired
     private academyRepository dao;
 
@@ -20,6 +21,7 @@ public class academyService {
             list = dao.getAllList();
         }
         else {
+            page = (page-1)*limit;
             list = dao.getList(page);
             int totpage = totalcount%12 ==0 ? totalcount/12 : (totalcount/12)+1;
             result.setTotalpage(totpage);

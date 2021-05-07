@@ -9,7 +9,8 @@ import java.util.List;
 @Repository
 public interface themeRepository {
     List<themeDTO> getThemeList();
-    List<lectureDTO> getLectureList(int id, int page);
+    List<lectureDTO> getLectureList(int id, int start);
+    int getLectureCount(int id);
     int delTheme(int id);
     String getTheme(int id);
     int modifyTheme(themeDTO dto);

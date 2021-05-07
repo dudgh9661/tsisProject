@@ -18,6 +18,17 @@ public class academtModifyService {
     }
 
     public int addAcademy(academyDTO dto){
+        String id = dao.getLast();
+        String temp = id.substring(2);
+        int count = Integer.parseInt(temp);
+        count++;
+        temp = Integer.toString(count);
+        while(temp.length()<3){
+            temp = "0"+temp;
+        }
+        id = "EI"+temp;
+        dto.setAcademyId(id);
+        System.out.println(id);
         return dao.addAcademy(dto);
     }
 }

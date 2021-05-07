@@ -8,25 +8,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/guide")
 public class guideController {
     @Autowired
     private guideService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(guideController.class);
 
-    @GetMapping("/main")
+    @GetMapping("/guide")
     public String main(){
         LOGGER.debug("void");
-        return "guide/main";
+        return "manager/guide";
     }
     @ResponseBody
-    @GetMapping("/getGuide")
+    @GetMapping("/guide/getGuide")
     public guideDTO getGuide(){
         LOGGER.debug("void");
         return service.getGuide();
     }
     @ResponseBody
-    @PostMapping("setGuide")
+    @PostMapping("/guide/setGuide")
     public int setGuide(@RequestBody guideDTO request){
         LOGGER.debug("request",request);
         return service.setGuide(request);

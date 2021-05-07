@@ -15,9 +15,11 @@ public interface categoryRepository {
     int delDepth1(String d1);
     int delDepth2(String d1,String d2);
     int delDepth3(String d1,String d2,String d3);
-    categoryDTO getTitle(int id);
+    String getTitle(int id);
     int setDepth(categoryForm form);
-    int addDepth(categoryForm form);
+    int addDepth1(categoryForm form);
+    int addDepth2(categoryForm form);
+    int addDepth3(categoryForm form);
     int setDepth1(categoryForm form);
     int setDepth2(categoryForm form);
     int setDepth3(categoryForm form);

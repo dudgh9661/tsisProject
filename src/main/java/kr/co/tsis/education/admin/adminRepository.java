@@ -8,7 +8,8 @@ import java.util.List;
 @Repository
 public interface adminRepository {
     List<lectureDTO> getAdmin();
-    List<lectureDTO> getUser(String s);
+    List<lectureDTO> getUserById(String s);
+    List<lectureDTO> getUserByName(String s);
     int setAdmin(String empId);
     int delAdmin(String empId);
 }

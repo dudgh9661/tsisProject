@@ -35,15 +35,8 @@ public class categoryService {
         return dao.delDepth3(d1,d2,d3);
     }
 
-    public categoryDTO getTitle(categoryForm form){
-        categoryDTO result = dao.getTitle(form.getLectureId());
-        List<String> d1List = dao.getDepth1();
-        List<String> d2List = dao.getDepth2(form.getDepth1Field());
-        List<String> d3List = dao.getDepth3(form.getDepth1Field(),form.getNewDepth2Skill());
-        result.setDepth1FieldList(d1List);
-        result.setDepth2SkillList(d2List);
-        result.setDepth3CourseList(d3List);
-        return result;
+    public String getTitle(categoryForm form){
+        return dao.getTitle(form.getLectureId());
 
     }
 
@@ -52,18 +45,26 @@ public class categoryService {
     }
 
     public int addDepth(categoryForm form){
-        return dao.addDepth(form);
+        if(form.getDepth1Field() == null){
+            return dao.addDepth1(form);
+        }
+        else if(form.getDepth2Skill() == null){
+            return dao.addDepth2(form);
+        }
+        else{
+            return dao.addDepth3(form);
+        }
     }
 
     public int resetDepth(categoryForm form){
-        if(form.getNewDepth1Field() != null){
-            return dao.setDepth1(form);
+        if(form.getDepth3Course() != null){
+            return dao.setDepth3(form);
         }
-        else if (form.getNewDepth2Skill() != null){
+        else if (form.getDepth2Skill()!= null){
             return dao.setDepth2(form);
         }
         else{
-            return dao.setDepth3(form);
+            return dao.setDepth1(form);
         }
     }
 }

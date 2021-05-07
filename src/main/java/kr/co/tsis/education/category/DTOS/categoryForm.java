@@ -5,9 +5,24 @@ public class categoryForm {
     private String depth2Skill;
     private String depth3Course;
     private int lectureId;
-    private String newDepth1Field;
-    private String newDepth2Skill;
-    private String newDepth3Course;
+    private String newDepth;
+    private String adddepth;
+
+    public String getAdddepth() {
+        return adddepth;
+    }
+
+    public void setAdddepth(String adddepth) {
+        this.adddepth = adddepth;
+    }
+
+    public String getNewDepth() {
+        return newDepth;
+    }
+
+    public void setNewDepth(String newDepth) {
+        this.newDepth = newDepth;
+    }
 
     public String getDepth1Field() {
         return depth1Field;
@@ -39,29 +54,5 @@ public class categoryForm {
 
     public void setLectureId(int lectureId) {
         this.lectureId = lectureId;
-    }
-
-    public String getNewDepth1Field() {
-        return newDepth1Field;
-    }
-
-    public void setNewDepth1Field(String newDepth1Field) {
-        this.newDepth1Field = newDepth1Field;
-    }
-
-    public String getNewDepth2Skill() {
-        return newDepth2Skill;
-    }
-
-    public void setNewDepth2Skill(String newDepth2Skill) {
-        this.newDepth2Skill = newDepth2Skill;
-    }
-
-    public String getNewDepth3Course() {
-        return newDepth3Course;
-    }
-
-    public void setNewDepth3Course(String newDepth3Course) {
-        this.newDepth3Course = newDepth3Course;
     }
 }

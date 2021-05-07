@@ -6,34 +6,37 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/academyModify")
 public class AcademyModifyController {
     @Autowired
     private academtModifyService service;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AcademyModifyController.class);
-    @ResponseBody
-    @GetMapping("/main")
-    public String main(){
-        return "academyModify/main";
-    }
-    @ResponseBody
-    @GetMapping("/getAcademy")
-    public academyDTO getAcademy(@RequestParam("academyId")String id){
-        return service.getAcademy(id);
-    }
-    @ResponseBody
-    @PostMapping("setAcademy")
-    public int setAcademy(@RequestBody academyDTO dto){
-        return service.setAcademy(dto);
 
+    @GetMapping("/academyModify/getAcademy")
+    public String getAcademy(@RequestParam("academyId")String id, Model model){
+        if(id==null || id == ""){
+            return "manager/academy_mod";
+        }
+        else {
+            model.addAttribute("academy", service.getAcademy(id));
+            return "manager/academy_mod";
+        }
     }
     @ResponseBody
-    @PostMapping("addAcademy")
+    @PostMapping(value = {"/academyModify/addAcademy","/academyModify/setAcademy"})
     public int addAcademy(@RequestBody academyDTO dto){
-        return service.addAcademy(dto);
+        if(dto.getAcademyName() == null || dto.getAcademyName() == ""){
+            return -1;
+        }
+        if(dto.getAcademyId() == null){
+            return service.addAcademy(dto);
+        }
+        else{
+            return service.setAcademy(dto);
+        }
     }
 }

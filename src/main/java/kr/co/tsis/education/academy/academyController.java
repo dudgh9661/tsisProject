@@ -8,32 +8,38 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/academy")
 public class academyController {
     @Autowired
     private academyService service;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(academyController.class);
 
-    @GetMapping("/main")
+    @GetMapping("/academy")
     public String main(){
         LOGGER.debug("void");
-        return "academy/main";
+        return "manager/academy";
     }
+
     @ResponseBody
-    @GetMapping("getList")
-    public academyPageDTO getList(@RequestParam("curpage")int curpage){
+    @GetMapping("/academy/getList")
+    public String getList(@RequestParam("curpage")int curpage, Model model){
         LOGGER.debug("curpage",curpage);
-        return service.getList(curpage);
+        academyPageDTO result = service.getList(curpage);
+        model.addAttribute("curPage",curpage);
+        model.addAttribute("totalPage",result.getTotalpage());
+        model.addAttribute("totalCount",result.getTotalCount());
+        model.addAttribute("organi",result.getOrgani());
+        return "manager/academy";
 
     }
     @ResponseBody
-    @PostMapping("delList")
+    @PostMapping("/academy/delList")
     public int delList(@RequestParam("academyIdList") List<String> ids){
         LOGGER.debug("academy_id_list",ids);
         return service.delList(ids);

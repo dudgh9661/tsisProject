@@ -10,41 +10,47 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
 public class adminController {
     @Autowired
     private adminService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(adminController.class);
 
-    @GetMapping("/main")
+    @GetMapping("/admin")
     public String main(){
         LOGGER.debug("void");
-        return "admin/main";
+        return "manager/admin";
     }
     @ResponseBody
-    @GetMapping("/getAdmin")
+    @GetMapping("/admin/getAdmin")
     public List<lectureDTO> getAdmin(){
         LOGGER.debug("void");
         return service.getAdmin();
     }
     @ResponseBody
-    @GetMapping("/getUser") //getUser/?searchvalue=1
-    public List<lectureDTO> getUser(HttpServletRequest request){
-        LOGGER.debug("request",request);
-        String s = request.getParameter("searchvalue");
+    @GetMapping("/admin/getUser") //getUser/?searchvalue=1
+    public List<lectureDTO> getUser(@RequestParam("searchvalue")String s){
+        LOGGER.debug("request",s);
         return service.getUser(s);
     }
     @ResponseBody
-    @PostMapping("/setAdmin")
-    public int setAdmin(@RequestParam("empId") String empId){
+    @PostMapping("/admin/setAdmin")
+    public int setAdmin(@RequestParam("empId") List<String> empId){
         LOGGER.debug("empId",empId);
-        return service.setAdmin(empId);
+        int result=0;
+        for(String item : empId){
+            result = service.setAdmin(item);
+        }
+        return result;
     }
     @ResponseBody
-    @PostMapping("/delAdmin")
-    public int delAdmin(@RequestParam("empId") String empId){
+    @PostMapping("/admin/delAdmin")
+    public int delAdmin(@RequestParam("empId") List<String> empId){
         LOGGER.debug("empId",empId);
-        return service.delAdmin(empId);
+        int result=0;
+        for(String item : empId){
+            result = service.delAdmin(item);
+        }
+        return result;
     }
 
 }

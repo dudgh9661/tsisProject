@@ -8,4 +8,5 @@ public interface academyModifyRepository {
     academyDTO getAcademy(String id);
     int setAcademy(academyDTO dto);
     int addAcademy(academyDTO dto);
+    String getLast();
 }
