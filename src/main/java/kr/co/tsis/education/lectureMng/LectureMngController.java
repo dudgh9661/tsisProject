@@ -2,7 +2,6 @@ package kr.co.tsis.education.lectureMng;
 
 import kr.co.tsis.education.lectureMng.Dto.*;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -116,18 +115,17 @@ public class LectureMngController {
 
     //강좌 추가
     @PostMapping("/lectureMng/add")
-    public String add(@RequestBody AddLectureRequestDto addLectureRequestDto, Model model) {
+    @ResponseBody
+    public AddSuccessDto add(@RequestBody AddLectureRequestDto addLectureRequestDto, Model model) {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.add(addLectureRequestDto);
 
-        if( isOverlapped ) { //강좌가 이미 존재하면, 입력했던 데이터를 다시 리턴해준다.
-            model.addAttribute("modifyLecture", addLectureRequestDto);
-            return "강좌수정페이지";
+        if( isOverlapped ) { //강좌가 이미 존재하면, return false
+            return new AddSuccessDto(false);
         }
         else {
-            return "강좌관리페이지";
+            return new AddSuccessDto(true);
         }
-//        lectureMngService.add(addLectureRequestDto);
     }
 }
