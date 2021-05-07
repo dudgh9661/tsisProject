@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+*{
+    margin: 0;
+    outline: 0;
+    padding: 0;
+}
+
+body{
+    position: relative;
+    background-image: url(../img/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+
+    height: 100vh;
+    width: 100vw;
+
+
+}
+
+.filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(233,76,161);
+    background: -moz-linear-gradient(90deg, rgba(233,76,161,1) 0%, rgba(74,205,233,1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(233,76,161,1) 0%, rgba(74,205,233,1) 100%);
+    background: linear-gradient(90deg, rgba(233,76,161,1) 0%, rgba(74,205,233,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e94ca1",endColorstr="#4acde9",GradientType=1);
+    opacity: .6;
+    z-index: 2;
+}
+
+.login{
+    position: absolute;
+    z-index: 3;
+    background-color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 350px;
+    border-bottom: 4px solid #9D9FA1;
+    padding: 30px;
+    border-radius: 40px;
+    font-family: 'Open Sans', sans-serif;
+}
+.login h1{
+    text-align: center;
+    text-transform: uppercase;
+    color:#243887;
+
+}
+
+.login .input{
+    padding: 6px 10px;
+    width: calc(100% - 20px);
+    margin: 12px 0;
+    border: none;
+    border-bottom: 1px solid #4193D0;
+    font-size: 1.2rem;
+}
+
+.login .input::placeholder{
+    font-size: .8rem;
+    text-transform: uppercase;
+}
+.login input[type="checkbox"]{
+    margin-right: 5px;
+
+}
+.login button{
+    color: #000;
+    text-transform: uppercase;
+    margin: 12px 0;
+    padding: 8px 0;
+    width: 100%;
+    border:none;
+    background: #4193D0;
+     color: #fff;
+    transition: all .4s;
+    border-radius: 50px;
+
+}
+.login button:hover{
+    background-color: rgba(233,76,161,.5);
+    color: #fff;
+}
+.login a{
+    text-decoration: none;
+    color: #4193D0;
+    transition: all .4s;
+}
+.login a:hover{
+    color: #4acde9;
+}
+
+.main-logo {
+    top: 30px;
+    position: absolute;
+    left : 40px;
+    z-index: 10;
+}
