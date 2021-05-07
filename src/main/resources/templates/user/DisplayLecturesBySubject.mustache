@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/common.css">
+    
+    <title>주제별 강의</title>
+</head>
+<body>
+    <!--sidebar-->
+    <div class="sidebar">
+        <a href="03_Main.html"><img src="img/logo.png" class="logo" /></a>
+        <ul class="sidebar_ul">
+            <li>
+                <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
+            </li>
+            <li>
+                <a href="05_SubjectEdu.html">주제별 교육 검색</a>
+            </li>
+            <li>
+                <a href="06_AcademyEdu.html">기관별 교육 검색</a>
+            </li>
+            <li>
+                <a href="07_SelectEdu.html">주요 교육기관</a>
+            </li>
+            <li>
+                <a href="08_LegendEdu.html">교육 주제 범례</a>
+            </li>
+            <li>
+                <a href="09_AdminMain.html">관리자</a>
+            </li>
+        </ul>
+    </div>
+    <!--/sidebar-->
+
+    <!--content-->
+    <div class="content">
+        <!--header-->
+        <header>
+            <div class="login-info">
+                <span>죠르디님 환영합니다!</span>
+                <button type="button" class="logout">
+                    <a href="01_Index.html">
+                        로그아웃
+                    </a>
+                </button>
+            </div>
+        </header>
+        <!--header-->
+
+        <!--section-->
+        <section class="DLBS_section">
+            <div class="DLBS_selSubjectShowIcons">
+                <div class="DLBS_selSubject">
+                    <select class="DLBS_selSubject_selectBox" id="DLBS_selSubject_selectBox" onchange=DLBS_display_theme()>
+                        {{#themeLecture}}
+                            <option value="{{themeLectureId}}">{{theme}}</option>
+                        {{/themeLecture}}
+                    </select>
+                </div>
+                <div class="DLBS_showIcons">
+                    <span class="DLBS_showIcons_best"><img class="DLBS_img" src="/img/star.svg"/>베스트강좌</span>
+                    <span class="DLBS_showIcons_interest"><img class="DLBS_img" src="/img/filledHeart.png" />관심강좌</span>
+                </div>
+            </div>
+
+            <div class="DLBS_display">
+                <div class="DLBS_display_searchCount" id="DLBS_display_searchCount">총 0개 검색</div>
+                <ul class="DLBS_display_list_container" id="DLBS_display_list_container">
+                    <li class="DLBS_display_list_title">
+                        <span class="DLBS_display_list_best"></span>
+                        <span class="DLBS_display_list_interest"></span>
+                        <span class="DLBS_display_list_no">No.</span>
+                        <span class="DLBS_display_list_category" onclick="DLBS_display(1, `ctgr.depth3_course`)">카테고리</span>
+                        <span class="DLBS_display_list_lectureName" onclick="DLBS_display(1, `lec.lecture_title`)">강좌명</span>
+                        <span class="DLBS_display_list_onOff" onclick="DLBS_display(1, `lec.online_yn`)">온라인/오프라인</span>
+                        <span class="DLBS_display_list_detail">상세보기</span>
+                    </li>
+                    <div class="DLBS_display_list_dynamic" id="DLBS_display_list_dynamic">
+                        
+                    </div>
+                </ul>
+                <div class="DLBS_display_list_pagingButtons" id="DLBS_display_list_pagingButtons"></div>
+            </div>
+        </section>
+        <!--/section-->
+
+        <!--footer-->
+        <footer>
+            <div class="footer-info">
+                <div>
+                    <p>문의처</p>
+                </div>
+                <div>
+                    <p>교육담당자 | 인사팀 정병석 과장</p>
+                </div>
+            </div> 
+        </footer>
+    </div>
+    <!--content-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/js/DisplayLecturesBySubject.js"></script>
+</body>
+</html>
