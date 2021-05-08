@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- <link rel="stylesheet" href="main.css"/> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+          integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <title>Document</title>
+<!--    <link href="css/common.css" rel="stylesheet" />-->
+    <link href="css/change.css" rel="stylesheet" />
+    <!--    <link href="css/change.css" rel="stylesheet" />-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div class="content">
+    <section>
+        <div id="app">
+            <div class='add'>
+                <div class='head'>
+                    <h1 style="text-align: center; font-family: 'SDSamliphopangche_Outline';">강좌 등록/수정하기</h1>
+                </div>
+                <div class='tblBody'>
+                    <table>
+                        <colgroup>
+                            <col style='width:20%'>
+                            <col style='width:80%'>
+                        </colgroup>
+                        <tr class="margin_top">
+                            <td scope='col' class='key'>카테고리</td>
+                            <td scope='col'>
+                                <div style="margin-left: 15px;">
+                                    <span class='md'>></span>
+                                    <select class='select type2 category-big' id='lecture_Category1'>
+                                        <option value="">{{depth1Field}}</option>
+                                    </select>
+                                    <br/>
+                                    <span class='md'>></span>
+                                    <select class='select type2 category-mid' id='lecture_Category2'>
+                                        <option>{{depth2Skill}}</option>
+                                    </select>
+                                    <br/>
+                                    <span class='md'>></span>
+                                    <select class='select type2 category-small' id='lecture_Category3'>
+                                        <option>{{depth3Course}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key'>강좌명</td>
+                            <td scope='col'>
+                                <input type='text' style="width: 70%; margin-left: 15px;" class='inputLecture' placeholder='강좌이름을 적어주세요.(예. Java 기초 문법)' value="{{lectureTitle}}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key'>교육기관</td>
+                            <td scope='col'>
+                                <select class='select selAcademy' style="margin-left: 15px;">
+                                    <option>{{academyName}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key'>상세페이지<br/>링크</td>
+                            <td scope='col'>
+                                <input type='text' style="width: 70%; margin-left: 15px;" class='inputUrl' placeholder='강좌의 상세 링크를 적어주세요.' value="{{academyUrl}}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key'>추천주제</td>
+                            <td scope='col'>
+                                <select class='selTheme' id="select" onchange="selectChange()" style="margin-left: 15px;">
+                                    <option>{{theme}}</option>
+                                    <!--
+                                    <option value="0" id="noselect">{{theme}}</option>
+                                    -->
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id = "position-tr">
+                            <td scope='col' class='key' class='key'>필수 직급</td>
+                            <td scope='col'>
+
+                                <div id="nec" style="float:left; margin-left: 15px;">
+                                    <div class="necChild">
+                                        <select class="change-main-position" id = "selPosition0">
+                                            <option>{{empPosition}}</option>
+                                        </select>
+                                        <select class="change-sub-year" id="selYears0">
+                                            <option>{{empYears}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button style="margin-left: 10px; font-size: 20px; width: 30px;" onclick="deleteline()">-</button>
+                                <button style="font-size: 20px; width: 30px;" onclick="addline()">+</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key' class='key'>수준</td>
+                            <td scope='col'>
+                                <div style ="margin-left: 15px;">
+
+                                    <input type="radio" id="basiclecture" name="level" value="basiclecture" checked />
+                                    <label for="basiclecture">기본강의</label>
+
+                                    <input type="radio" id="electivelecture" name="level" value="electivelecture" />
+                                    <label for="electivelecture">선택강의</label>
+
+                                    <input type="radio" id="prolecture" name="level" value="prolecture" />
+                                    <label for="prolecture">전문강의</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key' class='key'>온/오프라인</td>
+                            <td scope='col'>
+                                <div style ="margin-left: 15px;">
+                                    <input type="radio" id="offline" name="onoffline" value="0" checked>
+                                    <label for="offline">{{cz}}</label>
+
+                                    <input type="radio" id="online" name="onoffline" value="1">
+                                    <label for="online">온라인</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td scope='col' class='key'>리더 추천 여부</td>
+                            <td scope='col'>
+                                <label class='label type2'>
+                                    <input type='checkbox' name='state' class='rdo type2' id="recommchk" style ="margin-left: 15px;">
+                                    <span class='lTxt' id="lTxt">추천</span>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class='btn con' style="text-align: center; margin-top: 20px; ">
+                    <button type='button' class='btn gl' onclick="btn_cancel()" >
+                        <!--<a href='10_ManageClass.html' style="text-decoration:none;">취소</a>-->
+                        <a style="text-decoration:none;">취소</a>
+                    </button>
+                    <button type='button' class='btn gr'>
+                        <!--<a href='10_ManageClass.html' onclick="btn_save()" style="text-decoration:none;">저장</a>-->
+                        <a onclick="btn_save()" style="text-decoration:none;">저장</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--content-->
+<script src="/js/change.js"></</script>
+</body>
+
+</html>
+<!--
+eduLevelId : String
+lectureBestYn : Integer
+-->

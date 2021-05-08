@@ -1,0 +1,200 @@
+.lecture-search-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .lecture-star-icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .lecture-active {
+    display: inline-block !important;
+  }
+
+  .lecture-hidden {
+    display: none !important;
+  }
+
+  /* lecture-select */
+  .lecture-select {
+    width: 100%;
+    padding: 10px 60px;
+  }
+  .lecture-select-main,
+  .lecture-select-sub__recommendation,
+  .lecture-select-sub__institute,
+  .lecture-select-sub__category {
+    display: table;
+    position: relative;
+    width: 10%;
+    height: 104%;
+    vertical-align: middle;
+    padding: 6px 40px 6px 14px;
+    border-radius: 14px;
+    border: 3px solid #243887;
+    background: #fff;
+    text-align: center;
+    padding: 0;
+    height: 3.5rem;
+    display: table;
+  }
+  .lecture-select-sub__recommendation,
+  .lecture-select-sub__institute,
+  .lecture-select-sub__category {
+    border: 3px solid rgba(0, 0, 0, 0.5);
+  }
+
+  .lecture-select > div {
+    display: inline-block;
+  }
+  .lecture-select .lecture-main-select,
+  .recommendation-sub,
+  .institute-sub,
+  .lecture-select-sub__category > select {
+    outline: none;
+    border: none;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    font-size: 1.2rem;
+  }
+  .lecture-select .lecture-sub-select {
+  }
+  .lecture-select-sub {
+    width: 90%;
+  }
+  .lecture-select-sub > * {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    padding-left: 1rem;
+  }
+  /* /lecture-select */
+
+  /* lecture-search */
+  .lecture-search-wrapper {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    padding: 10px 60px;
+  }
+  .lecture-search-wrapper > .lecture-search {
+    display: table;
+    position: relative;
+    width: 100%;
+    height: 104%;
+    vertical-align: middle;
+    padding: 6px 40px 6px 14px;
+    border-radius: 14px;
+    border: 3px solid #243887;
+    background: #fff;
+  }
+  .lecture-search-wrapper > .lecture-search > div {
+    display: table-cell;
+    vertical-align: middle;
+    width: 15%;
+    font-size: 1.3rem;
+    height: 100%;
+    border: 0px;
+    border-right: 1px solid rgba(88, 88, 88, 0.44313725490196076);
+    -moz-text-align-last: center;
+    text-align-last: center;
+  }
+
+  .lecture-search-wrapper > .lecture-search > input {
+    vertical-align: middle;
+    outline: none;
+    font-size: 20px;
+    width: 88%;
+    height: 100%;
+    border: 0;
+    background: transparent;
+  }
+  /* /lecture-search */
+
+  /* lecture tab */
+  .lecture-tab {
+    width: 100%;
+    height: 76px;
+    width: 100%;
+    padding: 10px 60px;
+  }
+  .lecture-tab > .recom {
+    float: left;
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    font-weight: bold;
+  }
+  .lecture-tab > .btn_g {
+    float: right;
+    text-align: right;
+    position: relative;
+    width: auto;
+    padding-top: 22px;
+    padding-right: 12px;
+  }
+  /* /lecture tab */
+
+  /* table css */
+  .lecture-result__table {
+    border: 0;
+  }
+  .lecture-result__table th,
+  .lecture-result__table td {
+    text-align: center;
+  }
+  .lecture-result__table td {
+    border-bottom: 1px solid #a7a7a7;
+    border-right: 1px solid #a7a7a7;
+  }
+  .lecture-result__table th:last-child,
+  .lecture-result__table td:last-child {
+    border-bottom: 1px solid #a7a7a7;
+    border-right: 0;
+  }
+  .lecture-result {
+    width: 100%;
+    padding: 10px 60px;
+  }
+  .lecture-result > table {
+    width: 100%;
+  }
+  .lecture-result thead {
+    width: 100%;
+    padding: 14px;
+    background: #243887;
+    color: #ffffff;
+  }
+  .lecture-result li {
+    margin: 5px 20px 5px 10px;
+  }
+  .lecture-result td {
+    text-align: center;
+    padding: 0 10px;
+  }
+  .lecture-result .name {
+    text-align: left;
+    padding: 0 10px;
+    font-size: 17px;
+  }
+  .lecture-result .btn.gl {
+    font-weight: normal;
+    font-size: 13px;
+  }
+  .lecture-result .btn.gl a {
+    text-decoration: none;
+  }
+  .lecture-result .btn.gr {
+    background: #4193d0;
+    color: #ffffff;
+  }
+  .lecture-result .category {
+    color: #ff3974;
+  }
+  /* /table css */
+
+  .lname:hover {
+    color: red;
+    font-size: 20px;
+    cursor: pointer;
+  }

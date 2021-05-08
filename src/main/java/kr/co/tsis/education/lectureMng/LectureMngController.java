@@ -17,6 +17,13 @@ public class LectureMngController {
     private final LectureMngService lectureMngService;
     private static final Logger LOGGER = LoggerFactory.getLogger(LectureMngController.class);
 
+    //강좌 검색페이지 이동
+    @GetMapping("/lectureMng")
+    public String lectureSearch() {
+        System.out.println("/lectureMng");
+        return "/manager/lectureMng";
+    }
+
     //카테고리별 강좌 검색 ( Swagger success )
     @PostMapping("/lectureMng/category")
     @ResponseBody
