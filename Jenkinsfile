@@ -26,7 +26,7 @@ pipeline {
                 sh 'docker ps -f name=server -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=server -q | xargs -r docker container rm'
                 sh 'docker rmi $(docker images -f "dangling=true" -q)'
-                sh 'docker run -d --name tsis-container -p 8080:8080 tsis:latest'
+                sh 'docker run -d --name server -p 8080:8080 tsis:latest'
             }
         }
     }
