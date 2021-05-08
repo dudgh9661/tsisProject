@@ -1,14 +1,12 @@
 package kr.co.tsis.education.lectureMng.Dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
+@ToString
 public class ToModifyPageResponseDto {
     private String lectureTitle;
     private String depth1Field;

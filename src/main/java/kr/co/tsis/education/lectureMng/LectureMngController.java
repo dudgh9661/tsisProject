@@ -113,6 +113,28 @@ public class LectureMngController {
                 .empDtoList(empDtoList)
                 .build();
         model.addAttribute("modifiedData", toModifyPageResponseDto);
+
+        // onlineYn에 따른 return
+        if(toModifyPageDataResponseDto.getOnlineYn() == 1) {
+            model.addAttribute("online", true);
+        }
+
+        // eduLevelId에 따른 return
+        if(toModifyPageDataResponseDto.getEduLevelId().equals("ET001")) {
+            //전문강의
+            model.addAttribute("eduLevelPro", true);
+        } else if(toModifyPageDataResponseDto.getEduLevelId().equals("ET002")) {
+            //선택강의
+            model.addAttribute("eduLevelSelect", true);
+        } else {
+            //기본강의
+            model.addAttribute("eduLevelBasic", true);
+        }
+
+        // lectureBestYn에 따른 return
+        if(toModifyPageDataResponseDto.getLectureBestYn() == 1) {
+            model.addAttribute("best", true);
+        }
         System.out.println(toModifyPageResponseDto);
         return "/manager/lecture_mod";
     }

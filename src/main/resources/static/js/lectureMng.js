@@ -71,12 +71,6 @@ const appendOptionWId = (e1, ins, ids) => {
     tmp.innerText = ins[i];
     e1.appendChild(tmp);
   }
-//  arr1.forEach((e2) => {
-//    const tmp = document.createElement("option");
-//    tmp.value = e2;
-//    tmp.innerText = e2;
-//    e1.appendChild(tmp);
-//  });
 };
 const appendOption = (e1, arr) => {
   e1.innerHTML = "";

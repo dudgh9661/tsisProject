@@ -67,14 +67,14 @@
                             <tr>
                                 <td scope='col' class='key'>상세페이지<br/>링크</td>
                                 <td scope='col'>
-                                    <input type='text' style="width: 70%; margin-left: 15px;" class='inputUrl' placeholder='강좌의 상세 링크를 적어주세요.' value="{{academyName}}"/>
+                                    <input type='text' style="width: 70%; margin-left: 15px;" class='inputUrl' placeholder='강좌의 상세 링크를 적어주세요.' value="{{academyUrl}}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td scope='col' class='key'>추천주제</td>
                                 <td scope='col'>
                                     <select class='selTheme' id="select" onchange="selectChange()" style="margin-left: 15px;">
-                                        <option value="9">{{theme}}</option>
+                                        <option value="9">{{#theme}}{{theme}}{{/theme}}{{^theme}}-{{/theme}}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -85,10 +85,10 @@
                                     <div id="nec" style="float:left; margin-left: 15px;">
                                         <div class="necChild">
                                             <select class="change-main-position" id = "selPosition0">
-                                                <option>{{empPosition}}</option>
+                                                <option>{{#empDtoList.empPosition}}{{empDtoList.empPosition}}{{/empDtoList.empPosition}}{{^empDtoList.empPosition}}-{{/empDtoList.empPosition}}</option>
                                             </select>
                                             <select class="change-sub-year" id="selYears0">
-                                                <option>{{empYears}}</option>
+                                                <option>{{#empDtoList.empYears}}{{empDtoList.empYears}}{{/empDtoList.empYears}}{{^empDtoList.empYears}}-{{/empDtoList.empYears}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@
                                 <td scope='col' class='key'>리더 추천 여부</td>
                                 <td scope='col'>
                                     <label class='label type2'>
-                                        {{best}}
+                                        {{#best}}
                                             <input type='checkbox' name='state' class='rdo type2' id="recommchk" style ="margin-left: 15px;" checked>
                                             <span class='lTxt' id="lTxt">추천</span>
                                         {{/best}}
@@ -336,7 +336,7 @@
     </section>
 </div>
 <!--content-->
-<script src="/js/addlecture.js"></</script>
+<script src="/js/lecture_mod.js"></</script>
 </body>
 
 </html>

@@ -1,3 +1,28 @@
+var bigCatStatus = false;
+var midCatStatus = false;
+var smallCatStatus = false;
+
+/*------------------------------------------------------base code*/
+const appendOptionWId = (e1, ins, ids) => {
+  e1.innerHTML = "";
+  for(let i = 0; i < ins.length; i++) {
+    const tmp = document.createElement("option");
+    tmp.value = ids[i];
+    tmp.innerText = ins[i];
+    e1.appendChild(tmp);
+  }
+};
+const appendOption = (e1, arr) => {
+  e1.innerHTML = "";
+  arr.forEach((e2) => {
+    const tmp = document.createElement("option");
+    tmp.value = e2;
+    tmp.innerText = e2;
+    e1.appendChild(tmp);
+  });
+};
+/* base code ------------------------------------------------------*/
+
 function pushCheck() {
     // if(temp1[temp1.selectedIndex].id  != "recommchk") {
     //     const itxt = document.querySelector(".ITxt");
@@ -77,17 +102,6 @@ function addline(){
                     '<option>4년차</option>' +
                     '</select></div>';
 
-
-
-    /*var html = <div class="necChild">'+
-                   '<select class="change-main-position"+(index) id="test'+(index++) +'"><option>사원</option>'+
-                   '<option>대리</option>'+
-                   '<option>과장</option>'+
-                   '<option>차장</option>'+
-                   '<option>부장</option></select>'+
-                   '<select class="change-sub-year">'+
-                   '</select></div>';*/
-
     $("#nec").append(html2);
     document.querySelectorAll(".change-main-position").forEach(el => {
        el.addEventListener("change", changePositionYear);
@@ -96,9 +110,6 @@ function addline(){
 
 
 function deleteline(){
-
-    //console.log($("#nec")); .children().last().remove();
-    //$("#nec div:last-child").remove();
     $("#nec div:last-child").remove();
 }
 
@@ -186,3 +197,91 @@ function btn_save(){
     //window.close()
 }
 
+
+var bigCatStatus = false;
+var midCatStatus = false;
+var smallCatStatus = false;
+
+const getBigCat = () => {
+    console.log("bigCat");
+    if(bigCatStatus) {
+        console.log("bigCat2");
+          let temp1 = "";
+          const catBigSample = [];
+
+          $.ajax({
+            url: "/category/getDepth1",
+            method: "GET",
+            success: function (data) {
+                temp1 = data[0];
+                $.each(data, function(index,item){
+                  catBigSample.push(item);
+                });
+                  appendOption(catBigSelect, catBigSample);
+              },
+              error: function (x, s, e) {
+    //              console.log(x, s, e);
+              },
+              complete: function() {
+
+              }
+          }); //대분류 ajax끝
+    }
+}
+const getMidCat = () => {
+    if(bigCatStatus) {
+          let temp1 = "";
+          /* 중분류 ajax 시작 */
+                const catMidSample = [];
+                $.ajax({
+                  url: "/category/getDepth2?depth1Field=" + temp1,
+                  method: "GET",
+                  dataType: "json",
+                  success: function (data) {
+                      temp2 = data[0];
+//                      console.log(data);
+                      $('#lecture_Category2').empty();
+                      //catMidSample = [];
+                      $.each(data, function(index,item){
+                        catMidSample.push(item);
+                      });
+                        appendOption(catMidSelect, catMidSample);
+                    },
+                    error: function (x, s, e) {
+//                        console.log(x, s, e);
+                    },
+                    complete: function() {
+
+                    }
+                });
+        }
+        /* 중분류 ajax 끝 */
+}
+const getSmallCat = () => {
+    /* 소분류 ajax 시작 */
+    if(bigCatStatus) {
+          let temp1 = "";
+          let temp2 = "";
+          const catSmallSample = [];
+          $.ajax({
+                url: "/category/getDepth3?depth1Field=" + temp1 + "&depth2Skill=" + temp2,
+                method: "GET",
+                success: function (data) {
+    //                                console.log(data);
+                    $('#lecture_Category3').empty();
+
+                    $.each(data, function(index,item){
+                      catSmallSample.push(item);
+                    });
+                      appendOption(catSmallSelect, catSmallSample);
+                  },
+                  error: function (x, s, e) {
+    //                                  console.log(x, s, e);
+                  }
+          });
+      }
+      /* 소분류 ajax 끝 */
+}
+document.querySelector(".bigCat").addEventListener("click", getBigCat);
+document.querySelector(".midCat").addEventListener("click", getMidCat);
+document.querySelector(".smallCat").addEventListener("click", getSmallCat);
