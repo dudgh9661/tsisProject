@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh 'docker ps -f name=tsis-container -q | xargs --no-run-if-empty docker container stop'
                 sh 'docker container ls -a -fname=tsis-container -q | xargs -r docker container rm'
-                sh 'docker rmi $(docker images -f "dangling=true" -q)'
+                sh 'docker rmi tsis-image:latest'
                 sh 'docker run -d --name tsis-container -p 8080:8080 tsis:latest'
             }
         }
