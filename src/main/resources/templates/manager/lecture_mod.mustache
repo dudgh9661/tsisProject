@@ -74,7 +74,7 @@
                                 <td scope='col' class='key'>추천주제</td>
                                 <td scope='col'>
                                     <select class='selTheme' id="select" onchange="selectChange()" style="margin-left: 15px;">
-                                        <option value="9">{{#theme}}{{theme}}{{/theme}}{{^theme}}-{{/theme}}</option>
+                                        <option value="0">{{#theme}}{{theme}}{{/theme}}{{^theme}}-{{/theme}}</option>
                                     </select>
                                 </td>
                             </tr>
@@ -83,14 +83,19 @@
                                 <td scope='col'>
 
                                     <div id="nec" style="float:left; margin-left: 15px;">
-                                        <div class="necChild">
-                                            <select class="change-main-position" id = "selPosition0">
-                                                <option>{{#empDtoList.empPosition}}{{empDtoList.empPosition}}{{/empDtoList.empPosition}}{{^empDtoList.empPosition}}-{{/empDtoList.empPosition}}</option>
-                                            </select>
-                                            <select class="change-sub-year" id="selYears0">
-                                                <option>{{#empDtoList.empYears}}{{empDtoList.empYears}}{{/empDtoList.empYears}}{{^empDtoList.empYears}}-{{/empDtoList.empYears}}</option>
-                                            </select>
-                                        </div>
+                                        {{#empDtoList.empPosition}}
+                                            <div class="necChild">
+                                                <select class="change-main-position" id = "selPosition0">
+                                                    <option>{{empDtoList.empPosition}}</option>
+                                                </select>
+                                                <select class="change-sub-year" id="selYears0">
+                                                    <option>{{empDtoList.empYears}}</option>
+                                                </select>
+                                            </div>
+                                        {{/empDtoList.empPosition}}
+
+                                        {{^empDtoList.empPosition}}
+                                        {{/empDtoList.empPosition}}
                                     </div>
                                     <button style="margin-left: 10px; font-size: 20px; width: 30px;" onclick="deleteline()">-</button>
                                     <button style="font-size: 20px; width: 30px;" onclick="addline()">+</button>

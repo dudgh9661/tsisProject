@@ -1,10 +1,11 @@
 var bigCatStatus = false;
 var midCatStatus = false;
 var smallCatStatus = false;
+var themeStatus = false;
 
 /*------------------------------------------------------base code*/
 const appendOptionWId = (e1, ins, ids) => {
-  e1.innerHTML = "";
+//  e1.innerHTML = "";
   for(let i = 0; i < ins.length; i++) {
     const tmp = document.createElement("option");
     tmp.value = ids[i];
@@ -13,7 +14,7 @@ const appendOptionWId = (e1, ins, ids) => {
   }
 };
 const appendOption = (e1, arr) => {
-  e1.innerHTML = "";
+//  e1.innerHTML = "";
   arr.forEach((e2) => {
     const tmp = document.createElement("option");
     tmp.value = e2;
@@ -42,7 +43,7 @@ function selectChange(){
         $("#recommchk").prop("checked", true);
         $("#recommchk").attr("disabled", true);
     }
-    console.log(selected);
+//    console.log(selected);
 }
 //pushCheck();
 
@@ -62,7 +63,7 @@ var subOptions = {
 
 function changePositionYear (event) {
    const mainPosition = event.target;
-   console.log(mainPosition);
+//   console.log(mainPosition);
    const subPosition = event.target.parentNode.querySelector(".change-sub-year");
 
    //console.log(event);
@@ -137,7 +138,7 @@ function btn_save(){
     const empPositionArr = [];
     const empYearsArr = [];
     var i=0;
-    const lastI = $(".necChild:last select").attr("id").substring(11);
+    const lastI = $(".necChild:last select").attr("id").substring(11); ////////////////////////[...$(".necChild")]
     for(i; i<=lastI; i++){
         var selPosition ="#selPosition"+i;
         var selYears ="#selYears"+i;
@@ -197,18 +198,13 @@ function btn_save(){
     //window.close()
 }
 
-
-var bigCatStatus = false;
-var midCatStatus = false;
-var smallCatStatus = false;
-
-const getBigCat = () => {
-    console.log("bigCat");
-    if(bigCatStatus) {
-        console.log("bigCat2");
-          let temp1 = "";
+/*-----------------------------------------------------카테고리 select태그 설정*/
+const setBigCatClick = (e) => {
+    if(!bigCatStatus) {
+        console.log("big-click");
+        console.log(bigCatStatus, midCatStatus, smallCatStatus);
+        bigCatStatus = true;
           const catBigSample = [];
-
           $.ajax({
             url: "/category/getDepth1",
             method: "GET",
@@ -217,7 +213,7 @@ const getBigCat = () => {
                 $.each(data, function(index,item){
                   catBigSample.push(item);
                 });
-                  appendOption(catBigSelect, catBigSample);
+                  appendOption(e.target, catBigSample);
               },
               error: function (x, s, e) {
     //              console.log(x, s, e);
@@ -228,9 +224,12 @@ const getBigCat = () => {
           }); //대분류 ajax끝
     }
 }
-const getMidCat = () => {
-    if(bigCatStatus) {
-          let temp1 = "";
+const setMidCatClick = (e) => {
+    if(!midCatStatus) {
+        console.log("mid-click");
+        console.log(bigCatStatus, midCatStatus, smallCatStatus);
+        midCatStatus = true;
+          let temp1 = document.querySelector(".bigCat")[document.querySelector(".bigCat").selectedIndex].innerText;
           /* 중분류 ajax 시작 */
                 const catMidSample = [];
                 $.ajax({
@@ -239,41 +238,38 @@ const getMidCat = () => {
                   dataType: "json",
                   success: function (data) {
                       temp2 = data[0];
-//                      console.log(data);
-                      $('#lecture_Category2').empty();
-                      //catMidSample = [];
                       $.each(data, function(index,item){
                         catMidSample.push(item);
                       });
-                        appendOption(catMidSelect, catMidSample);
+                        appendOption(e.target, catMidSample);
                     },
                     error: function (x, s, e) {
 //                        console.log(x, s, e);
                     },
                     complete: function() {
-
                     }
                 });
         }
         /* 중분류 ajax 끝 */
 }
-const getSmallCat = () => {
+const setSmallCatClick = (e) => {
     /* 소분류 ajax 시작 */
-    if(bigCatStatus) {
-          let temp1 = "";
-          let temp2 = "";
+    if(!smallCatStatus) {
+        console.log("small-click");
+        console.log(bigCatStatus, midCatStatus, smallCatStatus);
+        smallCatStatus = true;
+          let temp1 = document.querySelector(".bigCat")[document.querySelector(".bigCat").selectedIndex].innerText;
+          let temp2 = document.querySelector(".midCat")[document.querySelector(".midCat").selectedIndex].innerText;
           const catSmallSample = [];
           $.ajax({
                 url: "/category/getDepth3?depth1Field=" + temp1 + "&depth2Skill=" + temp2,
                 method: "GET",
                 success: function (data) {
     //                                console.log(data);
-                    $('#lecture_Category3').empty();
-
                     $.each(data, function(index,item){
                       catSmallSample.push(item);
                     });
-                      appendOption(catSmallSelect, catSmallSample);
+                      appendOption(e.target, catSmallSample);
                   },
                   error: function (x, s, e) {
     //                                  console.log(x, s, e);
@@ -282,6 +278,69 @@ const getSmallCat = () => {
       }
       /* 소분류 ajax 끝 */
 }
-document.querySelector(".bigCat").addEventListener("click", getBigCat);
-document.querySelector(".midCat").addEventListener("click", getMidCat);
-document.querySelector(".smallCat").addEventListener("click", getSmallCat);
+const setCatClick = () => {
+    document.querySelector(".bigCat").addEventListener("click", setBigCatClick);
+    document.querySelector(".midCat").addEventListener("click", setMidCatClick);
+    document.querySelector(".smallCat").addEventListener("click", setSmallCatClick);
+}
+const setBigCatChange = () => {
+    setBigCatClick();
+    document.querySelector(".midCat").innerHTML = "";
+    midCatStatus = false;
+    document.querySelector(".smallCat").innerHTML = "";
+    smallCatStatus = false;
+    console.log("big-change")
+    console.log(bigCatStatus, midCatStatus, smallCatStatus);
+}
+const setMidCatChange = () => {
+    setMidCatClick();
+    document.querySelector(".smallCat").innerHTML = "";
+    smallCatStatus = false;
+    console.log("mid-change")
+    console.log(bigCatStatus, midCatStatus, smallCatStatus);
+}
+const setSmallCatChange = () => {
+    setMidCatClick();
+    console.log("small-change")
+    console.log(bigCatStatus, midCatStatus, smallCatStatus);
+}
+const setCatChange = () => {
+    document.querySelector(".bigCat").addEventListener("change", setBigCatChange);
+    document.querySelector(".midCat").addEventListener("change", setMidCatChange);
+    document.querySelector(".smallCat").addEventListener("change", setSmallCatChange);
+}
+/*카테고리 select태그 설정-----------------------------------------------------*/
+
+/*-----------------------------------------------------추천주제 select태그 설정*/
+const setTheme = () => {
+    if(!themeStatus) {
+        themeStatus = true;
+
+        const ins = [];
+        const ids = [];
+        $.ajax({
+            url: "/theme/getThemeList",
+            method: "GET",
+            success: function (data) {
+//            console.log(data);
+
+            $.each(data, function(index,item){
+              ins.push(item.theme);
+              ids.push(item.themeLectureId);
+            });
+              appendOptionWId(document.querySelector(".selTheme"), ins, ids);
+            },
+            error: function (x, s, e) {
+//              console.log(x, s, e);
+            }
+        });
+    }
+}
+const setThemeClick = () => {
+    document.querySelector(".selTheme").addEventListener("click", setTheme);
+}
+/*추천주제 select태그 설정-----------------------------------------------------*/
+
+setCatClick();
+setCatChange();
+setThemeClick();
