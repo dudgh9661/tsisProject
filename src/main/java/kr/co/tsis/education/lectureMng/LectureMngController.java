@@ -17,6 +17,7 @@ public class LectureMngController {
     private final LectureMngService lectureMngService;
     private static final Logger LOGGER = LoggerFactory.getLogger(LectureMngController.class);
 
+    /* 영국 추가 */
     //강좌 검색페이지 이동
     @GetMapping("/lectureMng")
     public String lectureSearch() {
@@ -83,6 +84,7 @@ public class LectureMngController {
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
     public boolean delete(@PathVariable int lectureId) {
+        System.out.println("/lectureMng/{lectureId} 진입");
         boolean isDeleted = false;
         if( lectureMngService.delete(lectureId) ) {
             System.out.println("삭제되었습니다.");
@@ -91,10 +93,14 @@ public class LectureMngController {
         return isDeleted;
     }
 
+    /* 영국수정 */
     //강좌 수정 페이지로 데이터 전송
     @GetMapping("/lectureMng/modify")
-    @ResponseBody
-    public ToModifyPageResponseDto sendToModifyPage(@RequestParam(value="lectureId") int lectureId, Model model) {
+    public String sendToModifyPage(@RequestParam(value="lectureId", required = false) Integer lectureId, Model model) {
+        System.out.println("/lectureMng/modify 진입");
+        if(lectureId == null) {
+            return "/manager/lecture_mod";
+        }
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
         System.out.println("lectureId : " + lectureId);
         ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
@@ -107,8 +113,8 @@ public class LectureMngController {
                 .empDtoList(empDtoList)
                 .build();
         model.addAttribute("modifiedData", toModifyPageResponseDto);
-        return toModifyPageResponseDto;
-//        return "/";
+        System.out.println(toModifyPageResponseDto);
+        return "/manager/lecture_mod";
     }
 
     //강좌 수정 저장 버튼 클릭

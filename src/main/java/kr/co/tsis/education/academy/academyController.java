@@ -26,7 +26,7 @@ public class academyController {
         return "manager/academy";
     }
 
-    @ResponseBody
+    /*영국 수정*/
     @GetMapping("/academy/getList")
     public String getList(@RequestParam("curpage")int curpage, Model model){
         LOGGER.debug("curpage",curpage);
@@ -35,9 +35,18 @@ public class academyController {
         model.addAttribute("totalPage",result.getTotalpage());
         model.addAttribute("totalCount",result.getTotalCount());
         model.addAttribute("organi",result.getOrgani());
+        System.out.println(result.getOrgani());
         return "manager/academy";
-
     }
+
+    /*영국 추가*/
+    @ResponseBody
+    @GetMapping("/academy/getListAjax")
+    public academyPageDTO getListAjax(@RequestParam("curpage")int curpage){
+        LOGGER.debug("curpage",curpage);
+        return service.getList(curpage);
+    }
+
     @ResponseBody
     @PostMapping("/academy/delList")
     public int delList(@RequestParam("academyIdList") List<String> ids){

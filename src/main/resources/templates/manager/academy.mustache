@@ -75,7 +75,7 @@
 						<div class="card-body_thumb">
 							<a href="{{academyUrl}}" target="_blank">
                                 <div class="institution-logo">
-                                    <img class="logoImg" src="img/institutionLogo.PNG" />
+                                    <img class="logoImg" src="{{academyLogoUrl}}" />
                                 </div>
 							</a>
 						</div>
@@ -84,7 +84,8 @@
 							    <strong>{{academyName}}</strong>
 							</div>
 							<div class="card-body_cont_info">
-                                {{academyDetail}}
+                                {{#academyDetails}}{{academyDetails}}{{/academyDetails}}
+                                {{^academyDetails}}-{{/academyDetails}}
 							</div>
 							<div class="card-body_cont_location">
                                 {{academyLoc}}
@@ -125,10 +126,11 @@
                 {{#organi}}
 				<div class="institution-item">
 					<div class="institution-logo">
-                        {{academyName}}
+                        <img class="logoImg" src="{{academyLogoUrl}}" />
 					</div>
 					<div class="institution-description">
-                        {{academyDetail}}
+                        {{#academyDetails}}{{academyDetails}}{{/academyDetails}}
+                        {{^academyDetails}}-{{/academyDetails}}
 					</div>
 					<div class="institution-position">
                         {{academyLoc}}
@@ -147,6 +149,7 @@
 			</article>
 			<!-- /리스트형 (/institution-choice-b) -->
         </section>
+        <!--
 		<div class="pagination-div">
 			<nav aria-label="Page navigation">
 			<ul class="pagination">
@@ -168,6 +171,7 @@
 			</ul>
 			</nav>
 		</div>
+		-->
 
         <!--footer-->
         <footer>

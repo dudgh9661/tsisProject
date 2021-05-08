@@ -191,6 +191,12 @@
   .lecture-result .category {
     color: #ff3974;
   }
+  .lecture-result-item {
+    cursor: pointer;
+  }
+    .lecture-result-item:hover {
+        color: red;
+    }
   /* /table css */
 
   .lname:hover {

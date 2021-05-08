@@ -74,7 +74,9 @@
   width: 1100px;
   position: relative;
   height: calc(25rem * 3);
-  display: block;
+    flex-wrap: wrap;
+    display: flex;
+    height: fit-content;
 }
 
 .institution-choice-a > .institution-item {
@@ -159,7 +161,7 @@
 /* .institution-choice-b */
 .institution-choice-b {
   display: none;
-  height: calc(11rem * 12);
+  height: fit-content;
 }
 .institution-choice-b > .institution-item:nth-child(1) {
   border-top: 1px solid black;
@@ -196,6 +198,11 @@
   border-top: 0;
   border-left: 0;
 }
+.institution-choice-b > .institution-item > .institution-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 1rem;
+}
 .institution-choice-b > .institution-item > .institution-description > div {
   line-height: inherit;
   text-overflow: ellipsis;
@@ -218,7 +225,8 @@
 }
 
 .institution-active {
-  display: block;
+//  display: block;
+    display: flow-root;
 }
 
 .institution-disable {
