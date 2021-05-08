@@ -9,8 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.tsis</groupId>
-	<artifactId>education</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>tsis</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
 	<name>education</name>
 	<description>Tsis Commissioned education</description>
 	<properties>
@@ -86,6 +87,12 @@
 		</dependency>
 
 
+		<!--tomcat server-->
+		<!-- <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
 	</dependencies>
 
 	<build>
