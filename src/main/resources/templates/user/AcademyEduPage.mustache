@@ -16,16 +16,16 @@
 <body>
 <!--sidebar-->
 <div class="sidebar">
-    <a href="MainPage.mustache"><img src="/img/tsis.png" class="logo"/></a>
+    <a href="MainPage.mustache"><img src="/img/img_symbol.png" class="logo"/></a>
     <ul class="sidebar_ul">
         <li>
             <a href="RecommendationEduPage.mustache">주제별 강좌 보기</a>
         </li>
         <li>
-            <a href="SubjectEduPage.mustache">카테고리별 교육 검색</a>
+            <a href="/categoryByLecture/mainCategoryKinds">카테고리별 교육 검색</a>
         </li>
         <li>
-            <a href="AcademyEduPage.mustache">기관별 교육 검색</a>
+            <a href="/trainingByInstitution/trainingByInstitutionList">기관별 교육 검색</a>
         </li>
         <li>
             <a href="SelectEduPage.mustache">교육기관</a>
@@ -60,7 +60,7 @@
                     <div class="academy-option">
                         <select class="academy-option__academy">
                         {{#academyList}}
-                            <option value="{{academyId}}">{{academyName}}</option>
+                            <option value="{{academyId}}" location="{{academyLoc}}">{{academyName}}</option>
                         {{/academyList}}
                         </select>
                     </div>
@@ -82,11 +82,11 @@
         <section class="academy-notice-bar">
             <div class="academy-notice-bar-icon">
                 <img class="academy-icon-sm" src="/img/star.svg"> : 베스트강좌
-                <img class="academy-icon-sm" src="/img/full-heart.png"> : 관심강좌
+                <img class="academy-icon-sm" src="/img/filledHeart.png"> : 관심강좌
             </div>
             <div>
                 <img class="academy-icon-sm" src="/img/help.svg">
-                <a href="07_SelectEdu.html">어떤 기관을 선택해야 할지 모르겠다면? 기관소개를 참고해보세요(클릭)</a>
+                <a href="/majorEducational">어떤 기관을 선택해야 할지 모르겠다면? 기관소개를 참고해보세요(클릭)</a>
             </div>
         </section>
 
@@ -105,12 +105,12 @@
     </section>
     <div class="academy-pagination">
         <div>
-            <img class="academy-icon-sm" src="/img/left-arrow.png">
+            <img class="academy-icon-sm" src="/img/pagingArrowLeft.png">
         </div>
         <ul class="academy-pagination__number">
         </ul>
         <div>
-            <img class="academy-icon-sm" src="/img/right-arrow.png">
+            <img class="academy-icon-sm" src="/img/pagingArrowRight.png">
         </div>
     </div>
     <!--/section-->

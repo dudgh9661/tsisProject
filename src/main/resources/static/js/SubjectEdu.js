@@ -1,35 +1,19 @@
 let largeCategory = document.querySelector(".subject-option__large");
 let mediumCategory = document.querySelector(".subject-option__medium");
 let smallCategory = document.querySelector(".subject-option__small");
-let categoryId = [];
-
-let isInit = true;
+let categoryIdList = [];
 
 let selectedAdvanced = document.querySelector(".subject-option__level--advanced");
 let selectedBasic = document.querySelector(".subject-option__level--basic");
 let selectedElective = document.querySelector(".subject-option__level--elective");
 
-let courseList = document.querySelector(".subject-result");
-let lectureId = [];
-let totalCourseNumber = 0;
-let columnName = "";
+let lectureList = document.querySelector(".subject-result");
+let columnName = "lec.lecture_title";
 
-let pageNum = 1;
+let pageNum = 1 ;
 let maxPageNum = 0;
 
-// 서버 요청
-function requestCategoryAPI(url, done) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "json",
-        contentType:"application/json; charset=utf-8",
-    }).done(done).fail((error) => {
-        alert(JSON.stringify(error));
-    });
-}
-
-function requestLargeCategoryAPI(url, done, largeCategoryName) {
+function requestMediumCategoryAPI(url, done, largeCategoryName) {
     $.ajax({
         type: "GET",
         url: url + "?depth1Field=" + largeCategoryName,
@@ -40,10 +24,21 @@ function requestLargeCategoryAPI(url, done, largeCategoryName) {
     });
 }
 
-function requestMediumCategoryAPI(url, done, largeCategoryName, mediumCategoryName) {
+// 중분류 요청 Method
+function requestMediumCategory(largeCategoryName, isInit) {
+    requestMediumCategoryAPI("/categoryByLecture/middleCategoryKinds", (response) => {
+        $(mediumCategory).children().remove().end();
+        for (const option of response) {
+            $(mediumCategory).append("<option>" + option['depth2Skill'] + "</option>");
+        }
+        requestSmallCategory(largeCategoryName, mediumCategory.children[0].text, isInit);
+    }, largeCategoryName);
+}
+
+function requestSmallCategoryAPI(url, done, largeCategoryName, mediumCategoryName) {
     $.ajax({
         type: "GET",
-        url: url + "?depth1Field=" + largeCategoryName + "&depth2Skill" + mediumCategoryName,
+        url: url + "?depth1Field=" + largeCategoryName + "&depth2Skill=" + mediumCategoryName,
         dataType: "json",
         contentType:"application/json; charset=utf-8",
     }).done(done).fail((error) => {
@@ -51,44 +46,26 @@ function requestMediumCategoryAPI(url, done, largeCategoryName, mediumCategoryNa
     });
 }
 
-// 대분류 요청
-requestCategoryAPI("/categoryByLecture/mainCategoryKinds", (response) => {
-    for (const option of response['mainCategoryList']) {
-        $(largeCategory).append("<option>" + option['depth1Field'] + "</option>");
-    }
-    // 1. 대분류 첫번째 이름을 parameter로 전달
-    requestMediumCategory(response.mainCategoryList[0].depth1Field);
-})
-
-// 중분류 요청 Method
-function requestMediumCategory(largeCategoryName) {
-    requestLargeCategoryAPI("/categoryByLecture/middleCategoryKinds", (response) => {
-        // 1. 중분류 데이터 추가
-        $(mediumCategory).children().remove().end();
-        for (const option of response['middleCategoryList']) {
-            $(mediumCategory).append("<option>" + option['depth2Skill'] + "</option>");
-        }
-        requestSmallCategory(largeCategoryName, response.middleCategoryList[0].depth2Skill);
-    }, largeCategoryName);
-}
-
 // 소분류 요청 Method
-function requestSmallCategory(largeCategoryName, mediumCategoryName) {
-    requestMediumCategoryAPI("/categoryByLecture/subclassKinds", (response) => {
-        // 1. 소분류 데이터 추가
+function requestSmallCategory(largeCategoryName, mediumCategoryName, isInit) {
+    requestSmallCategoryAPI("/categoryByLecture/subclassKinds", (response) => {
         $(smallCategory).children().remove().end();
-        categoryId.length = 0;
-        for (const option of response['subClassList']) {
+        categoryIdList.length = 0;
+        for (const option of response) {
             $(smallCategory).append("<option>" + option['depth3Course'] + "</option>");
-            categoryId.push(option['categoryId']);
+            categoryIdList.push(option['categoryId']);
+            console.log(categoryIdList);
         }
         if (isInit) {
             selectLevelAll();
-            requestLevelNumber(categoryId[response.subClassList[0].depth3Course]);
-            requestCourseList(categoryId[response.subClassList[0].depth3Course]);
+            requestLevelNumber(categoryIdList[0]);
+            setPage(1);
+            setPagination(pageNum);
+            requestLectureList(categoryIdList[0], pageNum, columnName);
         }
     }, largeCategoryName, mediumCategoryName);
 }
+requestMediumCategory(largeCategory.children[0].text, true);
 
 function selectLevelAll() {
     selectedAdvanced.children[0].checked = true;
@@ -105,17 +82,6 @@ function levelToList() {
     return levelList;
 }
 
-function requestInitListAPI(url, done, categoryId) {
-    $.ajax({
-        type: "GET",
-        url: url + "?categoryId=" + categoryId,
-        dataType: "json",
-        contentType:"application/json; charset=utf-8",
-    }).done(done).fail((error) => {
-        alert(JSON.stringify(error));
-    });
-}
-
 function requestListAPI(url, done, categoryId, pageNum, columnName) {
     $.ajax({
         type: "GET",
@@ -127,61 +93,91 @@ function requestListAPI(url, done, categoryId, pageNum, columnName) {
     });
 }
 
+function requestInitListAPI(url, done, categoryId) {
+    $.ajax({
+        type: "GET",
+        url: url + "?categoryId=" + categoryId,
+        dataType: "json",
+        contentType:"application/json; charset=utf-8",
+    }).done(done).fail((error) => {
+        alert(JSON.stringify(error));
+    });
+}
+
 function setLevelNumber(response) {
-    $(selectedAdvanced).children("span")[0].innerHTML = "전문과정 " + response['education_level'][2]['lecture_num'] + "개 조회가능";
-    $(selectedBasic).children("span")[0].innerHTML = "기본과정 " + response['education_level'][2]['lecture_num'] + "개 조회가능";
-    $(selectedElective).children("span")[0].innerHTML = "선택과정 " + response['education_level'][2]['lecture_num'] + "개 조회가능";
+// todo 3개를 계속 받는게 아닌지?
+    let basic = 0;
+    let advanced = 0;
+    let elective = 0;
+    for (const level of response) {
+        if (level['eduLevel'] === "기본과정") {
+            basic = level['lectureNum'];
+        }
+        else if (level['eduLevel'] === "전문과정") {
+            advanced = level['lectureNum'];
+        }
+        else if (level['eduLevel'] === "선택과정") {
+            elective = level['lectureNum'];
+        }
+    }
+    $(selectedAdvanced).children("span")[0].innerHTML = "전문과정 " + basic + "개 조회가능";
+    $(selectedBasic).children("span")[0].innerHTML = "기본과정 " + advanced + "개 조회가능";
+    $(selectedElective).children("span")[0].innerHTML = "선택과정 " + elective + "개 조회가능";
 }
 
 function requestLevelNumber(categoryId) {
     requestInitListAPI("/categoryByLecture/courseLevelKinds", (response) => {
+        console.log(response);
         setLevelNumber(response);
     }, categoryId);
 }
 
-function setTotalCourseNumber(response) {
-    totalCourseNumber = response['lectureNum'];
-    $(".subject-result__title")[0].innerHTML = "총 " + totalCourseNumber + "개 검색";
+function setTotalLectureNumber(response) {
+    $(".subject-result__title")[0].innerHTML = "총 " + response['lectureNum'] + "개 검색";
 }
 
-function setCourseList(response) {
-    $(courseList).children().slice(2).remove().end();
-    lectureId.length = 0;
+function setLectureList(response) {
+    $(lectureList).children().slice(2).remove().end();
     for (const lecture of response['lectureList']) {
-        lectureId.push(lecture['lectureId']);
-
-        let list = [];
+        let html = "";
 
         let best = "";
-        let wish = "<img class='subject-icon-sm' src='img/empty-heart.png'>";
-        let index = response['lectureList'].indexOf(lecture) + 1;
+        let wish = "<img class='subject-icon-sm' src='/img/emptyHeart.png'>";
+        let index = 20 * (pageNum - 1) + response['lectureList'].indexOf(lecture) + 1 ;
         let online = "온라인";
-        let urlImage = "<img class='subject-icon-sm' src='img/link.png'>";
+        let urlImage = "<img class='subject-icon-sm' src='/img/gotosite.png'>";
         let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
         if (lecture['lectureBestYn'] === true) {
-            best = "<img class='subject-icon-sm' src='img/star.svg'>"
+            best = "<img class='subject-icon-sm' src='/img/star.svg'>"
         }
         if (lecture['wishBool'] === true) {
-            wish = "<img class='subject-icon-sm' src='img/full-heart.png'>";
+            wish = "<img class='subject-icon-sm' src='/img/filledHeart.png'>";
         }
         if (lecture['onlineYn'] === false) {
             online = "오프라인";
         }
-        list.push("<div>" + best + "</div>");
-        list.push("<div>" + wish + "</div>");
-        list.push("<span>" + index + "</span>");
-        list.push("<span>" + lecture['lectureTitle'] + "</span>");
-        list.push("<span>" + lecture['academyName'] + "</span>");
-        list.push("<span>" + online + "</span>");
-        list.push("<span>" + lecture['academyLoc'] + "</span>");
-        list.push(url + "</a>");
-
-        $(courseList).append("<li>" + list + "</li>");
+        html += ("<div>" + best + "</div>");
+        html += ("<div class='subject-result__wish'>" + wish + "</div>");
+        html += ("<span>" + index + "</span>");
+        html += ("<span>" + lecture['lectureTitle'] + "</span>");
+        html += ("<span>" + lecture['academyName'] + "</span>");
+        html += ("<span>" + online + "</span>");
+        html += ("<span>" + lecture['academyLoc'] + "</span>");
+        html += (url + "</a>");
+console.log(lecture['lectureId']);
+        $(lectureList).append("<li value=" + lecture['lectureId'] + ">" + html + "</li>");
     }
 }
 
+function setPage(nextPage) {
+    let prevPage = pageNum;
+    pageNum = nextPage;
+    $(".subject-pagination__number").children((prevPage - 1) % 5).css("background-color", "red");
+    $(".subject-pagination__number").children((nextPage - 1) % 5).css("background-color", "yellow");
+}
+
 function setPagination(start) {
-    if ((start - 1) / 5 == 0) {
+    if (start < 6) {
         $(".subject-pagination div:first-child img").css("display", "none");
     }
     else {
@@ -199,34 +195,36 @@ function setPagination(start) {
         end = maxPageNum;
     }
     for (let i = start; i <= end; i++) {
-        $(".subject-pagination__number").append("<li>" + i + "</li>");
+        $(".subject-pagination__number").append("<li onclick='pageNumberClick(event)'>" + i + "</li>");
     }
+    let index = (start - 1) % 5;
+    $(".subject-pagination__number li:nth-child(" + index + ")").css("background-color", "red");
 }
 
-function requestCourseList(categoryId, pageNum, columnName = "") {
+function requestLectureList(categoryId, pageNum, columnName) {
     requestListAPI("/categoryByLecture/DuplicateCourseSelection", (response) => {
-        setTotalCourseNumber(response);
-        setCourseList(response);
+        setTotalLectureNumber(response);
+        setLectureList(response);
         maxPageNum = response['totalPageNationNum'];
-        setPagination(1);
     }, categoryId, pageNum, columnName);
-    isInit = false;
 }
 
 // 대분류 클릭 Event
 largeCategory.addEventListener("change", (event) => {
-    requestMediumCategory(event.target.value);
+    requestMediumCategory(event.target.value, false);
 });
 
 // 중분류 클릭 Event
 mediumCategory.addEventListener("change", (event) => {
-    requestSmallCategory($(".subject-option__large option:selected").text(), event.target.value);
+    requestSmallCategory($(".subject-option__large option:selected").text(), event.target.value, false);
 });
 
 // 소분류 클릭 Event
 smallCategory.addEventListener("change", (event) => {
-    requestLevelNumber(categoryId[event.target.selectedIndex]);
-    requestCourseList(categoryId[event.target.selectedIndex], 1);
+    requestLevelNumber(categoryIdList[event.target.selectedIndex]);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[event.target.selectedIndex], pageNum, columnName);
 });
 
 // 수준별 클릭 Event
@@ -237,7 +235,9 @@ selectedAdvanced.addEventListener("click", () => {
     else {
         $(selectedAdvanced.children[2]).css("display", "inline-block");
     }
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], 1);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 selectedBasic.addEventListener("click", () => {
@@ -247,7 +247,9 @@ selectedBasic.addEventListener("click", () => {
     else {
         $(selectedBasic.children[2]).css("display", "inline-block");
     }
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], 1);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 selectedElective.addEventListener("click", () => {
@@ -257,7 +259,9 @@ selectedElective.addEventListener("click", () => {
     else {
         $(selectedElective.children[2]).css("display", "inline-block");
     }
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], 1);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 function requestWishAPI(url, done, lectureId, wishTo) {
@@ -271,15 +275,19 @@ function requestWishAPI(url, done, lectureId, wishTo) {
     });
 }
 
+// todo 노깔끔
 $(document).click(function(event) {
     if (event.target.className === "subject-icon-sm") {
-        if (event.target.src.includes("empty-heart.png") === true) {
-            event.target.src = "img/full-heart.png";
-            requestWishAPI("/categoryByLecture/wishListSelection", () => {}, lectureId[event.target.parentElement.parentElement.children[2].innerHTML - 1], true);
+        if (event.target.src.includes("emptyHeart.png") === true) {
+            event.target.src = "/img/filledHeart.png";
+            console.log(lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML + 1])
+            requestWishAPI("/categoryByLecture/wishListSelection", () => {},
+                lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 1].value, true);
         }
-        else if (event.target.src.includes("full-heart.png") === true) {
-            event.target.src = "img/empty-heart.png";
-            requestWishAPI("/categoryByLecture/wishListSelection", () => {}, lectureId[event.target.parentElement.parentElement.children[2].innerHTML - 1], false);
+        else if (event.target.src.includes("filledHeart.png") === true) {
+            event.target.src = "/img/emptyHeart.png";
+            requestWishAPI("/categoryByLecture/wishListSelection", () => {},
+                lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 1].value, false);
         }
     }
 });
@@ -287,31 +295,38 @@ $(document).click(function(event) {
 // 컬럼 클릭시 정렬된 리스트 요청
 $(".subject-result__column--course-name").click(function() {
     columnName = "lec.lecture_title";
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], pageNum, columnName);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 $(".subject-result__column--academy-name").click(function() {
     columnName = "acdm.academy_name";
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], pageNum, columnName);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 $(".subject-result__column--is-online").click(function() {
     columnName = "lec.online_yn";
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], pageNum, columnName);
+    setPage(1);
+    setPagination(pageNum);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 // 페이지
-$(".subject-pagination__number *").click(function() {
-    pagaeNum = $(this).text();
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], pageNum, columnName);
-});
+function pageNumberClick(event) {
+//    event.target.style.backgroundColor = "#0094d4";
+    pageNum = event.target.innerHTML;
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
+}
 
 $(".subject-pagination div:first-child img").click(function() {
-    pageNum = (((pageNum - 1) / 5) - 1) * 5 + 1;
+    pageNum = (Math.floor((pageNum - 1) / 5) - 1) * 5 + 1;
     setPagination(pageNum);
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], pageNum, columnName);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 $(".subject-pagination div:last-child img").click(function() {
-    pageNum = (((pageNum - 1) / 5) + 1) * 5 + 1;
+    pageNum = (Math.floor((pageNum - 1) / 5) + 1) * 5 + 1;
     setPagination(pageNum);
-    requestCourseList(categoryId[$(".subject-option__small option:selected").index()], pageNum, columnName);
+    requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
