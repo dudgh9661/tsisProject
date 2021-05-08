@@ -126,7 +126,6 @@
         WHERE academy_id = #{academyId} AND academy_skill = #{depth2Skill};
     </select>
 
-
     <update id="update">
         UPDATE lecture
         SET lecture_title = #{lectureTitle}, lecture_url = #{lectureUrl},
@@ -177,11 +176,14 @@
     </select>
 
     <select id="getAllTotalPage" resultType="Integer">
-        SELECT count(*)
-        FROM lecture
-        WHERE 1=1
+        SELECT COUNT(*)
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        INNER JOIN lecture_category ctgr
+        ON lec.category_id = ctgr.category_id
         <if test="lectureTitle != null">
-            AND lecture_title = #{lectureTitle}
+            WHERE lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
         </if>
     </select>
 
