@@ -1,0 +1,47 @@
+package kr.co.tsis.education.academy;
+
+
+import kr.co.tsis.education.academy.DTOS.academyDTO;
+import kr.co.tsis.education.academy.DTOS.academyPageDTO;
+import kr.co.tsis.education.admin.adminController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@Controller
+public class academyController {
+    @Autowired
+    private academyService service;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(academyController.class);
+
+    @GetMapping("/academy")
+    public String main(){
+        LOGGER.debug("void");
+        return "manager/academy";
+    }
+
+    @ResponseBody
+    @GetMapping("/academy/getList")
+    public String getList(@RequestParam("curpage")int curpage, Model model){
+        LOGGER.debug("curpage",curpage);
+        academyPageDTO result = service.getList(curpage);
+        model.addAttribute("curPage",curpage);
+        model.addAttribute("totalPage",result.getTotalpage());
+        model.addAttribute("totalCount",result.getTotalCount());
+        model.addAttribute("organi",result.getOrgani());
+        return "manager/academy";
+
+    }
+    @ResponseBody
+    @PostMapping("/academy/delList")
+    public int delList(@RequestParam("academyIdList") List<String> ids){
+        LOGGER.debug("academy_id_list",ids);
+        return service.delList(ids);
+    }
+}
