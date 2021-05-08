@@ -72,6 +72,11 @@ public class LectureMngController {
                 .build();
     }
 
+    @GetMapping("/lectureMng")
+    public String lectureMngAllSearchPage() {
+        return "manager/lectureMng";
+    }
+
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
@@ -86,8 +91,7 @@ public class LectureMngController {
 
     //강좌 수정 페이지로 데이터 전송
     @GetMapping("/lectureMng/modify")
-    @ResponseBody
-    public ToModifyPageResponseDto sendToModifyPage(@RequestParam(value="lectureId") int lectureId, Model model) {
+    public String sendToModifyPage(@RequestParam(value="lectureId") int lectureId, Model model) {
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
         System.out.println("lectureId : " + lectureId);
         ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
@@ -100,7 +104,7 @@ public class LectureMngController {
                 .empDtoList(empDtoList)
                 .build();
         model.addAttribute("modifiedData", toModifyPageResponseDto);
-        return toModifyPageResponseDto;
+        return "manager/lecture_mod";
 //        return "/";
     }
 
@@ -110,7 +114,13 @@ public class LectureMngController {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);
-        return "/";
+        return "/manager/lecturMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
+    }
+
+    //강좌 추가 버튼 클릭 시 페이지 이동
+    @GetMapping("/lectureMng/add")
+    public String add() {
+        return "/manager/lecture_mod";
     }
 
     //강좌 추가
