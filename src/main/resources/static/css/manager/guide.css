@@ -1,6 +1,6 @@
 
 #noticeText {
-    width: 80%;
+    width: 100%;
     border: 1;
     overflow: visible;
     text-overflow: ellipsis;
@@ -9,19 +9,23 @@
 }
 
 .notice-saveButton {
-    float: right;
-    margin-right: 20%;
-    background: #4193D0;
     color: #ffffff;
-    margin-left: 5px;
-    height: 30px;
+    background: var(--color-sky-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 0.6rem;
+    display: block;
+    float: right;
 }
 
 #noticeStr {
-    font-size: 40px;
+    font-size: 1.75rem;
+    margin: 3rem;
     font-family: 'SDSamliphopangche_Outline';
 }
-
+#guide-textarea{
+    padding: 3rem;
+    padding-right: 30rem;
+}
 .guide-section {
     min-height : 65vh;
 }
