@@ -24,6 +24,8 @@ public class adminController {
     @GetMapping("/admin/getAdmin")
     public List<lectureDTO> getAdmin(){
         LOGGER.debug("void");
+        List<lectureDTO> temp = service.getAdmin();
+        int a = 0;
         return service.getAdmin();
     }
     @ResponseBody
@@ -34,7 +36,7 @@ public class adminController {
     }
     @ResponseBody
     @PostMapping("/admin/setAdmin")
-    public int setAdmin(@RequestParam("empId") List<String> empId){
+    public int setAdmin(@RequestBody List<String> empId){
         LOGGER.debug("empId",empId);
         int result=0;
         for(String item : empId){
@@ -44,7 +46,7 @@ public class adminController {
     }
     @ResponseBody
     @PostMapping("/admin/delAdmin")
-    public int delAdmin(@RequestParam("empId") List<String> empId){
+    public int delAdmin(@RequestBody List<String> empId){
         LOGGER.debug("empId",empId);
         int result=0;
         for(String item : empId){
