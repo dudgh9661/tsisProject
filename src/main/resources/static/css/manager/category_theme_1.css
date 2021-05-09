@@ -54,7 +54,7 @@ input[name="tab_item"] {
   height: 400px;
 }
 
-.sorted_categoriesdiv {
+.sorted_categories_div {
   position: relative;
   width: 95%;
   margin: 0 auto;
@@ -171,6 +171,18 @@ th,
 td {
   border: 1px solid black;
   border-collapse: collapse;
+}
+.sorted_lecture_list {
+  height: 300px;
+  overflow: auto;
+}
+.sorted_lecture_list::-webkit-scrollbar {
+    width: 10px;
+    background-color: rgb(223, 223, 248);
+}
+
+.sorted_lecture_list::-webkit-scrollbar-thumb{
+  background-color: rgb(10, 13, 170);
 }
 
 /*새로고침*/

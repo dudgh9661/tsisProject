@@ -47,6 +47,7 @@ public class categoryController {
     @ResponseBody
     @PostMapping("/category/delDepth1")
     public int delDepth1(@RequestParam("depth1Field")String depth1){
+        System.out.println(depth1);
         return service.delDepth1(depth1);
     }
 
@@ -61,14 +62,38 @@ public class categoryController {
         return service.delDepth3(depth1,depth2,depth3);
     }
 
-    @GetMapping("/category/getTitle")
+  /*  @GetMapping("/category/getTitle")
     public String getTitle(@RequestBody categoryForm form,Model model){
+
+        System.out.println("Ssssssssssssssssssss");
+        System.out.println(depth1);
+        System.out.println(depth2);
+        System.out.println(depth3);
+        System.out.println(lectureId);
+
         String title = service.getTitle(form);
         model.addAttribute("lectureId",form.getLectureId());
         model.addAttribute("lectureTitle",title);
         model.addAttribute("depth1Field",form.getDepth1Field());
         model.addAttribute("depth2Skill",form.getDepth2Skill());
         model.addAttribute("depth3Course",form.getDepth3Course());
+        return "manager/lecture_category_update";
+
+    }*/
+
+    @GetMapping("/category/getTitle")
+    public String getTitle(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2,@RequestParam("depth3Course")String depth3,
+                           @RequestParam("lectureId")int lectureId,Model model){
+
+        String title = service.getTitle(lectureId);
+        System.out.println("controller = "+ title);
+
+        model.addAttribute("depth1Field",depth1);
+        model.addAttribute("lectureId",lectureId);
+        model.addAttribute("lectureTitle",title);
+        model.addAttribute("depth2Skill",depth2);
+        model.addAttribute("depth3Course",depth3);
+
         return "manager/lecture_category_update";
 
     }
@@ -81,21 +106,39 @@ public class categoryController {
 
     }
 
-    @PostMapping("/category/modify")
+/*    @PostMapping("/category/modify")
     public String modify(@RequestBody categoryForm form, Model model){
         LOGGER.debug("input",form);
         model.addAttribute("depth1Field",form.getDepth1Field());
         model.addAttribute("depth2Skill",form.getDepth2Skill());
         model.addAttribute("depth3Course",form.getDepth3Course());
         return "admin/categori_modify";
+    }*/
+
+    @GetMapping("/category/modify")
+    public String modify(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2,@RequestParam("depth3Course")String depth3, Model model){
+
+        model.addAttribute("depth1Field",depth1);
+        model.addAttribute("depth2Skill",depth2);
+        model.addAttribute("depth3Course",depth3);
+        return "manager/category_modify";
     }
-    @PostMapping("/category/add")
+
+    /*@PostMapping("/category/add")
     public String add(@RequestBody categoryForm form, Model model){
         LOGGER.debug("input",form);
         model.addAttribute("depth1Field",form.getDepth1Field());
         model.addAttribute("depth2Skill",form.getDepth2Skill());
         return "admin/categori_add";
+    }*/
+
+    @GetMapping("/category/add")
+    public String add(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2, Model model){
+        model.addAttribute("depth1Field",depth1);
+        model.addAttribute("depth2Skill",depth2);
+        return "manager/category_add";
     }
+
 
     @ResponseBody
     @PostMapping("/category/addDepth")
@@ -105,6 +148,7 @@ public class categoryController {
     @ResponseBody
     @PostMapping("/category/resetDepth")
     public int resetDepth(@RequestBody categoryForm form){
+        System.out.println(form.getNewDepth());
         return service.resetDepth(form);
 
     }

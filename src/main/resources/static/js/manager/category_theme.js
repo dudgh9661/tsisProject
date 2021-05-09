@@ -1,18 +1,17 @@
 // load
 $(function () {
     $.ajax({
-        url: "/json/bg_test.json", // /category
-        //url: "/category/getDepth1",
+        url: "/category/getDepth1",
         method: "GET",
-        dataType: "json",
+        contentType: "application/json",
         success: function (data) {
             var html = "";
-            $.each(data.lecture_category, function (i, item) {
+            $.each(data, function (i, item) {
                 html += "<div class='category_list_one_div category_list_one_div_bg'>"
-                html += "<input type='hidden' class='depth1' value='" + item.depth1_field + "'>"
-                html += "<input type='text' class='cate_name bg_cate_name' id='" + item.depth1_field + "' onclick='bgcatename(" + item.depth1_field + ");' readonly value='" + item.depth1_field + "'>";
-                html += "<button class='cate_del' onclick='bg_del(" + item.depth1_field + ");'>삭제</button>";
-                html += "<button class='cate_up' onclick='bg_update(" + item.depth1_field + ")'>수정</button>";
+                html += "<input type='hidden' class='depth1' value='" + item + "'>"
+                html += "<input type='text' class='cate_name bg_cate_name' id='" + item + "' onclick='bgcatename(" + item + ");' readonly value='" + item + "'>";
+                html += "<button class='cate_del' onclick='bg_del(" + item + ");'>삭제</button>";
+                html += "<button class='cate_up' onclick='bg_update(" + item + ")'>수정</button>";
                 html += "</div>"
             });
             html += "<div class='plus_btn_div bg_plus_btn_div' onclick='bg_plus_btn();'><i class='fas fa-plus-circle'></i></div>"
@@ -42,7 +41,6 @@ function bgcatename(depth1) {
     let category = {
         depth1Field: $(depth1).val()
     }
-
     // 첫번째
     if (document.getElementById(depth1.id).getAttribute('class').includes('sort')) {
         document.getElementById(depth1.id).classList.remove('sort');
@@ -52,18 +50,18 @@ function bgcatename(depth1) {
         document.getElementById(depth1.id).classList.add('sort');
 
         $.ajax({
-            //url: "/json/m_test.json", // /category
             url: "/category/getDepth2",
             method: "GET",
-            data:  JSON.stringify(category),
+            data: category,
             dataType: "json",
+            contentType: "application/json",
             success: function (data) {
                 var html = "";
-                $.each(data.lecture_category, function (i, item) {
+                $.each(data, function (i, item) {
                     html += "<div class='category_list_one_div category_list_one_div_m'>"
-                    html += "<input type='text' class='cate_name m_cate_name' id='" + item.depth2_skill + "' onclick='mcatename(" + [depth1.id, item.depth2_skill] + ");' readonly value='" + item.depth2_skill + "'>";
-                    html += "<button class='cate_del' onclick='m_del(" + [depth1.id, item.depth2_skill] + ");'>삭제</button>";
-                    html += "<button class='cate_up' onclick='m_update(" + [depth1.id, item.depth2_skill] + ")'>수정</button>";
+                    html += "<input type='text' class='cate_name m_cate_name' id='" + item + "' onclick='mcatename(" + [depth1.id, item] + ");' readonly value='" + item + "'>";
+                    html += "<button class='cate_del' onclick='m_del(" + [depth1.id, item] + ");'>삭제</button>";
+                    html += "<button class='cate_up' onclick='m_update(" + [depth1.id, item] + ")'>수정</button>";
                     html += "</div>"
                 });
                 html += "<div class='plus_btn_div m_plus_btn_div' onclick='m_plus_btn(" + depth1.id + ");'><i class='fas fa-plus-circle'></i></div>"
@@ -85,7 +83,6 @@ function bgcatename(depth1) {
                 => sort 클래스명 없을시 => ajax 실행 안되기
 */
 function mcatename(depth1, depth2) {
-
     $(".category_list_one_div_s").remove(); /* 소분류 reset */
     $(".sorted_lecture_list_table").remove(); /* 테이블 reset */
     $(".s_plus_btn_div").remove(); /* +btn reset */
@@ -103,17 +100,17 @@ function mcatename(depth1, depth2) {
         document.getElementById(depth2.id).classList.add('sort');
 
         $.ajax({
-            //url: "/json/s_test.json", // /category
             url: "/category/getDepth3",
             method: "GET",
-            data: JSON.stringify(category),
+            data: category,
             dataType: "json",
+            contentType: "application/json",
             success: function (data) {
                 var html = "";
-                $.each(data.lecture_category, function (i, item) {
-                    html += "<div class='category_list_one_div category_list_one_div_s'>"
-                    html += "<input type='hidden' class='" + i + "' value='" + item.depth3_course + "'>"
-                    html += "<input type='text' class='cate_name s_cate_name' id='" + item.depth3_course + "' onclick='scatename(" + [depth1.id, depth2.id, i] + ");' readonly value='" + item.depth3_course + "'>";
+                $.each(data, function (i, item) {
+                    html += "<div class='category_list_one_div category_list_one_div_s' id='category_list_one_div_s_id'>"
+                    html += "<input type='hidden' class='category_theme" + i + "' value='" + item + "'>"
+                    html += "<input type='text' class='cate_name s_cate_name s_cate_name"+i+"' id='" + item + "' onclick='scatename(" + [depth1.id, depth2.id, i] + ");' readonly value='" + item + "'>";
                     html += "<button class='cate_del' onclick='s_del(" + [depth1.id, depth2.id, i] + ");'>삭제</button>";
                     html += "<button class='cate_up' onclick='s_update(" + [depth1.id, depth2.id, i] + ")'>수정</button>";
                     html += "</div>"
@@ -140,44 +137,46 @@ function scatename(depth1, depth2, i) {
     let category = {
         depth1Field: $(depth1).val(),
         depth2Skill: $(depth2).val(),
-        depth3Course: $("." + i).val()
+        depth3Course: $(".category_theme" + i).val()
     }
 
-    let depth3 = $("." + i);
+    let depth3 = $(".category_theme" + i);
 
-    if (document.getElementById($("." + i).val()).getAttribute('class').includes('sort')) {
-        document.getElementById($("." + i).val()).classList.remove('sort');
-    } else {
+    if(($(".s_cate_name"+i)[0].classList.value.includes('sort'))){
+        $(".s_cate_name"+i)[0].classList.remove('sort');
+    }else {
         $(".s_cate_name").removeClass("sort");
-        document.getElementById($("." + i).val()).classList.add('sort');
+        $(".s_cate_name"+i)[0].classList.add('sort');
 
         $.ajax({
-            //url: "/json/lecture_test.json", // /category
             url: "/category/getList",
             method: "GET",
-            data: JSON.stringify(category),
+            data: category,
             dataType: "json",
-            success: function (depth3) {
+            contentType: "application/json",
+            success: function (data) {
+                if(data.length>0){
                 var html = "";
-                html += "<table class='sorted_lecture_list_table' style='width:100%; text-align: center;'>"
-                html += "<tr><th>No</th><th>lecture_best_yn</th><th>lecture_title</th><th>academy_name</th><th>online_yn</th><th>academy_loc</th></tr>"
-                $.each(depth3.lecture, function (i, item) {
-                    console.log(category.depth3_course);
-                    html += "<tr>"
-                    html += "<input type='hidden' class='depth3" + i + "' value='" + category.depth3_course + "'>"
-                    html += "<input type='hidden' class='lec" + i + "' value='" + item.lecture_id + "'>"
-                    html += "<td>" + item.lecture_id + "</td>";
-                    html += "<td>" + item.lecture_best_yn + "</td>";
-                    html += "<td><a href= 'javascript:detailLecture(" + [category.depth1_field, category.depth2_skill, i] + ")'>" + item.lecture_title + "</a></td>";
-                    html += "<td>" + item.academy_name + "</td>";
-                    html += "<td>" + item.online_yn + "</td>";
-                    html += "<td>" + item.academy_loc + "</td>";
-                    html += "</tr>"
-                });
+                if(data){
+                    html += "<table class='sorted_lecture_list_table' style='width:100%; text-align: center;'>"
+                    html += "<tr><th>No.</th><th>베스트 강좌</th><th>강좌 이름</th><th>기관 이름</th><th>온라인 여부</th><th>기관 위치</th></tr>"
+                    $.each(data, function (i, item) {
+                        html += "<tr>"
+                        html += "<input type='hidden' class='category_theme_depth3" + i + "' value='" + category.depth3Course + "'>"
+                        html += "<input type='hidden' class='category_theme_lec" + i + "' value='" + item.lectureId + "'>"
+                        html += "<input type='hidden' class='category_theme_title" + i + "' value='" + item.lectureTitle + "'>"
+                        html += "<td>" + (i+1) + "</td>";
+                        html += "<td>" + (item.lectureBestYn==1?"YES":"NO") + "</td>";
+                        html += "<td><a href= 'javascript:detailLecture(" + [category.depth1Field, category.depth2Skill, i] + ")'>" + item.lectureTitle + "</a></td>";
+                        html += "<td>" + item.academyName + "</td>";
+                        html += "<td>" + item.onlineYn + "</td>";
+                        html += "<td>" + item.academyLoc + "</td>";
+                        html += "</tr>"
+                    });
+                }
                 html += "</table>"
                 $(".sorted_lecture_list").append(html);
-
-
+                }
             },
             error: function (x, s, e) {
                 console.log(x, s, e);
@@ -194,10 +193,12 @@ function detailLecture(depth1, depth2, i) {
 
     const depth1Field =  $(depth1).val();
     const depth2Skill = $(depth2).val();
-    const depth3Course = $(".depth3" + i).val();
-    const lectureId = $(".lec" + i).val();
-
-    console.log(category);
+    const depth3Course = $(".category_theme_depth3" + i).val();
+    const lectureId = $(".category_theme_lec" + i).val();
+    const lectureTitle = $(".category_theme_title"+i).val();
+    categoryForm = {
+        "depth1Field" : $(depth1).val()
+    }
 
     var url = "/category/getTitle?depth1Field=" + depth1Field +"&depth2Skill="+ depth2Skill + "&depth3Course=" + depth3Course + "&lectureId="+lectureId;
     var name = "updateLectureCategory";
@@ -209,8 +210,8 @@ function detailLecture(depth1, depth2, i) {
     대분류 + 버튼 눌러서 카테고리 add 하기
 */
 function bg_plus_btn() {
-    const depth1Field = null;
-    const depth2Skill = null;
+    const depth1Field = "";
+    const depth2Skill = "";
 
     var url = "/category/add?depth1Field=" + depth1Field + "&depth2Skill=" + depth2Skill;
     var name = "addCategory";
@@ -223,7 +224,7 @@ function bg_plus_btn() {
 */
 function m_plus_btn(depth1) {
     const depth1Field = depth1.id;
-    const depth2Skill = null;
+    const depth2Skill = "";
 
     var url = "/category/add?depth1Field=" + depth1Field + "&depth2Skill=" + depth2Skill;
     var name = "addCategory";
@@ -253,8 +254,8 @@ function s_plus_btn(depth1, depth2) {
 /* 대분류 수정 버튼 */
 function bg_update(depth1) {
     const depth1Field = depth1.id;
-    const depth2Skill = null;
-    const depth3Course = null;
+    const depth2Skill = "";
+    const depth3Course = "";
 
     var url = "/category/modify?depth1Field=" + depth1Field + "&depth2Skill=" + depth2Skill + "&depth3Course=" + depth3Course;
     var name = "addCategory";
@@ -263,11 +264,10 @@ function bg_update(depth1) {
 }
 /* 중분류 수정 버튼 */
 function m_update(depth1, depth2) {
-    let category = {
-        depth1Field: depth1.id,
-        depth2Skill: depth2.id,
-        depth3Course: null
-    }
+
+    const depth1Field = depth1.id;
+    const depth2Skill = depth2.id;
+    const depth3Course = "";
 
     var url = "/category/modify?depth1Field=" + depth1Field + "&depth2Skill=" + depth2Skill + "&depth3Course=" + depth3Course;
     var name = "addCategory";
@@ -278,9 +278,9 @@ function m_update(depth1, depth2) {
 /* 소분류 수정 버튼 */
 function s_update(depth1, depth2, i) {
 
-        const depth1_field = depth1.id;
-        const depth2_skill = depth2.id;
-        const depth3_course = $("." + i).val();
+    const depth1Field = depth1.id;
+    const depth2Skill = depth2.id;
+    const depth3Course = $(".category_theme" + i).val();
 
     var url = "/category/modify?depth1Field=" + depth1Field + "&depth2Skill=" + depth2Skill + "&depth3Course=" + depth3Course;
     var name = "addCategory";
@@ -301,12 +301,16 @@ function bg_del(depth1) {
         depth1Field: depth1.id
     }
 
+    console.log(category);
+
     $.ajax({
         url: "/category/delDepth1",
         method: "POST",
         data: JSON.stringify(category),
         dataType: "json",
+        contentType: "application/json",
         success: function (data) {
+            alert(data);
         },
         error: function (x, s, e) {
             console.log(x, s, e);
@@ -326,6 +330,7 @@ function m_del(depth1, depth2) {
         method: "POST",
         data: JSON.stringify(category),
         dataType: "json",
+        contentType: "application/json",
         success: function (data) {
         },
         error: function (x, s, e) {
@@ -339,7 +344,7 @@ function s_del(depth1, depth2, i) {
     let category = {
         depth1Field: depth1.id,
         depth2Skill: depth2.id,
-        depth3Course: $("." + i).val()
+        depth3Course: $(".category_theme" + i).val()
     }
     console.log(category);
 
@@ -348,6 +353,7 @@ function s_del(depth1, depth2, i) {
         method: "POST",
         data: JSON.stringify(category),
         dataType: "json",
+        contentType: "application/json",
         success: function (data) {
         },
         error: function (x, s, e) {

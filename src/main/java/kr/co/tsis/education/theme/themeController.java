@@ -20,8 +20,7 @@ public class themeController {
 
     @GetMapping("/category_theme")
     public String main(){
-
-        return "manager/category_theme";
+        return "/manager/category_theme";
     }
     @ResponseBody
     @GetMapping("/theme/getThemeList")

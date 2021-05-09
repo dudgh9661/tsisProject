@@ -5,11 +5,14 @@ function addCate() {
         adddepth: $(".input-info-box").val()
     }
 
+    console.log(category);
+
      $.ajax({
-            url: "/category/add",
+            url: "/category/addDepth",
             method: "POST",
             data: JSON.stringify(category),
             dataType: "json",
+            contentType: "application/json",
             success: function (data) {
                 // data == 1 성공
                 if (data > 0) {

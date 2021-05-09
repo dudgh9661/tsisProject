@@ -49,12 +49,21 @@
         DELETE FROM lecture_category
         WHERE depth3_course=#{d3}
     </delete>
+<!--
     <select id="getTile" parameterType="int" resultType="kr.co.tsis.education.category.DTOS.categoryDTO">
         SELECT
                lecture_id "강좌 아이디",
                lecture_title "강좌명"
         FROM lecture
         WHERE lecture_id=#{0}
+    </select>
+-->
+
+    <select id="getTitle" parameterType="int" resultType="String">
+        SELECT
+        lecture_title "강좌명"
+        FROM lecture
+        WHERE lecture_id=#{id}
     </select>
 
     <update id="setDepth" parameterType="kr.co.tsis.education.category.DTOS.categoryForm">

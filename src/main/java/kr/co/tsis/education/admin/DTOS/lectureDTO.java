@@ -1,7 +1,5 @@
 package kr.co.tsis.education.admin.DTOS;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
 
 
 public class lectureDTO {
