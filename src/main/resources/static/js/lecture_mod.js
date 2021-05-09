@@ -195,6 +195,10 @@ function btn_save(){
 //    self.close();
 }
 
+const btn_modify = () => {
+///lectureMng/modify/cofirm/{lectureId}
+}
+
 /*-----------------------------------------------------카테고리 select태그 설정*/
 const setBigCatClick = (e) => {
     if(!bigCatStatus) {
