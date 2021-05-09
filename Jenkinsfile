@@ -29,7 +29,7 @@ pipeline {
         //         sh 'docker run -d --name server -p 8081:8080 tsis:latest'
         //     }
         // }
-        state('Deploy') {
+        stage('Deploy') {
             steps {
                 build job: 'tsis_ci'
             }
