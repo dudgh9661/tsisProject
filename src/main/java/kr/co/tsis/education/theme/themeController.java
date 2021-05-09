@@ -19,10 +19,11 @@ public class themeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(themeController.class);
 
     @GetMapping("/category_theme")
-    public String main(){
-
-        return "manager/category_theme";
+    public String main(Model model){
+        model.addAttribute("subjectList", service.getThemeList());
+        return "/manager/category_theme";
     }
+
     @ResponseBody
     @GetMapping("/theme/getThemeList")
     public List<themeDTO> getThemeList(){
@@ -39,27 +40,30 @@ public class themeController {
 
     @ResponseBody
     @PostMapping("/theme/delTheme")
-    public int delTheme(@RequestParam("themeLectureId")int id){
-        return service.delTheme(id);
+    public int delTheme(@RequestBody themeDTO dto) {
+        return service.delTheme(dto.getThemeLectureId());
     }
 
     @GetMapping("/theme/getTheme")
-    public String getTheme(@RequestParam("themeLectureId")int id, Model model){
+    public String getTheme(@RequestParam("themeLectureId") Integer id, Model model){
+        if(id == 0) {
+            return "/manager/addSubject";
+        }
         model.addAttribute("theme",service.getTheme(id));
-        return "/admin/themeModify";
+        return "/manager/addSubject";
     }
 
     @ResponseBody
     @PostMapping("/theme/modifyTheme")
     public int modifyTheme(@RequestBody themeDTO dto){
+        System.out.println(dto);
         return service.modifyTheme(dto);
-
     }
 
     @ResponseBody
     @PostMapping("/theme/addTheme")
-    public int addTheme(@RequestParam("theme")String theme){
-        return service.addTheme(theme);
+    public int addTheme(@RequestBody themeDTO dto){
+        return service.addTheme(dto.getTheme());
     }
 
     @ResponseBody

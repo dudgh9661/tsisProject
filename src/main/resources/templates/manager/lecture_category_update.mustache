@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--css-->
+    <link rel="stylesheet" href="/css/manager/lecture_category_update.css">
+    <!--js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script defer src="/js/manager/lecture_category_update.js"></script>
+    <title>카테고리 변경</title>
+</head>
+
+<body>
+<div class="cate_update_title">
+    <h2>카테고리 변경</h2>
+</div>
+<form>
+    <center>
+        <div>
+            <div class="lecture-update-row">
+                <div class="div-info">강좌명</div>
+                <input class="input-info-box" name="id" type="text" value="{{lectureTitle}}" readonly>
+                <input type="hidden" id="lec_id" value="{{lectureId}}">
+            </div>
+            <div class="lecture-update-row">
+                <div class="div-info">대분류</div>
+                <select class="bg_cate">
+                    <!--여기에 비동기-->
+                    <option class="cate_update_bg_{{depth1Field}}" value="{{depth1Field}}" selected>{{depth1Field}}</option>
+                    <input id="get_bg_cate" type="hidden" class="bg_cate_option" value="{{depth1Field}}">
+                </select>
+            </div>
+            <div class="lecture-update-row">
+                <div class="div-info">중분류</div>
+                <select class="m_cate">
+                    <option class="cate_update_m_{{depth2Skill}}" value="{{depth2Skill}}" selected>{{depth2Skill}}</option>
+                    <!--여기에 비동기-->
+                    <input id="get_m_cate" type="hidden" class="m_cate_option" value="{{depth2Skill}}">
+                </select>
+            </div>
+            <div class="lecture-update-row">
+            <div class="div-info">소분류</div>
+                <select class="s_cate">
+                    <!--<option class="cate_update_s_{{depth3Course}}" value="{{depth3Course}}" selected>{{depth3Course}}</option>-->
+                    <!--여기에 비동기-->
+                    <input id="get_s_cate" type="hidden" class="s_cate_option" value="{{depth3Course}}">
+                </select>
+            </div>
+            <input type="button" class="pw-box input-pw-font" value="강좌 카테고리 변경" onclick="updateCate();">
+        </div>
+    </center>
+</form>
+</body>
+
+</html>

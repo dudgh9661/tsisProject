@@ -52,7 +52,4 @@ public class categoryForm {
         return lectureId;
     }
 
-    public void setLectureId(int lectureId) {
-        this.lectureId = lectureId;
-    }
 }

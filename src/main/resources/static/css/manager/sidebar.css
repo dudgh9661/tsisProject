@@ -1,6 +1,4 @@
-
 /*sidebar시작*/
-
 .sidebar {
   background-color: var(--color-light-beige);
   width: 12%;
@@ -37,11 +35,20 @@
 }
 
 .sidebar_ul > li:hover {
-  /* border-right: 5px solid var(--color-sky-blue); */
   background: #1d378b; /* #0094d4 , #1d378b, #9c9ea0, #6c6d6f*/
 }
 
 .sidebar_ul > li:hover > a {
+  color: white;
+  font-weight: 500;
+  font-size: calc(var(--font-medium-large) * 0.85);
+  transition: all 0.4s ease;
+}
+
+.sidebar_ul > li.admin-active {
+  background: #1d378b; /* #0094d4 , #1d378b, #9c9ea0, #6c6d6f*/  
+}
+.sidebar_ul > li.admin-active > a {
   color: white;
   font-weight: 500;
   font-size: calc(var(--font-medium-large) * 0.85);

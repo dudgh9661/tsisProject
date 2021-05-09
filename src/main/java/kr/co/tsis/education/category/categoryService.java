@@ -35,20 +35,21 @@ public class categoryService {
         return dao.delDepth3(d1,d2,d3);
     }
 
-    public String getTitle(categoryForm form){
+    /*public String getTitle(categoryForm form){
         return dao.getTitle(form.getLectureId());
+    }*/
 
-    }
+    public String getTitle(int id){ return dao.getTitle(id); }
 
     public int setDepth(categoryForm form){
         return dao.setDepth(form);
     }
 
     public int addDepth(categoryForm form){
-        if(form.getDepth1Field() == null){
+        if(form.getDepth1Field() == ""){
             return dao.addDepth1(form);
         }
-        else if(form.getDepth2Skill() == null){
+        else if(form.getDepth2Skill() == ""){
             return dao.addDepth2(form);
         }
         else{
@@ -57,13 +58,18 @@ public class categoryService {
     }
 
     public int resetDepth(categoryForm form){
-        if(form.getDepth3Course() != null){
+        System.out.println(form.getNewDepth());
+
+        if(form.getDepth3Course() != ""){
+            System.out.println("소");
             return dao.setDepth3(form);
         }
-        else if (form.getDepth2Skill()!= null){
+        else if (form.getDepth2Skill()!= ""){
+            System.out.println("중");
             return dao.setDepth2(form);
         }
         else{
+            System.out.println("대");
             return dao.setDepth1(form);
         }
     }

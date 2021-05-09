@@ -21,6 +21,11 @@
     font-weight: normal;
     font-style: normal;
 }
+@import "09_adminMain.css";
+@import "academy.css";
+@import "15_alert.css";
+@import "10_ManageClass.css";
+@import "07_selectEdu.css";
 
 :root {
   /*screen size*/
@@ -82,4 +87,3 @@ body {
   padding: var(--padding-small) var(--padding-medium);
   white-space: nowrap;
 }
-
