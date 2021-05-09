@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.tsis.education.repository.LectureRepository">
+    <select id="categorySearch" resultType="kr.co.tsis.education.lectureMng.Dto.CategoryLectureResponseDto">
+        SELECT lec.lecture_id 'lectureId', lec.lecture_title 'lectureTitle', lec.lecture_best_yn 'lectureBestYn',
+               lec.online_yn 'onlineYn', ctgr.depth1_field 'depth1Field',
+               ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course',
+               acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc'
+        FROM lecture lec
+                 INNER JOIN academy acdm
+                            ON lec.academy_id = acdm.academy_id
+                 INNER JOIN lecture_category ctgr
+                            ON lec.category_id = ctgr.category_id
+        WHERE 1=1
+        <choose>
+            <when test="depth1Field != null and depth2Skill == null and depth3Course == null">
+                AND lec.category_id in (
+                SELECT category_id
+                FROM lecture_category
+                WHERE depth1_field = #{depth1Field})
+            </when>
+          <when test="depth1Field != null and depth2Skill != null and depth3Course == null">
+              AND lec.category_id in (
+              SELECT category_id
+              FROM lecture_category
+              WHERE depth1_field = #{depth1Field} AND depth2_skill = #{depth2Skill})
+          </when>
+          <when test="depth1Field != null and depth2Skill != null and depth3Course != null">
+              AND lec.category_id in (
+              SELECT category_id
+              FROM lecture_category
+              WHERE depth1_field = #{depth1Field} AND depth2_skill = #{depth2Skill}
+              AND depth3_course = #{depth3Course})
+          </when>
+        </choose>
+        <if test="lectureTitle != null">
+            AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+        </if>
+        ORDER BY lec.lecture_id
+    </select>
+
+    <select id="academySearch" resultType="kr.co.tsis.education.lectureMng.Dto.LectureResponseDto">
+        SELECT lec.lecture_id 'lectureId', lec.lecture_title 'lectureTitle', lec.lecture_best_yn 'lectureBestYn',
+               lec.online_yn 'onlineYn', ctgr.depth1_field 'depth1Field',
+               ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course',
+               acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc'
+        FROM lecture lec
+                 INNER JOIN academy acdm
+                            ON lec.academy_id = acdm.academy_id
+                 INNER JOIN lecture_category ctgr
+                            ON lec.category_id = ctgr.category_id
+        WHERE 1=1
+          <choose>
+              <when test="lectureTitle != null">
+                  AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+              </when>
+              <when test="academyId != null">
+                  AND lec.academy_id = #{academyId}
+              </when>
+          </choose>
+        ORDER BY lec.lecture_id
+    </select>
+
+    <select id="recommendSearch" resultType="kr.co.tsis.education.lectureMng.Dto.LectureResponseDto">
+        SELECT lec.lecture_id 'lectureId', lec.lecture_title 'lectureTitle', lec.lecture_best_yn 'lectureBestYn',
+               lec.online_yn 'onlineYn', ctgr.depth1_field 'depth1Field',
+               ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course',
+               acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc'
+        FROM lecture lec
+                 INNER JOIN academy acdm
+                            ON lec.academy_id = acdm.academy_id
+                 INNER JOIN lecture_category ctgr
+                            ON lec.category_id = ctgr.category_id
+        WHERE 1=1
+        <choose>
+            <when test="lectureTitle != null">
+                AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+            </when>
+            <when test="themeLectureId != 0">
+                AND lec.theme_lecture_id = #{themeLectureId}
+            </when>
+        </choose>
+        ORDER BY lec.lecture_id
+    </select>
+
+    <select id="allSearch" resultType="kr.co.tsis.education.lectureMng.Dto.LectureResponseDto">
+        SELECT lec.lecture_id 'lectureId', lec.lecture_title 'lectureTitle', lec.lecture_best_yn 'lectureBestYn',
+               lec.online_yn 'onlineYn', ctgr.depth1_field 'depth1Field',
+               ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course',
+               acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc'
+        FROM lecture lec
+                 INNER JOIN academy acdm
+                            ON lec.academy_id = acdm.academy_id
+                 INNER JOIN lecture_category ctgr
+                            ON lec.category_id = ctgr.category_id
+        <if test="lectureTitle != null">
+            WHERE lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+        </if>
+    </select>
+
+    <delete id="delete">
+        DELETE FROM lecture
+        WHERE lecture_id = #{lecutreId};
+    </delete>
+
+    <select id="getCategoryId" resultType="Integer">
+        SELECT category_id
+        FROM lecture_category
+        WHERE depth1_field = #{depth1Field} and depth2_skill = #{depth2Skill} and
+            depth3_course = #{depth3Course};
+    </select>
+
+    <delete id="deleteRequiredTableColumn">
+        DELETE FROM required_lecture
+        WHERE lecture_id = #{lectureId};
+    </delete>
+
+    <insert id="addRequiredTable">
+        INSERT INTO required_lecture
+        VALUES (DEFAULT, #{empPosition},#{empYears},#{lectureId});
+    </insert>
+
+    <select id="getAcademySubjectId" resultType="Integer">
+        SELECT academy_subject_id
+        FROM academy_subject
+        WHERE academy_id = #{academyId} AND academy_skill = #{depth2Skill};
+    </select>
+
+    <update id="update">
+        UPDATE lecture
+        SET lecture_title = #{lectureTitle}, lecture_url = #{lectureUrl},
+            online_yn = #{onlineYn}, lecture_best_yn = #{lectureBestYn},
+            category_id = #{categoryId}, academy_id = #{academyId},
+            theme_lecture_id = #{themeLectureId}, edu_level_id = #{eduLevelId},
+            academy_subject_id = #{academySubjectId}
+        WHERE lecture_id = #{lectureId};
+    </update>
+<!--    int getLectureIdAfterInsert(String lectureTitle, String lectureUrl, -->
+<!--    int onlineYn, int lectureBestYn, int categoryId, String academyId, String eduLevelId, int themeLectureId);-->
+    <insert id="insertNewLecture">
+        INSERT INTO lecture
+        VALUES(DEFAULT, #{lectureTitle}, #{lectureUrl}, default,
+               #{onlineYn}, #{lectureBestYn}, #{categoryId},#{academyId},
+               #{eduLevelId}, #{themeLectureId},#{academySubjectId});
+    </insert>
+
+    <select id="getLectureIdAfterInsert" resultType="Integer">
+        SELECT DISTINCT(last_insert_id()) AS 'lectureId'
+        FROM lecture
+    </select>
+
+    <select id="getToModifyPageData" resultType="kr.co.tsis.education.lectureMng.Dto.ToModifyPageDataResponseDto">
+        SELECT lec.lecture_title 'lectureTitle', lec.online_yn 'onlineYn', lec.lecture_best_yn 'lectureBestYn', lec.edu_level_id 'eduLevelId',
+               acdm.academy_name 'academyName', acdm.academy_url 'academyUrl',
+               thm.theme 'theme', ctgr.depth1_field 'depth1Field', ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course'
+        FROM lecture lec
+                 INNER JOIN academy acdm
+                            ON lec.academy_id = acdm.academy_id
+                 LEFT OUTER JOIN theme_lecture thm
+                                 ON lec.theme_lecture_id = thm.theme_lecture_id
+                 INNER JOIN lecture_category ctgr
+                            ON lec.category_id = ctgr.category_id
+        WHERE lec.lecture_id = #{lectureId};
+    </select>
+
+    <select id="getEmpList" resultType="kr.co.tsis.education.lectureMng.Dto.empDto">
+        SELECT emp_position 'empPosition', emp_years 'empYears'
+        FROM required_lecture
+        WHERE lecture_id = #{lectureId}
+    </select>
+
+    <select id="findByLectureTitleAndAcademyId" resultType="Integer">
+        SELECT count(*)
+        FROM lecture
+        WHERE lecture_title = #{lectureTitle} and academy_id = #{academyId}
+    </select>
+
+    <select id="getAllTotalPage" resultType="Integer">
+        SELECT COUNT(*)
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        INNER JOIN lecture_category ctgr
+        ON lec.category_id = ctgr.category_id
+        <if test="lectureTitle != null">
+            WHERE lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+        </if>
+    </select>
+
+    <select id="getRecommendTotalPage" resultType="Integer">
+        SELECT COUNT(*)
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        INNER JOIN lecture_category ctgr
+        ON lec.category_id = ctgr.category_id
+        WHERE 1=1
+        <choose>
+            <when test="lectureTitle != null">
+                AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+            </when>
+            <when test="themeLectureId != 0">
+                AND lec.theme_lecture_id = #{themeLectureId}
+            </when>
+        </choose>
+    </select>
+
+    <select id="getAcademyTotalPage" resultType="Integer">
+        SELECT COUNT(*)
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        INNER JOIN lecture_category ctgr
+        ON lec.category_id = ctgr.category_id
+        WHERE 1=1
+        <choose>
+            <when test="lectureTitle != null">
+                AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+            </when>
+            <when test="academyId != null">
+                AND lec.academy_id = #{academyId}
+            </when>
+        </choose>
+    </select>
+    <select id="getCategoryTotalPage" resultType="Integer">
+        SELECT COUNT(*)
+        FROM lecture lec
+        INNER JOIN academy acdm
+        ON lec.academy_id = acdm.academy_id
+        INNER JOIN lecture_category ctgr
+        ON lec.category_id = ctgr.category_id
+        WHERE 1=1
+        <choose>
+            <when test="depth1Field != null and depth2Skill == null and depth3Course == null">
+                AND lec.category_id in (
+                SELECT category_id
+                FROM lecture_category
+                WHERE depth1_field = #{depth1Field})
+            </when>
+            <when test="depth1Field != null and depth2Skill != null and depth3Course == null">
+                AND lec.category_id in (
+                SELECT category_id
+                FROM lecture_category
+                WHERE depth1_field = #{depth1Field} AND depth2_skill = #{depth2Skill})
+            </when>
+            <when test="depth1Field != null and depth2Skill != null and depth3Course != null">
+                AND lec.category_id in (
+                SELECT category_id
+                FROM lecture_category
+                WHERE depth1_field = #{depth1Field} AND depth2_skill = #{depth2Skill}
+                AND depth3_course = #{depth3Course})
+            </when>
+        </choose>
+        <if test="lectureTitle != null">
+            AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
+        </if>
+    </select>
+</mapper>

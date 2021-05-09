@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!--css-->
+    <link rel="stylesheet" href="/css/updateLectureCategory.css">
+    <!--js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script defer src="/js/updateLectureCategory_ajax.js"></script>
+    <title>카테고리 변경</title>
+</head>
+
+<body>
+    <div class="cate_update_title">
+        <h2>카테고리 변경</h2>
+    </div>
+    <form>
+        <center>
+            <div>
+                <div class="div-info">강좌명</div>
+                <input class="input-info-box" name="id" type="text" value="Next Generation 대한민국 CEO 컨퍼런스" readonly>
+                <input type="hidden" id="lec_id" value="2">
+                <div class="div-info">대분류</div>
+                <select class="bg_cate">
+                    <!--여기에 비동기-->
+                    <input id="get_bg_cate" type="hidden" class="bg_cate_option" value="IT">
+                </select>
+                <div class="div-info">중분류</div>
+                <select class="m_cate">
+                    <!--여기에 비동기-->
+                    <input id="get_m_cate" type="hidden" class="m_cate_option" value="기획">
+                </select>
+                <div class="div-info">소분류</div>
+                <select class="s_cate">
+                    <!--여기에 비동기-->
+                    <input id="get_s_cate" type="hidden" class="s_cate_option" value="전략*기획">
+                </select>
+                <input type="button" class="pw-box input-pw-font" value="강좌 카테고리 변경" onclick="updateCate();">
+            </div>
+        </center>
+    </form>
+</body>
+
+</html>

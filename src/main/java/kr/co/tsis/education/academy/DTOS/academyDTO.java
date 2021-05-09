@@ -1,5 +1,8 @@
 package kr.co.tsis.education.academy.DTOS;
 
+import lombok.ToString;
+
+@ToString
 public class academyDTO {
     private String academyId;
     private String academyName;
