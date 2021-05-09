@@ -69,6 +69,7 @@ public class requiredController {
     @ResponseBody
     @PostMapping("/required/addList")
     public int addList(@RequestBody requiredListForm form){
+        System.out.println(form.getEmpPosition());
         LOGGER.debug("input",form);
         int result = 0;
         String position = form.getEmpPosition();
@@ -85,12 +86,17 @@ public class requiredController {
 
     @ResponseBody
     @PostMapping("/required/delList")
-    public int delList(@RequestParam("requiredLectureId")List<Integer> ids){
+    public int delList(@RequestBody List<Integer> ids){
         LOGGER.debug("required_lecture_id",ids);
+        System.out.println("&&&&&&&&&&&&");
         int result = 0;
+        ;
         for(int id : ids){
+            System.out.println("id : " + id);
             result = service.delList(id);
+            System.out.println(service.delList(id));
         }
+
         return result;
 
     }

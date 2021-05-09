@@ -123,10 +123,11 @@
     word-break: break-all;
  }
 
- .subject{
+ .necessary-subject{
      font-size: 35px;
      text-align: center;
      font-family: 'Bazzi';
+
  }
 
  @font-face {
