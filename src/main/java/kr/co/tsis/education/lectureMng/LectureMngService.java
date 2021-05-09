@@ -54,6 +54,7 @@ public class LectureMngService {
         //3. 필수 강좌 테이블 lecture_id를 이용해서 먼저 컬럼 삭제
         boolean isDeleted = lectureRepository.deleteRequiredTableColumn(lectureId);
         if (!isDeleted) System.out.println(" fail : 2. 필수 강좌 테이블 lecture_id를 이용해서 먼저 컬럼 삭제");
+        System.out.println(lectureId + "가 삭제되었습니다.");
 
         //4. 필수 강좌 테이블 lecture_id와 함께 데이터 추가
         List<empDto> empDtoList = modifyLectureSaveButtonRequestDto.getEmpDtoList();
@@ -66,7 +67,7 @@ public class LectureMngService {
         lectureRepository.update(modifyLectureSaveButtonRequestDto.getLectureTitle(), modifyLectureSaveButtonRequestDto.getLectureUrl(),
                 modifyLectureSaveButtonRequestDto.getOnlineYn(), modifyLectureSaveButtonRequestDto.getLectureBestYn(),
                 categoryId, modifyLectureSaveButtonRequestDto.getAcademyId(), modifyLectureSaveButtonRequestDto.getThemeLectureId(),
-                modifyLectureSaveButtonRequestDto.getEduLevelId(), academySubjectId);
+                modifyLectureSaveButtonRequestDto.getEduLevelId(), academySubjectId, lectureId);
         System.out.println("강의가 수정되었습니다.");
         return true;
     }

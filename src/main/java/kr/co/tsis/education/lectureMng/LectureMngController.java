@@ -132,7 +132,7 @@ public class LectureMngController {
 
     //강좌 수정 저장 버튼 클릭
     @PutMapping("/lectureMng/modify/confirm/{lectureId}")
-    public String update(@PathVariable int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
+    public String update(@PathVariable(value="lectureId") int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);

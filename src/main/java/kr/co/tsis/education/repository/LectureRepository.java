@@ -25,7 +25,7 @@ public interface LectureRepository {
 
     void addRequiredTable(String empPosition, int empYears, int lectureId);
 
-    void update(String lectureTitle, String lectureUrl, int onlineYn, int lectureBestYn, int categoryId, String academyId, int themeLectureId, String eduLevelId, int academySubjectId);
+    void update(String lectureTitle, String lectureUrl, int onlineYn, int lectureBestYn, int categoryId, String academyId, int themeLectureId, String eduLevelId, int academySubjectId, int lectureId);
 
     ToModifyPageDataResponseDto getToModifyPageData(int lectureId);
 
