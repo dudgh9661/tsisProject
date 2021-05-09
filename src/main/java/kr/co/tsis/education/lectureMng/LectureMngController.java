@@ -52,7 +52,6 @@ public class LectureMngController {
                 .lectureResponseDtoList(lectureResponseDtoList)
                 .totalPage(totalPage)
                 .build();
-
     }
 
     //전체 강좌 검색 ( Swagger success )
