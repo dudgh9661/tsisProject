@@ -127,7 +127,6 @@ function btn_cancel() {
 }
 
 function btn_save(){
-    //const dept1Field = document.querySelector(".type2")[document.querySelector(".type2").selectedIndex].getAttribute("value")
     const depth1Field = $(".bigCat option:selected").text();
     const depth2Skill = $(".midCat option:selected").text();
     const depth3Course = $(".smallCat option:selected").text();
@@ -138,21 +137,21 @@ function btn_save(){
     const empPositionArr = [];
     const empYearsArr = [];
     var i=0;
-    const lastI = $(".necChild:last select").attr("id").substring(11); ////////////////////////[...$(".necChild")]
-    for(i; i<=lastI; i++){
-        var selPosition ="#selPosition"+i;
-        var selYears ="#selYears"+i;
-        var empPosition  = $(selPosition+" option:selected").text();
-        var empYears  = $(selYears+" option:selected").text();
-        //console.log(empPosition);
-        empPositionArr.push(empPosition);
-        empYearsArr.push(empYears);
-    }
+    const necChildren = [...$(".necChild")];
+    const emp = [];
+    necChildren.forEach(e1 => {
+        const tmpPos = e1.querySelector(".change-main-position").value;
+        const tmpYear = e1.querySelector(".change-sub-year").value;
+        if(emp.filter(el => el["empPos"]== tmpPos && el["empYear"] == tmpYear).length <= 0) {
+            emp.push({
+                 empPos: tmpPos,
+                 empYear: tmpYear
+            })
+        }
+    })
+    console.log("emp", emp);
 
-    //console.log(empPositionArr);
-    //console.log(empYearsArr);
-
-    var onlineTmp = $('input:radio[name="onoffline"]:checked').attr('id');  
+    var onlineTmp = $('input:radio[name="onoffline"]:checked').attr("value");
     const onlineYN =  $("label[for='"+onlineTmp+"']").text();
     var LevelTmp = $('input:radio[name="level"]:checked').attr('id');   
     const eduLevelId = $("label[for='"+LevelTmp+"']").text();
@@ -171,31 +170,29 @@ function btn_save(){
             "academyId" : academyId,
             "lectureUrl" : lectureUrl,
             "themeLectureId" : themeLectureId,
-            "empPosition" : empPositionArr,
-            "empYears" : empYearsArr,
+            "empPosition" : emp.map(el => el.empPos),
+            "empYears" : emp.map(el => el.empYear),
             "onlineYN" : onlineYN,
             "eduLevelId" : eduLevelId,
             "lectureBestYn" : lectureBestYn
         }
     }
 
-    
     console.log(data);
-    // $.ajax({
-    //     url: "/lectureMng/add", 
-    //     method: "POST",
-    //     data: data,
-    //     dataType: "json",
-    //     success: function (data) {
-    //         console.log(data);
-        
-    //       },
-    //       error: function (x, s, e) {
-    //           console.log(x, s, e);
-    //       }
-    //   }); 
-
-    //window.close()
+     $.ajax({
+         url: "/lectureMng/add",
+         method: "POST",
+         data: JSON.stringify(data),
+         dataType: "json",
+         contentType: "application/json",
+         success: function (data) {
+             console.log(data);
+           },
+           error: function (x, s, e) {
+               console.log(x, s, e);
+           }
+       });
+//    self.close();
 }
 
 /*-----------------------------------------------------카테고리 select태그 설정*/

@@ -204,7 +204,7 @@ const setModifyBtns = () => {
 
 /* 강좌 추가 */
 function onAddClick() {
-    window.open("/lectureMng/modify", "강좌 추가","width=600px, height=600px");
+    window.open("/lectureMng/add", "강좌 추가","width=600px, height=600px");
   }
 
 /* main select 설정 */
@@ -439,7 +439,7 @@ const setSearch = () => {
            };
     }
     if(searchInput !== "") {
-        data[lectureTitle] = searchInput;
+        data["lectureTitle"] = searchInput;
     }
 
 //    console.log(url, data);

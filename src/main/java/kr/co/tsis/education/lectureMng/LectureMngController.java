@@ -17,14 +17,6 @@ public class LectureMngController {
     private final LectureMngService lectureMngService;
     private static final Logger LOGGER = LoggerFactory.getLogger(LectureMngController.class);
 
-    /* 영국 추가 */
-    //강좌 검색페이지 이동
-    @GetMapping("/lectureMng")
-    public String lectureSearch() {
-        System.out.println("/lectureMng");
-        return "/manager/lectureMng";
-    }
-
     //카테고리별 강좌 검색 ( Swagger success )
     @PostMapping("/lectureMng/category")
     @ResponseBody
@@ -80,6 +72,12 @@ public class LectureMngController {
                 .build();
     }
 
+    // 강좌 검색페이지로 이동
+    @GetMapping("/lectureMng")
+    public String lectureMngAllSearchPage() {
+        return "manager/lectureMng";
+    }
+
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
@@ -96,11 +94,7 @@ public class LectureMngController {
     /* 영국수정 */
     //강좌 수정 페이지로 데이터 전송
     @GetMapping("/lectureMng/modify")
-    public String sendToModifyPage(@RequestParam(value="lectureId", required = false) Integer lectureId, Model model) {
-        System.out.println("/lectureMng/modify 진입");
-        if(lectureId == null) {
-            return "/manager/lecture_mod";
-        }
+    public String sendToModifyPage(@RequestParam(value="lectureId") int lectureId, Model model) {
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
         System.out.println("lectureId : " + lectureId);
         ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
@@ -113,7 +107,7 @@ public class LectureMngController {
                 .empDtoList(empDtoList)
                 .build();
         model.addAttribute("modifiedData", toModifyPageResponseDto);
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
         // onlineYn에 따른 return
         if(toModifyPageDataResponseDto.getOnlineYn() == 1) {
             model.addAttribute("online", true);
@@ -136,7 +130,8 @@ public class LectureMngController {
             model.addAttribute("best", true);
         }
         System.out.println(toModifyPageResponseDto);
-        return "/manager/lecture_mod";
+        return "manager/lecture_mod";
+//        return "/";
     }
 
     //강좌 수정 저장 버튼 클릭
@@ -145,7 +140,13 @@ public class LectureMngController {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);
-        return "/";
+        return "/manager/lecturMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
+    }
+
+    //강좌 추가 버튼 클릭 시 페이지 이동
+    @GetMapping("/lectureMng/add")
+    public String add() {
+        return "/manager/lecture_mod";
     }
 
     //강좌 추가
