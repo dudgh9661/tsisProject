@@ -14,12 +14,12 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        // stage('Docker build') {
-        //     agent any
-        //     steps {
-        //         sh 'docker build -t tsis:latest .'
-        //     }
-        // }
+        stage('Docker build') {
+            agent any
+            steps {
+                sh 'docker build -t tsis:latest .'
+            }
+        }
         // stage('Docker run') {
         //     agent any
         //     steps {
