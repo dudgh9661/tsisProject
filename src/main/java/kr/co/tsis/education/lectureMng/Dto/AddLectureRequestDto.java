@@ -17,14 +17,14 @@ public class AddLectureRequestDto {
     private String lectureUrl;
     private int themeLectureId;
     private List<empDto> empDtoList;
-    private int onlineYN;
+    private int onlineYn;
     private String eduLevelId;
     private int lectureBestYn;
 
     @Builder
     public AddLectureRequestDto(String depth1Field, String depth2Skill, String depth3Course,
                                 String lectureTitle, String academyId, String lectureUrl, int themeLectureId,
-                                List<empDto> empDtoList, int onlineYN, String eduLevelId,
+                                List<empDto> empDtoList, int onlineYn, String eduLevelId,
                                 int lectureBestYn) {
         this.depth1Field = depth1Field;
         this.depth2Skill = depth2Skill;
@@ -34,7 +34,7 @@ public class AddLectureRequestDto {
         this.lectureUrl = lectureUrl;
         this.themeLectureId = themeLectureId;
         this.empDtoList = empDtoList;
-        this.onlineYN = onlineYN;
+        this.onlineYn = onlineYn;
         this.eduLevelId = eduLevelId;
         this.lectureBestYn = lectureBestYn;
 
