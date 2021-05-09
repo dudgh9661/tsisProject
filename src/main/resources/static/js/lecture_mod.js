@@ -2,6 +2,7 @@ var bigCatStatus = false;
 var midCatStatus = false;
 var smallCatStatus = false;
 var themeStatus = false;
+var academyStatus = false;
 
 /*------------------------------------------------------base code*/
 const appendOptionWId = (e1, ins, ids) => {
@@ -131,7 +132,7 @@ function btn_save(){
     const depth2Skill = $(".midCat option:selected").text();
     const depth3Course = $(".smallCat option:selected").text();
     const lectureTitle = $(".inputLecture").val();
-    const academyId = $(".selAcademy option:selected").text(); 
+    const academyId = $(".selAcademy option:selected")[0].value;
     const lectureUrl = $(".inputUrl").val();
     const themeLectureId = $(".selTheme option:selected").val();
     const empPositionArr = [];
@@ -141,44 +142,46 @@ function btn_save(){
     const emp = [];
     necChildren.forEach(e1 => {
         const tmpPos = e1.querySelector(".change-main-position").value;
-        const tmpYear = e1.querySelector(".change-sub-year").value;
+        const tmpYear = e1.querySelector(".change-sub-year").value.replace("년차", "");
         if(emp.filter(el => el["empPos"]== tmpPos && el["empYear"] == tmpYear).length <= 0) {
             emp.push({
-                 empPos: tmpPos,
-                 empYear: tmpYear
+                 "empPosition": tmpPos,
+                 "empYears": tmpYear
             })
         }
     })
-    console.log("emp", emp);
 
     var onlineTmp = $('input:radio[name="onoffline"]:checked').attr("value");
-    const onlineYN =  $("label[for='"+onlineTmp+"']").text();
-    var LevelTmp = $('input:radio[name="level"]:checked').attr('id');   
-    const eduLevelId = $("label[for='"+LevelTmp+"']").text();
-    var selectTmp = 0;
+    var LevelTmp = $('input:radio[name="level"]:checked').attr('id');
+    const eduLevel = $('input:radio[name="level"]:checked').attr("value");
+    let eduLevelId = "";
+    if(eduLevel == "basiclecture") {
+        eduLevelId = "ET003";
+    } else if(eduLevel == "electivelecture") {
+        eduLevelId = "ET002";
+    } else { // "prolecture"
+        eduLevelId = "ET001";
+    }
+    var lectureBestYn = 0;
     if($("#recommchk").prop("checked")) {
-        selectTmp = 1;
+        lectureBestYn = 1;
     };
-    const lectureBestYn = selectTmp;
 
     const data = {
-        "lecture" :{
-            "depth1Field" : depth1Field,
-            "depth2Skill" : depth2Skill,
-            "depth3Course" : depth3Course,
-            "lectureTitle" : lectureTitle,
-            "academyId" : academyId,
-            "lectureUrl" : lectureUrl,
-            "themeLectureId" : themeLectureId,
-            "empPosition" : emp.map(el => el.empPos),
-            "empYears" : emp.map(el => el.empYear),
-            "onlineYN" : onlineYN,
-            "eduLevelId" : eduLevelId,
-            "lectureBestYn" : lectureBestYn
-        }
+        "depth1Field" : depth1Field,
+        "depth2Skill" : depth2Skill,
+        "depth3Course" : depth3Course,
+        "lectureTitle" : lectureTitle,
+        "academyId" : academyId, // "EI001"
+        "lectureUrl" : lectureUrl,
+        "themeLectureId" : themeLectureId, //1
+        "empDtoList" : emp,
+        "onlineYn" : onlineTmp, //0,1
+        "eduLevelId" : eduLevelId, //"ET003"
+        "lectureBestYn" : lectureBestYn // 1
     }
 
-    console.log(data);
+    console.log(JSON.stringify(data));
      $.ajax({
          url: "/lectureMng/add",
          method: "POST",
@@ -186,17 +189,85 @@ function btn_save(){
          dataType: "json",
          contentType: "application/json",
          success: function (data) {
-             console.log(data);
+//             console.log(data);
            },
            error: function (x, s, e) {
-               console.log(x, s, e);
+//               console.log(x, s, e);
            }
-       });
-//    self.close();
+    });
+    self.close();
 }
 
 const btn_modify = () => {
-///lectureMng/modify/cofirm/{lectureId}
+    const lectureId = document.location.search.replace("?", "").split("&").filter(el => el.split("=")[0] == "lectureId")[0].split("=")[1];
+    const depth1Field = $(".bigCat option:selected").text();
+    const depth2Skill = $(".midCat option:selected").text();
+    const depth3Course = $(".smallCat option:selected").text();
+    const lectureTitle = $(".inputLecture").val();
+    const academyId = $(".selAcademy option:selected")[0].value;
+    const lectureUrl = $(".inputUrl").val();
+    const themeLectureId = $(".selTheme option:selected").val();
+    const empPositionArr = [];
+    const empYearsArr = [];
+    var i=0;
+    const necChildren = [...$(".necChild")];
+    const emp = [];
+    necChildren.forEach(e1 => {
+        const tmpPos = e1.querySelector(".change-main-position").value;
+        const tmpYear = e1.querySelector(".change-sub-year").value.replace("년차", "");
+        if(emp.filter(el => el["empPos"]== tmpPos && el["empYear"] == tmpYear).length <= 0) {
+            emp.push({
+                 "empPosition": tmpPos,
+                 "empYears": tmpYear
+            })
+        }
+    })
+
+    var onlineTmp = $('input:radio[name="onoffline"]:checked').attr("value");
+    var LevelTmp = $('input:radio[name="level"]:checked').attr('id');
+    const eduLevel = $('input:radio[name="level"]:checked').attr("value");
+    let eduLevelId = "";
+    if(eduLevel == "basiclecture") {
+        eduLevelId = "ET003";
+    } else if(eduLevel == "electivelecture") {
+        eduLevelId = "ET002";
+    } else { // "prolecture"
+        eduLevelId = "ET001";
+    }
+    var lectureBestYn = 0;
+    if($("#recommchk").prop("checked")) {
+        lectureBestYn = 1;
+    };
+
+    const data = {
+        "depth1Field" : depth1Field,
+        "depth2Skill" : depth2Skill,
+        "depth3Course" : depth3Course,
+        "lectureTitle" : lectureTitle,
+        "academyId" : academyId, // "EI001"
+        "lectureUrl" : lectureUrl,
+        "themeLectureId" : themeLectureId, //1
+        "empDtoList" : emp,
+        "onlineYn" : onlineTmp, //0,1
+        "eduLevelId" : eduLevelId, //"ET003"
+        "lectureBestYn" : lectureBestYn // 1
+    }
+
+    console.log(JSON.stringify(data));
+     $.ajax({
+         url: "/lectureMng/modify/confirm/" + lectureId,
+         method: "PUT",
+         data: JSON.stringify(data),
+         dataType: "json",
+         contentType: "application/json",
+         success: function (data) {
+             console.log(data);
+           },
+           error: function (x, s, e) {
+//               console.log(x, s, e);
+           }
+    });
+//    self.close();
 }
 
 /*-----------------------------------------------------카테고리 select태그 설정*/
@@ -342,6 +413,37 @@ const setThemeClick = () => {
 }
 /*추천주제 select태그 설정-----------------------------------------------------*/
 
+/*교육기관 select태그 설정-----------------------------------------------------*/
+const setAcademy = () => {
+    if(!academyStatus) {
+        academyStatus = true;
+
+        const ins = [];
+        const ids = [];
+        $.ajax({
+            url: "/academy/getListAjax?curpage=0",
+            method: "GET",
+            success: function (data) {
+//            console.log(data);
+            $.each(data.organi, function(index,item){
+              ins.push(item.academyName);
+              ids.push(item.academyId);
+            });
+            document.querySelector(".selAcademy").innerHTML = "";
+            appendOptionWId(document.querySelector(".selAcademy"), ins, ids);
+            },
+            error: function (x, s, e) {
+//              console.log(x, s, e);
+            }
+        });
+    }
+}
+const setAcademyClick = () => {
+    document.querySelector(".selAcademy").addEventListener("click", setAcademy);
+}
+/*-----------------------------------------------------교육기관 select태그 설정*/
+
 setCatClick();
 setCatChange();
 setThemeClick();
+setAcademyClick();

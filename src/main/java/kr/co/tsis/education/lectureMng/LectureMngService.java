@@ -63,10 +63,15 @@ public class LectureMngService {
             lectureRepository.addRequiredTable(empPosition, empYears, lectureId);
         }
         //5. 필수 강좌 테이블 lecture_id와 함께 데이터 추가
-        lectureRepository.update(modifyLectureSaveButtonRequestDto.getLectureTitle(), modifyLectureSaveButtonRequestDto.getLectureUrl(),
-                modifyLectureSaveButtonRequestDto.getOnlineYn(), modifyLectureSaveButtonRequestDto.getLectureBestYn(),
-                categoryId, modifyLectureSaveButtonRequestDto.getAcademyId(), modifyLectureSaveButtonRequestDto.getThemeLectureId(),
-                modifyLectureSaveButtonRequestDto.getEduLevelId(), academySubjectId);
+        lectureRepository.update(modifyLectureSaveButtonRequestDto.getLectureTitle(),
+                                modifyLectureSaveButtonRequestDto.getLectureUrl(),
+                                modifyLectureSaveButtonRequestDto.getOnlineYn(),
+                                modifyLectureSaveButtonRequestDto.getLectureBestYn(),
+                                categoryId,
+                                modifyLectureSaveButtonRequestDto.getAcademyId(),
+                                modifyLectureSaveButtonRequestDto.getThemeLectureId(),
+                                modifyLectureSaveButtonRequestDto.getEduLevelId(),
+                                academySubjectId);
         System.out.println("강의가 수정되었습니다.");
         return true;
     }
