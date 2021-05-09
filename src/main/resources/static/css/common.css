@@ -10,6 +10,7 @@
 @import "updateLectureCategory.css";
 @import "categoryManage.css";
 @import "themeManage.css";
+@import "admin_auth.css"
 
 :root {
   /*screen size*/

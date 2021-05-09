@@ -1,9 +1,26 @@
+/* 컴포넌트 */
 @import "header.css";
 @import "sidebar.css";
 @import "footer.css";
 
 /* 각페이지 */
 @import "03_Main.css";
+@import "admin.css";
+
+/* 글씨체 */
+@font-face {
+    font-family: 'Bazzi';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 :root {
   /*screen size*/

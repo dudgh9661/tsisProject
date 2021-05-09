@@ -1,13 +1,18 @@
+section {
+    min-height: 50vh;
+    height: auto;
+}
+
 .total-box{
     margin-top: 20px;
     margin-left: 75px;
-    
 }
 
 .necessary-title-text{
-    font-size: 50px;
+    font-size: 1.75rem;
     font-family: 'SDSamliphopangche_Outline';
-    
+    margin-top: 3rem;
+    display: block;
 }
 
 .necessary-info {

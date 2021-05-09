@@ -15,15 +15,26 @@ public class adminController {
     private adminService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(adminController.class);
 
+    /* 영국수정 : 관리자 메인페이지 */
     @GetMapping("/admin")
-    public String main(){
+    public String adminMain(){
         LOGGER.debug("void");
         return "manager/admin";
     }
+
+    /* 영국수정 : 관리자 권한 로딩페이지 */
+    @GetMapping("/admin/admin_auth")
+    public String main(){
+        LOGGER.debug("void");
+        return "manager/admin_auth";
+    }
+
     @ResponseBody
     @GetMapping("/admin/getAdmin")
     public List<lectureDTO> getAdmin(){
         LOGGER.debug("void");
+        List<lectureDTO> temp = service.getAdmin();
+        int a = 0;
         return service.getAdmin();
     }
     @ResponseBody
@@ -34,7 +45,7 @@ public class adminController {
     }
     @ResponseBody
     @PostMapping("/admin/setAdmin")
-    public int setAdmin(@RequestParam("empId") List<String> empId){
+    public int setAdmin(@RequestBody List<String> empId){
         LOGGER.debug("empId",empId);
         int result=0;
         for(String item : empId){
@@ -44,7 +55,7 @@ public class adminController {
     }
     @ResponseBody
     @PostMapping("/admin/delAdmin")
-    public int delAdmin(@RequestParam("empId") List<String> empId){
+    public int delAdmin(@RequestBody List<String> empId){
         LOGGER.debug("empId",empId);
         int result=0;
         for(String item : empId){

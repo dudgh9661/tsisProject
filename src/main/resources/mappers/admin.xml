@@ -19,7 +19,7 @@
     <update id="setAdmin" parameterType="String">
         UPDATE employee
         SET authority = 1
-        WHERE emp_id = #{0};
+        WHERE emp_id = #{empId};
     </update>
     <update id="delAdmin" parameterType="String">
         UPDATE employee
