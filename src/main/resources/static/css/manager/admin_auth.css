@@ -75,14 +75,13 @@
 }
 
 .total-box{
-    margin-left: 15rem;
 }
 
 .style-title{
-    font-size: 45px;
+    font-size: 1.9rem;
+    display: block;
+    margin: 3rem;
     font-family: 'SDSamliphopangche_Outline';
-    margin-top: 20px;
-    margin-left: 20px;
 }
 
 @font-face {
