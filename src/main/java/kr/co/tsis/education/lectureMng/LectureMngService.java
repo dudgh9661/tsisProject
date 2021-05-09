@@ -87,7 +87,7 @@ public class LectureMngService {
         if( lectureRepository.findByLectureTitleAndAcademyId(addLectureRequestDto.getLectureTitle(),
                 addLectureRequestDto.getAcademyId()) > 0 ) {
             System.out.println("중복된 강의가 존재합니다.");
-            return false;
+            return true;
         }
         else {
             System.out.println("테스트 시작!!!");
@@ -102,7 +102,7 @@ public class LectureMngService {
 
             //3. 강좌 테이블에 새로운 강좌 정보 상위 쿼리에서 받은 값과 함께 추가
             lectureRepository.insertNewLecture(addLectureRequestDto.getLectureTitle(),
-                    addLectureRequestDto.getLectureUrl(), addLectureRequestDto.getOnlineYN(),
+                    addLectureRequestDto.getLectureUrl(), addLectureRequestDto.getOnlineYn(),
                     addLectureRequestDto.getLectureBestYn(), categoryId, addLectureRequestDto.getAcademyId(),
                     addLectureRequestDto.getEduLevelId(), addLectureRequestDto.getThemeLectureId(), academySubjectId);
             int lectureId = lectureRepository.getLectureIdAfterInsert();
@@ -116,7 +116,7 @@ public class LectureMngService {
                 lectureRepository.addRequiredTable(empPosition, empYears, lectureId);
             }
             System.out.println("강의를 등록했습니다.");
-            return true;
+            return false;
         }
     }
 
