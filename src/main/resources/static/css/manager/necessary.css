@@ -1,0 +1,145 @@
+.total-box{
+    margin-top: 20px;
+    margin-left: 75px;
+    
+}
+
+.necessary-title-text{
+    font-size: 50px;
+    font-family: 'SDSamliphopangche_Outline';
+    
+}
+
+.necessary-info {
+    width: 10px;
+ }
+ 
+.necessary-input-position{
+    height: 30px;
+    margin-top: 50px;
+
+}
+
+.necessary-input-year{
+    height: 30px;
+    margin-top: 50px;
+    margin-left: 10px;
+    width: 60px;
+}
+
+ .necessary-image-info {
+    display: inline-block;
+ }
+ 
+ .necessary-Lookup-box{
+     margin-left: 20px;
+     height: 30px;
+ }
+
+ .necessary-select-box{
+     height: 30px;
+     margin-right: 10px;
+ }
+
+ .necessary-selectbtn {
+    background: #4193D0;
+    color: #ffffff;
+    margin-left: 5px;
+    height: 30px;
+ }
+ 
+ .necessary-main-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30rem;
+ }
+ 
+ .necessary-leftlist {
+    overflow-y: scroll;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border: solid 1px;
+    height: 20rem;
+    margin-top : -30px;
+    margin-left: 300px;
+ }
+ 
+ .necessary-rightlist {
+    display: inline-block;
+    overflow-y: scroll;
+    border: solid 1px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    height: 20rem;
+    margin-top : -30px;
+ }
+ 
+.necessary-insert-btn{
+    margin-top: 70px;
+    font-size: 15px;
+    
+}
+
+.necessary-delete-btn{
+    margin-top: 1px;
+    font-size: 15px;
+}
+
+ .necessary-arrowimage {
+    display: inline-block;
+    height: 100%;
+    margin-top: 22px;
+    padding: 0 30px;
+ }
+ 
+ .necessary-table {
+    
+    border-collapse: collapse;
+    overflow-y: scroll;
+    table-layout: fixed;
+    word-break: break-all;
+    width: 30rem;
+ }
+ 
+ .necessary-tableheader-tr > th {
+    background: #4193D0;
+    color: #ffffff;
+    height: 50px;
+    table-layout: fixed;
+    word-break: break-all;
+    position: sticky;
+    top: 0px;
+ }
+ 
+ .necessary-header-name {
+    width: 280px;
+    background: #4193D0;
+ }
+ 
+ .necessary-table td {
+    text-align: center;
+    width: 10px;
+    height: 20px;
+    table-layout: fixed;
+    word-break: break-all;
+ }
+
+ .necessary-subject{
+     font-size: 35px;
+     text-align: center;
+     font-family: 'Bazzi';
+
+ }
+
+ @font-face {
+    font-family: 'Bazzi';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

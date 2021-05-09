@@ -1,0 +1,11 @@
+
+/*footer*/
+footer {
+  margin-top: 6rem;
+  width: 100%;
+  background-color: var(--color-light-grey);
+}
+
+.footer-info {
+  padding: var(--padding-small-medium);
+}

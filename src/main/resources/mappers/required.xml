@@ -56,6 +56,6 @@
     </insert>
     <delete id="delList" parameterType="int">
         DELETE FROM required_lecture
-        WHERE required_lecture_id=#{0}
+        WHERE lecture_id=#{0}
     </delete>
 </mapper>
