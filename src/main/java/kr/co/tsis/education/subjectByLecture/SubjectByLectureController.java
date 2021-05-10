@@ -32,10 +32,19 @@ public class SubjectByLectureController {
 
     // 추천IT트랜드 목록
     @RequestMapping(value = "/subjectByLecture/companyRecommendationTrend", method = RequestMethod.GET)
-    public String companyRecommendationTrend(Model model){
-        ArrayList<ThemeLecture> themeLecturesList = sblService.themeLecturesList();
-        model.addAttribute("themeLecturesList", themeLecturesList);
-        return "user/DisplayLecturesBySubject";
+    public String companyRecommendationTrend(Model model, HttpServletRequest request){
+        // 사원정보
+        HttpSession session = request.getSession();
+        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        if(loginUser != null){
+            ArrayList<ThemeLecture> themeLecturesList = sblService.themeLecturesList();
+            model.addAttribute("themeLecturesList", themeLecturesList);
+            return "user/DisplayLecturesBySubject";
+        }
+        else{
+            return "redirect:/";
+        }
+
     }
 
     //검색결과 리스트(비동기처리)
