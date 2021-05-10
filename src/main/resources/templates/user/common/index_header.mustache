@@ -34,21 +34,21 @@ header {
 }
 </style>
 <header id="header">
-    {{#memberInfo}}
+    {{#loginUser}}
     <div class="login-info">
         <a href="06_AcademyEdu.html" class = "login-info1">
             <span>나의 강좌</span>
             <i class="fas fa-shopping-cart"></i>
         </a>
-        <span><strong>{{name}}</strong>님 환영합니다!</span>
+        <span><strong>{{empName}}</strong>님 환영합니다!</span>
         <button type="button">
             <a href="${root}/member/logout">
                 로그아웃
             </a>
         </button>
     </div>
-    {{/memberInfo}}
-    {{^memberInfo}}
+    {{/loginUser}}
+    {{^loginUser}}
     <div class="login-info">
         <span>죠르디님 환영합니다!</span>
         <a href="/myLecture/lectureList" class = "gomypage">
@@ -61,5 +61,5 @@ header {
             </a>
         </button>
     </div>
-    {{/memberInfo}}
+    {{/loginUser}}
 </header>
