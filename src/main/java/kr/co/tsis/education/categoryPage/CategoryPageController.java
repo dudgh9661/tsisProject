@@ -4,6 +4,7 @@ import kr.co.tsis.education.categoryByLecture.CategoryByLectureService;
 import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth1;
 import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth2;
 import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth3;
+import kr.co.tsis.education.userCommon.dto.LectureCategory;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,8 @@ public class CategoryPageController {
 
     @Autowired
     private CategoryPageService cpService;
-
-
-    /*@GetMapping("/getCategoryDepth1")
-    public ResponseEntity<List<LectureCategoryDepth1>> getCategoryDepth1() {
-        List<LectureCategoryDepth1> list= cpService.getLectureCategoryDepth1();
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }*/
+    @Autowired
+    private CategoryByLectureService cblService;
 
     @GetMapping("/getCategoryDepth1")
     public String getCategoryDepth1(Model model) {
@@ -66,5 +62,17 @@ public class CategoryPageController {
         JSONObject json =  new JSONObject(map);
 
         return new ResponseEntity<>(json.toString(), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/goToCategoryByLecture")
+    public String goToCategoryByLecture(String depth1Name, String depth2Name, String depth3Name, Model model) {
+        System.out.println("thisiscategory");
+        System.out.println(depth3Name);
+        ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
+
+        model.addAttribute("mainCategoryList",mainCategoryList);
+        model.addAttribute("mainCategoryList",mainCategoryList);
+        return "";
     }
 }

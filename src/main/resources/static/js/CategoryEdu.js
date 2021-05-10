@@ -6,16 +6,13 @@ function getCategory(field) {
         contentType:'application/json; charset=utf-8',
         dataType : 'json',
         success : function(data) {
-            console.log(data)
             let html = "";
-            $.each(ddd, function(mi, middle) {
-                console.log(mi);
-                console.log(middle);
+            $.each(data, function(mi, middle) {
                 html += "<div class=divTableRow>";
                 html += "<div class=divTableHead>"+mi+"</div>"
                 $.each(middle, function(si, small){
                     html += "<div class=divTableCell>";
-                    html += "<a href="+"07_SelectEdu.html"+">"
+                    html += "<a href="+"/CategoryPage/goToCategoryByLecture?depth1Name="+field+"&depth2Name="+mi+"&depth3Name="+small['depth3Name']+">"
                     html += "<div class=category-table-name>"+small['depth3Name']+"</div>";
                     html += "<div class=category-table-num>"+small['depth3Num']+"</div>";
                     html += "</a>";
@@ -28,6 +25,16 @@ function getCategory(field) {
     });
 }//large 카테고리 목록보기
 
-window.onload = function(){
 
+$(document).ready(function() {
+    $('ul.categorylist li').click(function(){
+        getCategory($(this).attr('name'));
+    });
+});
+
+
+
+window.onload = function(){
+    $("ul.categorylist>li:first>input").attr('checked', true);
+    getCategory($("ul.categorylist>li:first").attr('name'));
 }
