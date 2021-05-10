@@ -131,7 +131,7 @@
         SET lecture_title = #{lectureTitle}, lecture_url = #{lectureUrl},
             online_yn = #{onlineYn}, lecture_best_yn = #{lectureBestYn},
             category_id = #{categoryId}, academy_id = #{academyId},
-            edu_level_id = #{eduLevelId}, academy_subject_id = #{academySubjectId}
+            edu_level_id = #{eduLevelId}, academy_subject_id = #{academySubjectId},
             <if test="themeLectureId != 0 ">
                 theme_lecture_id = #{themeLectureId}
             </if>
