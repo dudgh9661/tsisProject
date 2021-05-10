@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.tsis.education.employee.EmployeeRepository">
 
-    <select id="checkEmployee" resultType="Integer">
-        SELECT COUNT(*)
+    <select id="checkEmployee" resultType="kr.co.tsis.education.userCommon.dto.Employee">
+        SELECT authority, survey_yn 'surveyYn'
         FROM employee WHERE emp_id=#{empId}
     </select>
 

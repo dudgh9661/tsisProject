@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface EmployeeRepository {
-    int checkEmployee(String empId);
+    public Employee checkEmployee(String empId);
     public int signup(Employee employee);
     public Employee login(String empId);
 }

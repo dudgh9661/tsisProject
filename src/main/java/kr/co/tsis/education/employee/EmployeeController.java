@@ -42,20 +42,21 @@ public class EmployeeController
         JSONObject jsonObj = new JSONObject(login_result);
 
         if(jsonObj.getString("RESULT").equals("SUCCESS")){
+            Employee user = employeeService.check(userId);
             //1. DB에 정보가 있는지 검사
-            if(employeeService.check(userId)){
+            if(user.getAuthority() == 1){ //관리자
                 //1-1. 있으면 그냥 로그인
                 Employee employee = employeeService.login(userId);
 
                 session.setAttribute("loginUser", employee);
-                return "redirect:/mainPage/mainInfo";
-            } else {
+                return "redirect:/admin";
+            } else{ // 사용자
                 //1-2. 없으면 처음 사용자
                 String search_input = "&ID="+userId;
 
                 String employeeResult = HttpConnection.PostData("http://211.53.18.197:8081/3rdParty_Store/DEF_0103",search_input);
                 JSONObject employeeJson = new JSONObject(employeeResult);
-                
+
                 Employee employee = new Employee();
                 String position = employeeJson.getString("PSIT_NM").split("/")[0].replaceAll(" ", "");
                 if(position.equals("수습사원")){
@@ -65,7 +66,7 @@ public class EmployeeController
                     employee.setEmpPosition(position);
                 }
                 //디비에 추가~
-                
+
                 employee.setEmpId(userId);
                 employee.setEmpName(employeeJson.getString("KOR_NM"));
                 employee.setEmpYears(employeeJson.getInt("PSIT_CNT"));

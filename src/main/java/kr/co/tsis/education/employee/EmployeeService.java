@@ -11,8 +11,8 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public boolean check(String empId){
-        return employeeRepository.checkEmployee(empId) > 0;
+    public Employee check(String empId){
+        return employeeRepository.checkEmployee(empId);
     }
 
     public int signup(Employee employee){
