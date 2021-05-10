@@ -4,7 +4,7 @@ let DLBS_display_searchCount = document.getElementById("DLBS_display_searchCount
 let DLBS_display_list_pagingButtons = document.getElementById("DLBS_display_list_pagingButtons");
 
 let DLBS_ext_themeId = DLBS_selSubject_selectBox.options[DLBS_selSubject_selectBox.selectedIndex].value;
-let DLBS_ext_columnName = "";
+let DLBS_ext_columnName = "ctgr.depth3_course";
 let DLBS_ext_pageNum = 1;
 const DLBS_pages = 5;
 const DLBS_listSize = 20;
