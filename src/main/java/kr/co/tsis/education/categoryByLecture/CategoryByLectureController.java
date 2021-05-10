@@ -37,6 +37,7 @@ public class CategoryByLectureController {
         HttpSession session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
         //System.out.println(loginUser.getEmpId());
+        //loginUser.getAuthority();
         if(loginUser != null){
             ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
             for (int i = 0; i < mainCategoryList.size(); i++){
@@ -103,6 +104,12 @@ public class CategoryByLectureController {
         String[] levelList = request.getParameterValues("levelList"); // 프론트에서 boolean으로 넘어오는데 확인해보기
         String columnName = request.getParameter("columnName");
 
+        //test
+        /*int categoryId = 1;
+        int pageNum = 0;
+        String[] levelList = {"0", "1", "1"}; // 프론트에서 boolean으로 넘어오는데 확인해보기
+        String columnName = "lec.lecture_title";*/
+
         // 사원정보
         HttpSession session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
@@ -114,7 +121,8 @@ public class CategoryByLectureController {
         int pushNum = Integer.parseInt(dataPushNum);
         //System.out.println(pushNum);
         // 2진법을 10진법으로
-        int dataPush = Integer.valueOf(dataPushNum, 2);
+        int sqlPush = Integer.valueOf(dataPushNum, 2);
+        String dataPush = Integer.toString(sqlPush);
         //String dataPush = Integer.toBinaryString(pushNum);
         System.out.println("10진법 : " + dataPush);
 
@@ -122,8 +130,7 @@ public class CategoryByLectureController {
         pushData.setDataPush(dataPush);
         pushData.setCategoryId(categoryId);
         pushData.setEmpId(loginUser.getEmpId());
-        //강좌 갯수
-        int lectureNum = cblService.selectLectureNum(pushData);
+
 
         int totalListNum = 20; // 출력되는 리스트 갯수
         int firstNum = pageNum * totalListNum; // 가장 먼저 출력되는 리스트 번호
@@ -131,6 +138,8 @@ public class CategoryByLectureController {
         pushData.setColumnName(columnName);
         pushData.setFirstNum(firstNum);
         pushData.setTotalListNum(totalListNum);
+        //강좌 갯수
+        int lectureNum = cblService.selectLectureNum(pushData);
 
         ArrayList<CategoryByLectureAll> lectureList = cblService.selectLectureList(pushData);
         for (int i = 0; i < lectureList.size(); i++){

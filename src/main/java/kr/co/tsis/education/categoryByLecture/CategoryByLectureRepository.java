@@ -52,11 +52,20 @@ public class CategoryByLectureRepository {
 
     //강좌갯수 구하기
     public int selectLectureNum(CategoryByLecturePush pushDate){
+        System.out.println(pushDate.toString());
         return sqlSession.selectOne("CategoryByLectureMapper.selectLectureNum",pushDate);
     }
 
     //과정 수준 강좌 리스트
     public ArrayList<CategoryByLectureAll> selectLectureList(CategoryByLecturePush pushData){
-        return (ArrayList)sqlSession.selectList("CategoryByLectureMapper.selectLectureList", pushData);
+        System.out.println(pushData.toString());
+        System.out.println("길이"+pushData.getDataPush().length());
+        System.out.println("타입"+pushData.getDataPush().getClass().getName());
+        ArrayList test = (ArrayList)sqlSession.selectList("CategoryByLectureMapper.selectLectureList", pushData);
+        System.out.println("2"+pushData.toString());
+        System.out.println("2길이"+pushData.getDataPush().length());
+        System.out.println("2타입"+pushData.getDataPush().getClass().getName());
+        //return (ArrayList)sqlSession.selectList("CategoryByLectureMapper.selectLectureList", pushData);
+        return test;
     }
 }

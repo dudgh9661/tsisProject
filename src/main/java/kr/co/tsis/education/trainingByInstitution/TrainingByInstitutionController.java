@@ -124,8 +124,8 @@ public class TrainingByInstitutionController {
     public int wishListSelection(HttpServletRequest request, HttpSession session){ // true, false는 어떤 변수명으로 넘겨줄건지
         int lectureId = Integer.parseInt(request.getParameter("lectureId"));
         String wishYn = request.getParameter("wishYn");
-        System.out.println(lectureId);
-        System.out.println(wishYn);
+        System.out.println("lectureId : "+lectureId);
+        System.out.println("wishYn : " + wishYn);
         // 사원정보
         session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기

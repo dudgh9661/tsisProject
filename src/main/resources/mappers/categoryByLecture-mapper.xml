@@ -68,29 +68,30 @@
         FROM lecture lec
         INNER JOIN academy acdm
         ON lec.academy_id = acdm.academy_id
-        <if test="dataPush == 0">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = '0'
+        WHERE lec.category_id = #{categoryId}
+        <if test='dataPush == "0"'>
+            AND lec.edu_level_id = '0'
         </if>
-        <if test="dataPush == 1">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET003'
+        <if test='dataPush.equals("1")'>
+            AND lec.edu_level_id = 'ET003'
         </if>
-        <if test="dataPush == 2">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002'
+        <if test='dataPush == "2"'>
+            AND lec.edu_level_id = 'ET002'
         </if>
-        <if test="dataPush == 3">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        <if test='dataPush.equals("3")'>
+            AND lec.edu_level_id IN ('ET002', 'ET003')
         </if>
-        <if test="dataPush == 4">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001'
+        <if test='dataPush == "4"'>
+            AND lec.edu_level_id = 'ET001'
         </if>
-        <if test="dataPush == 5">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET003'
+        <if test='dataPush == "5"'>
+            AND lec.edu_level_id IN ('ET001', 'ET003')
         </if>
-        <if test="dataPush == 6">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002'
+        <if test='dataPush == "6"'>
+            AND lec.edu_level_id IN ('ET001', 'ET002')
         </if>
-        <if test="dataPush == 7">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        <if test='dataPush =="7"'>
+            AND lec.edu_level_id IN ('ET001', 'ET002', 'ET003')
         </if>
     </select>
 
@@ -102,29 +103,34 @@
         FROM lecture lec
         INNER JOIN academy acdm
         ON lec.academy_id = acdm.academy_id
-        <if test="dataPush == 0">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = '0'
+        WHERE lec.category_id = #{categoryId}
+        <!--<choose>
+            <when test='dataPush.equals("3")'>AND lec.edu_level_id IN ('ET001')</when>
+            <when test='dataPush.equals("7")'>AND lec.edu_level_id IN ('ET001', 'ET002', 'ET003')</when>
+        </choose>-->
+       <if test='dataPush == "0"'>
+            AND lec.edu_level_id = '0'
         </if>
-        <if test="dataPush == 1">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET003'
+        <if test='dataPush.equals("1")'>
+            AND lec.edu_level_id = 'ET003'
         </if>
-        <if test="dataPush == 2">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002'
+        <if test='dataPush == "2"'>
+            AND lec.edu_level_id = 'ET002'
         </if>
-        <if test="dataPush == 3">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        <if test='dataPush.equals("3")'>
+            AND lec.edu_level_id IN ('ET002', 'ET003')
         </if>
-        <if test="dataPush == 4">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001'
+        <if test='dataPush == "4"'>
+            AND lec.edu_level_id = 'ET001'
         </if>
-        <if test="dataPush == 5">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET003'
+        <if test='dataPush == "5"'>
+            AND lec.edu_level_id IN ('ET001', 'ET003')
         </if>
-        <if test="dataPush == 6">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002'
+        <if test='dataPush == "6"'>
+            AND lec.edu_level_id IN ('ET001', 'ET002')
         </if>
-        <if test="dataPush == 7">
-            WHERE lec.category_id = #{categoryId} AND lec.edu_level_id = 'ET001' AND lec.edu_level_id = 'ET002' AND lec.edu_level_id = 'ET003'
+        <if test='dataPush =="7"'>
+            AND lec.edu_level_id IN ('ET001', 'ET002', 'ET003')
         </if>
         ORDER BY ${columnName}
         limit #{totalListNum} offset #{firstNum}

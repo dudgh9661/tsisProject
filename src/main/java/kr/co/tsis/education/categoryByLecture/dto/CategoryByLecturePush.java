@@ -3,7 +3,7 @@ package kr.co.tsis.education.categoryByLecture.dto;
 public class CategoryByLecturePush {
 
     private int categoryId; // 카테고리 아이디
-    private int dataPush; // 십진수
+    private String dataPush; // 십진수
     private String columnName; // 컬럼명
     private int totalListNum; // 출력 리스트 갯수
     private int firstNum; //가장 먼저 출력되는 리스트
@@ -12,7 +12,8 @@ public class CategoryByLecturePush {
     public CategoryByLecturePush(){
 
     }
-    public CategoryByLecturePush(int categoryId, int dataPush, String columnName, int totalListNum, int firstNum, String empId) {
+
+    public CategoryByLecturePush(int categoryId, String dataPush, String columnName, int totalListNum, int firstNum, String empId) {
         this.categoryId = categoryId;
         this.dataPush = dataPush;
         this.columnName = columnName;
@@ -29,11 +30,11 @@ public class CategoryByLecturePush {
         this.categoryId = categoryId;
     }
 
-    public int getDataPush() {
+    public String getDataPush() {
         return dataPush;
     }
 
-    public void setDataPush(int dataPush) {
+    public void setDataPush(String dataPush) {
         this.dataPush = dataPush;
     }
 
@@ -73,7 +74,7 @@ public class CategoryByLecturePush {
     public String toString() {
         return "CategoryByLecturePush{" +
                 "categoryId=" + categoryId +
-                ", dataPush=" + dataPush +
+                ", dataPush='" + dataPush + '\'' +
                 ", columnName='" + columnName + '\'' +
                 ", totalListNum=" + totalListNum +
                 ", firstNum=" + firstNum +
