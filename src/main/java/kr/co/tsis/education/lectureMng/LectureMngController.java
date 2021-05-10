@@ -80,13 +80,12 @@ public class LectureMngController {
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
-    public boolean delete(@PathVariable int lectureId) {
+    public void delete(@PathVariable int lectureId) {
         boolean isDeleted = false;
         if( lectureMngService.delete(lectureId) ) {
             System.out.println("삭제되었습니다.");
             isDeleted = true;
         } else System.out.println("삭제를 실패하였습니다..");
-        return isDeleted;
     }
 
     //강좌 수정 페이지로 데이터 전송
@@ -95,7 +94,10 @@ public class LectureMngController {
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
         System.out.println("lectureId : " + lectureId);
         ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
-        System.out.println(toModifyPageDataResponseDto.toString());
+
+        if( toModifyPageDataResponseDto != null ) System.out.println(toModifyPageDataResponseDto.toString());
+        else System.out.println(toModifyPageDataResponseDto.toString());
+        
         List<empDto> empDtoList = lectureMngService.getEmpList(lectureId);
 
         ToModifyPageResponseDto toModifyPageResponseDto
@@ -135,7 +137,7 @@ public class LectureMngController {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);
-        return "/manager/lecturMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
+        return "/manager/lectureMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
     }
 
     //강좌 추가 버튼 클릭 시 페이지 이동
