@@ -1,4 +1,11 @@
-FROM openjdk:8u111-jdk-alpine
+FROM openjdk:8-jdk-alpine
+FROM tomcat:latest
+
 VOLUME /tmp
-ADD /target/springboot_server.jar app.jar
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ADD tsis-0.0.1.jar /usr/local/tomcat/webapps/
+# ADD /usr/local/tomcat/webapps/tsis-0.0.1.jar app.jar 
+EXPOSE 8080
+
+ENV JAVA_OPTS=""
+# ENTRYPOINT ["java","-jar","/app.jar"]
+CMD ["catalina.sh", "run"]
