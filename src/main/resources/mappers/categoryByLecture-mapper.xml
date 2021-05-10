@@ -44,7 +44,7 @@
 
     <!-- 과정 수준 리스트 -->
     <select id="courseLevelList" resultType="kr.co.tsis.education.categoryByLecture.dto.EduInfoLevel">
-        SELECT lev.edu_level 'eduLevel', COUNT(lec.edu_level_id)
+        SELECT lev.edu_level 'eduLevel', COUNT(lec.edu_level_id) 'lectureNum'
         FROM education_level lev
         INNER JOIN lecture lec
         ON lec.edu_level_id = lev.edu_level_id
@@ -98,7 +98,7 @@
     <select id="selectLectureList" resultType="kr.co.tsis.education.categoryByLecture.dto.CategoryByLectureAll">
         SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id),
         lec.lecture_best_yn 'lectureBestYn', lec.lecture_title 'lectureTitle', lec.lecture_url 'lectureUrl', lec.online_yn 'onlineYn',
-        acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc'
+        acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc', lecture_id 'lectureId'
         FROM lecture lec
         INNER JOIN academy acdm
         ON lec.academy_id = acdm.academy_id

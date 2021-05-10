@@ -81,9 +81,8 @@
         WHERE lec.academy_subject_id = #{academySubjectId}
         AND lec.academy_id = #{academyId}
         ORDER BY ${columnName} ASC
-        LIMIT 0
-        OFFSET 20
-
+        LIMIT #{totalListNum}
+        OFFSET #{firstNum}
     </select>
 
     <!-- 관심강좌 등록 -->

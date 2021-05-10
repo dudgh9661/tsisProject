@@ -34,10 +34,10 @@ public class CategoryByLectureController {
     @GetMapping("/mainCategoryKinds")
     public String CategoryLectureView(Model model){
         ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
-        /*for (int i = 0; i < mainCategoryList.size(); i++){
+        for (int i = 0; i < mainCategoryList.size(); i++){
             System.out.println(mainCategoryList.get(i).getDepth1Field());
         }
-        model.addAttribute("mainCategoryList",mainCategoryList);*/
+        model.addAttribute("mainCategoryList",mainCategoryList);
 
         return "user/SubjectEduPage";
     }
@@ -61,6 +61,9 @@ public class CategoryByLectureController {
         category.setDepth1Field(depth1Field);
         category.setDepth2Skill(depth2Skill);
         ArrayList<LectureCategory> subClassList = cblService.subClassList(category);
+        for (int i = 0; i < subClassList.size(); i++){
+            System.out.println(subClassList.get(i).getCategoryId());
+        }
         return subClassList;
     }
 
@@ -71,7 +74,12 @@ public class CategoryByLectureController {
         //test
         //int categoryId = 1;
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        System.out.println("카테고리 아이디 : " + categoryId);
         ArrayList<EduInfoLevel> courseLevelList = cblService.courseLevelList(categoryId);
+        System.out.println("과정수준 : ");
+        for (int i = 0; i < courseLevelList.size(); i++){
+            System.out.println(courseLevelList.get(i).toString());
+        }
         return courseLevelList;
     }
 
@@ -80,12 +88,8 @@ public class CategoryByLectureController {
     @ResponseBody
     @GetMapping("/DuplicateCourseSelection")
     public LecturePush duplicateCourseList(HttpServletRequest request){
-        //test
-        //int categoryId =1;
-        //int pageNum = 1;
-        //String[] levelList = {"0", "0", "1"};
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        int pageNum = Integer.parseInt(request.getParameter("pageNum")) - 1;
         String[] levelList = request.getParameterValues("levelList"); // 프론트에서 boolean으로 넘어오는데 확인해보기
         String columnName = request.getParameter("columnName");
 
@@ -95,10 +99,14 @@ public class CategoryByLectureController {
 
         // 배열을 String으로
         String dataPushNum = Arrays.toString(levelList).replaceAll("[^0-9]","");
+        //System.out.println(dataPushNum);
         // String을 int로
         int pushNum = Integer.parseInt(dataPushNum);
+        //System.out.println(pushNum);
         // 2진법을 10진법으로
-        String dataPush = Integer.toBinaryString(pushNum);
+        int dataPush = Integer.valueOf(dataPushNum, 2);
+        //String dataPush = Integer.toBinaryString(pushNum);
+        System.out.println("10진법 : " + dataPush);
 
         CategoryByLecturePush pushData = new CategoryByLecturePush();
         pushData.setDataPush(dataPush);
@@ -115,7 +123,12 @@ public class CategoryByLectureController {
         pushData.setTotalListNum(totalListNum);
 
         ArrayList<CategoryByLectureAll> lectureList = cblService.selectLectureList(pushData);
+        for (int i = 0; i < lectureList.size(); i++){
+            System.out.println(lectureList.get(i).toString());
+        }
+
         int totalPageNationNum = (int)(lectureNum / totalListNum);//전체 페이지 갯수
+        System.out.println(lectureNum);
         //System.out.println("전체 페이지 갯수: " + totalPageNationNum);
         LecturePush lecturePush = new LecturePush(lectureList, totalPageNationNum, lectureNum);
 
