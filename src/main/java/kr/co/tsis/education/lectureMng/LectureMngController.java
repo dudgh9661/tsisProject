@@ -83,7 +83,7 @@ public class LectureMngController {
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
-    public String delete(@PathVariable int lectureId, HttpServletRequest request) {
+    public String delete(@PathVariable int lectureId, HttpServletRequest request,Model model) {
         try {
             HttpSession session = request.getSession();
             kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
@@ -91,6 +91,7 @@ public class LectureMngController {
                 return "redirect:/";
             }
             else {
+                model.addAttribute("empName",loginUser.getEmpName());
                 boolean isDeleted = false;
                 if( lectureMngService.delete(lectureId) ) {
                     System.out.println("삭제되었습니다.");
@@ -106,45 +107,58 @@ public class LectureMngController {
     /* 영국수정 */
     //강좌 수정 페이지로 데이터 전송
     @GetMapping("/lectureMng/modify")
-    public String sendToModifyPage(@RequestParam(value="lectureId") int lectureId, Model model) {
+    public String sendToModifyPage(HttpServletRequest request,@RequestParam(value="lectureId") int lectureId, Model model) {
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
-        System.out.println("lectureId : " + lectureId);
-        ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
 
-        if( toModifyPageDataResponseDto != null ) System.out.println(toModifyPageDataResponseDto.toString());
-        else System.out.println(toModifyPageDataResponseDto.toString());
+        try {
+            HttpSession session = request.getSession();
+            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                System.out.println("lectureId : " + lectureId);
+                ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
 
-        List<empDto> empDtoList = lectureMngService.getEmpList(lectureId);
+                if( toModifyPageDataResponseDto != null ) System.out.println(toModifyPageDataResponseDto.toString());
+                else System.out.println(toModifyPageDataResponseDto.toString());
 
-        ToModifyPageResponseDto toModifyPageResponseDto
-                = ToModifyPageResponseDto.builder()
-                .toModifyPageDataResponseDto(toModifyPageDataResponseDto)
-                .empDtoList(empDtoList)
-                .build();
-        model.addAttribute("modifiedData", toModifyPageResponseDto);
+                List<empDto> empDtoList = lectureMngService.getEmpList(lectureId);
 
-        //onlineYn에 따른 return
-        if( toModifyPageDataResponseDto.getOnlineYn() == 1 ) {
-            model.addAttribute("online", true);
+                ToModifyPageResponseDto toModifyPageResponseDto
+                        = ToModifyPageResponseDto.builder()
+                        .toModifyPageDataResponseDto(toModifyPageDataResponseDto)
+                        .empDtoList(empDtoList)
+                        .build();
+                model.addAttribute("modifiedData", toModifyPageResponseDto);
+
+                //onlineYn에 따른 return
+                if( toModifyPageDataResponseDto.getOnlineYn() == 1 ) {
+                    model.addAttribute("online", true);
+                }
+
+                //eduLevelId에 따른 return
+                if( toModifyPageDataResponseDto.getEduLevelId().equals("ET001")) {
+                    //전문강의
+                    model.addAttribute("eduLevelPro", true);
+                } else if ( toModifyPageDataResponseDto.getEduLevelId().equals("ET002")) {
+                    //선택강의
+                    model.addAttribute("eduLevelSelect", true);
+                } else {
+                    //기본강의
+                    model.addAttribute("eduLevelBasic", true);
+                }
+
+                //lectureBestYn에 따른 return
+                if( toModifyPageDataResponseDto.getLectureBestYn() == 1 ) {
+                    model.addAttribute("best",true);
+                }
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "manager/lecture_mod";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
         }
-
-        //eduLevelId에 따른 return
-        if( toModifyPageDataResponseDto.getEduLevelId().equals("ET001")) {
-            //전문강의
-            model.addAttribute("eduLevelPro", true);
-        } else if ( toModifyPageDataResponseDto.getEduLevelId().equals("ET002")) {
-            //선택강의
-            model.addAttribute("eduLevelSelect", true);
-        } else {
-            //기본강의
-            model.addAttribute("eduLevelBasic", true);
-        }
-
-        //lectureBestYn에 따른 return
-        if( toModifyPageDataResponseDto.getLectureBestYn() == 1 ) {
-            model.addAttribute("best",true);
-        }
-        return "manager/lecture_mod";
     }
 
     //강좌 수정 저장 버튼 클릭
@@ -166,7 +180,7 @@ public class LectureMngController {
 
     //강좌 추가 버튼 클릭 시 페이지 이동
     @GetMapping("/lectureMng/add")
-    public String add(HttpServletRequest request) {
+    public String add(HttpServletRequest request,Model model) {
         try {
             HttpSession session = request.getSession();
             kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
@@ -174,6 +188,7 @@ public class LectureMngController {
                 return "redirect:/";
             }
             else {
+                model.addAttribute("empName",loginUser.getEmpName());
                 return "/manager/lecture_mod";
             }
         } catch (Exception e) {

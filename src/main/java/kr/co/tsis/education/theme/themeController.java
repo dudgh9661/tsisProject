@@ -30,6 +30,7 @@ public class themeController {
             }
             else {
                 model.addAttribute("subjectList", service.getThemeList());
+                model.addAttribute("empName",loginUser.getEmpName());
                 return "/manager/category_theme";
             }
         } catch (Exception e) {
@@ -70,7 +71,7 @@ public class themeController {
                     return "/manager/addSubject";
                 }
                 model.addAttribute("theme",service.getTheme(id));
-
+                model.addAttribute("empName",loginUser.getEmpName());
                 return "/manager/addSubject";
             }
         } catch (Exception e) {

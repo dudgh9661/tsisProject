@@ -33,6 +33,7 @@ public class AcademyModifyController {
                     return "manager/academy_mod";
                 }
                 else {
+                    model.addAttribute("empName",loginUser.getEmpName());
                     model.addAttribute("academy", service.getAcademy(id));
                     return "manager/academy_mod";
                 }

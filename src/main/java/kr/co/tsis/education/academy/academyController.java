@@ -24,10 +24,11 @@ public class academyController {
     private static final Logger LOGGER = LoggerFactory.getLogger(academyController.class);
 
     @GetMapping("/academy")
-    public String main(HttpServletRequest request){
+    public String main(HttpServletRequest request,Model model){
         try {
             HttpSession session = request.getSession();
             lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            model.addAttribute("empName",loginUser.getEmpName());
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }

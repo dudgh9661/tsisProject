@@ -105,7 +105,7 @@ public class categoryController {
             else {
                 String title = service.getTitle(lectureId);
                 System.out.println("controller = "+ title);
-
+                model.addAttribute("empName",loginUser.getEmpName());
                 model.addAttribute("depth1Field",depth1);
                 model.addAttribute("lectureId",lectureId);
                 model.addAttribute("lectureTitle",title);
@@ -149,6 +149,7 @@ public class categoryController {
                 return "redirect:/";
             }
             else {
+                model.addAttribute("empName",loginUser.getEmpName());
                 model.addAttribute("depth1Field",depth1);
                 model.addAttribute("depth2Skill",depth2);
                 model.addAttribute("depth3Course",depth3);
@@ -168,10 +169,22 @@ public class categoryController {
     }*/
 
     @GetMapping("/category/add")
-    public String add(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2, Model model){
-        model.addAttribute("depth1Field",depth1);
-        model.addAttribute("depth2Skill",depth2);
-        return "manager/category_add";
+    public String add(HttpServletRequest request,@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2, Model model){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("empName",loginUser.getEmpName());
+                model.addAttribute("depth1Field",depth1);
+                model.addAttribute("depth2Skill",depth2);
+                return "manager/category_add";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
 
