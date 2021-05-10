@@ -4,6 +4,7 @@ import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.category.DTOS.CategoryDelDTO;
 import kr.co.tsis.education.category.DTOS.categoryDTO;
 import kr.co.tsis.education.category.DTOS.categoryForm;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,25 +72,6 @@ public class categoryController {
                                 categorydelDTO.getDepth3Course());
     }
 
-  /*  @GetMapping("/category/getTitle")
-    public String getTitle(@RequestBody categoryForm form,Model model){
-
-        System.out.println("Ssssssssssssssssssss");
-        System.out.println(depth1);
-        System.out.println(depth2);
-        System.out.println(depth3);
-        System.out.println(lectureId);
-
-        String title = service.getTitle(form);
-        model.addAttribute("lectureId",form.getLectureId());
-        model.addAttribute("lectureTitle",title);
-        model.addAttribute("depth1Field",form.getDepth1Field());
-        model.addAttribute("depth2Skill",form.getDepth2Skill());
-        model.addAttribute("depth3Course",form.getDepth3Course());
-        return "manager/lecture_category_update";
-
-    }*/
-
     @GetMapping("/category/getTitle")
     public String getTitle(@RequestParam("depth1Field")String depth1,
                            @RequestParam("depth2Skill")String depth2,
@@ -98,7 +80,7 @@ public class categoryController {
                            HttpServletRequest request){
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
@@ -127,15 +109,6 @@ public class categoryController {
 
     }
 
-/*    @PostMapping("/category/modify")
-    public String modify(@RequestBody categoryForm form, Model model){
-        LOGGER.debug("input",form);
-        model.addAttribute("depth1Field",form.getDepth1Field());
-        model.addAttribute("depth2Skill",form.getDepth2Skill());
-        model.addAttribute("depth3Course",form.getDepth3Course());
-        return "admin/categori_modify";
-    }*/
-
     @GetMapping("/category/modify")
     public String modify(@RequestParam("depth1Field")String depth1,
                          @RequestParam("depth2Skill")String depth2,
@@ -144,7 +117,7 @@ public class categoryController {
                          HttpServletRequest request){
             try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
@@ -160,19 +133,11 @@ public class categoryController {
         }
     }
 
-    /*@PostMapping("/category/add")
-    public String add(@RequestBody categoryForm form, Model model){
-        LOGGER.debug("input",form);
-        model.addAttribute("depth1Field",form.getDepth1Field());
-        model.addAttribute("depth2Skill",form.getDepth2Skill());
-        return "admin/categori_add";
-    }*/
-
     @GetMapping("/category/add")
     public String add(HttpServletRequest request,@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2, Model model){
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }

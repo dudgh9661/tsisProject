@@ -2,6 +2,7 @@ package kr.co.tsis.education.lectureMng;
 
 import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.lectureMng.Dto.*;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,7 +87,7 @@ public class LectureMngController {
     public String delete(@PathVariable int lectureId, HttpServletRequest request,Model model) {
         try {
             HttpSession session = request.getSession();
-            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
@@ -112,7 +113,7 @@ public class LectureMngController {
 
         try {
             HttpSession session = request.getSession();
-            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
@@ -183,7 +184,7 @@ public class LectureMngController {
     public String add(HttpServletRequest request,Model model) {
         try {
             HttpSession session = request.getSession();
-            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }

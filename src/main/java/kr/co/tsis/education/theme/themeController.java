@@ -3,6 +3,7 @@ package kr.co.tsis.education.theme;
 import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.theme.DTOS.lecturePageDTO;
 import kr.co.tsis.education.theme.DTOS.themeDTO;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class themeController {
     public String main(Model model, HttpServletRequest request){
         try {
             HttpSession session = request.getSession();
-            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
@@ -62,7 +63,7 @@ public class themeController {
     public String getTheme(@RequestParam("themeLectureId") Integer id, Model model,HttpServletRequest request){
         try {
             HttpSession session = request.getSession();
-            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
