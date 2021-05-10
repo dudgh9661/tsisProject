@@ -8,31 +8,31 @@
     </select>
     <select id="getList" parameterType="int" resultType="kr.co.tsis.education.academy.DTOS.academyDTO">
         SELECT academy_id,
-                academy_name,
-                academy_loc,
-                academy_url,
-                academy_details,
-                academy_logo_url,
-                (SELECT count(*)
-                 FROM academy acdm INNER JOIN lecture lec
-                                              ON acdm.academy_id = lec.academy_id
-                 WHERE acdm.academy_id = academy.academy_id)
-        FROM academy
+               academy_name,
+               academy_loc,
+               academy_url,
+               academy_details,
+               academy_logo_url,
+               (SELECT count(*)
+                FROM tsis_edu.academy acdm INNER JOIN tsis_edu.lecture lec
+                                                      ON acdm.academy_id = lec.academy_id
+                WHERE acdm.academy_id = academy.academy_id) AS count
+        FROM tsis_edu.academy
                  LIMIT 12
         OFFSET #{0}
     </select>
     <select id="getAllList" resultType="kr.co.tsis.education.academy.DTOS.academyDTO">
         SELECT academy_id,
-                academy_name,
-                academy_loc,
-                academy_url,
-                academy_details,
-                academy_logo_url,
-                (SELECT count(*)
-                 FROM academy acdm INNER JOIN lecture lec
-                                              ON acdm.academy_id = lec.academy_id
-                 WHERE acdm.academy_id = academy.academy_id)
-        FROM academy;
+               academy_name,
+               academy_loc,
+               academy_url,
+               academy_details,
+               academy_logo_url,
+               (SELECT count(*)
+                FROM tsis_edu.academy acdm INNER JOIN tsis_edu.lecture lec
+                                                      ON acdm.academy_id = lec.academy_id
+                WHERE acdm.academy_id = academy.academy_id) AS count
+        FROM tsis_edu.academy
     </select>
 
     <delete id="delList" parameterType="String">
