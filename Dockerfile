@@ -7,5 +7,5 @@ FROM openjdk:8-jdk-alpine
 EXPOSE 8085
 
 # ENV JAVA_OPTS=""
-ENTRYPOINT ["java","-jar","/app.jar"]
+CMD ["java","-jar","/app.jar"]
 # CMD ["catalina.sh", "run"]
