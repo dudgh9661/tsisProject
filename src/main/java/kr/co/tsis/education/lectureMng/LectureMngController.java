@@ -147,7 +147,6 @@ public class LectureMngController {
         else {
             return new AddSuccessDto(true);
         }
-//        return "/manager/lectureMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
     }
 
     //강좌 추가 버튼 클릭 시 페이지 이동
