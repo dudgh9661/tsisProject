@@ -9,6 +9,7 @@ function loadGuide(){
 			$('#guide-textarea').empty();
             var html;
             html = '<textarea id="noticeText" rows="10" guide-id = "' + data.guideId  + '">' + data.contents + '</textarea>';
+			html += '<button class = "notice-saveButton" onclick = "saveGuide()">저장</button>';
 			$('#guide-textarea').append(html);
 		},
 		error: function(x, s, e) {

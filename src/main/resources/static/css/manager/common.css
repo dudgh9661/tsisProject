@@ -6,6 +6,7 @@
 /* 각페이지 */
 @import "03_Main.css";
 @import "admin.css";
+@import "academy.css";
 
 /* 글씨체 */
 @font-face {
@@ -22,7 +23,6 @@
     font-style: normal;
 }
 @import "09_adminMain.css";
-@import "academy.css";
 @import "15_alert.css";
 @import "10_ManageClass.css";
 @import "07_selectEdu.css";
