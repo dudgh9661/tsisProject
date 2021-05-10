@@ -36,17 +36,17 @@ public class CategoryPageController {
     public String getCategoryDepth1(Model model, HttpServletRequest request) {
 
         // 사원정보
-//        HttpSession session = request.getSession();
-//        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
-//        //System.out.println(loginUser.getEmpId());
-//        if(loginUser != null){
+        HttpSession session = request.getSession();
+        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        //System.out.println(loginUser.getEmpId());
+        if(loginUser != null){
             List<LectureCategoryDepth1> list= cpService.getLectureCategoryDepth1();
             model.addAttribute("LectureList",list);
             return "user/CategoryEduPage";
-//        }
-//        else{
-//            return "redirect:/";
-//        }
+        }
+        else{
+            return "redirect:/";
+        }
     }
 
     @ResponseBody
