@@ -116,7 +116,6 @@ let DLBS_display = (code, value) => {
     }
     else{//카테고리
         DLBS_ext_columnName = value;
-        DLBS_ext_pageNum = 1;
     }
     DLBS_doAjax(DLBS_ext_themeId, DLBS_ext_columnName, DLBS_ext_pageNum);
 }
@@ -124,6 +123,7 @@ let DLBS_display = (code, value) => {
 //주제 바꾸면 DLBS_ext_themeId 갱신 후 호출
 let DLBS_display_theme = () => {
     DLBS_ext_themeId = DLBS_selSubject_selectBox.options[DLBS_selSubject_selectBox.selectedIndex].value;
+    DLBS_ext_pageNum = 1;
     DLBS_doAjax(DLBS_ext_themeId, DLBS_ext_columnName, DLBS_ext_pageNum);
 }
 

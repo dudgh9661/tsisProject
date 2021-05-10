@@ -55,7 +55,7 @@ function setLectureList(response) {
         let html = "";
 
         let best = "";
-        let wish = "<img class='academy-icon-sm' src='img/emptyHeart.png'>";
+        let wish = "<img class='academy-icon-sm' src='/img/emptyHeart.png'>";
         let index = 20 * (pageNum - 1) + response['lectureList'].indexOf(lecture) + 1 ;
         let online = "온라인";
         let urlImage = "<img class='academy-icon-sm' src='/img/gotosite.png'>";
@@ -76,10 +76,9 @@ function setLectureList(response) {
         html += ("<span>" + lecture['lectureTitle'] + "</span>");
         html += ("<span>" + online + "</span>");
         html += (url + "</a>");
-        console.log(html);
 
         $(lectureList).append("<li value=" + lecture['lectureId'] + ">" + html + "</li>");
-        console.log(lectureList);
+        console.log(lecture['lectureId']);
     }
 }
 
@@ -117,7 +116,6 @@ function setPagination(start) {
 
 function requestLectureList(academyId, subjectId, pageNum, columnName) {
     requestListAPI("/trainingByInstitution/trainingSearchResult", (response) => {
-    console.log(response);
         setTotalLectureNumber(response);
         setLectureList(response);
         maxPageNum = response['totalPageNationNum'];
@@ -152,13 +150,15 @@ $(document).click(function(event) {
         if (event.target.src.includes("emptyHeart.png") === true) {
             event.target.src = "/img/filledHeart.png";
             requestWishAPI("/trainingByInstitution/wishListSelection", () => {},
-            lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 1], true);
+            lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 3].value, "true");
         }
         else if (event.target.src.includes("filledHeart.png") === true) {
             event.target.src = "/img/emptyHeart.png";
             requestWishAPI("/trainingByInstitution/wishListSelection", () => {},
-            lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 1], false);
+            lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 3].value, "false");
         }
+        console.log(lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 3].value);
+//        console.log("heart", lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML + 1].value);
     }
 });
 
