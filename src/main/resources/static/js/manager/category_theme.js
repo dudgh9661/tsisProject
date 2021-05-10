@@ -522,7 +522,7 @@ const setModifyBtn = (e) => {
     window.open(
         "/theme/getTheme?themeLectureId=" + e.target.getAttribute("data-id"),
         "안녕하세요^^",
-        "width=400,height=370");
+        "width=600,height=370");
 }
 
 const setModifyBtns = () => {

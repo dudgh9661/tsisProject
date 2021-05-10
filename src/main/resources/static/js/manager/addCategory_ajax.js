@@ -12,9 +12,23 @@ function modSub() {
             theme : val
         }),
     }).then(() => {
-        alert("수정되었습니다!")
-
-
+         Swal.fire({
+           title: '수정',
+           text: "수정하시겠습니까?",
+           showCancelButton: true,
+           confirmButtonColor: '#3085d6',
+           cancelButtonColor: '#d33',
+           confirmButtonText: '수정'
+         }).then((result) => {
+           if (result.isConfirmed) {
+             Swal.fire({
+               title: '수정되었습니다',
+               confirmButtonText: '수정'
+             }).then((result) => {
+                window.close()
+             })
+           }
+         })
     })
 }
 function addSub() {
@@ -28,18 +42,21 @@ function addSub() {
             theme : val
         }),
     }).then(() =>
-
        Swal.fire({
-          title: '추가하시겠습니까?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
+          title: '추가',
+          text: "추가하시겠습니까?",
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes'
+          confirmButtonText: '추가'
         }).then((result) => {
           if (result.isConfirmed) {
-             window.close()
+            Swal.fire({
+              title: '추가되었습니다',
+              confirmButtonText: '추가'
+            }).then((result) => {
+               window.close()
+            })
           }
         })
     )
