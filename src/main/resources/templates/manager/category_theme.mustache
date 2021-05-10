@@ -26,44 +26,13 @@
 <body>
     <!--sidebar-->
     <div class="sidebar">
-        <a href="03_Main.html"><img src="/img/tsis.png" class="logo" /></a>
-        <ul class="sidebar_ul">
-            <li>
-                <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
-            </li>
-            <li>
-                <a href="05_SubjectEdu.html">주제별 교육 검색</a>
-            </li>
-            <li>
-                <a href="06_AcademyEdu.html">기관별 교육 검색</a>
-            </li>
-            <li>
-                <a href="07_SelectEdu.html">주요 교육기관</a>
-            </li>
-            <li>
-                <a href="08_LegendEdu.html">교육 주제 범례</a>
-            </li>
-            <li class="admin-active">
-                <a href="09_AdminMain.html">관리자</a>
-            </li>
-        </ul>
+        {{>manager/sidebar}}
     </div>
     <!--/sidebar-->
 
     <!--content-->
     <div class="content">
-        <!--header-->
-        <header>
-            <div class="login-info">
-                <span>죠르디님 환영합니다!</span>
-                <button type="button" class="logout">
-                    <a href="01_Index.html">
-                        로그아웃
-                    </a>
-                </button>
-            </div>
-        </header>
-        <!--header-->
+        {{>manager/header}}
 
         <!--section-->
         <!-- 여기에 코드 넣으세요 -->
@@ -309,18 +278,7 @@
         </section>
         <!--/section-->
 
-        <!--footer-->
-        <footer>
-            <div class="footer-info">
-                <div>
-                    <p>문의처</p>
-                </div>
-                <div>
-                    <p>교육담당자 | 인사팀 정병석 과장</p>
-                </div>
-            </div>
-        </footer>
-        <!--/footer-->
+        {{>manager/footer}}
     </div>
     <!--content-->
 </body>

@@ -1,0 +1,23 @@
+
+<!--header-->
+<header>
+    <div class="login-info">
+        {{#empName}}
+            <span>{{empName}}님 환영합니다!</span>
+            <button type="button" class="logout">
+                <a href="01_Index.html">
+                    로그아웃
+                </a>
+            </button>
+        {{/empName}}
+        {{^empName}}
+            <span>로그인이 필요합니다!</span>
+            <button type="button" class="logout">
+                <a href="/">
+                    로그인
+                </a>
+            </button>
+        {{/empName}}
+    </div>
+</header>
+<!--header-->
