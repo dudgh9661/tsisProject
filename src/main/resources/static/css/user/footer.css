@@ -1,9 +1,13 @@
 
 /*footer*/
 footer {
+    min-height: 100%;
   margin-top: 6rem;
   width: 100%;
+  position: relative;
+  bottom: 0;
   background-color: var(--color-light-grey);
+  padding-bottom 124.4px:
 }
 
 .footer-info {

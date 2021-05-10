@@ -4,6 +4,7 @@ import kr.co.tsis.education.categoryByLecture.CategoryByLectureService;
 import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth1;
 import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth2;
 import kr.co.tsis.education.categoryPage.dto.LectureCategoryDepth3;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import kr.co.tsis.education.userCommon.dto.LectureCategory;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +33,20 @@ public class CategoryPageController {
     private CategoryByLectureService cblService;
 
     @GetMapping("/getCategoryDepth1")
-    public String getCategoryDepth1(Model model) {
-        List<LectureCategoryDepth1> list= cpService.getLectureCategoryDepth1();
-        model.addAttribute("LectureList",list);
-        return "user/CategoryEduPage";
+    public String getCategoryDepth1(Model model, HttpServletRequest request) {
+
+        // 사원정보
+        HttpSession session = request.getSession();
+        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        //System.out.println(loginUser.getEmpId());
+        if(loginUser != null){
+            List<LectureCategoryDepth1> list= cpService.getLectureCategoryDepth1();
+            model.addAttribute("LectureList",list);
+            return "user/CategoryEduPage";
+        }
+        else{
+            return "redirect:/";
+        }
     }
 
     @ResponseBody
