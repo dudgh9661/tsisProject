@@ -30,7 +30,7 @@
                 mouseleave: function () {
                     $(this).css('background-color', '')
                 }
-                
+
             });
 
             $('#currentTable tr').hover(function(){
@@ -42,22 +42,16 @@
                         background:''
                     })
                 }
-            ); 
-            
+            );
+
             $('#originalTable tr').click(function () {
                 //alert($(this).text())
-                
             });
-            
-            $("#insertButton").click(function() {
 
-            	
+            $("#insertButton").click(function() {
             	var checkbox = $("input[name=origin-checkbox]:checked");
-            	
             	console.log(checkbox);
-            	
             	checkbox.each(function(i) {
-            	
             		var tr = $(this).parent().parent();
             		$(this).attr("name", "current-checkbox");
             		$(this).attr("id", "current-course");
@@ -65,32 +59,20 @@
             		console.log('$$$$$$');
             		$("#currentTable").append(tr);
 	        		console.log('#####');
-            		
             	});
-            	
-            	
-        		
             });
-            
+
             $("#deleteButton").click(function() {
-            	
             	var checkbox = $("input[name=current-checkbox]:checked");
-            	
             	console.log(checkbox);
-            	
             	checkbox.each(function(i) {
-            	
             		var tr = $(this).parent().parent();
             		$(this).attr("name", "origin-checkbox");
             		$(this).attr("id", "original-course");
             		$(this).prop("checked", false);
             		$("#originalTable").append(tr);
-            
             	});
-            
-            
         	});
-        
         });
     </script>
 
@@ -107,7 +89,7 @@
 			<li><a href="06_AcademyEdu.html">기관별 교육 검색</a></li>
 			<li><a href="07_SelectEdu.html">주요 교육기관</a></li>
 			<li><a href="08_LegendEdu.html">교육 주제 범례</a></li>
-			<li><a href="09_AdminMain.html">관리자</a></li>
+			<li class="admin-active"<a href="09_AdminMain.html">관리자</a></li>
 		</ul>
 	</div>
 	<!--/sidebar-->
@@ -132,19 +114,19 @@
 			<div class="total-box">
 				<p1 class="necessary-title-text">필수 강좌 관리</p1>
 				<div>
-					<input type="text" placeholder="직급" class = "necessary-input-position"> 
+					<input type="text" placeholder="직급" class = "necessary-input-position">
 					<input type="text" placeholder="연차" class = "necessary-input-year">
 					<button class="necessary-selectbtn" id="necessary-selectButton" onclick="getList()">검색</button>
 
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<div style="margin-top: 20px;">
 					<select id="necessary-big" class="necessary-select-box">
 
 					</select> <select id="necessary-middle" class="necessary-select-box">
-						
+
 
 					</select> <select id="necessary-small" class="necessary-select-box" onchange="getDpList()">
-						
+
 
 					</select> <br> <br>
 					<div>
@@ -170,12 +152,12 @@
 								<th class="necessary-header-name">강좌</th>
 								<th>기관</th>
 							</tr>
-							
-							
+
+
 						</table>
 					</div>
 					</div>
-					
+
 					<div class="necessary-arrowimage">
 						<button id="insertButton">▶</button>
 						<br /> <br />
@@ -184,7 +166,7 @@
 					</div>
 					<div>
                         <p class="necessary-subject">설정된 강좌</p>
-                            
+
 					<div class="necessary-rightlist">
 						<table class="necessary-table" border="1" id="currentTable">
 							<tr class="necessary-tableheader-tr">
@@ -193,7 +175,7 @@
 								<th>기관</th>
 							</tr>
 
-							
+
 						</table>
 					</div>
 				</div>
@@ -217,7 +199,7 @@
 			</div>
 		</footer>
 		<!--/footer-->
-		
+
 	</div>
 	<script src="/js/necessary-ajax.js"></script>
 </body>

@@ -87,3 +87,8 @@ body {
   padding: var(--padding-small) var(--padding-medium);
   white-space: nowrap;
 }
+
+.admin-active {
+  background: #1d378b;
+  color: white;
+}

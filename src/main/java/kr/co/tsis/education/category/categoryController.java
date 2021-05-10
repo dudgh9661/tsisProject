@@ -100,7 +100,6 @@ public class categoryController {
         model.addAttribute("depth3Course",depth3);
 
         return "manager/lecture_category_update";
-
     }
 
     @ResponseBody
