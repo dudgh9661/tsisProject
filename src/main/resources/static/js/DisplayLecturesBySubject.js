@@ -61,7 +61,7 @@ let DLBS_setDisplay = (ajaxData) => {
             html += "<span class=DLBS_display_list_onOff>온라인</span>";
         else
             html += "<span class=DLBS_display_list_onOff>오프라인</span>";
-        html += "<span class=DLBS_display_list_detail><a href=" +listData[i].lectureUrl + "><img class=DLBS_img src=/img/gotosite.png  /></a></span>";
+        html += "<span class=DLBS_display_list_detail><a href=" +listData[i].lectureUrl + " target=_blank><img class=DLBS_img src=/img/gotosite.png  /></a></span>";
         html += "</span>";
         html += "</li>";
     }
@@ -145,7 +145,7 @@ let DLBS_changeHeartState = (state, lectureId, idx) => {
     }
     DLBS_heartImg.innerHTML = html;
     $.ajax({
-        type: 'PUT',
+        type: 'GET',
         url: '/changeHeartState?lectureId=' + lectureId + '&wishYn=' + state,
         contentType:'application/json; charset=utf-8'
     }).done(()=>{
