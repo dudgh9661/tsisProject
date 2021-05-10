@@ -75,3 +75,8 @@ body {
   padding-bottom: 150px;
 }
 
+section {
+height: auto;
+min-height: 60vh;
+}
+
