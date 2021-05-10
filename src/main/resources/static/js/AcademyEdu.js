@@ -5,7 +5,7 @@ let lectureList = document.querySelector(".academy-result");
 let columnName = "lec.lecture_title";
 
 let pageNum = 1;
-let maxPageNum = 0;
+let maxPageNum = 1;
 
 function requestSubjectCategoryAPI(url, done, academyId) {
     $.ajax({
@@ -27,6 +27,7 @@ function requestSubjectCategory(academyId, isInit) {
         }
         $(".academy-bottom-note").children("div")[0].innerHTML = $(".academy-option__academy option:selected").attr("location");
         if (isInit) {
+            pageNum = 1;
             requestLectureList(academyCategory.children[0].value, subjectCategory.children[0].value, pageNum, columnName);
         }
     }, academyId);
@@ -56,7 +57,7 @@ function setLectureList(response) {
 
         let best = "";
         let wish = "<img class='academy-icon-sm' src='/img/emptyHeart.png' onclick='wishClick(event)'>";
-        let index = 20 * (pageNum - 1) + response['lectureList'].indexOf(lecture) + 1 ;
+        let index = 20 * (pageNum - 1) + response['lectureList'].indexOf(lecture) + 1;
         let online = "온라인";
         let urlImage = "<img class='academy-icon-sm' src='/img/gotosite.png'>";
         let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
@@ -81,13 +82,6 @@ function setLectureList(response) {
     }
 }
 
-function setPage(nextPage) {
-    let prevPage = pageNum;
-    pageNum = nextPage;
-    $(".academy-pagination__number").children((prevPage - 1) % 5).css("background-color", "red");
-    $(".academy-pagination__number").children((nextPage - 1) % 5).css("background-color", "yellow");
-}
-
 function setPagination(start) {
     if (start < 6) {
         $(".academy-pagination div:first-child img").css("display", "none");
@@ -106,18 +100,24 @@ function setPagination(start) {
     if (end > maxPageNum) {
         end = maxPageNum;
     }
+    console.log(start, end);
     for (let i = start; i <= end; i++) {
-        $(".academy-pagination__number").append("<li onclick='pageNumberClick(event)'>" + i + "</li>");
+        if (i === start) {
+            $(".academy-pagination__number").append("<li onclick='pageNumberClick(event)' style='background-color: #0094d4;'>" + i + "</li>");
+        }
+        else {
+            $(".academy-pagination__number").append("<li onclick='pageNumberClick(event)'>" + i + "</li>");
+        }
     }
-    let index = (start - 1) % 5;
-    $(".academy-pagination__number li:nth-child(" + index + ")").css("background-color", "red");
 }
 
 function requestLectureList(academyId, subjectId, pageNum, columnName) {
     requestListAPI("/trainingByInstitution/trainingSearchResult", (response) => {
         setTotalLectureNumber(response);
         setLectureList(response);
-        maxPageNum = response['totalPageNationNum'];
+        maxPageNum = response['totalPageNationNum'] + 1;
+        if (pageNum % 5 === 1)
+            setPagination(Number(pageNum));
     }, academyId, subjectId, pageNum, columnName);
 }
 
@@ -128,8 +128,7 @@ academyCategory.addEventListener("change", (event) => {
 
 // subject 클릭 Event
 subjectCategory.addEventListener("change", (event) => {
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList($(".academy-option__academy option:selected").val(), event.target.value, pageNum, columnName);
 });
 
@@ -160,40 +159,41 @@ function wishClick(event) {
 }
 
 // 컬럼 클릭시 정렬된 리스트 요청
+$(".academy-result__column--category-name").click(function() {
+    columnName = "ctgr.depth3_course";
+    pageNum = 1;
+    requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val() , pageNum, columnName);
+});
 $(".academy-result__column--course-name").click(function() {
     columnName = "lec.lecture_title";
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val() , pageNum, columnName);
 });
 $(".academy-result__column--academy-name").click(function() {
     columnName = "acdm.academy_name";
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val(), pageNum, columnName);
 });
 $(".academy-result__column--is-online").click(function() {
     columnName = "lec.online_yn";
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val(), pageNum, columnName);
 });
 
 // 페이지
 function pageNumberClick(event) {
-//    event.target.style.backgroundColor = "#0094d4";
+    $(".academy-pagination__number").children().css("background-color", "rgba(0,0,0,0.1)");
+    event.target.style.backgroundColor = "#0094d4";
     pageNum = event.target.innerHTML;
     requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val(), pageNum, columnName);
 }
 
 $(".academy-pagination div:first-child img").click(function() {
     pageNum = (Math.floor((pageNum - 1) / 5) - 1) * 5 + 1;
-    setPagination(pageNum);
     requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val(), pageNum, columnName);
 });
 
 $(".academy-pagination div:last-child img").click(function() {
     pageNum = (Math.floor((pageNum - 1) / 5) + 1) * 5 + 1;
-    setPagination(pageNum);
     requestLectureList($(".academy-option__academy option:selected").val(), $(".academy-option__subject option:selected").val(), pageNum, columnName);
 });

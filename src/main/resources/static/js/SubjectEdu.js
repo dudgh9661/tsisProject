@@ -11,7 +11,7 @@ let lectureList = document.querySelector(".subject-result");
 let columnName = "lec.lecture_title";
 
 let pageNum = 1 ;
-let maxPageNum = 0;
+let maxPageNum = 1;
 
 function requestMediumCategoryAPI(url, done, largeCategoryName) {
     $.ajax({
@@ -58,8 +58,7 @@ function requestSmallCategory(largeCategoryName, mediumCategoryName, isInit) {
         if (isInit) {
             selectLevelAll();
             requestLevelNumber(categoryIdList[0]);
-            setPage(1);
-            setPagination(pageNum);
+            pageNum = 1;
             requestLectureList(categoryIdList[0], pageNum, columnName);
         }
     }, largeCategoryName, mediumCategoryName);
@@ -136,21 +135,7 @@ function requestLevelNumber(categoryId) {
 }
 
 function setTotalLectureNumber(response) {
-    totalLectureNumber = response['lectureNum'];
-//    if (selectedAdvanced.children[0].checked === false) {
-//        totalLectureNumber -= $(selectedAdvanced).children("span")[0].value;
-//    }
-//    console.log(totalLectureNumber, $(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value);
-//    if (selectedBasic.children[0].checked === false) {
-//        totalLectureNumber -= $(selectedBasic).children("span")[0].value;
-//    }
-//        console.log(totalLectureNumber, $(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value);
-//    if (selectedElective.children[0].checked === false) {
-//        totalLectureNumber -= $(selectedElective).children("span")[0].value;
-//    }
-//        console.log(totalLectureNumber, $(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value);
-//    console.log($(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value)
-    $(".subject-result__title")[0].innerHTML = "총 " + totalLectureNumber + "개 검색";
+    $(".subject-result__title")[0].innerHTML = "총 " + response['lectureNum'] + "개 검색";
 }
 
 function setLectureList(response) {
@@ -185,13 +170,6 @@ function setLectureList(response) {
     }
 }
 
-function setPage(nextPage) {
-    let prevPage = pageNum;
-    pageNum = nextPage;
-    $(".subject-pagination__number").children((prevPage - 1) % 5).css("background-color", "red");
-    $(".subject-pagination__number").children((nextPage - 1) % 5).css("background-color", "yellow");
-}
-
 function setPagination(start) {
     if (start < 6) {
         $(".subject-pagination div:first-child img").css("display", "none");
@@ -211,17 +189,22 @@ function setPagination(start) {
         end = maxPageNum;
     }
     for (let i = start; i <= end; i++) {
-        $(".subject-pagination__number").append("<li onclick='pageNumberClick(event)'>" + i + "</li>");
+        if (i === start) {
+            $(".subject-pagination__number").append("<li onclick='pageNumberClick(event)' style='background-color: #0094d4;'>" + i + "</li>");
+        }
+        else {
+            $(".subject-pagination__number").append("<li onclick='pageNumberClick(event)'>" + i + "</li>");
+        }
     }
-    let index = (start - 1) % 5;
-    $(".subject-pagination__number li:nth-child(" + index + ")").css("background-color", "red");
 }
 
 function requestLectureList(categoryId, pageNum, columnName) {
     requestListAPI("/categoryByLecture/DuplicateCourseSelection", (response) => {
         setTotalLectureNumber(response);
         setLectureList(response);
-        maxPageNum = response['totalPageNationNum'];
+        maxPageNum = response['totalPageNationNum'] + 1;
+        if (pageNum % 5 === 1)
+            setPagination(Number(pageNum));
     }, categoryId, pageNum, columnName);
 }
 
@@ -241,8 +224,7 @@ mediumCategory.addEventListener("change", (event) => {
 smallCategory.addEventListener("change", (event) => {
     selectLevelAll();
     requestLevelNumber(categoryIdList[event.target.selectedIndex]);
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[event.target.selectedIndex], pageNum, columnName);
 });
 
@@ -254,8 +236,7 @@ selectedAdvanced.addEventListener("click", () => {
     else {
         $(selectedAdvanced.children[2]).css("display", "inline-block");
     }
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
@@ -266,8 +247,7 @@ selectedBasic.addEventListener("click", () => {
     else {
         $(selectedBasic.children[2]).css("display", "inline-block");
     }
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
@@ -278,8 +258,7 @@ selectedElective.addEventListener("click", () => {
     else {
         $(selectedElective.children[2]).css("display", "inline-block");
     }
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
@@ -312,38 +291,34 @@ function wishClick(event) {
 // 컬럼 클릭시 정렬된 리스트 요청
 $(".subject-result__column--course-name").click(function() {
     columnName = "lec.lecture_title";
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 $(".subject-result__column--academy-name").click(function() {
     columnName = "acdm.academy_name";
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 $(".subject-result__column--is-online").click(function() {
     columnName = "lec.online_yn";
-    setPage(1);
-    setPagination(pageNum);
+    pageNum = 1;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 // 페이지
 function pageNumberClick(event) {
-//    event.target.style.backgroundColor = "#0094d4";
+    $(".subject-pagination__number").children().css("background-color", "rgba(0,0,0,0.1)");
+    event.target.style.backgroundColor = "#0094d4";
     pageNum = event.target.innerHTML;
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 }
 
 $(".subject-pagination div:first-child img").click(function() {
     pageNum = (Math.floor((pageNum - 1) / 5) - 1) * 5 + 1;
-    setPagination(pageNum);
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
 $(".subject-pagination div:last-child img").click(function() {
     pageNum = (Math.floor((pageNum - 1) / 5) + 1) * 5 + 1;
-    setPagination(pageNum);
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });

@@ -127,6 +127,8 @@ a:visited {
 .subject-result > li > * {
     font-size: 12px;
     display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .subject-result > li > *:first-child {
     width: 2%;
@@ -159,9 +161,6 @@ a:visited {
     align-items: center;
 }
 
-.subject-pagination > div > img {
-    margin-right: 10px;
-}
 .subject-pagination > div > img:hover {
     cursor: pointer;
     background-color: #0094d4;
@@ -169,25 +168,20 @@ a:visited {
 .subject-pagination__number {
     list-style: none;
     display: flex;
-    margin-top: 0px;
-    margin-bottom: 0px;
     padding-left: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .subject-pagination__number > li {
-    margin-right: 10px;
-    padding: 2px 8px;
+    width: 32px;
+    height: 32px;
     border: 1px solid gray;
-    border-radius: 25px;
     background-color: rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 .subject-pagination__number > li:hover {
     background-color: #0094d4;
     cursor: pointer;
 }
-
-/* .subject-no-text-deco {
-    text-decoration: none;
-    color: black;
-} */

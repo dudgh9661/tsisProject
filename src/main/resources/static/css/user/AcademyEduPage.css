@@ -96,12 +96,6 @@ a:visited {
 .academy-icon-sm {
     width: 15px;
 }
-/*
-.academy-notice-bar > div > span::before {
-    content: "";
-    width: 15px;
-    background-image: url(../WebContent/help.svg);
-} */
 
 .academy-result {
     height: 1200px;
@@ -124,6 +118,7 @@ a:visited {
     font-weight: bolder;
 }
 
+.academy-result__column--category-name,
 .academy-result__column--course-name,
 .academy-result__column--is-online {
     cursor: pointer;
@@ -140,8 +135,9 @@ a:visited {
 .academy-result > li > * {
     font-size: 12px;
     display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
-
 
 .academy-result > li > *:first-child {
     width: 2%;
@@ -167,38 +163,31 @@ a:visited {
     width: 15%;
 }
 
-/* .academy-no-text-deco {
-    text-decoration: none;
-    color: black;
-} */
-
 .academy-pagination {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.academy-pagination > div > img {
-    margin-right: 10px;
-}
 .academy-pagination > div > img:hover {
     cursor: pointer;
     background-color: #0094d4;
 }
+
 .academy-pagination__number {
     list-style: none;
     display: flex;
-    margin-top: 0px;
-    margin-bottom: 0px;
     padding-left: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .academy-pagination__number > li {
-    margin-right: 10px;
-    padding: 2px 8px;
+    width: 32px;
+    height: 32px;
     border: 1px solid gray;
-    border-radius: 25px;
     background-color: rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 .academy-pagination__number > li:hover {
