@@ -1,9 +1,11 @@
 window.onload = function() {
     var input=document.getElementById("py");
-    var str=""
+    var str="";
+    var input_url="http://127.0.0.1:8001/api/flask/recommend?emp_id=";
+    var user;
     $.ajax({
         tyep: "GET",
-        url: "http://127.0.0.1:5000/recommend?emp_id=1",
+        url: input_url+user,
         dataType: "json",
         contentType: "application/json; charset=utf-8",
     }).done((response) => {
