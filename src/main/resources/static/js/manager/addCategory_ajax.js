@@ -11,7 +11,10 @@ function modSub() {
             themeLectureId : id,
             theme : val
         }),
-    }).then(() => window.close())
+    }).then(() => {
+
+
+    })
 }
 function addSub() {
     const val = document.querySelector(".input-sub-info-box").value;
@@ -23,7 +26,22 @@ function addSub() {
         body: JSON.stringify({
             theme : val
         }),
-    }).then(() => window.close())
+    }).then(() =>
+
+       Swal.fire({
+          title: '추가하시겠습니까?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+             window.close()
+          }
+        })
+    )
 }
 if(document.querySelector(".btn-modify")){
     document.querySelector(".btn-modify").addEventListener("click", modSub);

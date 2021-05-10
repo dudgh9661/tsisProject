@@ -460,7 +460,7 @@ function s_del(depth1, depth2, i) {
 // 추가 버튼
 function add_sub(){
     //window.open("addSubject.mustache", "강좌 주제 추가","width=600px, height=600px");
-    window.open("/theme/getTheme?themeLectureId=0", "안녕하세요^^", "width=550, height=800");
+    window.open("/theme/getTheme?themeLectureId=0", "안녕하세요^^", "width=500, height=300");
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
