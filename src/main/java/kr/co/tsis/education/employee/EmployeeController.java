@@ -2,8 +2,10 @@ package kr.co.tsis.education.employee;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sun.deploy.net.HttpResponse;
 import kr.co.tsis.education.categoryByLecture.CategoryByLectureService;
 import kr.co.tsis.education.userCommon.dto.Employee;
 import kr.co.tsis.education.util.HttpConnection;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Controller
 public class EmployeeController
@@ -26,7 +29,7 @@ public class EmployeeController
     }
 
     @RequestMapping(value = "/employee/login", method = RequestMethod.POST)
-    public String login( HttpSession session, HttpServletRequest request) throws IOException {
+    public String login( HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String userId = request.getParameter("userId");
         String pwd = request.getParameter("pwd");
@@ -66,17 +69,26 @@ public class EmployeeController
                 session.setAttribute("loginUser", employee);
                 return "redirect:/mainPage/mainInfo"; // 이부분 나중에 수정
             }
-            
+
         } else {
             //1. "RESULT_MSG":"아이디가 존재하지 않습니다."
             //2. "RESULT_MSG":"비밀번호가 일치하지 않습니다."
-            return "redirect:login?result=fail&RESULT_MSG="+jsonObj.getString("RESULT_MSG");
+
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            //out.println("<script>alert('등록된 회원이 아닙니다.'); location.href='redirect:/';</script> ");
+            out.println("<script>alert('등록된 회원이 아닙니다.'); location.href='/';</script> ");
+            out.flush();
+            out.close();
+            return "redirect:/";
+            //return "redirect:login?result=fail&RESULT_MSG="+jsonObj.getString("RESULT_MSG");
         }
     }
 
     @GetMapping("/employee/logout")
     public String logout(HttpSession session) throws IOException {
         session.invalidate();
-        return "redirect:/login";
+        return "redirect:/";
     }
 }

@@ -76,6 +76,7 @@
         lec.lecture_title,
         lec.lecture_url,
         lec.lecture_best_yn,
+        lec.lecture_id
         exists(SELECT * FROM wishlist WHERE emp_id=#{empId} AND lecture_id=lec.lecture_id)
         FROM lecture lec INNER JOIN lecture_category ctgr ON lec.category_id = ctgr.category_id
         WHERE lec.academy_subject_id = #{academySubjectId}
