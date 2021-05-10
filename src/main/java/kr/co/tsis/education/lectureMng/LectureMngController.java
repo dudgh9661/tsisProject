@@ -134,11 +134,18 @@ public class LectureMngController {
 
     //강좌 수정 저장 버튼 클릭
     @PutMapping("/lectureMng/modify/confirm/{lectureId}")
-    public String update(@PathVariable(value="lectureId") int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
+    @ResponseBody
+    public AddSuccessDto update(@PathVariable(value="lectureId") int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);
-        return "/manager/lectureMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
+
+        if( !isOverlapped ) { //강좌가 이미 존재하면, return false
+            return new AddSuccessDto(false);
+        }
+        else {
+            return new AddSuccessDto(true);
+        }
     }
 
     //강좌 추가 버튼 클릭 시 페이지 이동
