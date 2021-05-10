@@ -60,13 +60,13 @@ function setLectureList(response) {
         let online = "온라인";
         let urlImage = "<img class='academy-icon-sm' src='/img/gotosite.png'>";
         let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
-        if (lecture['lectureBestYn'] === true) {
-            best = "<img class='academy-icon-sm' src='/img/star.svg' onclick='wishClick(event)'>"
+        if (lecture['lectureBestYn'] === 1) {
+            best = "<img class='academy-icon-sm' src='/img/star.svg'>"
         }
-        if (lecture['wishBool'] === true) {
-            wish = "<img class='academy-icon-sm' src='/img/filledHeart.png'>";
+        if (lecture['wishBool'] === 1) {
+            wish = "<img class='academy-icon-sm' src='/img/filledHeart.png' onclick='wishClick(event)'>";
         }
-        if (lecture['onlineYn'] === false) {
+        if (lecture['onlineYn'] === 0) {
             online = "오프라인";
         }
         html += ("<div>" + best + "</div>");
@@ -78,7 +78,6 @@ function setLectureList(response) {
         html += (url + "</a>");
 
         $(lectureList).append("<li value=" + lecture['lectureId'] + ">" + html + "</li>");
-//        console.log($(lectureList).);
     }
 }
 

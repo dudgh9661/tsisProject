@@ -155,18 +155,18 @@ function setLectureList(response) {
         let html = "";
 
         let best = "";
-        let wish = "<img class='subject-icon-sm' src='/img/emptyHeart.png'>";
+        let wish = "<img class='subject-icon-sm' src='/img/emptyHeart.png' onclick='wishClick(event)'>";
         let index = 20 * (pageNum - 1) + response['lectureList'].indexOf(lecture) + 1 ;
         let online = "온라인";
         let urlImage = "<img class='subject-icon-sm' src='/img/gotosite.png'>";
         let url = "<a href='" + lecture['lectureUrl'] + "' target='_blank'>" + urlImage;
-        if (lecture['lectureBestYn'] === true) {
+        if (lecture['lectureBestYn'] === 1) {
             best = "<img class='subject-icon-sm' src='/img/star.svg'>"
         }
-        if (lecture['wishBool'] === true) {
-            wish = "<img class='subject-icon-sm' src='/img/filledHeart.png'>";
+        if (lecture['wishBool'] === 1) {
+            wish = "<img class='subject-icon-sm' src='/img/filledHeart.png' onclick='wishClick(event)'>";
         }
-        if (lecture['onlineYn'] === false) {
+        if (lecture['onlineYn'] === 0) {
             online = "오프라인";
         }
         html += ("<div>" + best + "</div>");
@@ -224,19 +224,19 @@ function requestLectureList(categoryId, pageNum, columnName) {
 
 // 대분류 클릭 Event
 largeCategory.addEventListener("change", (event) => {
-//    selectLevelAll();
+    selectLevelAll();
     requestMediumCategory(event.target.value, false);
 });
 
 // 중분류 클릭 Event
 mediumCategory.addEventListener("change", (event) => {
-//    selectLevelAll();
+    selectLevelAll();
     requestSmallCategory($(".subject-option__large option:selected").text(), event.target.value, false);
 });
 
 // 소분류 클릭 Event
 smallCategory.addEventListener("change", (event) => {
-//    selectLevelAll();
+    selectLevelAll();
     requestLevelNumber(categoryIdList[event.target.selectedIndex]);
     setPage(1);
     setPagination(pageNum);
@@ -291,21 +291,20 @@ function requestWishAPI(url, done, lectureId, wishTo) {
     });
 }
 
-// todo 노깔끔
-$(document).click(function(event) {
+function wishClick(event) {
     if (event.target.className === "subject-icon-sm") {
         if (event.target.src.includes("emptyHeart.png") === true) {
             event.target.src = "/img/filledHeart.png";
             requestWishAPI("/categoryByLecture/wishListSelection", () => {},
-                lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 1].value, true);
+            $(lectureList).children()[Number(event.target.parentElement.parentElement.children[2].innerHTML) + 1].value, "true");
         }
         else if (event.target.src.includes("filledHeart.png") === true) {
             event.target.src = "/img/emptyHeart.png";
             requestWishAPI("/categoryByLecture/wishListSelection", () => {},
-                lectureList.children[event.target.parentElement.parentElement.children[2].innerHTML - 1].value, false);
+            $(lectureList).children()[Number(event.target.parentElement.parentElement.children[2].innerHTML) + 1].value, "false");
         }
     }
-});
+}
 
 // 컬럼 클릭시 정렬된 리스트 요청
 $(".subject-result__column--course-name").click(function() {
