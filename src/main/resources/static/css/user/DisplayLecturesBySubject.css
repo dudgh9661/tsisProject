@@ -1,6 +1,5 @@
 .DLBS_img{
     width:16px;
-    height:16px;
 }
 
 .DLBS_section{
@@ -82,7 +81,18 @@
 .DLBS_display_list_notIcons{
     text-decoration: underline;
 }
-li{
+
+.DLBS_ul{
+    list-style-type : none;
+}
+
+.DLBS_display_list_element{
+    float: left;
+    margin-bottom: 25px;
+}
+
+.DLBS_display_list_title{
+    float: left;
     margin-bottom: 25px;
 }
 
