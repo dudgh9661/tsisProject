@@ -96,7 +96,7 @@
 
     <!-- 과정 수준 클릭 -->
     <select id="selectLectureList" resultType="kr.co.tsis.education.categoryByLecture.dto.CategoryByLectureAll">
-        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id),
+        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id) 'wishBool',
         lec.lecture_best_yn 'lectureBestYn', lec.lecture_title 'lectureTitle', lec.lecture_url 'lectureUrl', lec.online_yn 'onlineYn',
         acdm.academy_name 'academyName', acdm.academy_loc 'academyLoc', lecture_id 'lectureId'
         FROM lecture lec

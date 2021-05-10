@@ -50,7 +50,7 @@
     <select id="lectureList" resultMap="subjectByLectureAllResultMap">
         SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id),
         lec.lecture_title, lec.lecture_url, lec.online_yn, lec.lecture_best_yn,
-        ctgr.depth2_skill, ctgr.depth3_course, lec_lecture_id
+        ctgr.depth2_skill, ctgr.depth3_course, lec.lecture_id
         FROM lecture lec
         INNER JOIN lecture_category ctgr
         ON ctgr.category_id = lec.category_id
