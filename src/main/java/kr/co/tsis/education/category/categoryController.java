@@ -150,7 +150,10 @@ public class categoryController {
     @ResponseBody
     @PostMapping("/category/addDepth")
     public int addDepth(@RequestBody categoryForm form){
-        return service.addDepth(form);
+        if(form.getAdddepth()==""){
+            return -1;
+        }
+        else return service.addDepth(form);
     }
     @ResponseBody
     @PostMapping("/category/resetDepth")

@@ -4,12 +4,14 @@
     <select id="getDepth1" resultType="String">
         SELECT depth1_field
         FROM lecture_category
+        WHERE depth1_field IS NOT NULL
         GROUP BY depth1_field
     </select>
     <select id="getDepth2" parameterType="String" resultType="String">
         SELECT depth2_skill
         FROM lecture_category
         WHERE depth1_field=#{0}
+            AND depth2_skill IS NOT NULL
         GROUP BY depth2_skill
     </select>
     <select id="getDepth3" parameterType="String" resultType="String">
@@ -17,6 +19,7 @@
         FROM lecture_category
         WHERE depth1_field=#{depth1}
           AND depth2_skill=#{depth2}
+            AND depth3_course IS NOT NULL
         GROUP BY depth3_course
 
     </select>
