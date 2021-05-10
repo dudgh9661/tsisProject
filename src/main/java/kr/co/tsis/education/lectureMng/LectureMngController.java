@@ -80,12 +80,13 @@ public class LectureMngController {
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
-    public void delete(@PathVariable int lectureId) {
+    public String delete(@PathVariable int lectureId) {
         boolean isDeleted = false;
         if( lectureMngService.delete(lectureId) ) {
             System.out.println("삭제되었습니다.");
             isDeleted = true;
         } else System.out.println("삭제를 실패하였습니다..");
+        return "redirect:/manager/lectureMng";
     }
 
     //강좌 수정 페이지로 데이터 전송
@@ -97,7 +98,7 @@ public class LectureMngController {
 
         if( toModifyPageDataResponseDto != null ) System.out.println(toModifyPageDataResponseDto.toString());
         else System.out.println(toModifyPageDataResponseDto.toString());
-        
+
         List<empDto> empDtoList = lectureMngService.getEmpList(lectureId);
 
         ToModifyPageResponseDto toModifyPageResponseDto

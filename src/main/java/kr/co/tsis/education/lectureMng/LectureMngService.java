@@ -86,6 +86,7 @@ public class LectureMngService {
     public ToModifyPageDataResponseDto getToModifyPageData(int lectureId) {
         return lectureRepository.getToModifyPageData(lectureId);
     }
+
     //ToModifyPageEmp 매칭
     public List<empDto> getEmpList(int lectureId) {
         return lectureRepository.getEmpList(lectureId);
