@@ -215,6 +215,7 @@ function updateCate() {
             }
           },
           error: function (x, s, e) {
+              alert("입력값을 확인해주세요.");
               console.log(x, s, e);
           }
     });

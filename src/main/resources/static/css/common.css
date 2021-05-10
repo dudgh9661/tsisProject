@@ -4,13 +4,11 @@
 @import "footer.css";
 
 /* 각페이지 */
-@import "academy.css";
 @import "15_alert.css";
 @import "addCategory.css";
 @import "updateLectureCategory.css";
 @import "categoryManage.css";
 @import "themeManage.css";
-@import "admin_auth.css"
 
 :root {
   /*screen size*/

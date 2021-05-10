@@ -9,7 +9,7 @@ const modAddUrl = "/academyModify/getAcademy/";
 /* 변수 선언 ---------------------------------------------------*/
 
 /* sample data */
-const resultDataList = {
+var resultDataList = {
   totalCount: 1,
   organi: [
     {
@@ -100,7 +100,7 @@ const setAddBtn = () => {
       window.open(
           "/academyModify/getAcademy/",
           "안녕하세요^^",
-          "width=400,height=370")
+          "width=400,height=600")
   ));
 };
 /* 수정버튼 설정 */
@@ -110,7 +110,7 @@ const setModifyBtns = () => {
         window.open(
             "/academyModify/getAcademy/" + e2.target.parentNode.getAttribute("data-id"),
             "안녕하세요^^",
-            "width=400,height=370")
+            "width=400,height=600")
     ));
   });
 };
