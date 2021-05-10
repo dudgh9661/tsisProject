@@ -2,7 +2,7 @@ window.onload = function() {
     var input=document.getElementById("py");
     var str="";
     var input_url="http://127.0.0.1:8001/api/flask/recommend?emp_id=";
-    var user;
+    var user =  ;
     $.ajax({
         tyep: "GET",
         url: input_url+user,
