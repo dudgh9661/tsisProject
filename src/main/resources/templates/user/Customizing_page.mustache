@@ -17,320 +17,24 @@
             crossorigin="anonymous">
         <link rel="stylesheet" href="/css/user/common.css">
         <!-- <link rel="stylesheet" href="css/footer.css"> -->
-        <title>Document</title>
-        <style>
-            :root {
-                /*screen size*/
-                --screen-width: 1920px;
-                --screen-height: 1080px;
-
-                /*color*/
-                --color-light-beige: #FDFDFD;
-                --color-light-sky-blue: #f1f8ff;
-                --color-blue: #1d378b;
-                --color-sky-blue: #4193D0;
-                --color-dark-blue: #243887;
-                --color-light-grey: #dbdbdb;
-                --color-grey: #6D6E70;
-                --color-dark-grey: #6D6E70;
-                --color-black: #1e1e1e;
-
-                /*font*/
-                --font-small: 15px;
-                --font-small-medium: 20px;
-                --font-medium-large: 25px;
-
-                /*margin*/
-                --margin-small: 10px;
-                --margin-small-medium: 15px;
-                --margin-medium: 20px;
-                --margin-medium-large: 25px;
-                --margin-large: 30px;
-
-                /*padding*/
-                --padding-small: 10px;
-                --padding-small-medium: 15px;
-                --padding-medium: 20px;
-                --padding-medium-large: 25px;
-                --padding-large: 30px;
-            }
-
-            * {
-                box-sizing: border-box;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                cursor: default;
-                font-family: 'Noto Sans KR', sans-serif;
-                width: var(--screen-width);
-                height: var(--screen-height);
-            }
-
-            /*sidebar시작*/
-
-            .sidebar {
-                position: absolute;
-                left: 0;
-                background-color: var(--color-light-beige);
-                width: 12%;
-                height: var(--screen-height);
-                border-right: solid 1px var(--color-light-grey);
-                white-space: nowrap;
-            }
-
-            .logo {
-                width: 200px;
-                margin: var(--margin-medium-large) var(--margin-small);
-            }
-
-            .sidebar_ul {
-                list-style: none;
-                width: 100%;
-                padding: 0;
-            }
-
-            .sidebar_ul > li {
-                padding: calc(var(--padding-large)) var(--padding-small);
-            }
-
-            .sidebar_ul > :first-child {
-                margin-top: calc(var(--margin-medium-large));
-            }
-
-            .sidebar_ul > li > a {
-                font-size: calc(var(--font-medium-large)*0.9);
-                font-weight: 500;
-                text-decoration: none;
-                color: var(--color-black);
-            }
-
-            .sidebar_ul > li:hover {
-                border-right: 5px solid var(--color-sky-blue);
-            }
-
-            /*content 시작*/
-            .content {
-                position: absolute;
-                right: 0;
-                background-color: var(--color-light-beige);
-                width: 88%;
-                height: var(--screen-height);
-                padding: var(--padding-small) var(--padding-medium);
-                white-space: nowrap;
-            }
-
-            header {
-                padding: var(--padding-small-medium);
-                border-bottom: dotted 1px var(--color-black);
-                height: 5%;
-            }
-
-            .login-info {
-                text-align: right;
-            }
-
-            .login-info > span {
-                font-size: calc(var(--font-small)*1.3);
-                margin: 0 var(--margin-small);
-                font-weight: 400;
-            }
-
-            .logout {
-                width: 80px;
-                border-radius: 10%;
-                background-color: var(--color-sky-blue);
-                border: 1px solid var(--color-sky-blue);
-                padding: calc(var(--padding-small)*0.5);
-            }
-
-            .logout > a {
-                text-decoration: none;
-                color: var(--color-light-beige);
-            }
-
-            /* session시작 */
-            #contentWrapper {
-                width: 100%;
-                height: 1000px;
-                margin-top: 50px;
-            }
-
-            /* .contentUpper{
-			width: 1250px;
-			height: 350px;
-			border: solid 1px black;
-		} */
-
-            .contentInside {
-                width: 20%;
-                height: 300px;
-                float: left;
-                margin-top: 30px;
-                padding: 0 30px;
-                /* border: solid 1px black; */
-            }
-
-            .card-body {
-                /* 	width: 200px; */
-                height: 280px;
-                margin: auto;
-                background: #4198D0;
-                border-radius: 5px;
-                /* border: solid 1px black; */
-                border: 1px solid #243887;
-            }
-            .online {
-                width: 80px;
-                margin-top: 4px;
-                margin-left: 4px;
-                border: 2px solid #243887;
-                border-radius: 15px;
-                color: #243887;
-                font-weight: bold;
-                text-align: center;
-            }
-            .body_top {
-                width: 200px;
-                height: 25px;
-                background-color:
-            }
-            .location {
-                width: 200px;
-                height: 50px;
-                margin: auto;
-                padding-left: 10px;
-                font-size: 8pt;
-                font-weight: bold;
-            }
-            .institution-logo {
-                margin: 4px auto auto;
-                text-align: center;
-                height: 150px;
-                border-top: 2px solid #243887;
-                border-bottom: 2px solid #243887;
-                /* background: url("https://www.multicampus.com/img/saas/main/logo/CUS0001/pc_main.png") no-repeat center, white; */
-            }
-            .institution-description {
-                /* margin-top: 5px */
-                ;
-                padding: 5px;
-                font-size: 10pt;
-                text-align: center;
-            }
-
-            .logoImg {
-                width: 200px;
-                height: 150px;
-            }
-            .pagination {
-                float: left;
-                width: 100%;
-                height: 100px;
-            }
-
-            #pagenavi {
-                margin: 50px auto auto;
-                width: 300px;
-                height: 100px;
-            }
-            .page-navigation {
-                /* margin-top: 40px;
-			margin-bottom: 40px; */
-                display: inline-block;
-                margin: auto;
-                width: 200px;
-                height: 50px;
-            }
-            .pagination a {
-                color: black;
-                float: left;
-                padding: 8px 16px;
-                text-decoration: none;
-                border: 1px solid #ddd;
-            }
-            .pagination a:hover:not(.active) {
-                background-color: #ddd;
-            }
-            .page-navigation ul {}
-            .page-navigation ul li {
-                background: #cce5ff;
-                margin: 5px;
-                list-style-type: none;
-                float: left;
-            }
-
-            /*footer*/
-            /* footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: inline-block;
-            background-color: var(--color-light-grey);
-        }
-
-        .footer-info {
-            padding: var(--padding-small-medium);
-        } */
-        </style>
+        <title>고객 맞춤 강좌</title>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     </head>
 
     <body>
-
         <!--sidebar-->
-        <div class="sidebar">
-            <a href="03_Main.html"><img src="img/logo.png" class="logo"/></a>
-            <ul class="sidebar_ul">
-                <li>
-                    <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
-                </li>
-                <li>
-                    <a href="Customizing_page.html">고객맞춤 서비스</a>
-                </li>
-                <li>
-                    <a href="05_SubjectEdu.html">주제별 교육 검색</a>
-                </li>
-                <li>
-                    <a href="06_AcademyEdu.html">기관별 교육 검색</a>
-                </li>
-                <li>
-                    <a href="07_SelectEdu.html">주요 교육기관</a>
-                </li>
-                <li>
-                    <a href="08_LegendEdu.html">교육 주제 범례</a>
-                </li>
-                <li>
-                    <a href="09_AdminMain.html">관리자</a>
-                </li>
-
-            </ul>
-        </div>
-        <!--/sidebar-->
+        {{>user/common/index_sidebar}}
 
         <!--content-->
         <div class="content">
             <!--header-->
-            <header>
-                <div class="login-info">
-                    <span>죠르디님 환영합니다!</span>
-                    <button type="button" class="logout">
-                        <a href="01_Index.html">
-                            로그아웃
-                        </a>
-                    </button>
-                </div>
-            </header>
-            <!--header-->
-
+            {{>user/common/index_header}}
             <!--section-->
             <!-- 여기에 코드 넣으세요 -->
             <section>
                 <div class='first_contents'>
-                    <link rel="stylesheet" href="css/Customizing_page.css">
+                    <link rel="stylesheet" href="/css/user/Customizing_page.css">
                     <!-- 차트 1 -->
                     <div class='chart1'>
                         <link
@@ -441,7 +145,7 @@
                     <!-- 이미지 슬라이더 1 -->
                     <div class="slider1">
                         <head>
-                            <link rel="stylesheet" href="Slider/multiple_slide.css">
+                            <link rel="stylesheet" href="/Slider/multiple_slide.css">
                         </head>
                         <span class="slider1_title">사용언어별 고객 맞춤 강좌</span>
                         <div class="Slider">
@@ -474,7 +178,7 @@
 
                         </div>
 
-                        <script src="Slider/multiple_slide.js"></script>
+                        <script src="/Slider/multiple_slide.js"></script>
                     </div>
                 </div>
 
@@ -482,7 +186,7 @@
                     <!-- 이미지 슬라이더 2 -->
                     <div class="slider2">
                         <head>
-                            <link rel="stylesheet" href="Slider/multiple_slide.css">
+                            <link rel="stylesheet" href="/Slider/multiple_slide.css">
                         </head>
                         <span class="slider2_title">관심 트렌드별 고객 맞춤 강좌</span>
                         <div class="Slider2">
@@ -510,7 +214,7 @@
 
                         </div>
 
-                        <script src="Slider/multiple_slide2.js"></script>
+                        <script src="/Slider/multiple_slide2.js"></script>
                     </div>
                 </div>
 
@@ -518,7 +222,7 @@
                     <!-- 이미지 슬라이더 3 -->
                     <div class="slider3">
                         <head>
-                            <link rel="stylesheet" href="Slider/multiple_slide.css">
+                            <link rel="stylesheet" href="/Slider/multiple_slide.css">
                         </head>
                         <span class="slider3_title">비슷한 유저별 고객 맞춤 강좌</span>
                         <div class="Slider3">
@@ -546,7 +250,7 @@
 
                         </div>
 
-                        <script src="Slider/multiple_slide3.js"></script>
+                        <script src="/Slider/multiple_slide3.js"></script>
                     </div>
                 </div>
 
@@ -557,17 +261,7 @@
 
 
         <!--footer-->
-        <footer>
-            <div class="footer-info">
-                <div>
-                    <p>문의처</p>
-                </div>
-                <div>
-                    <p>교육담당자 | 인사팀 정병석 과장</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+        {{>user/common/index_footer}}
     <!--/footer-->
 </div>
 <!--content-->
@@ -595,6 +289,6 @@
         }
     </script> -->
 </body>
-<script src="./script.js"></script>
+<script src="/js/CustomizingScript.js"></script>
 
 </html>

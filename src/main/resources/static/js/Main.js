@@ -1,5 +1,5 @@
 window.onload = function() {
-
+console.log();
 
     $.ajax({
         type : 'GET',
@@ -8,6 +8,11 @@ window.onload = function() {
         dataType : 'json',
         success : function(data) {
             console.log(data);
+            if(data.surveyYn == 0){
+                window.open("/mainPage/survey", "안녕하세요^^", "width=600,height=800");
+
+            }
+
               var input=document.getElementById("py");
                 var str="";
                 var input_url="http://127.0.0.1:8001/api/flask/recommend?emp_id=";
@@ -39,3 +44,4 @@ window.onload = function() {
                 });
         }
     });
+}

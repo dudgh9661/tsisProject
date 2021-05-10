@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/user/survey.css"/>
+    <meta charset="utf-8" />
+    <title>tsis 설문조사</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
+
+  <body>
+    <div class="survey">
+      <tr>
+        <td><img src="pic/tsis.JPG" /></td>
+      </tr>
+      <h1 class="title">나와 맞는 강의를 찾아보자!</h1>
+        <p class="main">1. 귀하의 직무는?</p>
+        <input 
+            type="radio" 
+            name="duty" 
+            value="개발"
+        /> 
+        <span class="ans">개발</span>
+        <br />
+        <input 
+            type="radio" 
+            name="duty" 
+            value="비개발"
+        /> 
+        <span class="ans">비개발</span>
+      
+     
+      <div>
+        <p class="main">
+          1-1. (개발 직무자만 해당) 귀하가 사용하는 언어는?(최대 3개)
+        </p>
+        <input
+          type="checkbox"
+          name="lang"
+          value="JAVA"
+          onclick="check(this)"
+        />
+        <span class="ans">JAVA</span>
+        <br />
+        <input
+          type="checkbox"
+          name="lang"
+          value="C / C++"
+          onclick="check(this)"
+        />
+        <span class="ans">C/C++</span>
+        <br />
+        <input
+          type="checkbox"
+          name="lang"
+          value="C#"
+          onclick="check(this)"
+        />
+        <span class="ans">C#</span>
+        <br />
+        <input
+          type="checkbox"
+          name="lang"
+          value="Python"
+          onclick="check(this)"
+        />
+        <span class="ans">Python</span>
+        <br />
+        <input
+          type="checkbox"
+          name="lang"
+          value="웹(자바스크립트/ HTML/ CSS 등)"
+          onclick="check(this)"
+        />
+        <span class="ans">웹(javascript,HTML,CSS)</span>
+        <br />
+        <input
+          type="checkbox"
+          name="lang"
+          value="기타"
+          onclick="check(this)"
+        />
+        <span class="ans">기타</span>
+      </div>
+
+      <div>
+        <p class="main">2. 귀하가 원하는 과정 수준은?</p>
+        <input 
+          type="radio" 
+          name="level" 
+          value="기초과정" 
+        />
+        <span class="ans">기초과정</span>
+        <br />
+        <input 
+          type="radio" 
+          name="level" 
+          value="전문과정" 
+        />
+        <span class="ans">전문과정</span>
+      </div>
+
+      <div>
+        <p class="main">3. 최근 관심있는 IT 트랜드는?</p>
+        <table>
+          <tbody>
+            <tr>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="IoT" />
+                IoT
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="IT프로젝트관리" />
+                IT프로젝트관리
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="SW공학" /> 
+                SW공학
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="기술관리" />
+                기술관리
+              </td>
+            </tr>
+
+            <tr>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="네트워크" />
+                네트워크
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="데이터베이스" />
+                데이터베이스
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="데이터사이언스" />
+                데이터사이언스
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="디자인" />
+                디자인
+              </td>
+            </tr>
+            <tr>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="보안" />
+                보안
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="블록체인" />
+                블록체인
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="빅데이터" />
+                빅데이터
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="세미나" />
+                세미나
+              </td>
+            </tr>
+            <tr>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="시스템" />
+                시스템
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="운영체제" />
+                운영체제
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="인공지능" />
+                인공지능
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="클라우드" />
+                클라우드
+              </td>
+            </tr>
+            <tr>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="품질" />
+                품질
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="프로그래밍" />
+                프로그래밍
+              </td>
+              <td class="ans">
+                <input type="checkbox" name="trend" value="핀테크" class="ans"/>
+                핀테크
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+      <button type="button" class="commit" onclick="sub()">제출</button>
+    </div>
+    <!-- <script src="../js/jquery.ajax-cross-origin.min.js"></script> -->
+    <script src="/js/survey.js"></script>
+
+  </body>
+</html>

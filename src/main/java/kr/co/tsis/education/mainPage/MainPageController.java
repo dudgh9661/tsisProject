@@ -46,4 +46,13 @@ public class MainPageController {
 
     }
 
+    @GetMapping("/survey")
+    public String goSurvey(){
+        return "user/survey";
+    }
+
+    @GetMapping("/cumstomizing")
+    public String goCustomizing(){
+        return "user/Customizing_page";
+    }
 }
