@@ -23,4 +23,8 @@ public interface categoryRepository {
     int setDepth1(categoryForm form);
     int setDepth2(categoryForm form);
     int setDepth3(categoryForm form);
+    int isDepth1(String s);
+    int isDepth2(String s);
+    int isDepth3(String s);
+
 }

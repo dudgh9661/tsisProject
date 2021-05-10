@@ -52,6 +52,21 @@
         DELETE FROM lecture_category
         WHERE depth3_course=#{d3}
     </delete>
+    <select id="isDepth1" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM lecture_category
+        WHERE depth1_field=#{0}
+    </select>
+    <select id="isDepth2" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM lecture_category
+        WHERE depth2_skill=#{0}
+    </select>
+    <select id="isDepth3" parameterType="String" resultType="int">
+        SELECT count(*)
+        FROM lecture_category
+        WHERE depth3_course=#{0}
+    </select>
 <!--
     <select id="getTile" parameterType="int" resultType="kr.co.tsis.education.category.DTOS.categoryDTO">
         SELECT
