@@ -102,9 +102,9 @@ section {
     overflow-y: scroll;
     table-layout: fixed;
     word-break: break-all;
-    width: 30rem;
+    width: 37rem;
  }
- 
+
  .necessary-tableheader-tr > th {
     background: #4193D0;
     color: #ffffff;
@@ -114,10 +114,9 @@ section {
     position: sticky;
     top: 0px;
  }
- 
+
  .necessary-header-name {
-    width: 280px;
-    background: #4193D0;
+    width: 50%;
  }
  
  .necessary-table td {
@@ -127,12 +126,18 @@ section {
     table-layout: fixed;
     word-break: break-all;
  }
-
- .necessary-subject{
+ .necessary-table td:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.necessary-subject-left,
+.necessary-subject-right{
      font-size: 35px;
      text-align: center;
      font-family: 'Bazzi';
-
+ }
+ .necessary-subject-left {
+     margin-left: 300px;
  }
 
  @font-face {
