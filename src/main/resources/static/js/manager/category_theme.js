@@ -297,69 +297,115 @@ function s_update(depth1, depth2, i) {
  */
 /* 대분류 삭제 버튼 */
 function bg_del(depth1) {
-    let category = {
-        depth1Field: depth1.id
-    }
 
-    console.log(category);
 
-    $.ajax({
-        url: "/category/delDepth1",
-        method: "POST",
-        data: JSON.stringify(category),
-        dataType: "json",
-        contentType: "application/json",
-        success: function (data) {
-            alert(data);
-        },
-        error: function (x, s, e) {
-            console.log(x, s, e);
+    Swal.fire({
+        title: '삭제하시겠습니까?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `YES`
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+
+            let category = {
+                depth1Field: depth1.id
+            }
+
+            $.ajax({
+                url: "/category/delDepth1",
+                method: "POST",
+                data: JSON.stringify(category),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    alert(data);
+                   /* if(data>0){
+                        Swal.fire('삭제가 완료되었습니다!');
+                    }else{
+                        Swal.fire('삭제가 완료되었습니다!');
+                    }*/
+                },
+                error: function (x, s, e) {
+                    console.log(x, s, e);
+                }
+            });
         }
-    });
+    })
 }
 /* 중분류 삭제 버튼 */
 function m_del(depth1, depth2) {
-    let category = {
-        depth1Field: depth1.id,
-        depth2Skill: depth2.id
-    }
-    console.log(category);
 
-    $.ajax({
-        url: "/category/delDepth2",
-        method: "POST",
-        data: JSON.stringify(category),
-        dataType: "json",
-        contentType: "application/json",
-        success: function (data) {
-        },
-        error: function (x, s, e) {
-            console.log(x, s, e);
+    Swal.fire({
+        title: '삭제하시겠습니까?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `YES`
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            let category = {
+                depth1Field: depth1.id,
+                depth2Skill: depth2.id
+            }
+            console.log(category);
+
+            $.ajax({
+                url: "/category/delDepth2",
+                method: "POST",
+                data: JSON.stringify(category),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    if(data>0){
+                        Swal.fire('삭제가 완료되었습니다!');
+                    }else{
+                        Swal.fire('삭제가 완료되었습니다!');
+                    }
+                },
+                error: function (x, s, e) {
+                    console.log(x, s, e);
+                }
+            });
         }
-    });
-
+    })
 }
 /* 소분류 삭제 버튼 */
 function s_del(depth1, depth2, i) {
-    let category = {
-        depth1Field: depth1.id,
-        depth2Skill: depth2.id,
-        depth3Course: $(".category_theme" + i).val()
-    }
-    console.log(category);
 
-    $.ajax({
-        url: "/category/delDepth3",
-        method: "POST",
-        data: JSON.stringify(category),
-        dataType: "json",
-        contentType: "application/json",
-        success: function (data) {
-        },
-        error: function (x, s, e) {
-            console.log(x, s, e);
+    Swal.fire({
+        title: '삭제하시겠습니까?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `YES`
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            let category = {
+                depth1Field: depth1.id,
+                depth2Skill: depth2.id,
+                depth3Course: $(".category_theme" + i).val()
+            }
+
+            $.ajax({
+                url: "/category/delDepth3",
+                method: "POST",
+                data: JSON.stringify(category),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    if(data>0){
+                        Swal.fire('삭제가 완료되었습니다!');
+                    }else{
+                        Swal.fire('삭제가 완료되었습니다!');
+                    }
+                },
+                error: function (x, s, e) {
+                    console.log(x, s, e);
+                }
+            });
         }
-    });
+    })
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */

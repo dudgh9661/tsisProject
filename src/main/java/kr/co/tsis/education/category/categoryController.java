@@ -39,23 +39,26 @@ public class categoryController {
         return service.getDepth3(depth1,depth2);
     }
 
+    /* 영국수정 */
     @ResponseBody
     @GetMapping("/category/getList")
     public List<categoryDTO> getList(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2,@RequestParam("depth3Course")String depth3){
         return service.getList(depth1,depth2,depth3);
     }
 
+    /* 영국수정 */
     @ResponseBody
     @PostMapping("/category/delDepth1")
-    public int delDepth1(@RequestParam("depth1Field")String depth1){
-        System.out.println(depth1);
-        return service.delDepth1(depth1);
+    public int delDepth1(@RequestBody() CategoryDelDTO categorydelDTO){
+        return service.delDepth1(categorydelDTO.getDepth1Field());
     }
 
+    /* 영국수정 */
     @ResponseBody
     @PostMapping("/category/delDepth2")
-    public int delDepth2(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2){
-        return service.delDepth2(depth1,depth2);
+    public int delDepth2(@RequestBody() CategoryDelDTO categorydelDTO){
+        return service.delDepth2(categorydelDTO.getDepth1Field(),
+                                   categorydelDTO.getDepth2Skill());
     }
     @ResponseBody
     @PostMapping("/category/delDepth3")
