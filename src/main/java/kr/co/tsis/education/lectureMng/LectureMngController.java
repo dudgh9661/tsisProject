@@ -80,14 +80,13 @@ public class LectureMngController {
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
-    public boolean delete(@PathVariable int lectureId) {
-        System.out.println("/lectureMng/{lectureId} 진입");
+    public String delete(@PathVariable int lectureId) {
         boolean isDeleted = false;
         if( lectureMngService.delete(lectureId) ) {
             System.out.println("삭제되었습니다.");
             isDeleted = true;
         } else System.out.println("삭제를 실패하였습니다..");
-        return isDeleted;
+        return "redirect:/manager/lectureMng";
     }
 
     /* 영국수정 */
@@ -97,7 +96,10 @@ public class LectureMngController {
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
         System.out.println("lectureId : " + lectureId);
         ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
-        System.out.println(toModifyPageDataResponseDto.toString());
+
+        if( toModifyPageDataResponseDto != null ) System.out.println(toModifyPageDataResponseDto.toString());
+        else System.out.println(toModifyPageDataResponseDto.toString());
+
         List<empDto> empDtoList = lectureMngService.getEmpList(lectureId);
 
         ToModifyPageResponseDto toModifyPageResponseDto
@@ -133,11 +135,19 @@ public class LectureMngController {
 
     //강좌 수정 저장 버튼 클릭
     @PutMapping("/lectureMng/modify/confirm/{lectureId}")
-    public String update(@PathVariable(value="lectureId") int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
+    @ResponseBody
+    public AddSuccessDto update(@PathVariable(value="lectureId") int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
 
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);
-        return "/manager/lecturMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
+
+        if( !isOverlapped ) { //강좌가 이미 존재하면, return false
+            return new AddSuccessDto(false);
+        }
+        else {
+            return new AddSuccessDto(true);
+        }
+//        return "/manager/lectureMng"; //저장하면, index 페이지로 가는게 맞지 않을까???
     }
 
     //강좌 추가 버튼 클릭 시 페이지 이동

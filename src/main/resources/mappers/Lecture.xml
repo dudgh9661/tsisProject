@@ -131,8 +131,13 @@
         SET lecture_title = #{lectureTitle}, lecture_url = #{lectureUrl},
             online_yn = #{onlineYn}, lecture_best_yn = #{lectureBestYn},
             category_id = #{categoryId}, academy_id = #{academyId},
-            theme_lecture_id = #{themeLectureId}, edu_level_id = #{eduLevelId},
-            academy_subject_id = #{academySubjectId}
+            edu_level_id = #{eduLevelId}, academy_subject_id = #{academySubjectId},
+            <if test="themeLectureId != 0 ">
+                theme_lecture_id = #{themeLectureId}
+            </if>
+            <if test="themeLectureId == 0 ">
+                theme_lecture_id = null
+            </if>
         WHERE lecture_id = #{lectureId};
     </update>
 <!--    int getLectureIdAfterInsert(String lectureTitle, String lectureUrl, -->
@@ -152,7 +157,7 @@
     <select id="getToModifyPageData" resultType="kr.co.tsis.education.lectureMng.Dto.ToModifyPageDataResponseDto">
         SELECT lec.lecture_title 'lectureTitle', lec.online_yn 'onlineYn', lec.lecture_best_yn 'lectureBestYn', lec.edu_level_id 'eduLevelId',
                acdm.academy_name 'academyName', acdm.academy_url 'academyUrl',
-               thm.theme 'theme', ctgr.depth1_field 'depth1Field', ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course'
+               thm.theme 'theme', ctgr.depth1_field 'depth1Field', ctgr.depth2_skill 'depth2Skill', ctgr.depth3_course 'depth3Course', acdm.academy_id 'academyId'
         FROM lecture lec
                  INNER JOIN academy acdm
                             ON lec.academy_id = acdm.academy_id

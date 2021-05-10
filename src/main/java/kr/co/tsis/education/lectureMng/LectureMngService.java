@@ -39,7 +39,7 @@ public class LectureMngService {
     @Transactional
     public boolean delete(int lectureId) {
         //삭제 성공 : 1 실패 : 0
-        if( lectureRepository.delete(lectureId) > 0 ) return true;
+        if( lectureRepository.delete(lectureId) == 1 ) return true;
         else return false;
     }
 
@@ -86,6 +86,7 @@ public class LectureMngService {
     public ToModifyPageDataResponseDto getToModifyPageData(int lectureId) {
         return lectureRepository.getToModifyPageData(lectureId);
     }
+
     //ToModifyPageEmp 매칭
     public List<empDto> getEmpList(int lectureId) {
         return lectureRepository.getEmpList(lectureId);

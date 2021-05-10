@@ -1,13 +1,11 @@
 package kr.co.tsis.education.lectureMng.Dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -22,4 +20,5 @@ public class ToModifyPageDataResponseDto {
     private int onlineYn;
     private String eduLevelId;
     private int lectureBestYn;
+    private String academyId;
 }

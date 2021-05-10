@@ -133,7 +133,7 @@ function btn_save(){
     const depth3Course = $(".smallCat option:selected").text();
     const lectureTitle = $(".inputLecture").val();
     const academyId = $(".selAcademy option:selected")[0].value;
-    const lectureUrl = $(".inputUrl").val();
+    const lectureUrl = $(".lectureUrl").val();
     const themeLectureId = $(".selTheme option:selected").val();
     const empPositionArr = [];
     const empYearsArr = [];
@@ -189,13 +189,14 @@ function btn_save(){
          dataType: "json",
          contentType: "application/json",
          success: function (data) {
-//             console.log(data);
+             console.log(data);
+             self.close();
            },
            error: function (x, s, e) {
-//               console.log(x, s, e);
+               console.log(x, s, e);
            }
     });
-    self.close();
+
 }
 
 const btn_modify = () => {
@@ -205,7 +206,7 @@ const btn_modify = () => {
     const depth3Course = $(".smallCat option:selected").text();
     const lectureTitle = $(".inputLecture").val();
     const academyId = $(".selAcademy option:selected")[0].value;
-    const lectureUrl = $(".inputUrl").val();
+    const lectureUrl = $(".lectureUrl").val();
     const themeLectureId = $(".selTheme option:selected").val();
     const empPositionArr = [];
     const empYearsArr = [];
@@ -262,12 +263,13 @@ const btn_modify = () => {
          contentType: "application/json",
          success: function (data) {
              console.log(data);
+             self.close();
            },
            error: function (x, s, e) {
 //               console.log(x, s, e);
            }
     });
-//    self.close();
+
 }
 
 /*-----------------------------------------------------카테고리 select태그 설정*/
