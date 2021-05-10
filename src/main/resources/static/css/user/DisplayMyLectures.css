@@ -1,4 +1,4 @@
-section{
+.DML_section{
     display:flex;
     flex-direction: row;
 }
@@ -14,13 +14,10 @@ section{
     height:256px;
 }
 
-ul{
+#DML_ul{
     list-style-type : none;
 }
 
-li{
-    float: left;
-}
 
 .DML_display_lectures_necessary_container{
     width: 1300x;
@@ -28,6 +25,8 @@ li{
 }
 
 .DML_li{
+    float: left;
+    margin-bottom: 25px;
     width: 20%;
     margin-left:  2%;
     margin-right: 2%;

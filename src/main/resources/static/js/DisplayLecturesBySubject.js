@@ -4,7 +4,7 @@ let DLBS_display_searchCount = document.getElementById("DLBS_display_searchCount
 let DLBS_display_list_pagingButtons = document.getElementById("DLBS_display_list_pagingButtons");
 
 let DLBS_ext_themeId = DLBS_selSubject_selectBox.options[DLBS_selSubject_selectBox.selectedIndex].value;
-let DLBS_ext_columnName = "lec.lecture_title";
+let DLBS_ext_columnName = "";
 let DLBS_ext_pageNum = 1;
 const DLBS_pages = 5;
 const DLBS_listSize = 20;
@@ -14,15 +14,12 @@ const DLBS_listSize = 20;
 
 //초기 화면 보여줄 때 나타낼 강좌목록 받아온 후 화면에 표시
 let  DLBS_doAjax =  (themeLectureId, columnName, pageNum) => {
-    //tet
-    //columnName = "lec.lecture_title";
     $.ajax({
         type: 'GET',
-        url: '/subjectByLecture/recommendationResultList?themeLectureId=' + themeLectureId +'&columnName=' + columnName + '&pageNum=' + pageNum,
+        url: '/getLectures?themeLectureId=' + themeLectureId +'&columnName=' + columnName + '&pageNum=' + pageNum,
         contentType:'application/json; charset=utf-8',
         dataType: 'json',
     }).done((ajaxData)=>{
-        console.log(ajaxData);
         DLBS_setDisplay(ajaxData);
     }).fail(function (error) {
         alert(JSON.stringify(error));
@@ -43,6 +40,7 @@ let DLBS_setDisplay = (ajaxData) => {
     let pagingNumber = ajaxData['totalPageNationNum'];
     //'총 n개' 에서 n개 세팅하기
     DLBS_display_searchCount.innerHTML = "총 " + totalCount + "개 검색";
+    
 
     //20개 데이터 출력하기.
     let html = ""; 
@@ -51,9 +49,9 @@ let DLBS_setDisplay = (ajaxData) => {
         html += "<span class=DLBS_display_list_icons>";
         html += "<span class=DLBS_display_list_best><img class=DLBS_img src=/img/star.svg/></span>";
         if(listData[i].wishBool == 1)
-            html += "<span class=DLBS_display_list_interest id=DLBS_heartImg" + i + "><img onclick=DLBS_changeHeartState(1," + listData.lectureId +"," + i+") class=DLBS_img src=/img/filledHeart.png/></span>";
+            html += "<span class=DLBS_display_list_interest id=DLBS_heartImg" + i + "><img onclick=DLBS_changeHeartState(1," + listData[i].lectureId +"," + i+") class=DLBS_img src=/img/filledHeart.png/></span>";
         else
-            html += "<span class=DLBS_display_list_interest id=DLBS_heartImg" + i + "><img onclick=DLBS_changeHeartState(0," + listData.lectureId +"," + i+") class=DLBS_img src=/img/emptyHeart.png/></span>";   
+            html += "<span class=DLBS_display_list_interest id=DLBS_heartImg" + i + "><img onclick=DLBS_changeHeartState(0," + listData[i].lectureId +"," + i+") class=DLBS_img src=/img/emptyHeart.png/></span>";   
         html += "</span>";
         html += "<span class=DLBS_display_list_notIcons>";
         html += "<span class=DLBS_display_list_no>" + (DLBS_listSize*(DLBS_ext_pageNum-1) + (i+1)) + "</span>";
@@ -118,6 +116,7 @@ let DLBS_display = (code, value) => {
     }
     else{//카테고리
         DLBS_ext_columnName = value;
+        DLBS_ext_pageNum = 1;
     }
     DLBS_doAjax(DLBS_ext_themeId, DLBS_ext_columnName, DLBS_ext_pageNum);
 }
@@ -131,6 +130,7 @@ let DLBS_display_theme = () => {
 
 //하트누르기,재누르기 PUT매핑
 let DLBS_changeHeartState = (state, lectureId, idx) => {
+    
     let DLBS_heartImg = document.getElementById("DLBS_heartImg"+idx);
     
     //하트 이미지 바꾸기.
