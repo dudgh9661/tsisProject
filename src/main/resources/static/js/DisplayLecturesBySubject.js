@@ -16,7 +16,7 @@ const DLBS_listSize = 20;
 let  DLBS_doAjax =  (themeLectureId, columnName, pageNum) => {
     $.ajax({
         type: 'GET',
-        url: '/getLectures?themeLectureId=' + themeLectureId +'&columnName=' + columnName + '&pageNum=' + pageNum,
+        url: '/subjectByLecture/recommendationResultList?themeLectureId=' + themeLectureId +'&columnName=' + columnName + '&pageNum=' + pageNum,
         contentType:'application/json; charset=utf-8',
         dataType: 'json',
     }).done((ajaxData)=>{
