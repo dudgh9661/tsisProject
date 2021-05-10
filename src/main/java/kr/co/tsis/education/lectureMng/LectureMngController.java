@@ -81,7 +81,6 @@ public class LectureMngController {
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
     public void delete(@PathVariable int lectureId) {
-        System.out.println("/lectureMng/{lectureId} 진입");
         boolean isDeleted = false;
         if( lectureMngService.delete(lectureId) ) {
             System.out.println("삭제되었습니다.");
@@ -96,7 +95,10 @@ public class LectureMngController {
         //EMP제외한 정보들 + EMP List를 담은 Dto => return
         System.out.println("lectureId : " + lectureId);
         ToModifyPageDataResponseDto toModifyPageDataResponseDto = lectureMngService.getToModifyPageData(lectureId);
-        System.out.println(toModifyPageDataResponseDto.toString());
+
+        if( toModifyPageDataResponseDto != null ) System.out.println(toModifyPageDataResponseDto.toString());
+        else System.out.println(toModifyPageDataResponseDto.toString());
+        
         List<empDto> empDtoList = lectureMngService.getEmpList(lectureId);
 
         ToModifyPageResponseDto toModifyPageResponseDto
