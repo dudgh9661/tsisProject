@@ -45,19 +45,25 @@ public class CategoryPageController {
     public ResponseEntity<String> getCategoryDepth2(String depth1Field) {
         List<LectureCategoryDepth2> list= cpService.getLectureCategoryDepth2(depth1Field);
 
-        Map<String, List<String>> map = new HashMap<>();
+        Map<String, List<JSONObject>> map = new HashMap<>();
 
         for (LectureCategoryDepth2 depth2 : list) {
             if(map.containsKey(depth2.getDepth2Skill())){
-                map.get(depth2.getDepth2Skill()).add(depth2.getDepth3Course());
+
+                JSONObject smallCategory = new JSONObject();
+                smallCategory.put("depth3Name", depth2.getDepth3Course());
+                smallCategory.put("depth3Num", depth2.getCategoryNum());
+                map.get(depth2.getDepth2Skill()).add(smallCategory);
             } else {
-                List<String> arrayList = new ArrayList<>();
-                arrayList.add(depth2.getDepth3Course());
+                List<JSONObject> arrayList = new ArrayList<>();
+                JSONObject smallCategory = new JSONObject();
+                smallCategory.put("depth3Name", depth2.getDepth3Course());
+                smallCategory.put("depth3Num", depth2.getCategoryNum());
+
                 map.put(depth2.getDepth2Skill(), arrayList);
             }
         }
         JSONObject json =  new JSONObject(map);
-        System.out.println(json);
 
         return new ResponseEntity<>(json.toString(), HttpStatus.OK);
     }

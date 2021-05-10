@@ -1,47 +1,33 @@
-function largeCategory() {
+function getCategory(field) {
     $.ajax({
         type : 'GET',
-        url : '//',
+        url : '/CategoryPage/getCategoryDepth2',
+        data: {depth1Field: field},
+        contentType:'application/json; charset=utf-8',
         dataType : 'json',
         success : function(data) {
-
-            $.each(data, function(index, value) {
-//category_id, depth1_field
+            console.log(data)
+            let html = "";
+            $.each(ddd, function(mi, middle) {
+                console.log(mi);
+                console.log(middle);
+                html += "<div class=divTableRow>";
+                html += "<div class=divTableHead>"+mi+"</div>"
+                $.each(middle, function(si, small){
+                    html += "<div class=divTableCell>";
+                    html += "<a href="+"07_SelectEdu.html"+">"
+                    html += "<div class=category-table-name>"+small['depth3Name']+"</div>";
+                    html += "<div class=category-table-num>"+small['depth3Num']+"</div>";
+                    html += "</a>";
+                    html += "</div>";
+                });
+                html += "</div>";
             });
+            document.getElementById("category-table-body").innerHTML = html;
         }
     });
 }//large 카테고리 목록보기
 
-function largeCategory() {
-    $.ajax({
-        type : 'GET',
-        url : '//',
-        dataType : 'json',
-        success : function(data) {
-
-            $.each(data, function(index, value) {
-//category_id, depth2_skill
-            });
-
-        }
-    });
-}//large 카테고리 목록보기
-
-function smallCategory() {
-    $.ajax({
-        type : 'GET',
-        url : '//',
-        dataType : 'json',
-        success : function(data) {
-
-            $.each(data, function(index, value) {
-//category_id, depth3_course
-            });
-        }
-    });
-}//large 카테고리 목록보기
-
-//category 선택했을 때 넘겨주기
-function categorySelect(){
+window.onload = function(){
 
 }
