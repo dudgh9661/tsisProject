@@ -46,14 +46,30 @@ public class categoryService {
     }
 
     public int addDepth(categoryForm form){
+        String s = form.getAdddepth();
         if(form.getDepth1Field() == ""){
-            return dao.addDepth1(form);
+            if(dao.isDepth1(s)<1){
+                return dao.addDepth1(form);
+            }
+            else{
+                return -1;
+            }
         }
         else if(form.getDepth2Skill() == ""){
-            return dao.addDepth2(form);
+            if(dao.isDepth2(s)<1){
+                return dao.addDepth2(form);
+            }
+            else{
+                return -1;
+            }
         }
         else{
-            return dao.addDepth3(form);
+            if(dao.isDepth3(s)<1){
+                return dao.addDepth3(form);
+            }
+            else{
+                return -1;
+            }
         }
     }
 
