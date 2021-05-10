@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.deploy.net.HttpResponse;
-import kr.co.tsis.education.categoryByLecture.CategoryByLectureService;
 import kr.co.tsis.education.userCommon.dto.Employee;
 import kr.co.tsis.education.util.HttpConnection;
 import org.json.JSONObject;
