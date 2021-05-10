@@ -95,6 +95,9 @@ public class SubjectByLectureController {
         System.out.println("전체 리스트 갯수 : " + lectureNum);
         System.out.println("전체 페이지 갯수 : " + totalPageNationNum);
         ArrayList<SubjectByLectureAll> lectureList = sblService.lectureList(emplInfo);
+        for (int i = 0; i < lectureList.size(); i++){
+            System.out.println("리스트 wishBool : "+lectureList.get(i).getWishBool());
+        }
 
         //객체로 넘겨주기!!!
         LecturePush lecturePush = new LecturePush(lectureList, totalPageNationNum, lectureNum);
@@ -107,12 +110,16 @@ public class SubjectByLectureController {
     public int wishListSelection(HttpServletRequest request, HttpSession session){ // true, false는 어떤 변수명으로 넘겨줄건지
         int lectureId = Integer.parseInt(request.getParameter("lectureId"));
         String wishYn = request.getParameter("wishYn");
+        System.out.println("lectureId : "+lectureId);
+        System.out.println("wishYn : "+wishYn);
         // 사원정보
         session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
         int wishPush = 0;
         PushEmplInfo emplInfo = new PushEmplInfo();
-        emplInfo.setEmpId(loginUser.getEmpId());
+        String empId = loginUser.getEmpId();
+        System.out.println("empId"+empId);
+        emplInfo.setEmpId(empId);
         emplInfo.setLectureId(lectureId);
         if(wishYn.equals("true")){ // true일 경우 insert문
             wishPush = sblService.wishListPush(emplInfo);
@@ -120,6 +127,7 @@ public class SubjectByLectureController {
         else{// false일 경우 delete문
             wishPush = sblService.wishListPop(emplInfo);
         }
+        System.out.println("wishPush결과 : "+wishPush);
         return wishPush;
     }
 }

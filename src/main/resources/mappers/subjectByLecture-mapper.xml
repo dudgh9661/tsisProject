@@ -48,7 +48,7 @@
 
     <!-- 검색결과 리스트(비동기처리) -->
     <select id="lectureList" resultMap="subjectByLectureAllResultMap">
-        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id),
+        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id) 'wish_bool',
         lec.lecture_title, lec.lecture_url, lec.online_yn, lec.lecture_best_yn,
         ctgr.depth2_skill, ctgr.depth3_course, lec.lecture_id
         FROM lecture lec
