@@ -85,8 +85,8 @@ public class requiredController {
 
     @ResponseBody
     @PostMapping("/required/delList")
-    public int delList(@RequestParam("requiredLectureId")List<Integer> ids){
-        LOGGER.debug("required_lecture_id",ids);
+    public int delList(@RequestBody List<Integer> ids){
+        LOGGER.debug("lecture_id",ids);
         int result = 0;
         for(int id : ids){
             result = service.delList(id);
