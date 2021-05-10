@@ -23,20 +23,27 @@ public class MainPageController {
     //메인페이지
     @GetMapping("/mainInfo")
     public String mainPageView(HttpServletRequest request, Model model){
-        // 공지사항
-        Guide guideList = mpService.selectGuide();
         // 사원정보
         HttpSession session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
         //System.out.println(loginUser.getEmpId());
+        if(loginUser != null){
+            // 공지사항
+            Guide guideList = mpService.selectGuide();
 
-        // 필수강좌정보
-        //String empId = loginUser.getEmpId();
-        ArrayList<MainPageLecture> myRequiredLectureList = mpService.myRequiredLectureList(loginUser);
-        model.addAttribute("requiredLectureList",myRequiredLectureList);
-        model.addAttribute("guide",guideList);
-        model.addAttribute("employee",loginUser);
-        return "user/MainPage";
+            // 필수강좌정보
+            //String empId = loginUser.getEmpId();
+            ArrayList<MainPageLecture> myRequiredLectureList = mpService.myRequiredLectureList(loginUser);
+            model.addAttribute("requiredLectureList",myRequiredLectureList);
+            model.addAttribute("guide",guideList);
+            model.addAttribute("employee",loginUser);
+            return "user/MainPage";
+        }
+        else{
+            return "redirect:/";
+        }
+
+
     }
 
 }

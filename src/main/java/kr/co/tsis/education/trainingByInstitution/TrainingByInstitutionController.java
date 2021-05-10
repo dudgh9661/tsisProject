@@ -34,10 +34,6 @@ public class TrainingByInstitutionController {
     public String trainingInstitutionView(Model model){
         //기관 종류 리스트
         ArrayList<Academy> academyList = tbiService.academyList();
-        System.out.println(academyList.size());
-        for (int i = 0; i < academyList.size(); i++){
-            System.out.println("기관별" + academyList.get(i).getAcademyName());
-        }
         model.addAttribute("academyList", academyList);
         return "user/AcademyEduPage";
     }
@@ -51,9 +47,6 @@ public class TrainingByInstitutionController {
         String academyId = request.getParameter("academyId");
         System.out.println("academyId"+academyId);
         ArrayList<AcademySubject> academySubjectList = tbiService.academySubjectList(academyId);
-        for (int i = 0;  i < academySubjectList.size(); i++){
-            System.out.println("주제리스트"+academySubjectList.get(i).getAcademySubjectId());
-        }
         return academySubjectList;
     }
 
@@ -79,7 +72,7 @@ public class TrainingByInstitutionController {
         //현재 페이지 번호
         //test
         //int pageNum = 0;
-        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        int pageNum = Integer.parseInt(request.getParameter("pageNum")) - 1;
         //컬럼명
         //test
         //String columnName = "ctgr.category_id";
@@ -101,8 +94,13 @@ public class TrainingByInstitutionController {
         handlingInfo.setTotalListNum(totalListNum);
         ArrayList<TrainingInstitutionLectureAll> lectureList = tbiService.lectureList(handlingInfo);
 
+        System.out.println("확인리스트 : ");
+        for (int i = 0; i < lectureList.size(); i++){
+            System.out.println(lectureList.get(i).toString());
+        }
         //전체 페이지 버튼 수(전체 리스트 갯수 / 20)
         int totalPageNationNum = (int)(lectureNum / totalListNum);
+        System.out.println("확인전체 페이지 수 : "+totalPageNationNum);
 
         TraningLecturePath trainingLecturePath = new TraningLecturePath();
         trainingLecturePath.setLectureList(lectureList);
