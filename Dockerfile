@@ -1,11 +1,12 @@
 FROM openjdk:8-jdk-alpine
-# FROM tomcat:latest
+FROM tomcat:latest
 
 # VOLUME /tmp
 # ADD tsis-0.0.1.jar /usr/local/tomcat/webapps/
 # ADD /usr/local/tomcat/webapps/tsis-0.0.1.jar app.jar 
-EXPOSE 8085
+# EXPOSE 8085
 
 # ENV JAVA_OPTS=""
-CMD ["java","-jar","tsis-0.0.1.jar"]
+ADD tsis-0.0.1.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 # CMD ["catalina.sh", "run"]
