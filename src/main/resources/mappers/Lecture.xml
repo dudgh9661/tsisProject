@@ -121,7 +121,7 @@
     </insert>
 
     <select id="getAcademySubjectId" resultType="Integer">
-        SELECT academy_subject_id
+        SELECT IFNULL(MAX(academy_subject_id),-1) 'academySubjectId'
         FROM academy_subject
         WHERE academy_id = #{academyId} AND academy_skill = #{depth2Skill};
     </select>
@@ -254,5 +254,17 @@
         <if test="lectureTitle != null">
             AND lec.lecture_title LIKE CONCAT('%',#{lectureTitle},'%')
         </if>
+    </select>
+
+    <insert id="insertAcademySubjectId">
+        INSERT INTO academy_subject
+        VALUES (DEFAULT, (SELECT academy_name
+                          FROM academy
+                          WHERE academy_id = #{academyId}), #{depth2Skill}, #{academyId});
+    </insert>
+
+    <select id="getAcademySubjectIdCaseMinus" resultType="Integer">
+        SELECT DISTINCT(last_insert_id()) AS 'academySubjectId'
+        FROM academy_subject;
     </select>
 </mapper>

@@ -25,7 +25,7 @@ public interface LectureRepository {
 
     void addRequiredTable(String empPosition, int empYears, int lectureId);
 
-    void update(String lectureTitle, String lectureUrl, int onlineYn, int lectureBestYn, int categoryId, String academyId, int themeLectureId, String eduLevelId, int academySubjectId);
+    void update(String lectureTitle, String lectureUrl, int onlineYn, int lectureBestYn, int categoryId, String academyId, int themeLectureId, String eduLevelId, int academySubjectId, int lectureId);
 
     ToModifyPageDataResponseDto getToModifyPageData(int lectureId);
 
@@ -50,4 +50,8 @@ public interface LectureRepository {
     int getAcademySubjectId(String academyId, String depth2Skill);
 
     int getLectureIdAfterInsert();
+
+    void insertAcademySubjectId(String academyId, String depth2Skill);
+
+    int getAcademySubjectIdCaseMinus();
 }

@@ -129,14 +129,12 @@ public class LectureMngController {
             model.addAttribute("best",true);
         }
         return "manager/lecture_mod";
-//        return "/";
     }
 
     //강좌 수정 저장 버튼 클릭
     @PutMapping("/lectureMng/modify/confirm/{lectureId}")
-    public String update(@PathVariable("lectureId") int lectureId,
-                         @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto,
-                         Model model) {
+    public String update(@PathVariable(value="lectureId") int lectureId, @RequestBody ModifyLectureSaveButtonRequestDto modifyLectureSaveButtonRequestDto, Model model) {
+
         //강좌 중복 여부 확인( academyId, lectureTitle )
         boolean isOverlapped = lectureMngService.update(lectureId, modifyLectureSaveButtonRequestDto);
         return "/manager/lecturMng"; //저장하면, index 페이지로 가는게 맞지 않을까???

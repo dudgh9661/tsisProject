@@ -51,9 +51,19 @@ public class LectureMngService {
         //2. 기관 별 주제 아이디 찾아서 넣어주기
         int academySubjectId = lectureRepository.getAcademySubjectId(modifyLectureSaveButtonRequestDto.getAcademyId(),
                 modifyLectureSaveButtonRequestDto.getDepth2Skill());
+
+        // 기관 별 주제 아이디 찾아서 넣어주기(있는경우 subject_id 반환 / 없는 경우 -1 반환)
+        if( academySubjectId == -1 ) {
+            //2-2. academy_subject_id를 -1 반환받은 경우
+            lectureRepository.insertAcademySubjectId(modifyLectureSaveButtonRequestDto.getAcademyId(),
+                    modifyLectureSaveButtonRequestDto.getDepth2Skill());
+            //2-3. 방금 입력된 academy_subject_id 반환받기
+            academySubjectId = lectureRepository.getAcademySubjectIdCaseMinus();
+        }
         //3. 필수 강좌 테이블 lecture_id를 이용해서 먼저 컬럼 삭제
         boolean isDeleted = lectureRepository.deleteRequiredTableColumn(lectureId);
         if (!isDeleted) System.out.println(" fail : 2. 필수 강좌 테이블 lecture_id를 이용해서 먼저 컬럼 삭제");
+        System.out.println(lectureId + "가 삭제되었습니다.");
 
         //4. 필수 강좌 테이블 lecture_id와 함께 데이터 추가
         List<empDto> empDtoList = modifyLectureSaveButtonRequestDto.getEmpDtoList();
@@ -63,15 +73,10 @@ public class LectureMngService {
             lectureRepository.addRequiredTable(empPosition, empYears, lectureId);
         }
         //5. 필수 강좌 테이블 lecture_id와 함께 데이터 추가
-        lectureRepository.update(modifyLectureSaveButtonRequestDto.getLectureTitle(),
-                                modifyLectureSaveButtonRequestDto.getLectureUrl(),
-                                modifyLectureSaveButtonRequestDto.getOnlineYn(),
-                                modifyLectureSaveButtonRequestDto.getLectureBestYn(),
-                                categoryId,
-                                modifyLectureSaveButtonRequestDto.getAcademyId(),
-                                modifyLectureSaveButtonRequestDto.getThemeLectureId(),
-                                modifyLectureSaveButtonRequestDto.getEduLevelId(),
-                                academySubjectId);
+        lectureRepository.update(modifyLectureSaveButtonRequestDto.getLectureTitle(), modifyLectureSaveButtonRequestDto.getLectureUrl(),
+                modifyLectureSaveButtonRequestDto.getOnlineYn(), modifyLectureSaveButtonRequestDto.getLectureBestYn(),
+                categoryId, modifyLectureSaveButtonRequestDto.getAcademyId(), modifyLectureSaveButtonRequestDto.getThemeLectureId(),
+                modifyLectureSaveButtonRequestDto.getEduLevelId(), academySubjectId, lectureId);
         System.out.println("강의가 수정되었습니다.");
         return true;
     }
@@ -102,8 +107,18 @@ public class LectureMngService {
             System.out.println("categoryId : " + categoryId);
 
             //2. 기관 별 주제 아이디 찾아서 넣어주기
+            //2-1. 기관 별 주제 아이디 찾아서 넣어주기(있는경우 subject_id 반환 / 없는 경우 -1 반환)
             int academySubjectId = lectureRepository.getAcademySubjectId(addLectureRequestDto.getAcademyId(),
                     addLectureRequestDto.getDepth2Skill());
+
+            //2-2. academy_subject_id를 -1 반환받은 경우
+            if( academySubjectId == -1 ) {
+                //2-2. academy_subject_id를 -1 반환받은 경우
+                lectureRepository.insertAcademySubjectId(addLectureRequestDto.getAcademyId(),
+                        addLectureRequestDto.getDepth2Skill());
+                //2-3. 방금 입력된 academy_subject_id 반환받기
+                academySubjectId = lectureRepository.getAcademySubjectIdCaseMinus();
+            }
 
             //3. 강좌 테이블에 새로운 강좌 정보 상위 쿼리에서 받은 값과 함께 추가
             lectureRepository.insertNewLecture(addLectureRequestDto.getLectureTitle(),
