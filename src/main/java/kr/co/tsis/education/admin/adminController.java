@@ -15,10 +15,16 @@ public class adminController {
     private adminService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(adminController.class);
 
+
     @GetMapping("/admin")
-    public String main(){
+    public String adminmain(){
         LOGGER.debug("void");
         return "manager/admin";
+    }
+    @GetMapping("/admin/admin_auth")
+    public String main(){
+        LOGGER.debug("void");
+        return "manager/admin_auth";
     }
     @ResponseBody
     @GetMapping("/admin/getAdmin")
@@ -34,7 +40,7 @@ public class adminController {
     }
     @ResponseBody
     @PostMapping("/admin/setAdmin")
-    public int setAdmin(@RequestParam("empId") List<String> empId){
+    public int setAdmin(@RequestBody List<String> empId){
         LOGGER.debug("empId",empId);
         int result=0;
         for(String item : empId){
@@ -44,7 +50,7 @@ public class adminController {
     }
     @ResponseBody
     @PostMapping("/admin/delAdmin")
-    public int delAdmin(@RequestParam("empId") List<String> empId){
+    public int delAdmin(@RequestBody List<String> empId){
         LOGGER.debug("empId",empId);
         int result=0;
         for(String item : empId){
