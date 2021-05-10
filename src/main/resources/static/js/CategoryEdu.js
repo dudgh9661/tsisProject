@@ -37,4 +37,6 @@ $(document).ready(function() {
 window.onload = function(){
     $("ul.categorylist>li:first>input").attr('checked', true);
     getCategory($("ul.categorylist>li:first").attr('name'));
+    var user = window.sessionStorage.getItem("loginUser");
+    console.log(user);
 }

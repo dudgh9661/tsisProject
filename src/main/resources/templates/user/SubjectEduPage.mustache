@@ -15,41 +15,13 @@
 
 <body>
 <!--sidebar-->
-<div class="sidebar">
-    <!-- todo change to mustache -->
-    <a href="/"><img src="/img/img_symbol.png" class="logo"/></a>
-    <ul class="sidebar_ul">
-        <li>
-            <a href="RecommendationEduPage.mustache">주제별 강좌 보기</a>
-        </li>
-        <li>
-            <a href="/categoryByLecture/mainCategoryKinds">카테고리별 교육 검색</a>
-        </li>
-        <li>
-            <a href="/trainingByInstitution/trainingByInstitutionList">기관별 교육 검색</a>
-        </li>
-        <li>
-            <a href="SelectEduPage.mustache">교육기관</a>
-        </li>
-        <li>
-            <a href="LegendEduPage.mustache">카테고리</a>
-        </li>
-        <li>
-            <a href="AdminMainPage.mustache">관리자</a>
-        </li>
-    </ul>
-</div>
+{{>user/common/index_sidebar}}
 <!--/sidebar-->
 
 <!--content-->
 <div class="content">
     <!--header-->
-    <header>
-        <div class="login-info">
-            <span>죠르디님 환영합니다!</span>
-            <button type="button" class="logout"><a href="IndexPage.mustache">로그아웃</a></button>
-        </div>
-    </header>
+    {{>user/common/index_header}}
     <!--header-->
 
     <!--section-->
@@ -146,16 +118,8 @@
     <!--/section-->
 
     <!--footer-->
-    <footer>
-        <div class="footer-info">
-            <div>
-                <p>문의처</p>
-            </div>
-            <div>
-                <p>교육담당자 | 인사팀 정병석 과장</p>
-            </div>
-        </div>
-    </footer>
+
+    {{>user/common/index_footer}}
     <!--/footer-->
 </div>
 <!--content-->
