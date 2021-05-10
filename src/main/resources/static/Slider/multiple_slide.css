@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.Slider,
+.Slider2,
+.Slider3 {
+    margin-top: 20px;
+    margin-left: 7%;
+    position: absolute;
+    width: auto;
+    height: auto;
+
+}
+.slide_wrapper,
+.slide_wrapper2,
+.slide_wrapper3 {
+
+    position: relative;
+    width: 1120px;
+    margin: 0 auto;
+    height: 200px;
+    overflow: hidden;
+}
+
+.slides,
+.slides2,
+.slides3 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1810px;
+    transition: left 0.5s ease-out;
+}
+
+.slides li:not(:last-child) {
+    float: left;
+    margin-right: 30px;
+}
+
+.slides2 li:not(:last-child) {
+    float: left;
+    margin-right: 30px;
+}
+
+.slides3 li:not(:last-child) {
+    float: left;
+    margin-right: 30px;
+}
+
+.controls,
+.controls2,
+.controls3 {
+    text-align: center;
+}
+
+.controls span {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.controls2 span {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.controls3 span {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 10px 20px;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.png,
+.png2,
+.png3 {
+    width: 200px;
+    height: 200px;
+}
+
+.slider1_title,
+.slider2_title,
+.slider3_title {
+    margin-left: 7%;
+    font-family: "Bazzi";
+    font-size: 30px;
+
+}
+
+.controls span.prev {
+    right: calc(100% + 50px);
+}
+.controls span.next {
+    left: calc(100% + 50px);
+}
+
+.controls2 span.prev2 {
+    right: calc(100% + 50px);
+}
+.controls2 span.next2 {
+    left: calc(100% + 50px);
+}
+
+.controls3 span.prev3 {
+    right: calc(100% + 50px);
+}
+.controls3 span.next3 {
+    left: calc(100% + 50px);
+}

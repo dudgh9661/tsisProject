@@ -9,46 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
           integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../../static/css/common.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/user/common.css">
+    <title>기관별 강좌</title>
 </head>
 
 <body>
 <!--sidebar-->
-<div class="sidebar">
-    <a href="MainPage.mustache"><img src="../../../static/img/tsis.png" class="logo"/></a>
-    <ul class="sidebar_ul">
-        <li>
-            <a href="RecommendationEduPage.mustache">주제별 강좌 보기</a>
-        </li>
-        <li>
-            <a href="SubjectEduPage.mustache">카테고리별 교육 검색</a>
-        </li>
-        <li>
-            <a href="AcademyEduPage.mustache">기관별 교육 검색</a>
-        </li>
-        <li>
-            <a href="SelectEduPage.mustache">교육기관</a>
-        </li>
-        <li>
-            <a href="LegendEduPage.mustache">카테고리</a>
-        </li>
-        <li>
-            <a href="AdminMainPage.mustache">관리자</a>
-        </li>
-    </ul>
-</div>
+{{>user/common/index_sidebar}}
 <!--/sidebar-->
 
 <!--content-->
 <div class="content">
     <!--header-->
-    <header>
-        <div class="login-info">
-            <span>죠르디님 환영합니다!</span>
-            <button type="button" class="logout"><a href="01_Index.html">로그아웃</a></button>
-        </div>
-    </header>
+    {{>user/common/index_header}}
     <!--header-->
 
     <!--section-->
@@ -59,10 +32,13 @@
                     <div class="academy-top-note">원하시는 기관을 선택해 주세요.</div>
                     <div class="academy-option">
                         <select class="academy-option__academy">
+                        {{#academyList}}
+                            <option value="{{academyId}}" location="{{academyLoc}}">{{academyName}}</option>
+                        {{/academyList}}
                         </select>
                     </div>
                     <div class="academy-bottom-note">
-                        <img class="academy-icon-sm" src="../../../static/img/location.svg">
+                        <img class="academy-icon-sm" src="/img/location.svg">
                         <div></div>
                     </div>
                 </div>
@@ -76,16 +52,16 @@
             </div>
         </header>
 
-        <section class="academy-notice-bar">
+        <div class="academy-notice-bar">
             <div class="academy-notice-bar-icon">
-                <img class="academy-icon-sm" src="../../../static/img/star.svg"> : 베스트강좌
-                <img class="academy-icon-sm" src="../../../static/img/full-heart.png"> : 관심강좌
+                <img class="academy-icon-sm" src="/img/star.svg"> : 베스트강좌
+                <img class="academy-icon-sm" src="/img/filledHeart.png"> : 관심강좌
             </div>
             <div>
-                <img class="academy-icon-sm" src="../../../static/img/help.svg">
-                <a href="07_SelectEdu.html">어떤 기관을 선택해야 할지 모르겠다면? 기관소개를 참고해보세요(클릭)</a>
+                <img class="academy-icon-sm" src="/img/help.svg">
+                <a href="/majorEducational">어떤 기관을 선택해야 할지 모르겠다면? 기관소개를 참고해보세요(클릭)</a>
             </div>
-        </section>
+        </div>
 
         <ul class="academy-result">
             <li class="academy-result__title"></li>
@@ -102,32 +78,23 @@
     </section>
     <div class="academy-pagination">
         <div>
-            <img class="academy-icon-sm" src="../../../static/img/left-arrow.png">
+            <img class="academy-icon-sm" src="/img/pagingArrowLeft.png">
         </div>
         <ul class="academy-pagination__number">
         </ul>
         <div>
-            <img class="academy-icon-sm" src="../../../static/img/right-arrow.png">
+            <img class="academy-icon-sm" src="/img/pagingArrowRight.png">
         </div>
     </div>
     <!--/section-->
 
     <!--footer-->
-    <footer>
-        <div class="footer-info">
-            <div>
-                <p>문의처</p>
-            </div>
-            <div>
-                <p>교육담당자 | 인사팀 정병석 과장</p>
-            </div>
-        </div>
-    </footer>
+    {{>user/common/index_footer}}
     <!--/footer-->
 </div>
 <!--content-->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="../../../static/js/AcademyEdu.js"></script>
+<script src="/js/AcademyEdu.js"></script>
 
 </body>
 

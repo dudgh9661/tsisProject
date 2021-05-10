@@ -1,65 +1,17 @@
-<style>
-header {
-    padding: var(--padding-small-medium);
-    border-bottom: dotted 1px var(--color-black);
-    height: 5%;
-}
-
-.login-info {
-    text-align: right;
-}
-
-.login-info>span {
-    font-size: calc(var(--font-small)*1.3);
-    margin: 0 var(--margin-small);
-    font-weight: 400;
-}
-
-.logout {
-    width: 80px;
-    border-radius: 10%;
-    background-color: var(--color-sky-blue);
-    border: 1px solid var(--color-sky-blue);
-    padding: calc(var(--padding-small)*0.5);
-}
-
-.logout>a {
-    text-decoration: none;
-    color: var(--color-light-beige);
-}
-
-.gomypage{
-    float:right;
-    padding-left:10px;
-}
-</style>
+<link href="/css/user/header.css" rel="stylesheet">
 <header id="header">
-    {{#memberInfo}}
+    {{#loginUser}}
     <div class="login-info">
-        <a href="06_AcademyEdu.html" class = "login-info1">
+        <a href="/myLecture/myLectureInfo" class = "gomypage">
             <span>나의 강좌</span>
             <i class="fas fa-shopping-cart"></i>
         </a>
-        <span><strong>{{name}}</strong>님 환영합니다!</span>
-        <button type="button">
-            <a href="${root}/member/logout">
-                로그아웃
-            </a>
-        </button>
-    </div>
-    {{/memberInfo}}
-    {{^memberInfo}}
-    <div class="login-info">
-        <span>죠르디님 환영합니다!</span>
-        <a href="06_AcademyEdu.html" class = "gomypage">
-            <span>나의 강좌</span>
-            <i class="fas fa-shopping-cart"></i>
-        </a>
+        <span><strong>{{empName}}</strong>님 환영합니다!</span>
         <button type="button" class="logout">
-            <a href="${root}/member/logout">
+            <a href="/employee/logout">
                 로그아웃
             </a>
         </button>
     </div>
-    {{/memberInfo}}
+    {{/loginUser}}
 </header>

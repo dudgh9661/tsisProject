@@ -21,9 +21,11 @@ public class adminController {
     /* 영국수정 : 관리자 메인페이지 */
     @GetMapping("/admin")
     public String adminMain(HttpServletRequest request, Model model){
+        System.out.println("ㅗㅗㅗㅗㅗㅗ");
         try {
             HttpSession session = request.getSession();
             lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            System.out.println(loginUser.getAuthority());
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }

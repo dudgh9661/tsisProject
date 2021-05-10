@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TraningByInstitutionMapper">
+
+    <resultMap type="Academy" id="academyResultMap">
+        <result property="academyId" column="academy_id"></result>
+        <result property="academyName" column="academy_name"></result>
+        <result property="academyLoc" column="academy_loc"></result>
+        <result property="academyUrl" column="academy_url"></result>
+        <result property="academyDetails" column="academy_details"></result>
+        <result property="academyLogoUrl" column="academy_logo_url"></result>
+    </resultMap>
+
+    <resultMap type="AcademySubject" id="academySubjectResultMap">
+        <result property="academySubjectId" column="academy_subject_id"></result>
+        <result property="academyName" column="academy_name"></result>
+        <result property="academySkill" column="academy_skill"></result>
+        <result property="academyId" column="academy_id"></result>
+    </resultMap>
+
+    <resultMap type="TrainingInstitutionLectureAll" id="trainingInstitutionLectureAllResultMap" >
+        <result property="lectureId" column="lecture_id"></result>
+        <result property="lectureTitle" column="lecture_title"></result>
+        <result property="lectureUrl" column="lecture_url"></result>
+        <result property="validYn" column="valid_yn"></result>
+        <result property="onlineYn" column="online_yn"></result>
+        <result property="lectureBestYn" column="lecture_best_yn"></result>
+        <result property="categoryId" column="category_id"></result>
+        <result property="academyId" column="academy_id"></result>
+        <result property="eduLevelId" column="edu_level_id"></result>
+        <result property="themeLectureId" column="theme_lecture_id"></result>
+        <result property="requiredLectureId" column="required_lecture_id"></result>
+        <result property="academySubjectId" column="academy_subject_id"></result>
+        <result property="depth1Field" column="depth1_field"></result>
+        <result property="depth2Skill" column="depth2_skill"></result>
+        <result property="depth3Course" column="depth3_course"></result>
+        <result property="wishBool" column="wish_bool"></result>
+        <result property="empId" column="emp_id"></result>
+        <result property="lectureNum" column="lecture_num"></result>
+    </resultMap>
+    <!-- 기관 종류 리스트 -->
+    <select id="academyList" resultMap="academyResultMap">
+        SELECT
+        academy_id,
+        academy_name,
+        academy_loc
+        FROM academy
+    </select>
+
+    <!-- 주제리스트 -->
+    <select id="academySubjectList" resultMap="academySubjectResultMap">
+        SELECT
+        acsb.academy_skill,
+        acsb.academy_subject_id,
+        acdm.academy_id
+        FROM academy acdm
+        INNER JOIN academy_subject acsb
+        ON acsb.academy_id = acdm.academy_id
+        WHERE acsb.academy_id = #{academyId}
+    </select>
+
+    <!-- 검색 강좌 갯수 -->
+    <select id="selectLectureNum" resultType="int">
+        SELECT
+        COUNT(*)
+        FROM lecture lec INNER JOIN lecture_category ctgr ON lec.category_id = ctgr.category_id
+        WHERE lec.academy_subject_id = #{academySubjectId}
+        AND lec.academy_id = #{academyId}
+    </select>
+
+    <!-- 검색결과 리스트 -->
+    <select id="lectureList" resultMap="trainingInstitutionLectureAllResultMap">
+        SELECT
+        ctgr.depth2_skill,
+        ctgr.depth3_course,
+        lec.lecture_title,
+        lec.lecture_url,
+        lec.lecture_best_yn,
+        lec.lecture_id,
+        exists(SELECT * FROM wishlist WHERE emp_id=#{empId} AND lecture_id=lec.lecture_id) 'wish_bool'
+        FROM lecture lec INNER JOIN lecture_category ctgr ON lec.category_id = ctgr.category_id
+        WHERE lec.academy_subject_id = #{academySubjectId}
+        AND lec.academy_id = #{academyId}
+        ORDER BY ${columnName} ASC
+        LIMIT #{totalListNum}
+        OFFSET #{firstNum}
+    </select>
+
+    <!-- 관심강좌 등록 -->
+    <insert id="wishListPush">
+        INSERT INTO wishlist VALUES(#{empId},#{lectureId})
+    </insert>
+
+    <!-- 관심강좌 취소 -->
+    <delete id="wishListPop">
+        DELETE FROM wishlist WHERE emp_id = #{empId} AND lecture_id = #{lectureId}
+    </delete>
+
+
+
+</mapper>

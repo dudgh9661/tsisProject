@@ -11,8 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
         integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link rel="stylesheet" href="src/main/resources/static/css/user/MainPage.css">
-    <script src="src/main/resources/static/js/Main.js"></script>
+    <link rel="stylesheet" href="/css/user/MainPage.css">
+    <link rel="stylesheet" href="/css/user/common.css">
+    <script src="/js/Main.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <title>Document</title>
     <style>
     </style>
@@ -20,44 +23,13 @@
 
 <body>
     <!--sidebar-->
-    <div class="sidebar">
-        <a href="src/main/resources/templates/user/MainPage.mustache"><img src="src/main/resources/static/img/logo.png" class="logo" /></a>
-        <ul class="sidebar_ul">
-            <li>
-                <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
-            </li>
-            <li>
-                <a href="03_Main.html">고객 맞춤 강좌</a>
-            </li>
-            <li>
-                <a href="05_SubjectEdu.html">주제별 교육 검색</a>
-            </li>
-            <li>
-                <a href="06_AcademyEdu.html">기관별 교육 검색</a>
-            </li>
-            <li>
-                <a href="07_SelectEdu.html">주요 교육기관</a>
-            </li>
-            <li>
-                <a href="08_LegendEdu.html">교육 주제 범례</a>
-            </li>
-        </ul>
-    </div>
+    {{>user/common/index_sidebar}}
     <!--/sidebar-->
 
     <!--content-->
     <div class="content">
         <!--header-->
-        <header>
-            <div class="login-info">
-                <span>{{mployee.empName}} {{employee.empPosition}}님 환영합니다!</span>
-                <button type="button" class="logout">
-                    <a href="src/main/resources/templates/user/LoginPage.mustache">
-                        로그아웃
-                    </a>
-                </button>
-            </div>
-        </header>
+        {{>user/common/index_header}}
         <!--header-->
 
         <!--section-->
@@ -65,23 +37,10 @@
             <!--공지사항-->
             <div class="use-info">
                 <div class="use-info-content">                    
-                    <p class="p-info"><img src="src/main/resources/static/img/loud-speaker.png" />공지사항</p>
+                    <p class="p-info"><img src="/img/loud-speaker.png">공지사항</p>
                     <p class="p-info-text">{{guide.contents}}</p>
                 </div>
             </div>
-            <!--/공지사항-->
-
-            <!--강좌 신규 개설-->
-            <!-- <div class="notice-lecture">
-                <img src="img/loud-speaker.png" />
-                <p> 강좌 신규 개설</p>
-                <marquee scrollamount="6" class="marquee-notice">
-                    자바 프로그래밍 신규 강좌 5개가 추가되었습니다. (2021-03-12 FRI)
-                </marquee>
-            </div> {% endcomment %}-->
-            <!--/강좌 신규 개설-->
-
-
 
             <!--안내문구-->
             <div class="info-contents">
@@ -91,7 +50,7 @@
                         <p>연차별 필수 강좌<br></p>
                     </div>
                     <button type="button" class="more">
-                        <a href="src/main/resources/templates/user/LoginPage.mustache">
+                        <a href="/myLecture/myLectureInfo">
                             더보기
                         </a>
                     </button>
@@ -111,7 +70,6 @@
                                         <strong>{{lectureTitle}}</strong>
                                     </div>
                                     <div class="card-body_cont_info">
-                                        <!--{{멀티캠퍼스에서는 계정 등록 후 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다}}-->
                                     </div>
                                     <div class="card-body_cont_location">
                                         <span class="loc-acdm">{{academyName}}</span>
@@ -131,99 +89,29 @@
                         <p>연차별 추천 강좌<br></p>
                     </div>
                     <button type="button" class="more">
-                        <a href="src/main/resources/templates/user/LoginPage.mustache">
+                        <a href="/mainPage/cumstomizing">
                             더보기
                         </a>
                     </button>
-                    <div class="info-content"> 
-                        {{#bestLectureList}}
-                        <div class="contentInside">
-                            <div class="card-body">
-                                <div class="card-body_thumb">
-                                    <a href="{{lectureUrl}}" target="_blank">
-                                        <div class="institution-logo">
-                                            <img class="logoImg" src="{{academyLogoUrl}}">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body_cont">
-                                    <div class="card-body_cont_name">
-                                        <strong>{{lectureTitle}}</strong>
-                                    </div>
-                                    <div class="card-body_cont_info">
-                                        <!--{{멀티캠퍼스에서는 계정 등록 후 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. }}-->
-                                    </div>
-                                    <div class="card-body_cont_location">
-                                        <span class="loc-acdm">{{academyName}}</span>
-                                        <span class="loc-name">{{onlineYn}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{/bestLectureList}}
+                    <div class="info-content" id="py">
+
                     </div>
                 </div>
                 <!--연차별 추천 강좌-->
 
-
-                <!--고객 맞춤 강좌-->
-                <div class="info-detail">
-                    <div class="info-imoji">
-                        <p>고객 맞춤 강좌<br></p>
-                    </div>
-                    <button type="button" class="more">
-                        <a href="01_Index.html">
-                            더보기
-                        </a>
-                    </button>
-                    <div class="info-content"> 
-                        {{#파이썬추천}}
-                        <div class="contentInside">
-                            <div class="card-body">
-                                <div class="card-body_thumb">
-                                    <a href="{{lectureUrl}}" target="_blank">
-                                        <div class="institution-logo">
-                                            <img class="logoImg" src="{{academyLogoUrl}}">
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="card-body_cont">
-                                    <div class="card-body_cont_name">
-                                        <strong>{{lectureTitle}}</strong>
-                                    </div>
-                                    <div class="card-body_cont_info">
-                                        {{멀티캠퍼스에서는 계정 등록 후 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. 무료 강좌 제공하며 트랜드 IT기술 정보 제공합니다. }}
-                                    </div>
-                                    <div class="card-body_cont_location">
-                                        <span class="loc-acdm">{{academyName}}</span>
-                                        <span class="loc-name">{{onlineYn}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {{/파이썬추천}}
-                    </div>
-                </div>
-                <!--고객 맞춤 강좌-->
             </div>
             <!--/안내문구-->
         </section>
         <!--/section-->
 
         <!--footer-->
-        <footer>
-            <div class="footer-info">
-                <div>
-                    <p>문의처</p>
-                </div>
-                <div>
-                    <p>교육담당자 | 인사팀 정병석 과장</p>
-                </div>
-            </div>
-        </footer>
+        {{>user/common/index_footer}}
     <!--/footer-->
     </div>
     <!--content-->
+    
+<script src="survey/survey.js"></script>
+
 </body>
 
 </html>

@@ -1,11 +1,13 @@
-
 /*footer*/
 footer {
-  margin-top: 6rem;
-  width: 100%;
-  background-color: var(--color-light-grey);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    background-color: var(--color-light-grey);
 }
 
 .footer-info {
-  padding: var(--padding-small-medium);
+    padding: var(--padding-small-medium);
 }

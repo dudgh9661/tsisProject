@@ -9,51 +9,20 @@
 </head>
 <body>
         <!--sidebar-->
-        <div class="sidebar">
-            <a href="03_Main.html"><img src="img/logo.png" class="logo" /></a>
-            <ul class="sidebar_ul">
-                <li>
-                    <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
-                </li>
-                <li>
-                    <a href="05_SubjectEdu.html">주제별 교육 검색</a>
-                </li>
-                <li>
-                    <a href="06_AcademyEdu.html">기관별 교육 검색</a>
-                </li>
-                <li>
-                    <a href="07_SelectEdu.html">주요 교육기관</a>
-                </li>
-                <li>
-                    <a href="08_LegendEdu.html">교육 주제 범례</a>
-                </li>
-                <li>
-                    <a href="09_AdminMain.html">관리자</a>
-                </li>
-            </ul>
-        </div>
+        {{>user/common/index_sidebar}}
         <!--/sidebar-->
     
         <!--content-->
         <div class="content">
             <!--header-->
-            <header>
-                <div class="login-info">
-                    <span>죠르디님 환영합니다!</span>
-                    <button type="button" class="logout">
-                        <a href="01_Index.html">
-                            로그아웃
-                        </a>
-                    </button>
-                </div>
-            </header>
+            {{>user/common/index_header}}
             <!--header-->
     
             <!--section-->
-            <section>
+            <section class="DML_section">
                 <div class="DML_contents">
                     <div class="DML_greetings" id="DML_greetings">
-                        {{name}} {{title}}님 환영합니다.
+                        {{employee.empName}} {{employee.empPosition}}님 환영합니다.
                     </div>
                     <div class="DML_anchors">
                         <button class="DML_anchorButton_necessary"><a href="#DML_display_lectures_necessary_title">필수 강좌</a></button>
@@ -61,11 +30,10 @@
                     </div>
                     <div class="DML_display_lectures_necessary_container">
                         <div class="DML_display_lectures_necessary_title" id="DML_display_lectures_necessary_title">필수 강좌</div>
-                        <ul class="DML_display_lectures_necessary_grid">
+                        <ul class="DML_display_lectures_necessary_grid" id="DML_ul">
                             <!--강좌명, 교육기관명, 주제명, 해당기관 이미지url, 해당기관사이트url  -->
                             {{#requiredLectureList}}
                                 <li class="DML_li"> 
-                                    <div>{{theme}}</div>
                                     <a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>
                                     <!--밑 태그로 변경할것.-->
                                     <!--<a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>-->
@@ -80,11 +48,10 @@
                     </div>
                     <div class="DML_display_lectures_interest_container">
                         <div class="DML_display_lectures_interest_title" id="DML_display_lectures_interest_title">관심 강좌</div>
-                        <ul class="DML_display_lectures_interest_grid">
+                        <ul class="DML_display_lectures_interest_grid" id="DML_ul">
                             <!--강좌명, 교육기관명, 주제명, 해당기관 이미지url, 해당기관사이트url  -->
                             {{#wishLectureList}}
                                 <li class="DML_li">
-                                    <div>{{theme}}</div>
                                     <a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>
                                     <!--밑 태그로 변경할것.-->
                                     <!--<a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>-->
@@ -106,18 +73,8 @@
             <!--/section-->
     
             <!--footer-->
-            <footer>
-                <div class="footer-info">
-                    <div>
-                        <p>문의처</p>
-                    </div>
-                    <div>
-                        <p>교육담당자 | 인사팀 정병석 과장</p>
-                    </div>
-                </div> 
-            </footer>
+            {{>user/common/index_footer}}
         </div>
         <!--content-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </body>
 </html>

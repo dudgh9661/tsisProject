@@ -9,8 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kr.co.tsis</groupId>
-	<artifactId>education</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>tsis</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
 	<name>education</name>
 	<description>Tsis Commissioned education</description>
 	<properties>
@@ -68,12 +69,26 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.12</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20210307</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

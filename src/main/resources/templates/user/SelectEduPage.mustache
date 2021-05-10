@@ -10,119 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
           integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link href="css/common.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/user/common.css">
     <title>Document</title>
     <style>
-        :root {
-            /*screen size*/
-            --screen-width: 1920px;
-            --screen-height: 1080px;
-
-            /*color*/
-            --color-light-beige: #FDFDFD;
-            --color-light-sky-blue: #f1f8ff;
-            --color-blue: #1d378b;
-            --color-sky-blue: #4193D0;
-            --color-dark-blue: #243887;
-            --color-light-grey: #dbdbdb;
-            --color-grey: #6D6E70;
-            --color-dark-grey: #6D6E70;
-            --color-black: #1e1e1e;
-
-            /*font*/
-            --font-small: 15px;
-            --font-small-medium: 20px;
-            --font-medium-large: 25px;
-
-            /*margin*/
-            --margin-small: 10px;
-            --margin-small-medium: 15px;
-            --margin-medium: 20px;
-            --margin-medium-large: 25px;
-            --margin-large: 30px;
-
-            /*padding*/
-            --padding-small: 10px;
-            --padding-small-medium: 15px;
-            --padding-medium: 20px;
-            --padding-medium-large: 25px;
-            --padding-large: 30px;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            cursor: default;
-            font-family: 'Noto Sans KR', sans-serif;
-            width: var(--screen-width);
-            height: var(--screen-height);
-        }
-
-        /*sidebar시작*/
-
-        .sidebar {
-            position: absolute;
-            left: 0;
-            background-color: var(--color-light-beige);
-            width: 12%;
-            height: var(--screen-height);
-            border-right: solid 1px var(--color-light-grey);
-            white-space: nowrap;
-        }
-
-        .logo {
-            width: 200px;
-            margin: var(--margin-medium-large) var(--margin-small);
-        }
-
-        .sidebar_ul {
-            list-style: none;
-            width: 100%;
-            padding: 0;
-        }
-
-        .sidebar_ul>li {
-            padding: calc(var(--padding-large)) var(--padding-small);
-        }
-
-        .sidebar_ul> :first-child {
-            margin-top: calc(var(--margin-medium-large));
-        }
-
-        .sidebar_ul>li>a {
-            font-size: calc(var(--font-medium-large)*0.9);
-            font-weight: 500;
-            text-decoration: none;
-            color: var(--color-black);
-        }
-
-        .sidebar_ul>li:hover {
-            border-right: 5px solid var(--color-sky-blue);
-        }
-
-        /*content 시작*/
-        .content {
-            position: absolute;
-            right: 0;
-            background-color: var(--color-light-beige);
-            width: 88%;
-            height: var(--screen-height);
-            padding: var(--padding-small) var(--padding-medium);
-            white-space: nowrap;
-        }
-
-
-        #contentWrapper{
-            margin: 0 auto;
-            max-width: 1100px;
-			width: 1100px;
-            position: relative;
-		}
-
 		.contentInside{
             display: table-cell;
             vertical-align: top;
@@ -200,84 +90,57 @@
 			width: 100%;
 			height: 150px;
 		}
-		.pagination{
-			float: left;
-			width: 100%;
-			height: 100px;
-		}
-
-
     </style>
 </head>
 
 <body>
 
 <!--sidebar-->
-<div class="sidebar">
-    <a href="03_Main.html"><img src="img/logo.png" class="logo" /></a>
-    <ul class="sidebar_ul">
-        <li>
-            <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
-        </li>
-        <li>
-            <a href="05_SubjectEdu.html">주제별 교육 검색</a>
-        </li>
-        <li>
-            <a href="06_AcademyEdu.html">기관별 교육 검색</a>
-        </li>
-        <li>
-            <a href="07_SelectEdu.html">주요 교육기관</a>
-        </li>
-        <li>
-            <a href="08_LegendEdu.html">교육 주제 범례</a>
-        </li>
-        <li>
-            <a href="09_AdminMain.html">관리자</a>
-        </li>
-    </ul>
-</div>
+{{>user/common/index_sidebar}}
 <!--/sidebar-->
 
 <!--content-->
 <div class="content">
-    {{>index_header}}
+    {{>user/common/index_header}}
     <!--section-->
     <!-- 여기에 코드 넣으세요 -->
     <section>
         <div id="contentWrapper">
-            {{#academies}}
+            {{#academyList}}
                 <div class="contentInside">
                     <div class="card-body">
                         <div class="card-body_thumb">
-                            <a href="https://www.multicampus.com" target="_blank">
+                            <a href="
+                                {{academyUrl}}" target="_blank">
                                 <div class="institution-logo">
-                                    <img class="logoImg" src="../static/img/institutionLogo.PNG">
+                                    <img class="logoImg" src="{{academyLogoUrl}}">
                                 </div>
                             </a>
                         </div>
                         <div class="card-body_cont">
                             <div class="card-body_cont_name">
-                                <strong></strong>
+                                <strong>
+                                    {{academyName}}</strong>
                             </div>
                             <div class="card-body_cont_info">
-                                {{academy_name}}
+                                {{academyDetails}}
                             </div>
                             <div class="card-body_cont_location">
-                                역삼역
+                                {{academyLoc}}
                             </div>
                         </div>
                     </div>
                 </div>
-            {{/academies}}
+            {{/academyList}}
 
-            {{^academies}}
+            {{^academyList}}
                 데이터 없음!
-            {{/academies}}
+            {{/academyList}}
         </div>
     </section>
     <!--/section-->
 
-    {{>index_footer}}
+    {{>user/common/index_footer}}
 </div>
 <!--content-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>

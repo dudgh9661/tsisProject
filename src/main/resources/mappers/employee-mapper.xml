@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.tsis.education.employee.EmployeeRepository">
+
+    <select id="checkEmployee" resultType="kr.co.tsis.education.userCommon.dto.Employee">
+        SELECT authority, survey_yn 'surveyYn'
+        FROM employee WHERE emp_id=#{empId}
+    </select>
+
+    <insert id="signup">
+        INSERT INTO employee VALUES (#{empId}, #{empName},#{empPosition}, #{empYears}, #{empTeam}, #{surveyYn}, #{authority})
+    </insert>
+
+    <select id="login" resultType="Employee">
+        SELECT
+            emp_id 'empId',
+                emp_name 'empName',
+                emp_position 'empPosition',
+                emp_years 'empYears',
+                emp_team 'empTeam',
+                survey_yn 'surveyYn 여부',
+                authority 'authority'
+        FROM employee
+        WHERE emp_id = #{empId};
+    </select>
+</mapper>
