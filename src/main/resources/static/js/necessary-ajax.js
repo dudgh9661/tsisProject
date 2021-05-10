@@ -187,7 +187,8 @@ function getDpList() {
 $('#necessary-name-selectbtn').click(function() {
 
 	var name = document.querySelector('.necessary-input-name').value;
-	const data = { "lectureName" : name };
+	//console.log("name : " + name);
+	const data = { "lectureTitle" : name };
 	
 	$.ajax({
 		url: "/required/getTitleList",
@@ -198,7 +199,7 @@ $('#necessary-name-selectbtn').click(function() {
 		success: function(data) {
 			$('#originalTable').empty();
 			var html = '<tr class="necessary-tableheader-tr"><th></th><th class="necessary-header-name">강좌</th><th>기관</th></tr>';
-			$.each(data.lectures, function(index, item) {////////////////////////////////////////////////
+			$.each(data, function(index, item) {////////////////////////////////////////////////
 				html += '<tr><td><input type="checkbox" name="origin-checkbox" id = "original-course" ' + 'data-id = "' + item.lectureId + '"></td>'
 					+ '<td>' + item.lectureTitle + '</td><td>' + item.academyName + '</td></tr>';
 				
