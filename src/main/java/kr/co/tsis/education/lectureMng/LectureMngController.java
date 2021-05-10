@@ -52,7 +52,6 @@ public class LectureMngController {
                 .lectureResponseDtoList(lectureResponseDtoList)
                 .totalPage(totalPage)
                 .build();
-
     }
 
     //전체 강좌 검색 ( Swagger success )
@@ -72,6 +71,7 @@ public class LectureMngController {
                 .build();
     }
 
+    // 강좌 검색페이지로 이동
     @GetMapping("/lectureMng")
     public String lectureMngAllSearchPage() {
         return "manager/lectureMng";
@@ -89,6 +89,7 @@ public class LectureMngController {
         return "redirect:/manager/lectureMng";
     }
 
+    /* 영국수정 */
     //강좌 수정 페이지로 데이터 전송
     @GetMapping("/lectureMng/modify")
     public String sendToModifyPage(@RequestParam(value="lectureId") int lectureId, Model model) {

@@ -1,0 +1,41 @@
+
+#noticeText {
+    width: 100%;
+    border: 1;
+    overflow: visible;
+    text-overflow: ellipsis;
+    margin: 3px;
+
+}
+
+.notice-saveButton {
+    color: #ffffff;
+    background: var(--color-sky-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 0.6rem;
+    display: block;
+    float: right;
+}
+
+#noticeStr {
+    font-size: 1.75rem;
+    margin: 3rem;
+    font-family: 'SDSamliphopangche_Outline';
+}
+#guide-textarea{
+    padding: 3rem;
+    padding-right: 30rem;
+}
+.guide-section {
+    min-height : 65vh;
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+

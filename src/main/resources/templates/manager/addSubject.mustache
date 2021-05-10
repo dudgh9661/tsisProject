@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--css-->
+    <link rel="stylesheet" href="/css/manager/addCategory.css">
+    <!--js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <title>주제 수정/추가</title>
+</head>
+
+<body>
+    <div class="add_cate_title">
+        {{#theme}}
+        <h2>주제 수정</h2>
+        {{/theme}}
+        {{^theme}}
+        <h2>주제 추가</h2>
+        {{/theme}}
+    </div>
+    <form class="add_cate_form">
+        <div class="add_cate_div">
+            <h4>주제명</h4>
+            <div class="div-info">
+                {{#theme}}
+                <input class="input-sub-info-box" name="id" type="text" value="{{theme}}">
+                <input type="button" class="pw-box input-pw-font btn-modify" value="강좌 주제 수정">
+                {{/theme}}
+                {{^theme}}
+                <input class="input-sub-info-box" name="id" type="text">
+                <input type="button" class="pw-box input-pw-font btn-add" value="강좌 주제 추가">
+                {{/theme}}
+            </div>
+        </div>
+    </form>
+    <script defer src="/js/manager/addCategory_ajax.js"></script>
+</body>
+
+</html>

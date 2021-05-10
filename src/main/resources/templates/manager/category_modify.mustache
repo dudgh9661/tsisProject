@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--css-->
+    <link rel="stylesheet" href="/css/manager/category_modify.css">
+    <!--js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/manager/category_modify.js"></script>
+    <title>카테고리 이름 변경</title>
+</head>
+
+<body>
+<div class="add_cate_title">
+    <h2>카테고리 이름 변경</h2>
+</div>
+<form class="add_cate_form">
+    <div class="add_cate_div">
+        <h4>카테고리 이름</h4>
+        <div class="div-info">
+            <input class="update_category_info_box" name="id" type="text" value="">
+
+            <input type="hidden" id="depth1_field" value="{{depth1Field}}">
+            <input type="hidden" id="depth2_skill" value="{{depth2Skill}}">
+            <input type="hidden" id="depth3_course" value="{{depth3Course}}">
+
+            <input type="button" class="pw-box input-pw-font" value="강좌 카테고리 이름 변경" onclick="updeateCate();">
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<!-- <link rel="stylesheet" href="main.css"/> -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+	integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/manager/common.css">
+<link rel="stylesheet" href="/css/manager/necessary.css">
+
+<title>Document</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<script>
+        $(function () {
+            $('#originalTable tr').on({
+                mouseenter: function () {
+                    $(this).css('background-color', 'lightgray')
+                },
+                mouseleave: function () {
+                    $(this).css('background-color', '')
+                }
+
+            });
+
+            $('#currentTable tr').hover(function(){
+                $(this).css({
+                    background:'lightgray'
+                });
+            },function(){
+                    $(this).css({
+                        background:''
+                    })
+                }
+            );
+
+            $('#originalTable tr').click(function () {
+                //alert($(this).text())
+            });
+
+            $("#insertButton").click(function() {
+            	var checkbox = $("input[name=origin-checkbox]:checked");
+            	console.log(checkbox);
+            	checkbox.each(function(i) {
+            		var tr = $(this).parent().parent();
+            		$(this).attr("name", "current-checkbox");
+            		$(this).attr("id", "current-course");
+            		$(this).prop("checked", false);
+            		console.log('$$$$$$');
+            		$("#currentTable").append(tr);
+	        		console.log('#####');
+            	});
+            });
+
+            $("#deleteButton").click(function() {
+            	var checkbox = $("input[name=current-checkbox]:checked");
+            	console.log(checkbox);
+            	checkbox.each(function(i) {
+            		var tr = $(this).parent().parent();
+            		$(this).attr("name", "origin-checkbox");
+            		$(this).attr("id", "original-course");
+            		$(this).prop("checked", false);
+            		$("#originalTable").append(tr);
+            	});
+        	});
+        });
+    </script>
+
+
+<body>
+
+	<!--sidebar-->
+	<div class="sidebar">
+		<a href="03_Main.html"> <img src="/img/tsis.png" class="logo" />
+		</a>
+		<ul class="sidebar_ul">
+			<li><a href="04_RecommendationEdu.html">추천 강좌 보기</a></li>
+			<li><a href="05_SubjectEdu.html">주제별 교육 검색</a></li>
+			<li><a href="06_AcademyEdu.html">기관별 교육 검색</a></li>
+			<li><a href="07_SelectEdu.html">주요 교육기관</a></li>
+			<li><a href="08_LegendEdu.html">교육 주제 범례</a></li>
+			<li class="admin-active"<a href="09_AdminMain.html">관리자</a></li>
+		</ul>
+	</div>
+	<!--/sidebar-->
+
+	<!--content-->
+	<div class="content">
+		<!--header-->
+		<header>
+			<div class="login-info">
+				<span>죠르디님 환영합니다!</span>
+				<button type="button" class="logout">
+					<a href="01_Index.html"> 로그아웃 </a>
+				</button>
+			</div>
+		</header>
+		<!--header-->
+
+		<!--section-->
+		<section>
+
+
+			<div class="total-box">
+				<p1 class="necessary-title-text">필수 강좌 관리</p1>
+				<div>
+					<input type="text" placeholder="직급" class = "necessary-input-position">
+					<input type="text" placeholder="연차" class = "necessary-input-year">
+					<button class="necessary-selectbtn" id="necessary-selectButton" onclick="getList()">검색</button>
+
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="margin-top: 20px;">
+					<select id="necessary-big" class="necessary-select-box">
+
+					</select> <select id="necessary-middle" class="necessary-select-box">
+
+
+					</select> <select id="necessary-small" class="necessary-select-box" onchange="getDpList()">
+
+
+					</select> <br> <br>
+					<div>
+						<input type="text" placeholder="강좌명을 입력해주세요." class = "necessary-input-name">
+						<button class="necessary-selectbtn" id = "necessary-name-selectbtn">조회</button>
+
+						<div class="necessary-image-info">
+							<img class="necessary-info" src="img/information.png" /> <span>
+								위의 조건 설정 없이 강좌명만으로 검색할 수 있습니다. </span>
+						</div>
+					</div>
+					</div>
+				</div>
+
+				<div class="necessary-main-box">
+					<div>
+                        <p class="necessary-subject-left"> 기본 강좌</p>
+					<div class="necessary-leftlist">
+						<table class="necessary-table" border="1" id="originalTable">
+
+							<tr class="necessary-tableheader-tr">
+								<th></th>
+								<th class="necessary-header-name">강좌</th>
+								<th>기관</th>
+							</tr>
+
+
+						</table>
+					</div>
+					</div>
+
+					<div class="necessary-arrowimage">
+						<button id="insertButton">▶</button>
+						<br /> <br />
+
+						<button id="deleteButton">◀</button>
+					</div>
+					<div>
+                        <p class="necessary-subject-right">설정된 강좌</p>
+
+					<div class="necessary-rightlist">
+						<table class="necessary-table" border="1" id="currentTable">
+							<tr class="necessary-tableheader-tr">
+								<th></th>
+								<th class="necessary-header-name">강좌</th>
+								<th>기관</th>
+							</tr>
+
+
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		</section>
+		<!--/section-->
+
+		<!--footer-->
+		<footer>
+			<div class="footer-info">
+				<div>
+					<p>문의처</p>
+				</div>
+				<div>
+					<p>교육담당자 | 인사팀 정병석 과장</p>
+				</div>
+			</div>
+		</footer>
+		<!--/footer-->
+
+	</div>
+	<script src="/js/manager/necessary-ajax.js"></script>
+</body>
+</html>

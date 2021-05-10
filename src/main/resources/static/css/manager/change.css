@@ -1,0 +1,54 @@
+.tblBody, .head, .con{
+    width: 550px;
+    height: fit-content;
+
+}
+table{
+    padding : 20px;
+    border-spacing: 0 10px;
+}
+.tblBody{
+    border: solid 1px black;
+}
+
+.tr{
+
+    width: fit-content;
+    margin-top: 100px;
+
+}
+
+.gr, .gl{
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.key{
+    font-family: "Bazzi";
+    font-size: 20px;
+    background-color: skyblue;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+@font-face {
+    font-family: 'Bazzi';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
