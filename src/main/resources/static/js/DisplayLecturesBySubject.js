@@ -146,7 +146,7 @@ let DLBS_changeHeartState = (state, lectureId, idx) => {
     DLBS_heartImg.innerHTML = html;
     $.ajax({
         type: 'GET',
-        url: '/changeHeartState?lectureId=' + lectureId + '&wishYn=' + state,
+        url: '/subjectByLecture/wishListSelection?lectureId=' + lectureId + '&wishYn=' + state,
         contentType:'application/json; charset=utf-8'
     }).done(()=>{
     }).fail(function (error) {
