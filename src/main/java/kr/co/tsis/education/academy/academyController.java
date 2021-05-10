@@ -5,6 +5,7 @@ import kr.co.tsis.education.academy.DTOS.academyDTO;
 import kr.co.tsis.education.academy.DTOS.academyPageDTO;
 import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.admin.adminController;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class academyController {
     public String main(HttpServletRequest request,Model model){
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             model.addAttribute("empName",loginUser.getEmpName());
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";

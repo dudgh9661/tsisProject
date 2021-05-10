@@ -2,6 +2,7 @@ package kr.co.tsis.education.guide;
 
 import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.guide.DTOS.guideDTO;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class guideController {
     public String main(HttpServletRequest request, Model model){
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }

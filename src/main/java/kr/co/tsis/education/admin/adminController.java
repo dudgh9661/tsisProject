@@ -1,5 +1,6 @@
 package kr.co.tsis.education.admin;
 import kr.co.tsis.education.admin.DTOS.lectureDTO;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,9 @@ public class adminController {
     /* 영국수정 : 관리자 메인페이지 */
     @GetMapping("/admin")
     public String adminMain(HttpServletRequest request, Model model){
-        System.out.println("ㅗㅗㅗㅗㅗㅗ");
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
-            System.out.println(loginUser.getAuthority());
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
@@ -43,7 +42,7 @@ public class adminController {
     public String main(HttpServletRequest request,Model model){
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }

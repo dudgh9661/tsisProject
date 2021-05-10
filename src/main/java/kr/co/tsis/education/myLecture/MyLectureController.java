@@ -31,9 +31,6 @@ public class MyLectureController {
         if(loginUser != null){
             //나의 강좌(필수강좌)
             ArrayList<MyLecture> myPageRequiredLecturesList = mLectureService.myPageRequiredLecturesList(loginUser);
-            for (int i = 0; i < myPageRequiredLecturesList.size(); i++){
-                System.out.println(myPageRequiredLecturesList.get(i).getLectureUrl());
-            }
             //관심강좌
             ArrayList<MyLecture> myWishLecturesList = mLectureService.myWishLecturesList(loginUser);
 

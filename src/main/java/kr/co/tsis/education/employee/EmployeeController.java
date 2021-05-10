@@ -37,8 +37,6 @@ public class EmployeeController
 
         String login_result = HttpConnection.PostData("https://www.t-ammo.com/IGWS/loginLegacy_.json",input);
 
-        //System.out.println(login_result);
-
         JSONObject jsonObj = new JSONObject(login_result);
 
         if(jsonObj.getString("RESULT").equals("SUCCESS")){
@@ -49,7 +47,6 @@ public class EmployeeController
                     Employee employee = employeeService.login(userId);
 
                     session.setAttribute("loginUser", employee);
-                    System.out.println(employee.getEmpId());
                     return "redirect:/admin";
                 }
                 else {

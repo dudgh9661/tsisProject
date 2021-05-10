@@ -4,6 +4,7 @@ import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.required.DTOS.requiredForm;
 import kr.co.tsis.education.required.DTOS.requiredLectureDTO;
 import kr.co.tsis.education.required.DTOS.requiredListForm;
+import kr.co.tsis.education.userCommon.dto.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class requiredController {
     public String main(HttpServletRequest request, Model model){
         try {
             HttpSession session = request.getSession();
-            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
             if(loginUser.getAuthority()==0) {
                 return "redirect:/";
             }
