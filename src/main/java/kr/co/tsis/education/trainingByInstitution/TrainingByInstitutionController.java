@@ -31,11 +31,20 @@ public class TrainingByInstitutionController {
 
     //기관별 교육 검색
     @GetMapping("/trainingByInstitutionList")
-    public String trainingInstitutionView(Model model){
-        //기관 종류 리스트
-        ArrayList<Academy> academyList = tbiService.academyList();
-        model.addAttribute("academyList", academyList);
-        return "user/AcademyEduPage";
+    public String trainingInstitutionView(Model model, HttpServletRequest request){
+        // 사원정보
+        HttpSession session = request.getSession();
+        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        if(loginUser != null){
+            //기관 종류 리스트
+            ArrayList<Academy> academyList = tbiService.academyList();
+            model.addAttribute("academyList", academyList);
+            return "user/AcademyEduPage";
+        }
+        else{
+            return "redirect:/";
+        }
+
     }
 
     //주제리스트

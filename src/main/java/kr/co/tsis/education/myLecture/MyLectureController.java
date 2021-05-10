@@ -28,18 +28,24 @@ public class MyLectureController {
         // 사원정보
         HttpSession session = request.getSession();
         Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        if(loginUser != null){
+            //나의 강좌(필수강좌)
+            ArrayList<MyLecture> myPageRequiredLecturesList = mLectureService.myPageRequiredLecturesList(loginUser);
+            for (int i = 0; i < myPageRequiredLecturesList.size(); i++){
+                System.out.println(myPageRequiredLecturesList.get(i).getLectureUrl());
+            }
+            //관심강좌
+            ArrayList<MyLecture> myWishLecturesList = mLectureService.myWishLecturesList(loginUser);
 
-        //나의 강좌(필수강좌)
-        ArrayList<MyLecture> myPageRequiredLecturesList = mLectureService.myPageRequiredLecturesList(loginUser);
-        for (int i = 0; i < myPageRequiredLecturesList.size(); i++){
-            System.out.println(myPageRequiredLecturesList.get(i).getLectureUrl());
+            model.addAttribute("employee",loginUser);
+            model.addAttribute("requiredLectureList",myPageRequiredLecturesList);
+            model.addAttribute("wishLectureList",myWishLecturesList);
+            return "user/DisplayMyLectures";
         }
-        //관심강좌
-        ArrayList<MyLecture> myWishLecturesList = mLectureService.myWishLecturesList(loginUser);
+        else{
+            return "redirect:/";
+        }
 
-        model.addAttribute("employee",loginUser);
-        model.addAttribute("requiredLectureList",myPageRequiredLecturesList);
-        model.addAttribute("wishLectureList",myWishLecturesList);
-        return "user/DisplayMyLectures";
+
     }
 }

@@ -32,14 +32,24 @@ public class CategoryByLectureController {
 
     // 카테고리 선택 첫 페이지
     @GetMapping("/mainCategoryKinds")
-    public String CategoryLectureView(Model model){
-        ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
-        for (int i = 0; i < mainCategoryList.size(); i++){
-            System.out.println(mainCategoryList.get(i).getDepth1Field());
-        }
-        model.addAttribute("mainCategoryList",mainCategoryList);
+    public String CategoryLectureView(Model model, HttpServletRequest request){
+        // 사원정보
+        HttpSession session = request.getSession();
+        Employee loginUser = (Employee)session.getAttribute("loginUser"); // session이용해서 로그인 정보 가져오기
+        //System.out.println(loginUser.getEmpId());
+        if(loginUser != null){
+            ArrayList<LectureCategory> mainCategoryList = cblService.mainCategoryList();
+            for (int i = 0; i < mainCategoryList.size(); i++){
+                System.out.println(mainCategoryList.get(i).getDepth1Field());
+            }
+            model.addAttribute("mainCategoryList",mainCategoryList);
 
-        return "user/SubjectEduPage";
+            return "user/SubjectEduPage";
+        }
+        else{
+            return "redirect:/";
+        }
+
     }
 
     //중분류 리스트

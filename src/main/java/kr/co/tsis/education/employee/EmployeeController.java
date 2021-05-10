@@ -53,12 +53,19 @@ public class EmployeeController
 
                 String employeeResult = HttpConnection.PostData("http://211.53.18.197:8081/3rdParty_Store/DEF_0103",search_input);
                 JSONObject employeeJson = new JSONObject(employeeResult);
-
-                //디비에 추가~
+                
                 Employee employee = new Employee();
+                String position = employeeJson.getString("PSIT_NM").split("/")[0].replaceAll(" ", "");
+                if(position.equals("수습사원")){
+                    employee.setEmpPosition("사원");
+                }
+                else{
+                    employee.setEmpPosition(position);
+                }
+                //디비에 추가~
+                
                 employee.setEmpId(userId);
                 employee.setEmpName(employeeJson.getString("KOR_NM"));
-                employee.setEmpPosition(employeeJson.getString("PSIT_NM").split("/")[0].replaceAll(" ", ""));
                 employee.setEmpYears(employeeJson.getInt("PSIT_CNT"));
                 employee.setEmpTeam(employeeJson.getString("VW_PLA_NM"));
                 employee.setSurveyYn(0);
