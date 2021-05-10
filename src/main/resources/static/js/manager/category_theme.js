@@ -1,3 +1,51 @@
+/* ---------------------------------------------------- base code */
+const appendOption = (e1, arr) => {
+    e1.innerHTML = "";
+    let cnt = 1;
+    arr.forEach((e2) => {
+        const temp = document.createElement("tr");
+        const best = document.createElement("td");
+        if(e2.lectureBestYn == 0) {
+            best.innerText = "N";
+        } else {
+            best.innerText = "Y";
+        }
+
+        const count = document.createElement("td");
+        count.innerText = cnt++;
+
+        const cat = document.createElement("td");
+        cat.innerText = e2.depth1Field + ">" + e2.depth2Skill + ">" + e2.depth3Course;
+
+        const lectureName = document.createElement("td");
+        lectureName.innerText = e2.lectureTitle;
+
+        const academyName = document.createElement("td");
+        academyName.innerText = e2.academyName;
+        academyName.setAttribute("data-id", e2.lectureId);
+
+        const online = document.createElement("td");
+        if(e2.onlineYn == 0) {
+            online.innerText = "N";
+        } else {
+            online.innerText = "Y";
+        }
+
+        const loc = document.createElement("td");
+        loc.innerText = e2.academyLoc;
+
+        temp.appendChild(best);
+        temp.appendChild(count);
+        temp.appendChild(cat);
+        temp.appendChild(lectureName);
+        temp.appendChild(academyName);
+        temp.appendChild(online);
+        temp.appendChild(loc);
+        e1.appendChild(temp);
+    });
+};
+/*  base code ----------------------------------------------------*/
+
 // load
 $(function () {
     $.ajax({
@@ -482,5 +530,34 @@ const setModifyBtns = () => {
         e1.addEventListener("click", setModifyBtn);
     })
 }
-setModifyBtns();
 
+// 주제명 누르면 강좌 검색
+const searchLecture = (e) => {
+    const data = {
+        themeLectureId: e.target.getAttribute("data-id"),
+        curpage: 1
+    }
+    $.ajax({
+        url: "/theme/getLectureList",
+        method: "GET",
+        data: data,
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+            const cnt = data.totalCount;
+            const totalPage = data.totalPage;
+            const lectureList = data.lectures;
+            appendOption(document.querySelector(".theme-lecture-result"),lectureList);
+        },
+        error: function (x, s, e) {
+            console.log(x, s, e);
+        }
+    });
+}
+const setSearchLecture = () => {
+    document.querySelectorAll(".subject-name").forEach(e1 => {
+      e1.addEventListener("click", searchLecture);
+    })
+}
+setModifyBtns();
+setSearchLecture();
