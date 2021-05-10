@@ -9,6 +9,8 @@ import kr.co.tsis.education.userCommon.dto.Employee;
 import kr.co.tsis.education.util.HttpConnection;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -95,5 +97,10 @@ public class EmployeeController
     public String logout(HttpSession session) throws IOException {
         session.invalidate();
         return "redirect:/";
+    }
+
+    @GetMapping("/employee/getSession")
+    public ResponseEntity<Employee> getSession(HttpSession session) {
+        return new ResponseEntity<Employee>((Employee) session.getAttribute("loginUser"), HttpStatus.OK);
     }
 }
