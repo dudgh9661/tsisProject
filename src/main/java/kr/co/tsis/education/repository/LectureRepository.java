@@ -50,4 +50,8 @@ public interface LectureRepository {
     int getAcademySubjectId(String academyId, String depth2Skill);
 
     int getLectureIdAfterInsert();
+
+    void insertAcademySubjectId(String academyId, String depth2Skill);
+
+    int getAcademySubjectIdCaseMinus();
 }

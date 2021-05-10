@@ -127,7 +127,6 @@ public class LectureMngController {
             model.addAttribute("best",true);
         }
         return "manager/lecture_mod";
-//        return "/";
     }
 
     //강좌 수정 저장 버튼 클릭
