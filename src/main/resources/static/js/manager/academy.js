@@ -5,7 +5,7 @@ const choiceA = document.querySelector(".institution-choice-a");
 const choiceB = document.querySelector(".institution-choice-b");
 const addBtn = document.querySelector(".institution-btn-add");
 var curPage = 1;
-const modAddUrl = "/academyModify/getAcademy/";
+const modAddUrl = "/academyModify/getAcademy";
 /* 변수 선언 ---------------------------------------------------*/
 
 /* sample data */
@@ -45,9 +45,8 @@ const setDelBtn = (e) => {
     })
     .then((result) => {
       if (result.isConfirmed) {
-
-        fetch('/lectureMng/' + e.target.parentNode.getAttribute("data-id"), {
-          method: 'DELETE',
+        fetch('/academy/delList?academyIdList=' + e.target.parentNode.getAttribute("data-id"), {
+          method: 'POST',
           mode: 'same-origin',
         }).then(() => {
           swalWithBootstrapButtons.fire("삭제완료!", "성공적으로 삭제되었습니다", "success");
@@ -98,7 +97,7 @@ const setDelBtns = () => {
 const setAddBtn = () => {
   document.querySelector(".institution-btn-add").addEventListener("click", () => (
       window.open(
-          "/academyModify/getAcademy/",
+          modAddUrl + "?academyId=0",
           "안녕하세요^^",
           "width=400,height=600")
   ));
@@ -108,7 +107,7 @@ const setModifyBtns = () => {
   document.querySelectorAll(".modify").forEach((e1) => {
     e1.addEventListener("click", (e2) => (
         window.open(
-            "/academyModify/getAcademy/" + e2.target.parentNode.getAttribute("data-id"),
+            modAddUrl + "?academyId=" +e2.target.parentNode.getAttribute("data-id"),
             "안녕하세요^^",
             "width=400,height=600")
     ));
