@@ -19,6 +19,7 @@ public class ToModifyPageResponseDto {
     private int onlineYn;
     private String eduLevelId;
     private int lectureBestYn;
+    private String academyId;
 
     @Builder
     public ToModifyPageResponseDto(List<empDto> empDtoList,
@@ -34,5 +35,6 @@ public class ToModifyPageResponseDto {
         this.onlineYn = toModifyPageDataResponseDto.getOnlineYn();
         this.eduLevelId = toModifyPageDataResponseDto.getEduLevelId();
         this.lectureBestYn = toModifyPageDataResponseDto.getLectureBestYn();
+        this.academyId = toModifyPageDataResponseDto.getAcademyId();
     }
 }
