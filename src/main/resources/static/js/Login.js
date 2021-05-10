@@ -19,13 +19,12 @@ function btn_click() {
     if (document.loginForm.idsave.checked === true) { // 아이디 저장을 체크 하였을때
         if (!frm.userid.value || !frm.pwd.value) { //아이디를 입력하지 않으면.
             alert("아이디와 비밀번호를 확인해주세요!");
-            //frm.userid.focus();
-            location.href="redirect:/";
-            //return false;
+            frm.userid.focus();
         }
         else{
             localStorage.setItem("id",document.loginForm.userid.value);
             localStorage.setItem("check",true);
+            frm.submit();
         }
 
 
@@ -33,13 +32,13 @@ function btn_click() {
 
         if (!frm.userid.value || !frm.pwd.value) { //아이디를 입력하지 않으면.
             alert("아이디와 비밀번호를 확인해주세요!");
-            //frm.userid.focus();
-            location.href="redirect:/";
+            frm.userid.focus();
             
         }
         else{
             localStorage.setItem("check",false);
             localStorage.removeItem("id");
+            frm.submit();
         }
 
 
