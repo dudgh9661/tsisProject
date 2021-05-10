@@ -141,7 +141,7 @@ $(".bg_cate").change(function (event) {
 /*
 중분류 option selected변경시 이벤트
 */
-$(".m_cate").change(function () {
+$(".m_cate").click(function () {
 
     let category = {
         depth1Field: $(".cate_update_bg:selected").val(),
@@ -169,7 +169,7 @@ $(".m_cate").change(function () {
             $(".s_cate").append(html);
 
             selectedmCategoryName = $(".cate_update_m:selected").val();
-
+            selectedsCategoryName = $(".cate_update_s:selected").val();
         },
         error: function (x, s, e) {
             console.log(x, s, e);
@@ -181,8 +181,8 @@ $(".m_cate").change(function () {
 /*
 소분류 option selected변경시 이벤트
 */
-$(".s_cate").change(function () {
-    selectedsCategoryName = $(".s_cate option:selected").val();
+$(".s_cate").click(function () {
+    selectedsCategoryName = $(".cate_update_s:selected").val();
 });
 
 
@@ -193,6 +193,9 @@ function updateCate() {
         depth3Course: selectedsCategoryName,
         lectureId: $("#lec_id").val()
     }
+
+    console.log(category);
+
 
     let jsonStr = JSON.stringify(category);
 
