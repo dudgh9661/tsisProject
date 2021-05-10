@@ -10,6 +10,24 @@ public class lectureDTO {
     private String empPosition;
     private String empId;
     private int empYears;
+    private  int surveyYn;
+    private  int authority;
+
+    public int getSurveyYn() {
+        return surveyYn;
+    }
+
+    public void setSurveyYn(int surveyYn) {
+        this.surveyYn = surveyYn;
+    }
+
+    public int getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(int authority) {
+        this.authority = authority;
+    }
 
     public String getEmpName() {
         return empName;

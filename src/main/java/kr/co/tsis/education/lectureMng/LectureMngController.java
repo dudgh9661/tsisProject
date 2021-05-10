@@ -1,5 +1,6 @@
 package kr.co.tsis.education.lectureMng;
 
+import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.lectureMng.Dto.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -80,13 +83,24 @@ public class LectureMngController {
 
     //강좌 삭제
     @DeleteMapping("/lectureMng/{lectureId}")
-    public String delete(@PathVariable int lectureId) {
-        boolean isDeleted = false;
-        if( lectureMngService.delete(lectureId) ) {
-            System.out.println("삭제되었습니다.");
-            isDeleted = true;
-        } else System.out.println("삭제를 실패하였습니다..");
-        return "redirect:/manager/lectureMng";
+    public String delete(@PathVariable int lectureId, HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession();
+            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                boolean isDeleted = false;
+                if( lectureMngService.delete(lectureId) ) {
+                    System.out.println("삭제되었습니다.");
+                    isDeleted = true;
+                } else System.out.println("삭제를 실패하였습니다..");
+                return "redirect:/manager/lectureMng";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     /* 영국수정 */
@@ -152,8 +166,19 @@ public class LectureMngController {
 
     //강좌 추가 버튼 클릭 시 페이지 이동
     @GetMapping("/lectureMng/add")
-    public String add() {
-        return "/manager/lecture_mod";
+    public String add(HttpServletRequest request) {
+        try {
+            HttpSession session = request.getSession();
+            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                return "/manager/lecture_mod";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     //강좌 추가
