@@ -1,5 +1,6 @@
 package kr.co.tsis.education.category;
 
+import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.category.DTOS.CategoryDelDTO;
 import kr.co.tsis.education.category.DTOS.categoryDTO;
 import kr.co.tsis.education.category.DTOS.categoryForm;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -91,18 +94,29 @@ public class categoryController {
     public String getTitle(@RequestParam("depth1Field")String depth1,
                            @RequestParam("depth2Skill")String depth2,
                            @RequestParam("depth3Course")String depth3,
-                           @RequestParam("lectureId")int lectureId,Model model){
+                           @RequestParam("lectureId")int lectureId, Model model,
+                           HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                String title = service.getTitle(lectureId);
+                System.out.println("controller = "+ title);
+                model.addAttribute("empName",loginUser.getEmpName());
+                model.addAttribute("depth1Field",depth1);
+                model.addAttribute("lectureId",lectureId);
+                model.addAttribute("lectureTitle",title);
+                model.addAttribute("depth2Skill",depth2);
+                model.addAttribute("depth3Course",depth3);
+                return "manager/lecture_category_update";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
 
-        String title = service.getTitle(lectureId);
-        System.out.println("controller = "+ title);
-
-        model.addAttribute("depth1Field",depth1);
-        model.addAttribute("lectureId",lectureId);
-        model.addAttribute("lectureTitle",title);
-        model.addAttribute("depth2Skill",depth2);
-        model.addAttribute("depth3Course",depth3);
-
-        return "manager/lecture_category_update";
     }
 
     @ResponseBody
@@ -123,12 +137,27 @@ public class categoryController {
     }*/
 
     @GetMapping("/category/modify")
-    public String modify(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2,@RequestParam("depth3Course")String depth3, Model model){
-
-        model.addAttribute("depth1Field",depth1);
-        model.addAttribute("depth2Skill",depth2);
-        model.addAttribute("depth3Course",depth3);
-        return "manager/category_modify";
+    public String modify(@RequestParam("depth1Field")String depth1,
+                         @RequestParam("depth2Skill")String depth2,
+                         @RequestParam("depth3Course")String depth3,
+                         Model model,
+                         HttpServletRequest request){
+            try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("empName",loginUser.getEmpName());
+                model.addAttribute("depth1Field",depth1);
+                model.addAttribute("depth2Skill",depth2);
+                model.addAttribute("depth3Course",depth3);
+                return "manager/category_modify";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     /*@PostMapping("/category/add")
@@ -140,10 +169,22 @@ public class categoryController {
     }*/
 
     @GetMapping("/category/add")
-    public String add(@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2, Model model){
-        model.addAttribute("depth1Field",depth1);
-        model.addAttribute("depth2Skill",depth2);
-        return "manager/category_add";
+    public String add(HttpServletRequest request,@RequestParam("depth1Field")String depth1, @RequestParam("depth2Skill")String depth2, Model model){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("empName",loginUser.getEmpName());
+                model.addAttribute("depth1Field",depth1);
+                model.addAttribute("depth2Skill",depth2);
+                return "manager/category_add";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
 

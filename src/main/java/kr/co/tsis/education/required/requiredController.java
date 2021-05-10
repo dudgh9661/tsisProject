@@ -1,5 +1,6 @@
 package kr.co.tsis.education.required;
 
+import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.required.DTOS.requiredForm;
 import kr.co.tsis.education.required.DTOS.requiredLectureDTO;
 import kr.co.tsis.education.required.DTOS.requiredListForm;
@@ -7,7 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -18,9 +23,20 @@ public class requiredController {
     private static final Logger LOGGER = LoggerFactory.getLogger(requiredController.class);
 
     @GetMapping("/required")
-    public String main(){
-        LOGGER.debug("void");
-        return "manager/required";
+    public String main(HttpServletRequest request, Model model){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "manager/required";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     @ResponseBody

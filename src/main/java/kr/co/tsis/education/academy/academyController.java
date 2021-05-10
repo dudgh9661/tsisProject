@@ -3,6 +3,7 @@ package kr.co.tsis.education.academy;
 
 import kr.co.tsis.education.academy.DTOS.academyDTO;
 import kr.co.tsis.education.academy.DTOS.academyPageDTO;
+import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.admin.adminController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,9 +24,20 @@ public class academyController {
     private static final Logger LOGGER = LoggerFactory.getLogger(academyController.class);
 
     @GetMapping("/academy")
-    public String main(){
-        LOGGER.debug("void");
-        return "manager/academy";
+    public String main(HttpServletRequest request,Model model){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            model.addAttribute("empName",loginUser.getEmpName());
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                return "manager/academy";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     /*영국 수정*/

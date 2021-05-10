@@ -1,6 +1,6 @@
 package kr.co.tsis.education.theme;
 
-import kr.co.tsis.education.theme.DTOS.lectureDTO;
+import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import kr.co.tsis.education.theme.DTOS.lecturePageDTO;
 import kr.co.tsis.education.theme.DTOS.themeDTO;
 import org.slf4j.Logger;
@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,9 +21,21 @@ public class themeController {
     private static final Logger LOGGER = LoggerFactory.getLogger(themeController.class);
 
     @GetMapping("/category_theme")
-    public String main(Model model){
-        model.addAttribute("subjectList", service.getThemeList());
-        return "/manager/category_theme";
+    public String main(Model model, HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession();
+            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("subjectList", service.getThemeList());
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "/manager/category_theme";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     @ResponseBody
@@ -45,12 +59,24 @@ public class themeController {
     }
 
     @GetMapping("/theme/getTheme")
-    public String getTheme(@RequestParam("themeLectureId") Integer id, Model model){
-        if(id == 0) {
-            return "/manager/addSubject";
+    public String getTheme(@RequestParam("themeLectureId") Integer id, Model model,HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession();
+            kr.co.tsis.education.admin.DTOS.lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                if(id == 0) {
+                    return "/manager/addSubject";
+                }
+                model.addAttribute("theme",service.getTheme(id));
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "/manager/addSubject";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
         }
-        model.addAttribute("theme",service.getTheme(id));
-        return "/manager/addSubject";
     }
 
     @ResponseBody

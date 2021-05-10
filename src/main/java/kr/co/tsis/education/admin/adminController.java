@@ -3,10 +3,13 @@ import kr.co.tsis.education.admin.DTOS.lectureDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -17,16 +20,38 @@ public class adminController {
 
     /* 영국수정 : 관리자 메인페이지 */
     @GetMapping("/admin")
-    public String adminMain(){
-        LOGGER.debug("void");
-        return "manager/admin";
+    public String adminMain(HttpServletRequest request, Model model){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "manager/admin";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     /* 영국수정 : 관리자 권한 로딩페이지 */
     @GetMapping("/admin/admin_auth")
-    public String main(){
-        LOGGER.debug("void");
-        return "manager/admin_auth";
+    public String main(HttpServletRequest request,Model model){
+        try {
+            HttpSession session = request.getSession();
+            lectureDTO loginUser = (lectureDTO) session.getAttribute("loginUser");
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "manager/admin_auth";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
     @ResponseBody
