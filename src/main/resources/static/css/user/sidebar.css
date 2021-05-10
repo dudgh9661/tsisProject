@@ -1,42 +1,48 @@
-/**
-    * side bar css 파일
-*/
+
+/*sidebar시작*/
+
 .sidebar {
-    position: absolute;
-    left: 0;
-    background-color: var(--color-light-beige);
-    width: 12%;
-    height: var(--screen-height);
-    border-right: solid 1px var(--color-light-grey);
-    white-space: nowrap;
+  background-color: var(--color-light-beige);
+  width: 12%;
+  height: var(--screen-height);
+  border-right: solid 1px var(--color-light-grey);
+  white-space: nowrap;
 }
 
 .logo {
-    width: 200px;
-    margin: var(--margin-medium-large) var(--margin-small);
+  width: 200px;
+  margin: var(--margin-medium-large) var(--margin-small);
 }
 
 .sidebar_ul {
-    list-style: none;
-    width: 100%;
-    padding: 0;
+  list-style: none;
+  width: 100%;
+  padding: 0;
 }
 
-.sidebar_ul>li {
-    padding: calc(var(--padding-large)) var(--padding-small);
+.sidebar_ul > li {
+  padding: calc(var(--padding-large)) var(--padding-small);
 }
 
-.sidebar_ul> :first-child {
-    margin-top: calc(var(--margin-medium-large));
+.sidebar_ul > :first-child {
+  margin-top: calc(var(--margin-medium-large));
 }
 
-.sidebar_ul>li>a {
-    font-size: calc(var(--font-medium-large)*0.9);
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--color-black);
+.sidebar_ul > li > a {
+  font-size: calc(var(--font-medium-large) * 0.8);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-black);
 }
 
-.sidebar_ul>li:hover {
-    border-right: 5px solid var(--color-sky-blue);
+.sidebar_ul > li:hover {
+  /* border-right: 5px solid var(--color-sky-blue); */
+  background: #1d378b; /* #0094d4 , #1d378b, #9c9ea0, #6c6d6f*/
+}
+
+.sidebar_ul > li:hover > a {
+  color: white;
+  font-weight: 500;
+  font-size: calc(var(--font-medium-large) * 0.85);
+  transition: all 0.4s ease;
 }

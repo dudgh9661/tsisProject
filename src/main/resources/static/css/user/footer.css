@@ -1,15 +1,13 @@
-
 /*footer*/
 footer {
-    min-height: 100%;
-  margin-top: 6rem;
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  background-color: var(--color-light-grey);
-  padding-bottom 124.4px:
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: inline-block;
+    background-color: var(--color-light-grey);
 }
 
 .footer-info {
-  padding: var(--padding-small-medium);
+    padding: var(--padding-small-medium);
 }

@@ -64,9 +64,14 @@ body {
 
 /*content 시작*/
 .content {
+  position: absolute;
+  right: 0;
   background-color: var(--color-light-beige);
   width: 88%;
+  min-height: 100%;
   height: var(--screen-height);
   padding: var(--padding-small) var(--padding-medium);
   white-space: nowrap;
+  padding-bottom: 150px;
 }
+
