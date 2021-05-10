@@ -9,7 +9,8 @@ function loadGuide(){
 			$('#guide-textarea').empty();
             var html;
             html = '<textarea id="noticeText" rows="10" guide-id = "' + data.guideId  + '">' + data.contents + '</textarea>';
-			$('#guide-textarea').append(html);
+
+            $('#guide-textarea').append(html);
 		},
 		error: function(x, s, e) {
 			console.log(x, s, e);
