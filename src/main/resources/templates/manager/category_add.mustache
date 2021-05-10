@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--css-->
+    <link rel="stylesheet" href="/css/manager/category_add.css">
+    <!--js-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script defer src="/js/manager/category_add.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리 추가</title>
+</head>
+
+<body>
+<div class="add_cate_title">
+    <h2>카테고리 추가</h2>
+</div>
+<form class="add_cate_form">
+    <div class="add_cate_div">
+        <h4>카테고리 이름</h4>
+        <div class="div-info">
+            <input class="input-info-box" name="id" type="text" value="">
+
+            <input type="hidden" id="depth1_field" value="{{depth1Field}}">
+            <input type="hidden" id="depth2_skill" value="{{depth2Skill}}">
+
+            <input type="button" class="pw-box input-pw-font" value="강좌 카테고리 추가" onclick="addCate();">
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

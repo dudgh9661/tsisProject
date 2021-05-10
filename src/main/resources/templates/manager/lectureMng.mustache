@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- <link rel="stylesheet" href="main.css"/> -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet" />
+    <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+            integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+            crossorigin="anonymous"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/manager/common.css" />
+    <link rel="stylesheet" href="/css/manager/lectureMng.css" />
+</head>
+<body>
+<!--sidebar-->
+<div class="sidebar">
+    <a href="03_Main.html"><img src="/img/tsis.jpg" class="logo" /></a>
+    <ul class="sidebar_ul">
+        <li>
+            <a href="04_RecommendationEdu.html">추천 강좌 보기</a>
+        </li>
+        <li>
+            <a href="05_SubjectEdu.html">주제별 교육 검색</a>
+        </li>
+        <li>
+            <a href="06_AcademyEdu.html">기관별 교육 검색</a>
+        </li>
+        <li>
+            <a href="07_SelectEdu.html">주요 교육기관</a>
+        </li>
+        <li>
+            <a href="08_LegendEdu.html">교육 주제 범례</a>
+        </li>
+        <li class="admin-active">
+            <a href="09_AdminMain.html" >관리자</a>
+        </li>
+    </ul>
+</div>
+<!--/sidebar-->
+
+<!--content-->
+<div class="content">
+    <!--header-->
+    <header>
+        <div class="login-info">
+            <span>죠르디님 환영합니다!</span>
+            <button type="button" class="logout">
+                <a href="01_Index.html"> 로그아웃 </a>
+            </button>
+        </div>
+    </header>
+    <!--header-->
+
+    <!--section-->
+    <!-- 여기에 코드 넣으세요 -->
+    <section>
+        <div class="header title">
+            <h3>강좌 관리하기</h3>
+        </div>
+
+        <div class="lecture-select">
+            <div class="lecture-select-main">
+                <select class="lecture-main-select" id="lecture_mainCategory">
+                    <option value="전체" selected="selected">전체</option>
+                    <option value="추천">추천</option>
+                    <option value="교육기관">교육기관</option>
+                    <option value="카테고리">카테고리</option>
+                </select>
+            </div>
+
+            <div class="lecture-select-sub lecture-hidden">
+                <div class="lecture-select-sub__recommendation">
+                    <select class="recommendation-sub">
+                        {{! <option value="추천1">추천1</option>
+                        <option value="추천2">추천2</option>
+                        <option value="추천3">추천3</option> }}
+                    </select>
+                </div>
+                <div class="lecture-select-sub__institute">
+                    <select class="institute-sub">
+                        {{! <option value="교육기관1">교육기관1</option>
+                        <option value="교육기관2">교육기관2</option>
+                        <option value="교육기관3">교육기관3</option> }}
+                    </select>
+                </div>
+
+                <div class="lecture-select-sub__category">
+                    <select class="category-big" id="lecture_Category1">
+                    </select>
+
+                    <select class="category-mid" id="lecture_Category2">
+                    </select>
+
+                    <select class="category-small" id="lecture_Category3">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="lecture-search-wrapper">
+            <div class="lecture-search" type="0">
+                <div>강좌 검색</div>
+                <input class="input lecture-title-input" type="text" placeholder="강좌명을 입력해주세요." />
+                <img class="lecture-search-icon" src="/img/search.png" />
+            </div>
+        </div>
+        <div class="lecture-tab">
+            <div class="recom">
+                <img class="lecture-star-icon" src="/img/star.png" />
+                : 리더 추천 강좌
+            </div>
+            <div class="btn_g">
+                <button onClick="onAddClick()" class="btn btn-secondary">추가</button>
+            </div>
+        </div>
+        <div class="lecture-result">
+            <table border ="1" id="lecturedata" class="lecture-result__table">
+                <colgroup>
+                    <col style="width: 5%" />
+                    <col style="width: 5%" />
+                    <col style="width: 20%" />
+                    <col style="width: 35%" />
+                    <col style="width: 10%" />
+                    <col style="width: 10%" />
+                    <col style="width: 10%" />
+                    <col style="width: 5%" />
+                </colgroup>
+                <thead>
+                <th scope="col">리더추천</th>
+                <th scope="col">No.</th>
+                <th scope="col">카테고리</th>
+                <th scope="col">강좌명</th>
+                <th scope="col">교육기관</th>
+                <th scope="col">온/오프라인</th>
+                <th scope="col">위치</th>
+                <th scope="col">삭제</th>
+                </thead>
+                <tbody class="lecture-result-list" id="lectureInfo">
+                <tr>
+                    <td scope="col">-</td>
+                    <td scope="col">-</td>
+                    <td scope="col">-</td>
+                    <td scope="col" onClick="onRowClick()" class="lname">-</td>
+                    <td scope="col">-</td>
+                    <td scope="col">-</td>
+                    <td scope="col">-</td>
+                    <td scope="col">
+                        <button onclick="onXClick()" class="btn btn-danger">x</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!--/section-->
+
+    <!--footer-->
+    <footer>
+        <div class="footer-info">
+            <div>
+                <p>문의처</p>
+            </div>
+            <div>
+                <p>교육담당자 | 인사팀 정병석 과장</p>
+            </div>
+        </div>
+    </footer>
+    <!--/footer-->
+</div>
+<!--content-->
+<script src="/js/manager/lectureMng.js"></script>
+</body>
+
+
+</html>
+

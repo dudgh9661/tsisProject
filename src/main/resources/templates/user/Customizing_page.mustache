@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <!-- <link rel="stylesheet" href="main.css"/> -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap"
+            rel="stylesheet">
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+            integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/user/common.css">
+        <!-- <link rel="stylesheet" href="css/footer.css"> -->
+        <title>고객 맞춤 강좌</title>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    </head>
+
+    <body>
+        <!--sidebar-->
+        {{>user/common/index_sidebar}}
+
+        <!--content-->
+        <div class="content">
+            <!--header-->
+            {{>user/common/index_header}}
+            <!--section-->
+            <!-- 여기에 코드 넣으세요 -->
+            <section>
+                <div class='first_contents'>
+                    <link rel="stylesheet" href="/css/user/Customizing_page.css">
+                    <!-- 차트 1 -->
+                    <div class='chart1'>
+                        <link
+                            rel="stylesheet"
+                            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+                            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+                            crossorigin="anonymous">
+
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                        <h1>최신 IT 트랜드 TOP 5!</h1>
+
+                        <div class="row">
+                            <div class="col-6 chart">
+                                <canvas id="myChart" width="400" height="500"></canvas>
+                            </div>
+                        </div>
+
+                        <script src="chart/script.js"></script>
+                    </div>
+                    <div class='cardnews'>
+                        <h1>최신 IT 늬우스~</h1><br>
+                        <div class="news_box">
+
+                            <li>
+                                <div class="news_font">
+                                    <a class="link_color" href="https://hianna.tistory.com/482" target="_blank">인앱결제, 갑질?…애플-에픽, 세기의 재판 시작</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=293&aid=0000034517"
+                                        target="_blank">트위터, 음성 SNS '스페이스' 사용 기준은?…팔로워 600명 이상</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=011&aid=0003905692"
+                                        target="_blank">카카오게임즈, 1분기 영업이익 156억 원... 전년比 22.9% 늘어</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=014&aid=0004632515"
+                                        target="_blank">[글로벌포스트] 이더리움 최고가에 27세 창업자 억만장자 등극</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LS2D&mid=shm&sid1=105&sid2=230&oid=277&aid=0004897048"
+                                        target="_blank">"로봇이 기업 단순 업무 대신한다" 비즈테크파트너스, RPA 솔루션 공급</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LS2D&mid=shm&sid1=105&sid2=230&oid=469&aid=0000602067"
+                                        target="_blank">한국인이 실리콘밸리에 세운 AI 스타트업 몰로코, 유니콘 등극</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=056&aid=0011037729"
+                                        target="_blank">임혜숙 “과학기술 혁신 실질적 성과 창출…국산 백신 개발 지원”</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/ranking/read.nhn?mode=LSD&mid=shm&sid1=001&oid=366&aid=0000712134&rankingType=RANKING"
+                                        target="_blank">세계 최대 재단 운영하는 게이츠 부부 파경…“사회 전 분야에 파장”</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=277&aid=0004896304"
+                                        target="_blank">막 오른 애플-에픽 소송전…앱시장 지각변동 일어나나</a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="news_font">
+                                    <a
+                                        class="link_color"
+                                        href="https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=101&oid=437&aid=0000265415"
+                                        target="_blank">남양유업 회장 눈물의 사퇴…"자식에게 경영권 안 물려줘"</a>
+                                </div>
+                            </li>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="second_contents">
+                    <!-- <div id="boom"></div> -->
+                    <!-- 이미지 슬라이더 1 -->
+                    <div class="slider1">
+                        <head>
+                            <link rel="stylesheet" href="/Slider/multiple_slide.css">
+                        </head>
+                        <span class="slider1_title">사용언어별 고객 맞춤 강좌</span>
+                        <div class="Slider">
+                            <div class="slide_wrapper">
+                                <ul class="slides" id="slides">
+                                    <!-- <li>
+                                        <img 
+                                            class="png" 
+                                            src="Slider/clemetain.png"
+                                        >  
+                                    </li> -->
+                                    <!-- <li><img class="png" src="Slider/hero.png"></li>
+                                    <li><img class="png" src="Slider/sungnyang.png"></li>
+                                    <li><img class="png" src="Slider/다운로드.jpg"></li>
+                                    <li><img class="png" src="Slider/kalnal.png"></li>
+                                    <li><img class="png" src="Slider/minari.png"></li>
+                                    <li><img class="png" src="Slider/rain.png"></li>
+                                    <li><img class="png" src="Slider/sungnyang.png"></li> -->
+                                </ul>
+
+                            </div>
+
+                            <div>
+                                <p class="controls">
+                                    <span class="prev">&#10094</span>
+                                    <span class="next">
+                                        &#10095</span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <script src="/Slider/multiple_slide.js"></script>
+                    </div>
+                </div>
+
+                <div class="third_contents">
+                    <!-- 이미지 슬라이더 2 -->
+                    <div class="slider2">
+                        <head>
+                            <link rel="stylesheet" href="/Slider/multiple_slide.css">
+                        </head>
+                        <span class="slider2_title">관심 트렌드별 고객 맞춤 강좌</span>
+                        <div class="Slider2">
+                            <div class="slide_wrapper2">
+                                <ul class="slides2" id="slides2">
+                                    <!-- <li><img class="png2" src="Slider/clemetain.png"></li>
+                                    <li><img class="png2" src="Slider/hero.png"></li>
+                                    <li><img class="png2" src="Slider/sungnyang.png"></li>
+                                    <li><img class="png2" src="Slider/다운로드.jpg"></li>
+                                    <li><img class="png2" src="Slider/kalnal.png"></li>
+                                    <li><img class="png2" src="Slider/minari.png"></li>
+                                    <li><img class="png2" src="Slider/rain.png"></li>
+                                    <li><img class="png2" src="Slider/sungnyang.png"></li> -->
+                                </ul>
+
+                            </div>
+
+                            <div>
+                                <p class="controls2">
+                                    <span class="prev2">&#10094</span>
+                                    <span class="next2">
+                                        &#10095</span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <script src="/Slider/multiple_slide2.js"></script>
+                    </div>
+                </div>
+
+                <div class="fourth_contents">
+                    <!-- 이미지 슬라이더 3 -->
+                    <div class="slider3">
+                        <head>
+                            <link rel="stylesheet" href="/Slider/multiple_slide.css">
+                        </head>
+                        <span class="slider3_title">비슷한 유저별 고객 맞춤 강좌</span>
+                        <div class="Slider3">
+                            <div class="slide_wrapper3">
+                                <ul class="slides3" id="slides3">
+                                    <!-- <li><img class="png3" src="Slider/clemetain.png"></li>
+                                    <li><img class="png3" src="Slider/hero.png"></li>
+                                    <li><img class="png3" src="Slider/sungnyang.png"></li>
+                                    <li><img class="png3" src="Slider/다운로드.jpg"></li>
+                                    <li><img class="png3" src="Slider/kalnal.png"></li>
+                                    <li><img class="png3" src="Slider/minari.png"></li>
+                                    <li><img class="png3" src="Slider/rain.png"></li>
+                                    <li><img class="png3" src="Slider/sungnyang.png"></li> -->
+                                </ul>
+
+                            </div>
+
+                            <div>
+                                <p class="controls3">
+                                    <span class="prev3">&#10094</span>
+                                    <span class="next3">
+                                        &#10095</span>
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <script src="/Slider/multiple_slide3.js"></script>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!--/section-->
+
+
+        <!--footer-->
+        {{>user/common/index_footer}}
+    <!--/footer-->
+</div>
+<!--content-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script type="text/javascript" >
+        crossorigin="anonymous"
+        window.onload= function(){ 
+            let emp_id = '1';
+    
+            axios({
+                method: 'post', //통신 방식
+                url: 'http://127.0.0.1:5000/renewLang', //통신할 페이지
+                data: {
+                    emp_id
+                } //인자로 보낼 데이터
+            })
+            .then(response=>{
+                //document.getElementById('boom').innerText=response.data.num;
+                console.log(response);
+            })
+            .catch(error=>{
+                //document.getElementById('boom').innerText='error';
+                console.log(error);
+            })    
+        }
+    </script> -->
+</body>
+<script src="/js/CustomizingScript.js"></script>
+
+</html>

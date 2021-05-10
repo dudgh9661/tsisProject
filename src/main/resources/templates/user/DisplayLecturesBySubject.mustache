@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/common.css">
+    
+    <title>주제별 강의</title>
+</head>
+<body>
+    <!--sidebar-->
+    {{>user/common/index_sidebar}}
+    <!--/sidebar-->
+
+    <!--content-->
+    <div class="content">
+        <!--header-->
+        {{>user/common/index_header}}
+        <!--header-->
+
+        <!--section-->
+        <section class="DLBS_section">
+            <div class="DLBS_selSubjectShowIcons">
+                <div class="DLBS_selSubject">
+                    <select class="DLBS_selSubject_selectBox" id="DLBS_selSubject_selectBox" onchange=DLBS_display_theme()>
+                        {{#themeLecturesList}}
+                            <option value="{{themeLectureId}}">{{theme}}</option>
+                        {{/themeLecturesList}}
+                    </select>
+                </div>
+                <div class="DLBS_showIcons">
+                    <span class="DLBS_showIcons_best"><img class="DLBS_img" src="/img/star.svg"/> : 베스트강좌</span>
+                    <span class="DLBS_showIcons_interest"><img class="DLBS_img" src="/img/filledHeart.png" /> : 관심강좌</span>
+                </div>
+            </div>
+
+            <div class="DLBS_display">
+                <div class="DLBS_display_searchCount" id="DLBS_display_searchCount">총 0개 검색</div>
+                <ul class="DLBS_display_list_container DLBS_ul" id="DLBS_display_list_container">
+                    <li class="DLBS_display_list_title">
+                        <span class="DLBS_display_list_best"></span>
+                        <span class="DLBS_display_list_interest"></span>
+                        <span class="DLBS_display_list_no">No.</span>
+                        <span class="DLBS_display_list_category" onclick="DLBS_display(1, `ctgr.depth3_course`)">카테고리</span>
+                        <span class="DLBS_display_list_lectureName" onclick="DLBS_display(1, `lec.lecture_title`)">강좌명</span>
+                        <span class="DLBS_display_list_onOff" onclick="DLBS_display(1, `lec.online_yn`)">온라인/오프라인</span>
+                        <span class="DLBS_display_list_detail">상세보기</span>
+                    </li>
+                    <div class="DLBS_display_list_dynamic" id="DLBS_display_list_dynamic">
+                        
+                    </div>
+                </ul>
+                <div class="DLBS_display_list_pagingButtons" id="DLBS_display_list_pagingButtons"></div>
+            </div>
+        </section>
+        <!--/section-->
+
+        <!--footer-->
+        {{>user/common/index_footer}}
+    </div>
+    <!--content-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/js/DisplayLecturesBySubject.js"></script>
+</body>
+</html>

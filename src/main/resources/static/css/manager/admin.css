@@ -1,0 +1,33 @@
+.admin-manage {
+}
+
+.admin-manage > li{
+    display: inline-block;
+    margin-right: 2rem;
+}
+.admin-manage > li > span {
+    display: block;
+    text-align: center;
+    font-family: 'Bazzi';
+    font-size: 1.8rem;
+}
+.admin-manage > li,
+.admin-manage > li > a,
+.admin-manage > li > a > div,
+.admin-manage > li > a > div > img {
+    width: 110px;
+    margin-right: 4rem;
+}
+.image {
+    mix-blend-mode: luminosity;
+    background: white;
+}
+.title {
+    font-size: 1.9rem;
+    display: block;
+    margin: 3rem;
+    font-family: 'SDSamliphopangche_Outline';
+}
+section {
+    min-height: 50vh;
+}

@@ -1,0 +1,74 @@
+
+.lecture,.recommend{
+    background-color: #e8e6e6;
+    width:90%;
+    border-radius: 15px;
+    padding: 18px 0;
+    margin:auto;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    margin-bottom: 20px;
+}
+.top span{
+    font-size:30px;
+}
+button{
+    border:none;
+    padding: 0;
+    border-radius: 5px;
+}
+button.save{
+    background-color: #66a8ff;
+    color:#ffffff;
+    width: 70px;
+    height:40px;
+}
+button.a{
+    height:100%;
+}
+
+
+.bigmediumsmall{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.bms{
+    width: 100%;
+    text-align: center;
+}
+.select{
+    width:85%;
+}
+.delete{
+    width:15%;
+}
+
+.add{
+    width:100%;
+}
+ul{
+    padding-left: 0;
+    width:25%;
+    margin: 0 10px;
+}
+li{
+    list-style: none;
+    margin: 5px auto;
+    height: 30px;
+}
+.recommend{
+    margin-top:40px;
+}
+ul.recommendadd{
+    margin:auto;
+    width:50%;
+}
+.home {
+  width: 60px;
+  float: top;
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SubjectByLectureMapper">
+
+    <!-- 추천강좌 -->
+    <resultMap type="SubjectByLectureAll" id="subjectByLectureAllResultMap">
+        <result property="lectureId" column="lecture_id"></result>
+        <result property="lectureTitle" column="lecture_title"></result>
+        <result property="lectureUrl" column="lecture_url"></result>
+        <result property="validYn" column="valid_yn"></result>
+        <result property="onlineYn" column="online_yn"></result>
+        <result property="lectureBestYn" column="lecture_best_yn"></result>
+        <result property="categoryId" column="category_id"></result>
+        <result property="academyId" column="academy_id"></result>
+        <result property="eduLevelId" column="edu_level_id"></result>
+        <result property="themeLectureId" column="theme_lecture_id"></result>
+        <result property="requiredLectureId" column="required_lecture_id"></result>
+        <result property="academySubjectId" column="academy_subject_id"></result>
+        <result property="depth1Field" column="depth1_field"></result>
+        <result property="depth2Skill" column="depth2_skill"></result>
+        <result property="depth3Course" column="depth3_course"></result>
+        <result property="wishBool" column="wish_bool"></result>
+        <result property="empId" column="emp_id"></result>
+    </resultMap>
+
+    <!-- 주제 -->
+    <resultMap type="ThemeLecture" id="themeLectureResultMap">
+        <result property="themeLectureId" column="theme_lecture_id"></result>
+        <result property="theme" column="theme"></result>
+    </resultMap>
+
+    <!-- 추천IT트랜드 목록 -->
+    <select id="themeLecturesList" resultMap="themeLectureResultMap">
+        SELECT
+        theme_lecture_id,
+        theme
+        FROM theme_lecture
+    </select>
+
+    <!-- 강좌갯수 -->
+    <select id="selectLectureNum" resultType="int">
+        SELECT count(lec.lecture_id)
+        FROM lecture lec
+        INNER JOIN lecture_category ctgr
+        ON ctgr.category_id = lec.category_id
+        WHERE lec.theme_lecture_id=#{themeLectureId}
+    </select>
+
+    <!-- 검색결과 리스트(비동기처리) -->
+    <select id="lectureList" resultMap="subjectByLectureAllResultMap">
+        SELECT exists(select*from wishlist where emp_id = #{empId} and lecture_id = lec.lecture_id) 'wish_bool',
+        lec.lecture_title, lec.lecture_url, lec.online_yn, lec.lecture_best_yn,
+        ctgr.depth2_skill, ctgr.depth3_course, lec.lecture_id
+        FROM lecture lec
+        INNER JOIN lecture_category ctgr
+        ON ctgr.category_id = lec.category_id
+        WHERE lec.theme_lecture_id=#{themeLectureId}
+        ORDER BY ${columnName} ASC
+        limit #{totalListNum} offset #{firstNum}
+    </select>
+
+    <!-- 관심강좌 등록 -->
+    <insert id="wishListPush">
+        INSERT INTO wishlist VALUES(#{empId},#{lectureId})
+    </insert>
+
+    <!-- 관심강좌 취소 -->
+    <delete id="wishListPop">
+        DELETE FROM wishlist WHERE emp_id = #{empId} AND lecture_id = #{lectureId}
+    </delete>
+
+</mapper>

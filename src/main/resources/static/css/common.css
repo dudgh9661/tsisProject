@@ -1,0 +1,71 @@
+/* 컴포넌트 */
+@import "header.css";
+@import "sidebar.css";
+@import "footer.css";
+
+/* 각페이지 */
+@import "15_alert.css";
+@import "addCategory.css";
+@import "updateLectureCategory.css";
+@import "categoryManage.css";
+@import "themeManage.css";
+
+:root {
+  /*screen size*/
+  --screen-width: 1920px;
+  --screen-height: 1080px;
+
+  /*color*/
+  --color-light-beige: #fdfdfd;
+  --color-beige: #ebe8e8;
+  --color-light-sky-blue: #f1f8ff;
+  --color-blue: #1d378b;
+  --color-sky-blue: #4193d0;
+  --color-dark-blue: #243887;
+  --color-light-grey: #dbdbdb;
+  --color-grey: #6d6e70;
+  --color-dark-grey: #6d6e70;
+  --color-black: #1e1e1e;
+
+  /*font*/
+  --font-small: 15px;
+  --font-small-medium: 20px;
+  --font-medium-large: 25px;
+
+  /*margin*/
+  --margin-small: 10px;
+  --margin-small-medium: 15px;
+  --margin-medium: 20px;
+  --margin-medium-large: 25px;
+  --margin-large: 30px;
+
+  /*padding*/
+  --padding-small: 10px;
+  --padding-small-medium: 15px;
+  --padding-medium: 20px;
+  --padding-medium-large: 25px;
+  --padding-large: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  cursor: default;
+  font-family: "Noto Sans KR", sans-serif;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  display: flex;
+}
+
+/*content 시작*/
+.content {
+  background-color: var(--color-light-beige);
+  width: 88%;
+  height: var(--screen-height);
+  padding: var(--padding-small) var(--padding-medium);
+  white-space: nowrap;
+}

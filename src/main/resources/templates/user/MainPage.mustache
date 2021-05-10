@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- <link rel="stylesheet" href="main.css"/> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사외교육 조회 사이트</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/user/MainPage.css">
+    <link rel="stylesheet" href="/css/user/common.css">
+    <script src="/js/Main.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!--sidebar-->
+    {{>user/common/index_sidebar}}
+    <!--/sidebar-->
+
+    <!--content-->
+    <div class="content">
+        <!--header-->
+        {{>user/common/index_header}}
+        <!--header-->
+
+        <!--section-->
+        <section>
+            <!--공지사항-->
+            <div class="use-info">
+                <div class="use-info-content">                    
+                    <p class="p-info"><img src="/img/loud-speaker.png">공지사항</p>
+                    <p class="p-info-text">{{guide.contents}}</p>
+                </div>
+            </div>
+
+            <!--안내문구-->
+            <div class="info-contents">
+            <!--연차별 필수 강좌-->
+                <div class="info-detail"> 
+                    <div class="info-imoji">
+                        <p>연차별 필수 강좌<br></p>
+                    </div>
+                    <button type="button" class="more">
+                        <a href="/myLecture/myLectureInfo">
+                            더보기
+                        </a>
+                    </button>
+                    <div class="info-content"> 
+                    {{#requiredLectureList}}
+                        <div class="contentInside">
+                            <div class="card-body">
+                                <div class="card-body_thumb">
+                                    <a href="{{lectureUrl}}" target="_blank">
+                                        <div class="institution-logo">
+                                            <img class="logoImg" src="{{academyLogoUrl}}">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="card-body_cont">
+                                    <div class="card-body_cont_name">
+                                        <strong>{{lectureTitle}}</strong>
+                                    </div>
+                                    <div class="card-body_cont_info">
+                                    </div>
+                                    <div class="card-body_cont_location">
+                                        <span class="loc-acdm">{{academyName}}</span>
+                                        <span class="loc-name">{{onlineYn}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/requiredLectureList}}    
+                    </div>
+                </div>
+                <!--연차별 필수 강좌-->
+
+                <!--연차별 추천 강좌-->
+                <div class="info-detail">
+                    <div class="info-imoji">
+                        <p>연차별 추천 강좌<br></p>
+                    </div>
+                    <button type="button" class="more">
+                        <a href="/mainPage/cumstomizing">
+                            더보기
+                        </a>
+                    </button>
+                    <div class="info-content" id="py">
+
+                    </div>
+                </div>
+                <!--연차별 추천 강좌-->
+
+            </div>
+            <!--/안내문구-->
+        </section>
+        <!--/section-->
+
+        <!--footer-->
+        {{>user/common/index_footer}}
+    <!--/footer-->
+    </div>
+    <!--content-->
+    
+<script src="survey/survey.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+.admin-manage {
+    width: 150px;
+}
+
+.admin-manage > li{
+    display: inline-block;
+    margin-right: 2rem;
+}
+.admin-manage > li > span {
+    display: block;
+    text-align: center;
+}
+.admin-manage > li,
+.admin-manage > li > a,
+.admin-manage > li > a > div,
+.admin-manage > li > a > div > img {
+    width: 150px;
+}

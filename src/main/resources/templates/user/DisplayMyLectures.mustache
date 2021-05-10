@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/user/common.css">
+    <title>나의 강좌</title>
+</head>
+<body>
+        <!--sidebar-->
+        {{>user/common/index_sidebar}}
+        <!--/sidebar-->
+    
+        <!--content-->
+        <div class="content">
+            <!--header-->
+            {{>user/common/index_header}}
+            <!--header-->
+    
+            <!--section-->
+            <section class="DML_section">
+                <div class="DML_contents">
+                    <div class="DML_greetings" id="DML_greetings">
+                        {{employee.empName}} {{employee.empPosition}}님 환영합니다.
+                    </div>
+                    <div class="DML_anchors">
+                        <button class="DML_anchorButton_necessary"><a href="#DML_display_lectures_necessary_title">필수 강좌</a></button>
+                        <button class="DML_anchorButton_interest"><a href="#DML_display_lectures_interest_title">관심 강좌</a></button>
+                    </div>
+                    <div class="DML_display_lectures_necessary_container">
+                        <div class="DML_display_lectures_necessary_title" id="DML_display_lectures_necessary_title">필수 강좌</div>
+                        <ul class="DML_display_lectures_necessary_grid" id="DML_ul">
+                            <!--강좌명, 교육기관명, 주제명, 해당기관 이미지url, 해당기관사이트url  -->
+                            {{#requiredLectureList}}
+                                <li class="DML_li"> 
+                                    <a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>
+                                    <!--밑 태그로 변경할것.-->
+                                    <!--<a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>-->
+                                    <div>{{academyName}}</div>
+                                    <div>{{lectureTitle}}</div>
+                                </li>
+                            {{/requiredLectureList}}
+                            {{^requiredLectureList}}
+                                조회 결과 없음.
+                            {{/requiredLectureList}}     
+                        </ul>
+                    </div>
+                    <div class="DML_display_lectures_interest_container">
+                        <div class="DML_display_lectures_interest_title" id="DML_display_lectures_interest_title">관심 강좌</div>
+                        <ul class="DML_display_lectures_interest_grid" id="DML_ul">
+                            <!--강좌명, 교육기관명, 주제명, 해당기관 이미지url, 해당기관사이트url  -->
+                            {{#wishLectureList}}
+                                <li class="DML_li">
+                                    <a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>
+                                    <!--밑 태그로 변경할것.-->
+                                    <!--<a href="{{lectureUrl}}"><img src="{{academyLogoUrl}}" class="DML_gridImg"/></a>-->
+                                    <div>{{academyName}}</div>
+                                    <div>{{lectureTitle}}</div>
+                                </li>
+                            {{/wishLectureList}}
+                            {{^wishLectureList}}
+                                조회 결과 없음.
+                            {{/wishLectureList}} 
+                        </ul>
+                    </div>
+                </div>
+                <div class="DML_toTopAnchor">
+                    <div class="DML_toTopAnchorMargin"></div>
+                    <div><a href="#DML_greetings"><img src="/img/toTop.png"/></a></div>
+                </div>
+            </section>
+            <!--/section-->
+    
+            <!--footer-->
+            {{>user/common/index_footer}}
+        </div>
+        <!--content-->
+</body>
+</html>
