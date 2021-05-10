@@ -104,20 +104,23 @@ a:visited {
 }
 
 .subject-result > li:nth-child(2) {
-    border-bottom: 5px solid rgba(0,0,0,1);
+    border-bottom: 5px solid white;
+}
+
+.subject-result > li:nth-child(2) > span {
+    font-weight: bolder;
 }
 
 .subject-result__column--course-name,
 .subject-result__column--academy-name,
 .subject-result__column--is-online {
     cursor: pointer;
-
 }
 
 .subject-result > li.subject-result__title {
     font-size: 15px;
     font-weight: 800;
-    color:blueviolet;
+    color: blueviolet;
     display: inline-block;
     border-bottom: 0;
 }
@@ -135,19 +138,19 @@ a:visited {
     cursor: pointer;
 }
 .subject-result > li > *:nth-child(3) {
-    width: 2%;
+    width: 4%;
 }
 .subject-result > li > span:nth-child(4) {
-    width: 42%;
+    width: 25%;
 }
 .subject-result > li > span:nth-child(5) {
-    width: 10%;
+    width: 20%;
 }
 .subject-result > li > span:nth-child(6) {
     width: 15%;
 }
 .subject-result > li > span:nth-child(7) {
-    width: 10%;
+    width: 20%;
 }
 
 .subject-pagination {

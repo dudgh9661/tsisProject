@@ -70,6 +70,9 @@ function selectLevelAll() {
     selectedAdvanced.children[0].checked = true;
     selectedBasic.children[0].checked = true;
     selectedElective.children[0].checked = true;
+    $(selectedAdvanced.children[2]).css("display", "none");
+    $(selectedBasic.children[2]).css("display", "none");
+    $(selectedElective.children[2]).css("display", "none");
 }
 
 function levelToList() {
@@ -108,10 +111,10 @@ function setLevelNumber(response) {
     let advanced = 0;
     let elective = 0;
     for (const level of response) {
-        if (level['eduLevel'] === "기본과정") {
+        if (level['eduLevel'] === "전문과정") {
             basic = level['lectureNum'];
         }
-        else if (level['eduLevel'] === "전문과정") {
+        else if (level['eduLevel'] === "기본과정") {
             advanced = level['lectureNum'];
         }
         else if (level['eduLevel'] === "선택과정") {
@@ -124,9 +127,6 @@ function setLevelNumber(response) {
     $(selectedBasic).children("span")[0].value = basic;
     $(selectedElective).children("span")[0].innerHTML = "선택과정 " + elective + "개 조회가능";
     $(selectedElective).children("span")[0].value = elective;
-    console.log($(selectedAdvanced).children("span")[0].value);
-    console.log($(selectedBasic).children("span")[0].value);
-    console.log($(selectedElective).children("span")[0].value);
 }
 
 function requestLevelNumber(categoryId) {
@@ -137,15 +137,19 @@ function requestLevelNumber(categoryId) {
 
 function setTotalLectureNumber(response) {
     totalLectureNumber = response['lectureNum'];
-    if (selectedAdvanced.children[0].checked === false) {
-        totalLectureNumber -= $(selectedAdvanced).children("span")[0].value;
-    }
-    if (selectedBasic.children[0].checked === false) {
-        totalLectureNumber -= $(selectedBasic).children("span")[0].value;
-    }
-    if (selectedElective.children[0].checked === false) {
-        totalLectureNumber -= $(selectedElective).children("span")[0].value;
-    }
+//    if (selectedAdvanced.children[0].checked === false) {
+//        totalLectureNumber -= $(selectedAdvanced).children("span")[0].value;
+//    }
+//    console.log(totalLectureNumber, $(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value);
+//    if (selectedBasic.children[0].checked === false) {
+//        totalLectureNumber -= $(selectedBasic).children("span")[0].value;
+//    }
+//        console.log(totalLectureNumber, $(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value);
+//    if (selectedElective.children[0].checked === false) {
+//        totalLectureNumber -= $(selectedElective).children("span")[0].value;
+//    }
+//        console.log(totalLectureNumber, $(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value);
+//    console.log($(selectedAdvanced).children("span")[0].value, $(selectedBasic).children("span")[0].value, $(selectedElective).children("span")[0].value)
     $(".subject-result__title")[0].innerHTML = "총 " + totalLectureNumber + "개 검색";
 }
 
@@ -177,7 +181,6 @@ function setLectureList(response) {
         html += ("<span>" + online + "</span>");
         html += ("<span>" + lecture['academyLoc'] + "</span>");
         html += (url + "</a>");
-        console.log(lecture['lectureId']);
         $(lectureList).append("<li value=" + lecture['lectureId'] + ">" + html + "</li>");
     }
 }
@@ -244,7 +247,7 @@ smallCategory.addEventListener("change", (event) => {
 });
 
 // 수준별 클릭 Event
-selectedAdvanced.addEventListener("change", () => {
+selectedAdvanced.addEventListener("click", () => {
     if (selectedAdvanced.children[0].checked === true) {
         $(selectedAdvanced.children[2]).css("display", "none");
     }
@@ -256,7 +259,7 @@ selectedAdvanced.addEventListener("change", () => {
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
-selectedBasic.addEventListener("change", () => {
+selectedBasic.addEventListener("click", () => {
     if (selectedBasic.children[0].checked === true) {
         $(selectedBasic.children[2]).css("display", "none");
     }
@@ -268,7 +271,7 @@ selectedBasic.addEventListener("change", () => {
     requestLectureList(categoryIdList[$(".subject-option__small option:selected").index()], pageNum, columnName);
 });
 
-selectedElective.addEventListener("change", () => {
+selectedElective.addEventListener("click", () => {
     if (selectedElective.children[0].checked === true) {
         $(selectedElective.children[2]).css("display", "none");
     }
