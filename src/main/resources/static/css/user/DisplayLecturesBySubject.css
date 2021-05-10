@@ -68,6 +68,7 @@
 }
 
 .DLBS_display_list_pagingButtons{
+    display: flex;
     margin: 50px auto;
 }
 /* .DLBS_display_list_element{
@@ -112,7 +113,7 @@
     width: 35%;
 }
 .DLBS_showIcons{
-    background-color: silver;
+    background-color: rgba(0,0,0,0.1);
     padding: 5px;
     margin-bottom:20px;
 }
@@ -120,17 +121,19 @@
 .DLBS_display_searchCount{
     width:1400px;
     margin: auto;
-    color: violet;
+    color: blueviolet;
     font-size: large;
+    padding-inline-start: 40px;
 }
 
 .DLBS_display_list_icons{
-    border-bottom: 1px solid #fff;
+    border-bottom: 1.2px solid #fff;
+    padding-bottom: 12px;
 }
 
 .DLBS_display_list_notIcons{
-    border-bottom: 1px solid #666;
-    padding-bottom: 5px;
+    border-bottom: 1.2px solid rgba(0,0,0,0.2);
+    padding-bottom: 12px;
 }
 
 .DLBS_display_list_notIcons .DLBS_display_list_onOff{
@@ -139,4 +142,37 @@
 
 .DLBS_display_list_notIcons .DLBS_display_list_detail{
     padding-left:40px;
+}
+
+.DLBS_showIcons_best{
+    font-size: 12px;
+}
+.DLBS_showIcons_interest{
+    font-size: 12px;
+}
+.DLBS_display_list_best{
+    font-size: 12px;
+}
+
+.DLBS_display_list_interest{
+    font-size: 12px;
+}
+
+.DLBS_display_list_no{
+    font-size: 12px;
+}
+
+.DLBS_display_list_category{
+    font-size: 12px;
+}
+.DLBS_display_list_lectureName{
+    font-size: 12px;
+}
+
+.DLBS_display_list_onOff{
+    font-size: 12px;
+}
+
+.DLBS_display_list_detail{
+    font-size: 12px;
 }
