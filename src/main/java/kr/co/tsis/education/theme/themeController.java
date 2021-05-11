@@ -39,7 +39,7 @@ public class themeController {
                 System.out.println("5" + request);
                 model.addAttribute("subjectList", service.getThemeList());
                 model.addAttribute("empName",loginUser.getEmpName());
-                return "/manager/category_theme";
+                return "/manager/categoryTheme";
             }
         } catch (Exception e) {
             System.out.println("e" + e.toString());
