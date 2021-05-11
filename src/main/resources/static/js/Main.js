@@ -44,4 +44,16 @@ console.log();
                 });
         }
     });
+
+
+    var line = document.getElementById("online");
+        var tmp="";
+        console.log(line.innerText);
+        if (line.innerText == 1){
+            tmp ="온라인";
+        } else if(line.innerText == 0){
+            tmp ="오프라인";
+        }
+        line.innerText=tmp;
+
 }

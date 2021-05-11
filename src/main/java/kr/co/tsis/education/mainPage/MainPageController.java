@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 @RequestMapping("/mainPage")
 public class MainPageController {
