@@ -23,7 +23,7 @@ public class themeController {
     private themeService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(themeController.class);
 
-    @GetMapping("/category_theme")
+    @GetMapping("/categoryTheme")
     public String main(Model model, HttpServletRequest request){
         System.out.println("1" + request);
         try {
