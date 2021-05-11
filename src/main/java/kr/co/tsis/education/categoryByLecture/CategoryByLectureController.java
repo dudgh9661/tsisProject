@@ -20,7 +20,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 @RequestMapping("/categoryByLecture")
 public class CategoryByLectureController {

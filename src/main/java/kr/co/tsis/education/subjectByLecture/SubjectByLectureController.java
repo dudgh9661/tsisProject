@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 public class SubjectByLectureController {
 

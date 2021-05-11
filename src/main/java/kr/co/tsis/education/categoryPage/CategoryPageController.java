@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 
-@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 @RequestMapping(value = "/CategoryPage")
 public class CategoryPageController {
