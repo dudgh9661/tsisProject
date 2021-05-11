@@ -48,6 +48,8 @@ public class EmployeeController
                     Employee employee = employeeService.login(userId);
 
                     session.setAttribute("loginUser", employee);
+
+                    session.setAttribute("authority", "authority");
                     return "redirect:/admin";
                 }
                 else {
