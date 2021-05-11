@@ -12,18 +12,17 @@ console.log();
                 window.open("/mainPage/survey", "안녕하세요^^", "width=600,height=800");
 
             }
+            var line = document.getElementById("online");
+            var tmp="";
+            console.log(line.innerText);
+            if (line.innerText == 1){
+                tmp ="온라인";
+            } else if(line.innerText == 0){
+                tmp ="오프라인";
+            }
+            line.innerText=tmp;
+            // hello world
         }
     });
-
-
-    var line = document.getElementById("online");
-        var tmp="";
-        console.log(line.innerText);
-        if (line.innerText == 1){
-            tmp ="온라인";
-        } else if(line.innerText == 0){
-            tmp ="오프라인";
-        }
-        line.innerText=tmp;
 
 }
