@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 public class EmployeeController
