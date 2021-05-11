@@ -41,12 +41,18 @@
                 <div class="subject-purple-header__select__item">
                     <div class="subject-option">
                         <select class="subject-option__medium">
+                        {{#middleCategoryList}}
+                            <option>{{depth2Skill}}</option>
+                        {{/middleCategoryList}}
                         </select>
                     </div>
                 </div>
                 <div class="subject-purple-header__select__item">
                     <div class="subject-option">
                         <select class="subject-option__small">
+                            {{#subClassList}}
+                                <option>{{depth3Course}}</option>
+                            {{/subClassList}}
                         </select>
                     </div>
                 </div>
@@ -102,6 +108,11 @@
                 <span>위치</span>
                 <span>상세보기</span>
             </li>
+            {{#lecturePush}}
+                <li>
+                    <img class='subject-icon-sm' src='/img/emptyHeart.png' onclick='wishClick(event)'>
+                </li>
+            {{/lecturePush}}
         </ul>
 
         <div class="subject-pagination">

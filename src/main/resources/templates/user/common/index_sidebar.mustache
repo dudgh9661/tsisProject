@@ -21,6 +21,14 @@
         <li>
             <a href="/CategoryPage/getCategoryDepth1">카테고리</a>
         </li>
+        {{#authority}}
+        <li>
+            <a href="/admin">관리자</a>
+        </li>
+        {{/authority}}
+        {{^authority}}
+
+        {{/authority}}
     </ul>
 </div>
 <!--/sidebar-->
