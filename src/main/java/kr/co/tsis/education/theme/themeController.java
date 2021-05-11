@@ -23,7 +23,7 @@ public class themeController {
     private themeService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(themeController.class);
 
-    @GetMapping("/categoryTheme")
+    @GetMapping("/category_theme")
     public String main(Model model, HttpServletRequest request){
         System.out.println("1" + request);
         try {
@@ -39,7 +39,7 @@ public class themeController {
                 System.out.println("5" + request);
                 model.addAttribute("subjectList", service.getThemeList());
                 model.addAttribute("empName",loginUser.getEmpName());
-                return "/manager/categoryTheme";
+                return "/manager/categoryTheme.mustache";
             }
         } catch (Exception e) {
             System.out.println("e" + e.toString());
