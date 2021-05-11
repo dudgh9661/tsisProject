@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 @RequiredArgsConstructor
 public class LectureMngController {
@@ -77,8 +78,20 @@ public class LectureMngController {
 
     // 강좌 검색페이지로 이동
     @GetMapping("/lectureMng")
-    public String lectureMngAllSearchPage() {
-        return "manager/lectureMng";
+    public String lectureMngAllSearchPage(HttpServletRequest request, Model model) {
+        try {
+            HttpSession session = request.getSession();
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
+            model.addAttribute("empName",loginUser.getEmpName());
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                return "manager/lectureMng";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
     }
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 public class AcademyModifyController {
     @Autowired

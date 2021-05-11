@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 public class categoryController {
     @Autowired

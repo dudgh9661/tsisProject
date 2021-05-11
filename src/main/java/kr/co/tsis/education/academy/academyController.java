@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@CrossOrigin(origins = {"*"}, maxAge = 6000)
 @Controller
 public class academyController {
     @Autowired
@@ -43,15 +44,28 @@ public class academyController {
 
     /*영국 수정*/
     @GetMapping("/academy/getList")
-    public String getList(@RequestParam("curpage")int curpage, Model model){
-        LOGGER.debug("curpage",curpage);
-        academyPageDTO result = service.getList(curpage);
-        model.addAttribute("curPage",curpage);
-        model.addAttribute("totalPage",result.getTotalpage());
-        model.addAttribute("totalCount",result.getTotalCount());
-        model.addAttribute("organi",result.getOrgani());
-        System.out.println(result.getOrgani());
-        return "manager/academy";
+    public String getList(@RequestParam("curpage")int curpage, Model model, HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession();
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
+            model.addAttribute("empName",loginUser.getEmpName());
+            if(loginUser.getAuthority()==0) {
+                return "redirect:/";
+            }
+            else {
+                LOGGER.debug("curpage",curpage);
+                academyPageDTO result = service.getList(curpage);
+                model.addAttribute("curPage",curpage);
+                model.addAttribute("totalPage",result.getTotalpage());
+                model.addAttribute("totalCount",result.getTotalCount());
+                model.addAttribute("organi",result.getOrgani());
+                System.out.println(result.getOrgani());
+                return "manager/academy";
+            }
+        } catch (Exception e) {
+            return "redirect:/";
+        }
+
     }
 
     /*영국 추가*/
