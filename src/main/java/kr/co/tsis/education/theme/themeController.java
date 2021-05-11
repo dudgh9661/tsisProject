@@ -26,29 +26,29 @@ public class themeController {
     @GetMapping("/category_theme")
     public String main(Model model, HttpServletRequest request){
         System.out.println("1" + request);
-        return "manager/categoryTheme";
-        // try {
-        //     HttpSession session = request.getSession();
-        //     System.out.println("2" + request);
-        //     Employee loginUser = (Employee) session.getAttribute("loginUser");
-        //     System.out.println("3" + request);
-        //     if(loginUser.getAuthority()==0) {
-        //         System.out.println("4" + request);
-        //         return "redirect:/";
-        //     }
-        //     else {
-        //         System.out.println("5" + request);
-        //         model.addAttribute("subjectList", service.getThemeList());
-        //         model.addAttribute("empName",loginUser.getEmpName());
-        //         return "/manager/categoryTheme.mustache";
-        //     }
-        // } catch (Exception e) {
-        //     System.out.println("e" + e.toString());
-        //     return "redirect:/";
-        // }
-        // finally {
-        //     System.out.println("categoryTheme이 실행됐습니다.");
-        // }
+        
+        try {
+            HttpSession session = request.getSession();
+            System.out.println("2" + request);
+            Employee loginUser = (Employee) session.getAttribute("loginUser");
+            System.out.println("3" + request);
+            if(loginUser.getAuthority()==0) {
+                System.out.println("4" + request);
+                return "redirect:/";
+            }
+            else {
+                System.out.println("5" + request);
+                model.addAttribute("subjectList", service.getThemeList());
+                model.addAttribute("empName",loginUser.getEmpName());
+                return "manager/categoryTheme";
+            }
+        } catch (Exception e) {
+            System.out.println("e" + e.toString());
+            return "redirect:/";
+        }
+        finally {
+            System.out.println("categoryTheme이 실행됐습니다.");
+        }
     }
 
     @ResponseBody
