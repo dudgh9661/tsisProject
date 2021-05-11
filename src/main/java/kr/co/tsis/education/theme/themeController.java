@@ -36,11 +36,13 @@ public class themeController {
                 return "redirect:/";
             }
             else {
+                System.out.println("5" + request);
                 model.addAttribute("subjectList", service.getThemeList());
                 model.addAttribute("empName",loginUser.getEmpName());
                 return "/manager/category_theme";
             }
         } catch (Exception e) {
+            System.out.println("e" + e.toString());
             return "redirect:/";
         }
     }
