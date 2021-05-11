@@ -25,10 +25,14 @@ public class themeController {
 
     @GetMapping("/category_theme")
     public String main(Model model, HttpServletRequest request){
+        System.out.println("1" + request);
         try {
             HttpSession session = request.getSession();
+            System.out.println("2" + request);
             Employee loginUser = (Employee) session.getAttribute("loginUser");
+            System.out.println("3" + request);
             if(loginUser.getAuthority()==0) {
+                System.out.println("4" + request);
                 return "redirect:/";
             }
             else {
