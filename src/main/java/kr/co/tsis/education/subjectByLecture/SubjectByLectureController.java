@@ -9,10 +9,7 @@ import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +18,6 @@ import java.util.HashMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
-
 public class SubjectByLectureController {
 
     @Autowired
