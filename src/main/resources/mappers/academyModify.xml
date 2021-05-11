@@ -11,7 +11,7 @@
                 (SELECT count(*)
                  FROM academy acdm INNER JOIN lecture lec
                                               ON acdm.academy_id = lec.academy_id
-                 WHERE acdm.academy_id = academy.academy_id)
+                 WHERE acdm.academy_id = academy.academy_id) AS count
         FROM academy
         WHERE academy.academy_id = #{0}
     </select>
