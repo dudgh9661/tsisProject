@@ -10,4 +10,4 @@ FROM openjdk:8-jdk-alpine
 ADD tsis-0.0.1.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]
 # CMD ["catalina.sh", "run"]
-# test 1111
+# test 111111111
