@@ -45,6 +45,9 @@ public class themeController {
             System.out.println("e" + e.toString());
             return "redirect:/";
         }
+        finally {
+            System.out.println("categoryTheme이 실행됐습니다.");
+        }
     }
 
     @ResponseBody
