@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = {"*"}, maxAge = 6000)
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 public class requiredController {
     @Autowired

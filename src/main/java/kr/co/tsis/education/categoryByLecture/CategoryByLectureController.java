@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 @RequestMapping("/categoryByLecture")

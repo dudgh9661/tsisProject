@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
 public class SubjectByLectureController {
 
