@@ -9,6 +9,6 @@ FROM openjdk:8-jdk-alpine
 # ENV JAVA_OPTS=""
 ADD tsis-0.0.1.war app.war
 # ENTRYPOINT ["java","-jar","app.jar"]
-ENTRYPOINT ["java","-war","app.war"]
+ENTRYPOINT ["java","-jar","app.war"]
 # CMD ["catalina.sh", "run"]
 # test 111111111
