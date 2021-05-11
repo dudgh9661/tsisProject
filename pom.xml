@@ -11,7 +11,7 @@
 	<groupId>kr.co.tsis</groupId>
 	<artifactId>tsis</artifactId>
 	<version>0.0.1</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>education</name>
 	<description>Tsis Commissioned education</description>
 	<properties>
