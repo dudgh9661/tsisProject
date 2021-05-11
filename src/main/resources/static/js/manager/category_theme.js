@@ -367,15 +367,14 @@ function bg_del(depth1) {
                 dataType: "json",
                 contentType: "application/json",
                 success: function (data) {
-                    alert(data);
-                   /* if(data>0){
+                    if(data>0){
                         Swal.fire('삭제가 완료되었습니다!');
                     }else{
                         Swal.fire('삭제가 완료되었습니다!');
-                    }*/
-                },
+                    }                },
                 error: function (x, s, e) {
-                    console.log(x, s, e);
+                    Swal.fire("해당 카테고리 내 강의를 먼저 삭제해주세요.")
+//                    console.log(x, s, e);
                 }
             });
         }
@@ -396,8 +395,6 @@ function m_del(depth1, depth2) {
                 depth1Field: depth1.id,
                 depth2Skill: depth2.id
             }
-            console.log(category);
-
             $.ajax({
                 url: "/category/delDepth2",
                 method: "POST",
@@ -412,7 +409,8 @@ function m_del(depth1, depth2) {
                     }
                 },
                 error: function (x, s, e) {
-                    console.log(x, s, e);
+                    Swal.fire("해당 카테고리 내 강의를 먼저 삭제해주세요.")
+//                    console.log(x, s, e);
                 }
             });
         }
@@ -449,7 +447,7 @@ function s_del(depth1, depth2, i) {
                     }
                 },
                 error: function (x, s, e) {
-                    console.log(x, s, e);
+                    Swal.fire("해당 카테고리 내 강의를 먼저 삭제해주세요.")
                 }
             });
         }
