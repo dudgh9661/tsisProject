@@ -26,7 +26,7 @@ public class themeController {
     @GetMapping("/category_theme")
     public String main(Model model, HttpServletRequest request){
         System.out.println("1" + request);
-        return "redirect:/";
+        return "/";
         // try {
         //     HttpSession session = request.getSession();
         //     System.out.println("2" + request);
