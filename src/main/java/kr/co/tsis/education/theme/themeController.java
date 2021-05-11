@@ -23,20 +23,26 @@ public class themeController {
     private themeService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(themeController.class);
 
-    @GetMapping("/category_theme")
+    @GetMapping("/categoryTheme")
     public String main(Model model, HttpServletRequest request){
+        System.out.println("1" + request);
         try {
             HttpSession session = request.getSession();
+            System.out.println("2" + request);
             Employee loginUser = (Employee) session.getAttribute("loginUser");
+            System.out.println("3" + request);
             if(loginUser.getAuthority()==0) {
+                System.out.println("4" + request);
                 return "redirect:/";
             }
             else {
+                System.out.println("5" + request);
                 model.addAttribute("subjectList", service.getThemeList());
                 model.addAttribute("empName",loginUser.getEmpName());
-                return "/manager/category_theme";
+                return "/manager/categoryTheme";
             }
         } catch (Exception e) {
+            System.out.println("e" + e.toString());
             return "redirect:/";
         }
     }
