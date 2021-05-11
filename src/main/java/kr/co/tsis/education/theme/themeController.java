@@ -23,7 +23,7 @@ public class themeController {
     private themeService service;
     private static final Logger LOGGER = LoggerFactory.getLogger(themeController.class);
 
-    @GetMapping("/categoryTheme")
+    @GetMapping("/category_theme")
     public String main(Model model, HttpServletRequest request){
         System.out.println("1" + request);
         try {
@@ -44,6 +44,9 @@ public class themeController {
         } catch (Exception e) {
             System.out.println("e" + e.toString());
             return "redirect:/";
+        }
+        finally {
+            System.out.println("categoryTheme이 실행됐습니다.");
         }
     }
 
