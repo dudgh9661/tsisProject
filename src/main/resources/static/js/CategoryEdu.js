@@ -12,7 +12,7 @@ function getCategory(field) {
                 html += "<div class=divTableHead>"+mi+"</div>"
                 $.each(middle, function(si, small){
                     html += "<div class=divTableCell>";
-                    html += "<a href="+"/CategoryPage/goToCategoryByLecture?depth1Name="+field+"&depth2Name="+mi+"&depth3Name="+small['depth3Name']+">"
+                    html += "<a href="+"/CategoryPage/goToCategoryByLecture?depth1Name="+field+"&depth2Name="+mi+"&depth3Name="+small['depth3Name']+"&categoryId="+small['categoryId']+">"
                     html += "<div class=category-table-name>"+small['depth3Name']+"</div>";
                     html += "<div class=category-table-num>("+small['depth3Num']+")</div>";
                     html += "</a>";
