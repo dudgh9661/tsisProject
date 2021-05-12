@@ -1,2 +1,1 @@
-# springBoot_server
-jenkins test
+# 사외교육 웹사이트 구축
