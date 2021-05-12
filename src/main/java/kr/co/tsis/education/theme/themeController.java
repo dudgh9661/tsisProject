@@ -26,6 +26,7 @@ public class themeController {
     @GetMapping("/category_theme")
     public String main(Model model, HttpServletRequest request){
         System.out.println("1" + request);
+        
         try {
             HttpSession session = request.getSession();
             System.out.println("2" + request);
@@ -39,7 +40,7 @@ public class themeController {
                 System.out.println("5" + request);
                 model.addAttribute("subjectList", service.getThemeList());
                 model.addAttribute("empName",loginUser.getEmpName());
-                return "/manager/categoryTheme.mustache";
+                return "manager/categoryTheme";
             }
         } catch (Exception e) {
             System.out.println("e" + e.toString());
