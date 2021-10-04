@@ -10,9 +10,6 @@
 <img src="./img/1.png" >
 <img src="./img/2.png" >
 
-<h2>Backend Structure</h2>
-<img src="./img/backend구조.png" >
-
 <h2>Git Structure</h2>
 <img src="./img/git구조.png">
 
